@@ -1,17 +1,13 @@
+import { Link } from 'react-router-dom';
 import { s } from '../lib/style';
 import { Hover } from '../components/Hover';
+import { MENUS } from '../data/nav';
 
-const NAV_LINK = 'color:#5A616D; font-size:14px; transition:color .25s';
+const NAV_LINK = 'color:#5A616D; font-size:14px; transition:color .25s; text-decoration:none';
 const NAV_LINK_HOVER = 'color:#1A1D23';
 
-const PRODUCT = [
-  ['#services', 'Services'],
-  ['#industries', 'Industries'],
-  ['#work', 'Work'],
-  ['#about', 'About'],
-];
-
-const VERTICALS = ['Automotive', 'Real estate', 'Healthcare'];
+const SOLUTIONS = MENUS.find((m) => m.label === 'Solutions').items;
+const INDUSTRIES = MENUS.find((m) => m.label === 'Industries').items;
 
 export function Footer() {
   return (
@@ -21,14 +17,14 @@ export function Footer() {
           <img src="/assets/ideora-lockup.png" alt="Ideora Labs" style={s('height:34px; width:auto; display:block')} />
           <p style={s('margin:20px 0 0; font-size:14px; max-width:26ch')}>Agentic AI and operational automation for large operators.</p>
         </div>
-        <div style={s('grid-column:6 / span 2; display:flex; flex-direction:column; gap:12px')}>
-          {PRODUCT.map(([href, label]) => (
-            <Hover key={label} as="a" href={href} style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>{label}</Hover>
+        <div style={s('grid-column:5 / span 4; display:flex; flex-direction:column; gap:12px')}>
+          {SOLUTIONS.map((item) => (
+            <Hover key={item.path} as={Link} to={item.path} style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>{item.label}</Hover>
           ))}
         </div>
-        <div style={s('grid-column:8 / span 2; display:flex; flex-direction:column; gap:12px')}>
-          {VERTICALS.map((label) => (
-            <Hover key={label} as="a" href="#industries" style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>{label}</Hover>
+        <div style={s('grid-column:9 / span 2; display:flex; flex-direction:column; gap:12px')}>
+          {INDUSTRIES.map((item) => (
+            <Hover key={item.path} as={Link} to={item.path} style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>{item.label}</Hover>
           ))}
         </div>
         <div style={s('grid-column:11 / span 2; display:flex; flex-direction:column; gap:12px; font-size:14px')}>
