@@ -245,9 +245,9 @@ export const PAGES = [
     ],
     sections: [
       { title: 'What it replaced', body: 'Three inboxes and a spreadsheet. Bookings arrived on WhatsApp, on the phone, and through the booking tool, and an advisor held the reconciliation in their head. Since February 2026 those routes land in one queue, and the record of what was agreed is the same record the DMS reads.' },
-      { title: 'One booking, forty seconds', body: 'Enquiry in, vehicle matched, bay availability checked, slot held, confirmation and inspection link sent. When the customer approves the estimate the job status moves and parts are ordered on it. The handoffs that used to pass between people do not happen at all.' },
+      { title: 'One booking, forty seconds', body: 'Forty seconds from the message landing to a confirmed slot going back with an inspection link. When the customer approves the estimate the job status moves and parts are ordered on it. The handoffs that used to pass between people do not happen at all.' },
       { title: 'The backlog, by site', body: 'A group running several sites reads each queue separately and against the others, so a backlog forming at one site is visible the day it forms rather than in a month-end report. In the console, an automotive workspace shows load peaking on a Thursday morning, which is a thing you can staff for once you can see it.' },
-      { title: 'What still reaches an advisor', body: 'A vehicle that does not match, an approval that never came back, a part that is not in the catalogue. Exceptions are named and attributed, and they are the only thing an advisor is asked to work. The routine confirmations run without one.' },
+      { title: 'What still reaches an advisor', body: 'An advisor starts the shift on jobs that are already booked, rather than on an inbox that has to be read before the day can begin. Exceptions are named and attributed, and they are the only thing an advisor is asked to work. The routine confirmations run without one.' },
     ],
     related: [
       { label: 'Service Centre Automation', path: '/solutions/service-centre' },
@@ -255,7 +255,7 @@ export const PAGES = [
     ],
     cta: {
       heading: 'Compare it against your own service queue',
-      body: 'We will walk one site from enquiry to invoice, map the handoffs, and show the console populated with the work your advisors did last week.',
+      body: 'Bring us a week of your own bookings and approvals. We will show which of them would have closed without an advisor, and which would have arrived as a named exception.',
     },
   },
   {
@@ -275,7 +275,7 @@ export const PAGES = [
       { title: 'What a sales director reads on Friday', body: 'One pipeline digest, built from the same records the agents worked rather than assembled afterwards from three of them. Open enquiries, what was qualified this week, and the small number of exceptions still waiting on a person. Nothing in it has to be reconciled before it can be believed.' },
       { title: 'The call-back list is gone', body: 'An enquiry used to arrive, join a list, and wait for somebody to work down it, by which point the buyer had spoken to two other brokerages. Since April 2026 there is no list, because the qualification and the offer of a viewing have already happened by the time an agent opens it.' },
       { title: 'A shortlist, not missed calls', body: 'The reasoning travels with the enquiry, so an agent picking one up can see why it is theirs and what has already been agreed with the buyer. Negotiation and the relationship stay where they were. The chasing around them does not.' },
-      { title: 'Where the pipeline is coming from', body: 'The queue is broken out by source, so a brokerage can see which channel is carrying it and which is quiet. In the console, a brokerage workspace shows the portal feed holding most of the open enquiries and the load peaking on a Saturday morning, when the fewest people are at a desk.' },
+      { title: 'Where the pipeline is coming from', body: 'The queue is broken out by source, so a brokerage can see which channel is carrying it and which is quiet. What a brokerage workspace shows in our own console is the portal feed holding most of the open enquiries, and the week landing hardest on a Saturday morning, when the fewest people are at a desk.' },
     ],
     related: [
       { label: 'Real Estate Automation', path: '/solutions/real-estate' },
@@ -302,8 +302,8 @@ export const PAGES = [
     sections: [
       { title: 'What the front desk stopped doing', body: 'Filling in a form at the counter while the room waited. Holding on a line to a payer to find out whether somebody was covered. Both were unpaid work done at the worst possible moment, and since May 2026 neither is done at the desk at all.' },
       { title: 'What arrives instead', body: 'A prepared chart, a coverage status that has already been checked, and a consent that has already been signed. The desk opens the day against a named list of exceptions, not a set of appointments it knows nothing about until each one walks in.' },
-      { title: 'Several clinics, one queue', body: 'A multi-site group reads every clinic from the same console, so a site running behind is visible next to the ones that are not. In the console, a clinic workspace shows intake peaking on a Monday morning, which is when a front desk has least time to work that out for itself.' },
-      { title: 'Recalls that do not wait for a report', body: 'A six-month review is flagged when it falls due rather than when somebody has time to run the list. The clinic knows on Monday which slots are going unfilled instead of learning it at the end of the month.' },
+      { title: 'Several clinics, one queue', body: 'A multi-site group reads every clinic from the same console, so a site with intake still open on the morning of an appointment is visible before the patient is. Monday morning is the peak in the clinic workspace our console ships with, which is when a front desk has least time to work that out for itself.' },
+      { title: 'Recalls that do not wait for a report', body: 'The clinic knows on Monday which slots are going unfilled, and it knows in the same place which patients are overdue a review. Neither fact waits on a report being pulled at the end of the month, and neither one has to be held by the person who happens to remember it.' },
     ],
     related: [
       { label: 'Healthcare & Clinic Automation', path: '/solutions/healthcare' },
