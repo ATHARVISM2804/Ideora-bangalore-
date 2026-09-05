@@ -8,8 +8,8 @@ const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px);
 const ARTICLES = [
   { category: 'Operations', title: 'The estimate that sits unapproved', standfirst: 'Why the biggest delay in a service bay is rarely a parts shortage, and almost always a follow-up nobody owns.', date: 'Jan 2026' },
   { category: 'Integrations', title: 'No rip and replace, and what that actually means', standfirst: 'Connecting agents to a CRM or DMS you already run, without asking anyone to migrate a system that already works.', date: 'Feb 2026' },
-  { category: 'Automotive', title: 'What a service centre queue looks like from one console', standfirst: 'Reading booking, estimate and parts status as one record instead of three inboxes and a spreadsheet.', date: 'Mar 2026' },
-  { category: 'Real estate', title: 'Qualifying an enquiry before a person sees it', standfirst: 'Scoring budget, area and readiness on arrival, so an agent opens the day on a shortlist instead of a call-back list.', date: 'Apr 2026' },
+  { category: 'Automotive', title: 'What a service centre queue looks like from one console', standfirst: 'Reading booking, estimate and parts status as one record, so nobody reconciles separate tools by hand at the end of the day.', date: 'Mar 2026' },
+  { category: 'Real estate', title: 'Qualifying an enquiry before a person sees it', standfirst: 'Scoring budget, area and readiness on arrival, so what reaches an agent already carries the qualification behind it.', date: 'Apr 2026' },
   { category: 'Healthcare', title: 'Coverage checked before the appointment, not at the desk', standfirst: 'Verifying eligibility days ahead of a visit changes what the front desk does on the morning it happens.', date: 'May 2026' },
   { category: 'Method', title: 'Why we fix the scope before we design the system', standfirst: 'Agreeing what an agent may action, and what it must route to a person, before anything is built.', date: 'Jun 2026' },
 ];
