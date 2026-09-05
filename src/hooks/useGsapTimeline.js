@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 // every tween to the root node and reverts them all on unmount, matching the
 // original componentWillUnmount.
 export function useGsapTimeline(refs) {
-  const { rootRef, barRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef } = refs;
+  const { rootRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef } = refs;
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -19,11 +19,6 @@ export function useGsapTimeline(refs) {
 
     const ctx = gsap.context(() => {
       const ease = 'power3.out';
-
-      gsap.to(barRef.current, {
-        scaleX: 1, ease: 'none',
-        scrollTrigger: { trigger: root, start: 'top top', end: 'bottom bottom', scrub: 0.3 },
-      });
 
       const intro = gsap.timeline();
       intro.from('[data-anim="hero-1"]', { y: 18, opacity: 0, duration: 0.7, ease });
@@ -118,5 +113,5 @@ export function useGsapTimeline(refs) {
     }, root);
 
     return () => ctx.revert();
-  }, [rootRef, barRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef]);
+  }, [rootRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef]);
 }
