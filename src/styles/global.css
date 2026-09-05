@@ -1,0 +1,30 @@
+html, body { margin:0; padding:0; background:#F1F3F6; }
+html { scroll-behavior:smooth; }
+* { box-sizing:border-box; }
+a { color:#B8400A; text-decoration:none; }
+a:hover { color:#F4601E; }
+::selection { background:#F4601E; color:#FFFFFF; }
+:focus-visible { outline:2px solid #F4601E; outline-offset:3px; }
+::-webkit-scrollbar { width:11px; }
+::-webkit-scrollbar-track { background:#E7EAEF; }
+::-webkit-scrollbar-thumb { background:#C3C9D3; border-radius:99px; }
+@keyframes om-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes om-blink { 0%,45% { opacity:1; } 55%,100% { opacity:0.12; } }
+@keyframes om-caret { 0%,49% { opacity:1; } 50%,100% { opacity:0; } }
+@keyframes om-sheen { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+@keyframes om-fade { from { opacity:0; } to { opacity:1; } }
+@keyframes om-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-9px); } }
+@keyframes om-ring { 0% { transform:scale(1); opacity:.55; } 100% { transform:scale(2.6); opacity:0; } }
+@keyframes om-bubble { 0%,4% { opacity:0; transform:translateY(10px) scale(.96); } 12%,72% { opacity:1; transform:none; } 84%,100% { opacity:0; transform:translateY(-6px) scale(.99); } }
+@keyframes om-typing { 0%,60% { opacity:0; } 66%,88% { opacity:1; } 94%,100% { opacity:0; } }
+@keyframes om-dot { 0%,100% { transform:translateY(0); opacity:.35; } 50% { transform:translateY(-3px); opacity:1; } }
+@keyframes om-slot { 0%,10% { background:#E7EAEF; border-color:#DFE3EA; } 22%,72% { background:rgba(244,96,30,0.16); border-color:rgba(244,96,30,0.45); } 88%,100% { background:#E7EAEF; border-color:#DFE3EA; } }
+@keyframes om-slotpick { 0%,26% { background:#E7EAEF; border-color:#DFE3EA; } 38%,74% { background:#F4601E; border-color:#F4601E; } 90%,100% { background:#E7EAEF; border-color:#DFE3EA; } }
+@keyframes om-growbar { 0%,8% { transform:scaleY(.12); } 34%,74% { transform:scaleY(1); } 92%,100% { transform:scaleY(.12); } }
+@keyframes om-sweep { to { transform:rotate(360deg); } }
+@keyframes om-ping { 0%,100% { opacity:.25; transform:scale(.8); } 50% { opacity:1; transform:scale(1.25); } }
+@keyframes om-draw { 0% { stroke-dashoffset:520; } 55%,100% { stroke-dashoffset:0; } }
+@keyframes om-dash { to { stroke-dashoffset:-40; } }
+@keyframes om-type { 0% { width:0; } 60%,100% { width:100%; } }
+@keyframes om-bar-pulse { 0%,100% { transform:scaleY(.55); } 50% { transform:scaleY(1); } }
+@keyframes om-tick { 0%,100% { opacity:.4; } 50% { opacity:1; } }
