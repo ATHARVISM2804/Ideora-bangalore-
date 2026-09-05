@@ -90,6 +90,146 @@ export const PAGES = [
       body: 'We will walk the systems you run today and show what an agent can action in each one before anything is committed.',
     },
   },
+  {
+    path: '/solutions/agentic-ai',
+    title: 'Agentic AI & Automation',
+    description: 'Custom agents that complete multi-step operational tasks end to end, built against your APIs, your permissions, and your escalation rules.',
+    eyebrow: 'Solutions',
+    heading: 'Custom agents that complete the work end to end',
+    lede: 'Agents that complete multi-step operational tasks end to end, with a full trace of every action. Built against your APIs, your permissions, and your escalation rules rather than around them.',
+    proof: [
+      { label: 'Median task completion', value: '40s' },
+      { label: 'Human touches', value: '0' },
+      { label: 'Build window', value: '8 to 10 wks' },
+      { label: 'Engagement', value: 'Build, then run' },
+    ],
+    sections: [
+      { title: 'Built the way a coordinator works', body: 'Read the request, check the record, take the action, log the outcome. That is the loop a trained coordinator runs a hundred times a day, and it is the loop the agent is built to run: against your systems, with the same information a person would have opened four tabs to find.' },
+      { title: 'Multi-step, not single-turn', body: 'Most work is not one action. It is an enquiry that becomes a match, a check, a hold, a confirmation, and a follow-up thirty seconds later when the customer replies. The agent carries the whole sequence, including the waiting, so nothing stalls between steps because a person did not pick it back up.' },
+      { title: 'A trace behind every action', body: 'Every step an agent takes is written down: what came in, what it matched, what it changed, and when. If a supervisor asks why a booking moved, the answer is a record, not a reconstruction.' },
+      { title: 'Your permissions, your escalations', body: 'What an agent may action alone and what it must route to a person is agreed in the design step and enforced in the build. Median task completion drops to around 40 seconds where the work was previously taking hours, but only for the work you have decided an agent should hold.' },
+    ],
+    related: [
+      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
+      { label: 'Productised Systems', path: '/solutions/productised-systems' },
+    ],
+    cta: {
+      heading: 'Start with the process that stalls most',
+      body: 'We run a scope call on one workflow, agree what success looks like, and fix the scope and the price before anything is designed.',
+    },
+  },
+  {
+    path: '/solutions/real-estate',
+    title: 'Real Estate Automation',
+    description: 'Enquiry qualification, viewing scheduling, and document chasing run continuously, so agents spend the day with buyers who are ready.',
+    eyebrow: 'Solutions',
+    heading: 'Enquiries qualified, viewings booked, documents chased',
+    lede: 'Enquiry qualification, viewing scheduling and document chasing handled continuously so agents spend their day with buyers who are ready. What gets delivered is qualified enquiries, confirmed viewings, and a document checklist that closes itself.',
+    proof: [
+      { label: 'Build window', value: '6 to 8 wks' },
+      { label: 'Connects', value: 'CRM · portals · calendars' },
+      { label: 'Built on', value: 'Your existing stack' },
+      { label: 'Human touches', value: '0' },
+    ],
+    sections: [
+      { title: 'Qualification before routing', body: 'Portal and website enquiries are scored against budget, area, and readiness as they arrive. The agent who picks one up is looking at a shortlist with the reasoning attached, rather than a list of names to ring back in an order nobody chose.' },
+      { title: 'Viewings offered against a real calendar', body: 'A viewing is proposed from the windows an agent actually has free, then confirmed and written into the CRM. There is no call-back loop, and no double booking that surfaces on a Saturday morning.' },
+      { title: 'Documents that chase themselves', body: 'Identity and KYC paperwork is requested, reminded, and re-reminded until it arrives, then filed against the deal. The checklist closes without anyone keeping it in their head.' },
+      { title: 'What stays with the agent', body: 'Negotiation, judgement, and the relationship. The system removes the call-backs and the chasing around them; it does not sell the unit.' },
+    ],
+    related: [
+      { label: 'Real Estate', path: '/industries/real-estate' },
+      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+    ],
+    cta: {
+      heading: 'Put it against a week of your enquiries',
+      body: 'We map how enquiries reach your agents today, then show what qualification and scheduling look like when they run before anyone picks up.',
+    },
+  },
+  {
+    path: '/solutions/healthcare',
+    title: 'Healthcare & Clinic Automation',
+    description: 'Intake, eligibility checks, reminders and recall lists run before the patient reaches the desk, with clinical judgement left to clinicians.',
+    eyebrow: 'Solutions',
+    heading: 'The desk work done before the patient arrives',
+    lede: 'Intake, eligibility checks, reminders, and recall lists run before the patient reaches the desk. What gets delivered is completed intake, verified coverage, and a filled schedule with named exceptions.',
+    proof: [
+      { label: 'Build window', value: '8 wks' },
+      { label: 'Connects', value: 'EMR · practice mgmt · payers' },
+      { label: 'Built on', value: 'Your existing stack' },
+      { label: 'Engagement', value: 'Build, then run' },
+    ],
+    sections: [
+      { title: 'Intake completed by message', body: 'The patient fills in intake and signs consent on their phone, in their own time. The chart is prepared before they walk in, so the first minute at the desk is not a form.' },
+      { title: 'Coverage verified, not assumed', body: 'Eligibility is checked against the payer while the appointment is still days away. Where cover is in doubt the system says so early, with a name and a reason, instead of the front desk finding out on the morning.' },
+      { title: 'Reminders and recalls that run themselves', body: 'Reminders go out on schedule and recall lists are worked continuously, so a six-month review is flagged when it falls due rather than when someone has time to run the report.' },
+      { title: 'Clinical judgement stays with clinicians', body: 'The system handles intake, coverage, scheduling, and follow-up. It does not triage, advise, or make a clinical call, and the exceptions it raises are administrative ones for the desk to work.' },
+    ],
+    related: [
+      { label: 'Healthcare', path: '/industries/healthcare' },
+      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+    ],
+    cta: {
+      heading: 'Take one clinic and one week',
+      body: 'We sit with the front desk, map every handoff between enquiry and appointment, and show which of them an agent can hold.',
+    },
+  },
+  {
+    path: '/solutions/service-centre',
+    title: 'Service Centre Automation',
+    description: 'One agent across booking, estimate approval, parts status and customer updates, working the same records your advisors and DMS already use.',
+    eyebrow: 'Solutions',
+    heading: 'One agent across booking, estimate and update',
+    lede: 'One agent covering booking, estimate approval, parts status, and customer updates, working the same records your advisors and DMS already use. Bookings held, estimates approved, and a bay schedule that reflects reality by 9am.',
+    proof: [
+      { label: 'Build window', value: '6 to 8 wks' },
+      { label: 'Connects', value: 'DMS · booking · WhatsApp' },
+      { label: 'Median task completion', value: '40s' },
+      { label: 'Human touches', value: '0 per booking' },
+    ],
+    sections: [
+      { title: 'Booking held while the message is still open', body: 'The enquiry arrives on WhatsApp, the vehicle is matched, bay availability is checked, and a slot is held with a confirmation and an inspection link sent back. The advisor sees a booked job, not a message to answer.' },
+      { title: 'Estimates that do not sit waiting', body: 'The approval goes out, the reply comes back, and the job status and parts order move on it. The common fault is not capacity, it is an estimate sitting unapproved because nobody called back, and that is the loop this closes.' },
+      { title: 'A bay schedule that matches the shop floor', body: 'Because the agent writes to the same records the advisors and the DMS use, the schedule at 9am is the schedule that is actually being worked. Nobody reconciles three inboxes and a spreadsheet to find out.' },
+      { title: 'Advisors on the jobs that need them', body: 'Routine confirmation, chasing, and status updates run without a person. What reaches an advisor is the exception: the vehicle that does not match, the approval that never came, the part that is not in the catalogue.' },
+    ],
+    related: [
+      { label: 'Automotive', path: '/industries/automotive' },
+      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+    ],
+    cta: {
+      heading: 'Bring us one site and its backlog',
+      body: 'We walk the process from enquiry to invoice, meet the advisors who run it today, and agree what an agent takes before anything is built.',
+    },
+  },
+  {
+    path: '/solutions/productised-systems',
+    title: 'Productised Systems',
+    description: 'Systems we have already built and deployed, configured to your data instead of designed from scratch: a shorter build, the same operating model.',
+    eyebrow: 'Solutions',
+    heading: 'Already built. Configured to your data.',
+    lede: 'Systems we have already built and deployed, configured to your data instead of designed from scratch. A shorter build, the same operating model: a running system, the standard dashboard, and a managed operation.',
+    proof: [
+      { label: 'Build window', value: '3 to 5 wks' },
+      { label: 'Connects', value: 'Standard connector set' },
+      { label: 'Built on', value: 'Your existing stack' },
+      { label: 'Engagement', value: 'Build, then run' },
+    ],
+    sections: [
+      { title: 'Configured, not commissioned', body: 'The workflow, the agent behaviour, and the dashboard already exist because they are running elsewhere. What we do for you is connect them to your systems and set them to your rules, which is why the window is three to five weeks rather than eight to ten.' },
+      { title: 'The same operating model', body: 'A productised build is not a lighter product. It is the same runtime, the same console, and the same managed operation as a bespoke system, entered at a different point.' },
+      { title: 'Where it fits, and where it does not', body: 'If your process looks like a process we have already automated, this is the shorter route. If it does not, a fixed-scope build is the honest answer and we will say so at the scope call rather than at the demo.' },
+      { title: 'Standard connectors first', body: 'The connector set covers the systems these verticals usually run on. Anything outside it is scoped as work, priced, and agreed before the build, not absorbed quietly into the timeline.' },
+    ],
+    related: [
+      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
+      { label: 'Real Estate Automation', path: '/solutions/real-estate' },
+    ],
+    cta: {
+      heading: 'Find out which route you are on',
+      body: 'One scope call tells us whether a system we already run fits your operation or whether yours needs building. Either way you leave with a scope and a price.',
+    },
+  },
 ];
 
 // Fails loudly in dev if nav.js and pages.js drift apart. A menu item with no
