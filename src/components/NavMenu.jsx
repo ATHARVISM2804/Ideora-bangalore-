@@ -48,7 +48,11 @@ export function NavMenu({ menu, glass, active }) {
     if (e.key === 'ArrowDown') { e.preventDefault(); focusItem(i + 1); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); focusItem(i - 1); }
     else if (e.key === 'Escape') { e.preventDefault(); close({ refocus: true }); }
-    else if (e.key === 'Tab') { close({ refocus: false }); }
+    else if (e.key === 'Tab') {
+      const lastIndex = menu.items.length - 1;
+      if (!e.shiftKey && i === lastIndex) close({ refocus: false });
+      else if (e.shiftKey && i === 0) close({ refocus: false });
+    }
   };
 
   return (
