@@ -1,15 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { s } from '../lib/style';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
 import { useOverDark } from '../hooks/useOverDark';
-
-const LINKS = [
-  ['#services', 'Services'],
-  ['#industries', 'Industries'],
-  ['#work', 'Work'],
-  ['#about', 'About'],
-];
+import { MENUS } from '../data/nav';
+import { NavMenu } from '../components/NavMenu';
 
 // Two glass treatments. Both keep the same blur and saturation so the bar reads
 // as one material; only the tint, edge light, and text colour swap.
@@ -19,18 +15,29 @@ const GLASS = {
     link: '#5A616D',
     linkHover: 'color:#1A1D23; background:rgba(26,29,35,0.06)',
     logo: '/assets/ideora-lockup.png',
+    panel: 'border:1px solid rgba(255,255,255,0.6); background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.72)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.95), 0 26px 60px -30px rgba(26,29,35,0.5)',
+    panelItemHover: 'background:rgba(26,29,35,0.06)',
   },
   dark: {
     bar: 'border:1px solid rgba(255,255,255,0.14); background:linear-gradient(180deg, rgba(46,51,60,0.62), rgba(26,29,35,0.44)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 rgba(0,0,0,0.28), 0 22px 50px -28px rgba(0,0,0,0.85), 0 2px 10px -6px rgba(0,0,0,0.4)',
     link: '#C6CCD6',
     linkHover: 'color:#FFFFFF; background:rgba(255,255,255,0.1)',
     logo: '/assets/ideora-lockup-light.png',
+    panel: 'border:1px solid rgba(255,255,255,0.16); background:linear-gradient(180deg, rgba(46,51,60,0.9), rgba(26,29,35,0.8)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), 0 26px 60px -30px rgba(0,0,0,0.9)',
+    panelItemHover: 'background:rgba(255,255,255,0.1)',
   },
 };
 
 export function Nav() {
   const barRef = useRef(null);
   const g = GLASS[useOverDark(barRef) ? 'dark' : 'light'];
+  const { pathname } = useLocation();
+  const [openLabel, setOpenLabel] = useState(null);
+  // A menu is active when the current route is one of its items, or is the
+  // menu's own path. Matched by exact path, not prefix: /solutions/real-estate
+  // and /industries/real-estate must not both light up.
+  const isActive = (menu) =>
+    menu.path === pathname || menu.items.some((i) => i.path === pathname);
 
   return (
     <header style={s('position:sticky; top:0; z-index:70; padding:14px 0')}>
@@ -39,27 +46,48 @@ export function Nav() {
           ref={barRef}
           style={s(`display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 20px; border-radius:18px; backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
         >
-          <a href="#top" style={s('display:flex; align-items:center')}>
+          <Link to="/" style={s('display:flex; align-items:center')}>
             <img src={g.logo} alt="Ideora Labs" style={s('height:32px; width:auto; display:block')} />
-          </a>
+          </Link>
           <nav style={s('display:flex; align-items:center; gap:4px')}>
-            {LINKS.map(([href, label]) => (
-              <Hover
-                key={href}
-                as="a"
-                href={href}
-                style={`color:${g.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; transition:color .3s, background .3s`}
-                hoverStyle={g.linkHover}
-              >{label}</Hover>
+            {MENUS.map((menu) => (
+              menu.items.length > 0
+                ? (
+                  <NavMenu
+                    key={menu.label}
+                    menu={menu}
+                    glass={g}
+                    active={isActive(menu)}
+                    open={openLabel === menu.label}
+                    onOpenChange={(next) => setOpenLabel(next ? menu.label : null)}
+                  />
+                )
+                : (
+                  <Hover
+                    key={menu.label}
+                    as={Link}
+                    to={menu.path}
+                    style={`color:${isActive(menu) ? '#F4601E' : g.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; text-decoration:none; transition:color .3s, background .3s`}
+                    hoverStyle={g.linkHover}
+                  >{menu.label}</Hover>
+                )
             ))}
+
             <Hover
-              as="a"
-              href="#book"
+              as={Link}
+              to="/about#contact"
+              style={`margin-left:10px; padding:9px 17px; border-radius:13px; border:1px solid ${g.link}; color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
+              hoverStyle={g.linkHover}
+            >Talk to Us</Hover>
+
+            <Hover
+              as={Link}
+              to="/#book"
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
-              style="margin-left:10px; padding:10px 18px; border-radius:13px; background:#F4601E; color:#1A1D23; font-size:14px; font-weight:500; box-shadow:0 10px 26px -14px rgba(244,96,30,0.95); transition:transform .18s ease-out, background .25s"
+              style="margin-left:8px; padding:10px 18px; border-radius:13px; background:#F4601E; color:#1A1D23; font-size:14px; font-weight:500; text-decoration:none; box-shadow:0 10px 26px -14px rgba(244,96,30,0.95); transition:transform .18s ease-out, background .25s"
               hoverStyle="background:#FF7A3D"
-            >Book a working session</Hover>
+            >Request a Demo</Hover>
           </nav>
         </div>
       </div>

@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { s } from '../lib/style';
 
 const CLOSE_DELAY = 120;
 
-export function NavMenu({ menu, glass, active }) {
-  const [open, setOpen] = useState(false);
+export function NavMenu({ menu, glass, active, open, onOpenChange }) {
   const timer = useRef(null);
   const triggerRef = useRef(null);
   const itemRefs = useRef([]);
@@ -16,7 +15,7 @@ export function NavMenu({ menu, glass, active }) {
   const cancelClose = () => clearTimeout(timer.current);
   const scheduleClose = () => {
     cancelClose();
-    timer.current = setTimeout(() => setOpen(false), CLOSE_DELAY);
+    timer.current = setTimeout(() => onOpenChange(false), CLOSE_DELAY);
   };
 
   const focusItem = (i) => {
@@ -25,13 +24,13 @@ export function NavMenu({ menu, glass, active }) {
   };
 
   const openAndFocusFirst = () => {
-    setOpen(true);
+    onOpenChange(true);
     requestAnimationFrame(() => focusItem(0));
   };
 
   const close = ({ refocus }) => {
     cancelClose();
-    setOpen(false);
+    onOpenChange(false);
     if (refocus) triggerRef.current?.focus();
   };
 
@@ -58,7 +57,7 @@ export function NavMenu({ menu, glass, active }) {
   return (
     <div
       style={s('position:relative')}
-      onMouseEnter={() => { cancelClose(); setOpen(true); }}
+      onMouseEnter={() => { cancelClose(); onOpenChange(true); }}
       onMouseLeave={scheduleClose}
     >
       <button
@@ -67,7 +66,7 @@ export function NavMenu({ menu, glass, active }) {
         aria-expanded={open}
         aria-haspopup="true"
         onKeyDown={onTriggerKeyDown}
-        onClick={() => (open ? close({ refocus: false }) : setOpen(true))}
+        onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
         style={s(`display:flex; align-items:center; gap:6px; border:0; background:${open ? 'rgba(26,29,35,0.06)' : 'transparent'}; cursor:pointer; font-family:inherit; color:${active ? '#F4601E' : glass.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; transition:color .3s, background .3s`)}
       >
         {menu.label}
