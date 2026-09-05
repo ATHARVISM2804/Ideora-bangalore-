@@ -26,11 +26,11 @@ export const CAPABILITIES = [
 ];
 
 export const PROBLEMS = [
-  { code: "fault 01", title: "Work waits on people",
+  { glyph: "waiting", meter: "stall", read: "waiting 4h 12m", code: "fault 01", title: "Work waits on people",
     body: "An estimate sits unapproved because nobody called back. The job is not blocked by capacity, it is blocked by a follow-up that never happened." },
-  { code: "fault 02", title: "Systems do not talk",
+  { glyph: "silo", meter: "split", read: "3 versions of the truth", code: "fault 02", title: "Systems do not talk",
     body: "The booking tool, the DMS, and WhatsApp each hold a different version of the truth. Staff reconcile them by hand, all day, from memory." },
-  { code: "fault 03", title: "Nobody can see the queue",
+  { glyph: "blind", meter: "late", read: "seen 28 days late", code: "fault 03", title: "Nobody can see the queue",
     body: "Management finds out about the backlog at the end of the month, when the report arrives and the week it describes is already gone." }
 ];
 
@@ -63,40 +63,52 @@ export const SERVICES = [
 ];
 
 export const INDUSTRIES = [
-  { code: "01", name: "Automotive", slotId: "v5-ind-auto", slotHint: "Drop a workshop or service bay photo",
+  { code: "01", name: "Automotive", panel: "automotive", slotId: "v5-ind-auto", slotHint: "Drop a workshop or service bay photo",
     body: "Bookings, estimates, and approvals move through one agent instead of three inboxes. Advisors stop transcribing and start closing jobs the agent has already prepared." },
-  { code: "02", name: "Real estate", slotId: "v5-ind-realestate", slotHint: "Drop a property or office photo",
+  { code: "02", name: "Real estate", panel: "realestate", slotId: "v5-ind-realestate", slotHint: "Drop a property or office photo",
     body: "Enquiries are qualified, viewings are scheduled against real calendars, and documents are chased until they arrive. Agents see a shortlist, not missed calls." },
-  { code: "03", name: "Healthcare", slotId: "v5-ind-health", slotHint: "Drop a clinic or front-desk photo",
+  { code: "03", name: "Healthcare", panel: "healthcare", slotId: "v5-ind-health", slotHint: "Drop a clinic or front-desk photo",
     body: "Intake, insurance checks, and recalls run before the patient arrives. The desk handles exceptions, and the clinic knows on Monday which slots go unfilled." }
 ];
 
 export const CASES = [
-  { vertical: "Automotive", code: "sys_01",
+  { vertical: "Automotive", code: "sys_01", status: "live",
     title: "Service bookings answered in seconds, not shifts",
     body: "One agent takes the WhatsApp enquiry, finds the vehicle, holds a bay, and returns a confirmed slot with an inspection link before an advisor has read the message.",
     replaced: "3 inboxes · 1 spreadsheet", since: "Feb 2026" },
-  { vertical: "Real estate", code: "sys_02",
+  { vertical: "Real estate", code: "sys_02", status: "live",
     title: "Every enquiry qualified before an agent sees it",
     body: "Portal and web enquiries are scored against budget, area, and readiness, then routed with a viewing already offered against the agent's live calendar.",
     replaced: "manual call-backs", since: "Apr 2026" },
-  { vertical: "Healthcare", code: "sys_03",
+  { vertical: "Healthcare", code: "sys_03", status: "live",
     title: "Intake and coverage settled before arrival",
     body: "Patients complete intake by message, coverage is verified against the payer, and the desk gets a single list of exceptions to work rather than a queue of unknowns.",
     replaced: "paper intake · phone checks", since: "May 2026" },
-  { vertical: "Cross-vertical", code: "sys_04",
+  { vertical: "Cross-vertical", code: "sys_04", status: "live",
     title: "A queue management can read on a Monday",
     body: "Every agent action writes to one operational record, so backlog, ageing, and exception volume are visible the day they happen instead of at month end.",
-    replaced: "month-end reporting", since: "Jun 2026" }
+    replaced: "month-end reporting", since: "Jun 2026" },
+  { vertical: "Finance", code: "sys_05", status: "in build",
+    title: "Onboarding cleared before a reviewer opens it",
+    body: "Registry lookups, director verification, and sanctions screening run the moment an application lands, so the file that reaches a reviewer is already complete and risk-banded.",
+    replaced: "manual KYC checks", since: "Q4 2026" },
+  { vertical: "Legal", code: "sys_06", status: "pilot",
+    title: "Matters opened without partner time",
+    body: "Conflict checks, engagement letters, and ID chasing complete before a partner sees the file. The matter arrives ready to bill rather than ready to set up.",
+    replaced: "manual intake · paper conflicts", since: "Aug 2026" }
 ];
 
 export const QUOTES = [
   { text: "The first week of the audit told us more about our own process than two years of reporting had.",
-    role: "Group service director", scale: "14-site dealer network", slotId: "v5-q1" },
+    glyph: "automotive", role: "Group service director", scale: "14-site dealer network", slotId: "v5-q1" },
   { text: "Nothing was ripped out. It plugged into the systems we already pay for and started clearing the queue.",
-    role: "Chief growth officer", scale: "Residential brokerage, 200 agents", slotId: "v5-q2" },
+    glyph: "realestate", role: "Chief growth officer", scale: "Residential brokerage, 200 agents", slotId: "v5-q2" },
   { text: "My front desk stopped chasing insurers. That alone paid for the build inside a quarter.",
-    role: "Operations director", scale: "Multi-clinic group", slotId: "v5-q3" }
+    glyph: "healthcare", role: "Operations director", scale: "Multi-clinic group", slotId: "v5-q3" },
+  { text: "We thought the delay was compliance. The audit showed it was three teams waiting on each other to confirm the same document.",
+    glyph: "finance", role: "Head of onboarding", scale: "Commercial bank · in build", slotId: "v5-q4" },
+  { text: "In the pilot, the conflicts check stopped being a Monday morning job. It happens when the enquiry lands.",
+    glyph: "legal", role: "Managing partner", scale: "Commercial firm · pilot", slotId: "v5-q5" }
 ];
 
 export const FACTS = [
@@ -133,20 +145,3 @@ export const RESULT_STATS = [
   { value: 12, suffix: "/12", label: "agents online right now", note: "99.98% uptime" }
 ];
 
-export const SLOT_PICK = 15;
-export const SLOT_LIT = [3, 7, 9, 14, 15, 16, 20];
-
-export const DIGEST_BARS = [38, 56, 44, 70, 62, 84, 74, 96, 58];
-
-export const DIGEST_ROWS = [
-  { label: "Bookings confirmed", val: "128", delay: "3.2s" },
-  { label: "Approvals collected", val: "96", delay: "3.5s" },
-  { label: "Exceptions to review", val: "2", delay: "3.8s" }
-];
-
-export const RESULT_FACTS = [
-  { n: "0", suffix: "", label: "systems ripped out to make room for ours", accent: true },
-  { n: "6", suffix: "–10 wks", label: "from first audit to a system in production", accent: false },
-  { n: "24", suffix: "/7", label: "operating hours, without a night shift", accent: false },
-  { n: "1", suffix: "", label: "operational record everyone reads from", accent: false }
-];

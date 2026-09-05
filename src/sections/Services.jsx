@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { s } from '../lib/style';
 import { spot } from '../lib/handlers';
-import { ImageSlot } from '../components/ImageSlot';
+import { MethodFlow } from '../components/SectionArt';
 import { SERVICES } from '../data/content';
 
 const MONO = "font-family:'JetBrains Mono', monospace";
@@ -10,14 +10,14 @@ export function Services() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="services" style={s('padding:0 0 184px')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 40px; display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; align-items:start')}>
+    <section id="services" style={s('padding:0 0 clamp(72px, 11vw, 184px)')}>
+      <div className="om-g12" style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; align-items:start')}>
         <div style={s('grid-column:1 / span 4; position:sticky; top:130px')}>
-          <h2 data-anim="head" style={s('margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:44px; line-height:0.98; letter-spacing:-0.03em')}>What we build</h2>
+          <h2 data-anim="head" style={s('margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>What we build</h2>
           <p style={s('margin:24px 0 0; max-width:40ch; color:#5A616D')}>Five practices, one method. We map the handoffs your team performs manually, then build agents that perform them against your live systems and report what they did.</p>
           <div style={s(`margin-top:32px; display:inline-flex; align-items:center; gap:9px; padding:8px 15px; border-radius:99px; border:1px solid rgba(26,29,35,0.08); background:#FFFFFF; ${MONO}; font-size:12px; color:#5A616D`)}>select a practice to expand</div>
-          <div style={s('margin-top:28px; border-radius:14px; overflow:hidden; border:1px solid rgba(26,29,35,0.07); height:180px')}>
-            <ImageSlot shape="rect" placeholder="Drop a photo of the team working" />
+          <div style={s('margin-top:28px; position:relative; border-radius:14px; overflow:hidden; border:1px solid rgba(26,29,35,0.07); height:200px')}>
+            <MethodFlow />
           </div>
         </div>
 
@@ -57,7 +57,7 @@ export function Services() {
                 {isOpen && (
                   <div style={s('position:relative; padding:0 24px 28px 72px; animation:om-fade .5s both')}>
                     <p style={s('margin:0 0 24px; max-width:58ch; color:#5A616D')}>{svc.body}</p>
-                    <div style={s('display:grid; grid-template-columns:repeat(3, 1fr); gap:12px')}>
+                    <div className="om-g3" style={s('display:grid; grid-template-columns:repeat(3, 1fr); gap:12px')}>
                       <div style={s('padding:18px; border-radius:14px; border:1px solid rgba(26,29,35,0.07); background:rgba(255,255,255,0.9)')}>
                         <div style={s('font-size:12px; color:#5A616D')}>What it delivers</div>
                         <div style={s('margin-top:8px; font-size:14px; line-height:1.45')}>{svc.delivers}</div>

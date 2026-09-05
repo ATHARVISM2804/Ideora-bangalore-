@@ -1,6 +1,4 @@
 import { s } from '../lib/style';
-import { spot } from '../lib/handlers';
-import { Hover } from '../components/Hover';
 import { CAPABILITIES } from '../data/content';
 
 // Line icons drawn to match the thin-stroke language already used in the
@@ -66,29 +64,25 @@ function CapIcon({ name }) {
 
 export function Capabilities() {
   return (
-    <section style={s('padding:0 0 96px')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 40px')}>
-        <div style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 7; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:44px; line-height:0.98; letter-spacing:-0.03em')}>Powerful capabilities. Real business impact.</h2>
+    <section style={s('padding:0 0 clamp(48px, 7vw, 96px)')}>
+      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
+        <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
+          <h2 data-anim="head" style={s('grid-column:1 / span 7; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>Powerful capabilities. Real business impact.</h2>
           <p data-anim="head" style={s('grid-column:9 / span 4; margin:0; color:#5A616D')}>Every system we build is assembled from the same set of capabilities, wired into the tools your team already runs on.</p>
         </div>
 
-        <div style={s('margin-top:52px; display:grid; grid-template-columns:repeat(6,1fr); gap:16px')}>
-          {CAPABILITIES.map((c) => (
-            <Hover
+        {/* One continuous strip divided by hairlines rather than six boxes. */}
+        <div className="om-g6" style={s('margin-top:52px; display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid rgba(26,29,35,0.12)')}>
+          {CAPABILITIES.map((c, i) => (
+            <div
               key={c.title}
-              data-anim="card"
-              onMouseMove={spot}
-              style="position:relative; overflow:hidden; padding:26px 20px 28px; border-radius:16px; border:1px solid rgba(26,29,35,0.07); background:rgba(255,255,255,0.82); backdrop-filter:blur(20px) saturate(140%); -webkit-backdrop-filter:blur(20px) saturate(140%); box-shadow:0 20px 46px -34px rgba(26,29,35,0.5); transition:transform .4s cubic-bezier(.16,.84,.24,1), border-color .4s, box-shadow .4s"
-              hoverStyle="transform:translateY(-8px); border-color:rgba(244,96,30,0.3); box-shadow:0 32px 62px -34px rgba(26,29,35,0.45)"
+              data-anim="step"
+              style={s(`padding:28px 22px 8px; ${i ? 'border-left:1px solid rgba(26,29,35,0.09)' : ''}`)}
             >
-              <div style={s('position:absolute; inset:0; pointer-events:none; background:radial-gradient(200px circle at var(--mx, 50%) var(--my, -20%), rgba(244,96,30,0.075), transparent 62%)')} />
-              <div style={s('position:relative')}>
-                <CapIcon name={c.icon} />
-                <h3 style={s('margin:20px 0 0; min-height:40px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:17px; line-height:1.18; letter-spacing:-0.015em')}>{c.title}</h3>
-                <p style={s('margin:12px 0 0; font-size:13.5px; line-height:1.5; color:#5A616D')}>{c.body}</p>
-              </div>
-            </Hover>
+              <CapIcon name={c.icon} />
+              <h3 style={s('margin:20px 0 0; min-height:40px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:17px; line-height:1.18; letter-spacing:-0.015em')}>{c.title}</h3>
+              <p style={s('margin:12px 0 0; font-size:13.5px; line-height:1.5; color:#5A616D')}>{c.body}</p>
+            </div>
           ))}
         </div>
       </div>

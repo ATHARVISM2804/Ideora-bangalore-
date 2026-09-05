@@ -17,6 +17,8 @@ export function useGsapTimeline(refs) {
     if (!root) return;
     const q = (sel) => Array.from(root.querySelectorAll(sel));
 
+    const mm = gsap.matchMedia();
+
     const ctx = gsap.context(() => {
       const ease = 'power3.out';
 
@@ -44,9 +46,13 @@ export function useGsapTimeline(refs) {
         scrollTrigger: { trigger: consoleRef.current, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
       });
 
+      // Entrances are fade-only. Sliding every heading and card up the screen
+      // is the generic default and it moved content under the reader; the
+      // page's deliberate motion lives in the hero sequence, the console, the
+      // scroll-drawn spine and rule, and the pinned Work scroller.
       q('[data-anim="head"]').forEach((el) => {
         gsap.from(el, {
-          y: 44, opacity: 0, duration: 1, ease,
+          opacity: 0, duration: 0.5, ease,
           scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
         });
       });
@@ -59,7 +65,7 @@ export function useGsapTimeline(refs) {
       });
       groups.forEach((els, parent) => {
         gsap.from(els, {
-          y: 56, opacity: 0, duration: 0.95, stagger: 0.11, ease,
+          opacity: 0, duration: 0.5, stagger: 0.04, ease,
           scrollTrigger: { trigger: parent, start: 'top 86%', toggleActions: 'play none none none' },
         });
       });
@@ -72,18 +78,16 @@ export function useGsapTimeline(refs) {
         });
       }
 
-      q('[data-anim="proc-card"]').forEach((el, i) => {
-        const fromLeft = i % 2 === 0;
+      q('[data-anim="proc-card"]').forEach((el) => {
         gsap.from(el, {
-          x: fromLeft ? -70 : 70, y: 40, opacity: 0, rotate: fromLeft ? -1.6 : 1.6,
-          duration: 1.05, ease,
+          opacity: 0, duration: 0.5, ease,
           scrollTrigger: { trigger: el, start: 'top 84%', toggleActions: 'play none none none' },
         });
       });
 
       q('[data-anim="proc-pill"]').forEach((el) => {
         gsap.from(el, {
-          scale: 0.6, opacity: 0, duration: 0.7, ease: 'back.out(2)',
+          opacity: 0, duration: 0.5, ease,
           scrollTrigger: { trigger: el, start: 'top 86%', toggleActions: 'play none none none' },
         });
       });
@@ -93,9 +97,16 @@ export function useGsapTimeline(refs) {
         scrollTrigger: { trigger: ruleRef.current, start: 'top 80%', end: 'top 30%', scrub: 0.4 },
       });
 
-      const track = trackRef.current;
-      const pin = pinRef.current;
-      if (track && pin) {
+      // The Work pin is desktop-only. Below 1024px the section renders as a
+      // native snap rail that the reader swipes, so pinning it would fight
+      // that scroller and, on iOS Safari, the address bar and the swipe-back
+      // edge gesture as well. gsap.matchMedia sets the tween up and tears it
+      // down on its own as the viewport crosses the breakpoint, which also
+      // covers a phone being rotated into landscape.
+      mm.add('(min-width: 1025px)', () => {
+        const track = trackRef.current;
+        const pin = pinRef.current;
+        if (!track || !pin) return;
         const distance = () => Math.max(0, track.scrollWidth - pin.getBoundingClientRect().width + 80);
         gsap.to(track, {
           x: () => -distance(), ease: 'none',
@@ -109,9 +120,9 @@ export function useGsapTimeline(refs) {
             },
           },
         });
-      }
+      });
     }, root);
 
-    return () => ctx.revert();
+    return () => { mm.revert(); ctx.revert(); };
   }, [rootRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef]);
 }

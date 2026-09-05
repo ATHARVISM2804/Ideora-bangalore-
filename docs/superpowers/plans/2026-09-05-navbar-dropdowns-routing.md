@@ -143,7 +143,7 @@ In `src/hooks/useGsapTimeline.js`, delete `barRef` from the destructured `refs` 
 
 - [ ] **Step 4: Create the Home page from the current App body**
 
-Create `src/pages/Home.jsx`. Move the thirteen section imports, the seven remaining refs, the `useGsapTimeline` call, and the section JSX out of `App.jsx` verbatim:
+Create `src/pages/Home.jsx`. Move the twelve body-section imports, the seven remaining refs, the `useGsapTimeline` call, and the section JSX out of `App.jsx` verbatim:
 
 ```jsx
 import { useRef } from 'react';
@@ -153,6 +153,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Hero } from '../sections/Hero';
 import { Problem } from '../sections/Problem';
 import { Services } from '../sections/Services';
+import { Capabilities } from '../sections/Capabilities';
 import { Industries } from '../sections/Industries';
 import { Work } from '../sections/Work';
 import { Voices } from '../sections/Voices';
@@ -182,6 +183,7 @@ export function Home() {
       <Hero consoleRef={consoleRef} />
       <Problem />
       <Services />
+      <Capabilities />
       <Industries />
       <Work pinRef={pinRef} trackRef={trackRef} railRef={railRef} />
       <Voices />
@@ -927,11 +929,11 @@ git commit -m "feat: PageShell, blocks, and data-driven routes"
 
 - [ ] **Step 1: Write `/platforms/agent-runtime`**
 
-Follow the Task 5 entry shape exactly — all ten keys. `eyebrow: 'Platforms'`. Subject: where agents execute, how they retry, how work hands off between them, and how a failed step becomes a named exception rather than a silent drop. Draw factual claims only from `src/data/content.js` (`STATS`, `FACTS`) and `src/data/dashboards.js` — specifically `agent: 'service_centre_agent'`, `online: ['12','12']`, and the 99.98% uptime figure. `related` links to Ops Console and Integrations Layer.
+Follow the Task 5 entry shape exactly — all ten keys. `eyebrow: 'Platforms'`. Subject: where agents execute, how they retry, how work hands off between them, and how a failed step becomes a named exception rather than a silent drop. Draw factual claims only from `src/data/content.js` (`RESULT_STATS`, `FACTS`) and `src/data/dashboards.js` — specifically `agent: 'service_centre_agent'`, `online: ['12','12']`, and the 99.98% uptime figure. `related` links to Ops Console and Integrations Layer.
 
 - [ ] **Step 2: Write `/platforms/integrations`**
 
-Same shape. `eyebrow: 'Platforms'`. Subject: connecting to the systems already in place. The governing claim, from `FACTS` in `content.js`, is **"Your existing stack. No rip and replace."** and the `PROOF` figure **0 systems ripped out**. `related` links to Ops Console and Agent Runtime.
+Same shape. `eyebrow: 'Platforms'`. Subject: connecting to the systems already in place. The governing claim, from `FACTS` in `content.js`, is **"Your existing stack. No rip and replace."** (Note: the former `RESULT_FACTS` export, which held the "0 systems ripped out" figure, was deleted from the repo on 2026-09-05 along with the ProcessResults section. Do not cite it — it no longer exists.) `related` links to Ops Console and Agent Runtime.
 
 - [ ] **Step 3: Verify**
 
@@ -963,7 +965,7 @@ Cross-linking, which is the point of having both Solutions and Industries:
 - `/solutions/service-centre` → related includes `/industries/automotive`
 - `/solutions/agentic-ai` and `/solutions/productised-systems` → related links to two sibling solutions
 
-`proof` items must come from `STATS` or `PROOF` in `content.js` (40s median task completion, 0 human touches per booking, 6 weeks to first system live, 12/12 agents online). Do not invent new metrics.
+`proof` items must come from `RESULT_STATS` in `content.js` (40s median task completion, 0 human touches per booking, 6 weeks to first system live, 12/12 agents online) or from `FACTS`. Do not invent new metrics, and do not cite the deleted `RESULT_FACTS` export.
 
 - [ ] **Step 2: Verify**
 

@@ -1,40 +1,75 @@
+import { useEffect, useState } from 'react';
 import { s } from '../lib/style';
-import { spot } from '../lib/handlers';
-import { Hover } from '../components/Hover';
-import { ImageSlot } from '../components/ImageSlot';
+import { QuoteGlyph } from '../components/SectionArt';
 import { QUOTES } from '../data/content';
 
+const MONO = "font-family:'JetBrains Mono', monospace";
+const CYCLE_MS = 7000;
+
+const VERTICAL = {
+  automotive: 'Automotive', realestate: 'Real estate', healthcare: 'Healthcare',
+  finance: 'Finance', legal: 'Legal',
+};
+
+function prefersReducedMotion() {
+  return typeof window !== 'undefined'
+    && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
+
+// One statement at a time, at a size worth reading. Three quotes shrunk into a
+// grid gave each of them less weight than any single one deserves.
 export function Voices() {
+  const [active, setActive] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const q = QUOTES[active];
+
+  useEffect(() => {
+    if (!autoplay || prefersReducedMotion()) return;
+    const t = setInterval(() => setActive((i) => (i + 1) % QUOTES.length), CYCLE_MS);
+    return () => clearInterval(t);
+  }, [autoplay]);
+
   return (
-    <section style={s('padding:184px 0')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 40px')}>
-        <div style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:44px; line-height:0.98; letter-spacing:-0.03em')}>What operations leads tell us</h2>
+    <section style={s('padding:clamp(48px, 7vw, 96px) 0')}>
+      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
+        <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
+          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>What operations leads tell us</h2>
           <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:#5A616D')}>Quotes are attributed by role and scale only. Named references are available on request under NDA.</p>
         </div>
-        <div style={s('margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px')}>
-          {QUOTES.map((q) => (
-            <Hover
-              key={q.slotId}
-              data-anim="card"
-              onMouseMove={spot}
-              style="position:relative; overflow:hidden; padding:28px 26px; border-radius:18px; border:1px solid rgba(26,29,35,0.07); background:rgba(255,255,255,0.85); box-shadow:0 24px 54px -36px rgba(26,29,35,0.55); transition:transform .4s cubic-bezier(.16,.84,.24,1), border-color .4s"
-              hoverStyle="transform:translateY(-6px); border-color:rgba(244,96,30,0.28)"
-            >
-              <div style={s('position:absolute; inset:0; pointer-events:none; background:radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(244,96,30,0.08), transparent 60%)')} />
-              <div style={s('position:relative; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:26px; line-height:1; color:#F4601E')}>“</div>
-              <p style={s('position:relative; margin:14px 0 0; font-size:17px; line-height:1.45; letter-spacing:-0.01em')}>{q.text}</p>
-              <div style={s('position:relative; margin-top:30px; padding-top:22px; border-top:1px solid rgba(26,29,35,0.08); display:flex; align-items:center; gap:14px')}>
-                <div style={s('width:44px; height:44px; flex:none; border-radius:50%; overflow:hidden; background:#E7EAEF')}>
-                  <ImageSlot shape="circle" placeholder="Photo" />
-                </div>
-                <div>
-                  <div style={s('font-size:14px; font-weight:500')}>{q.role}</div>
-                  <div style={s('font-size:13px; color:#5A616D')}>{q.scale}</div>
-                </div>
-              </div>
-            </Hover>
-          ))}
+
+        <div className="om-g12" style={s('margin-top:56px; display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:start')}>
+          {/* Which vertical is speaking, and the control for it */}
+          <div style={s('grid-column:1 / span 3; display:flex; flex-direction:column; border-top:1px solid rgba(26,29,35,0.12)')}>
+            {QUOTES.map((item, i) => {
+              const on = i === active;
+              return (
+                <button
+                  key={item.slotId}
+                  type="button"
+                  onClick={() => { setActive(i); setAutoplay(false); }}
+                  style={s(`display:flex; align-items:center; gap:11px; padding:15px 4px; border:0; border-bottom:1px solid rgba(26,29,35,0.09); background:none; cursor:pointer; font-family:inherit; font-size:14px; text-align:left; color:${on ? '#1A1D23' : '#8A929E'}; transition:color .3s`)}
+                >
+                  <span style={s(`width:7px; height:7px; flex:none; border-radius:50%; background:${on ? '#F4601E' : 'transparent'}; border:1.5px solid ${on ? '#F4601E' : 'rgba(26,29,35,0.22)'}; transition:all .3s`)} />
+                  {VERTICAL[item.glyph]}
+                </button>
+              );
+            })}
+          </div>
+
+          <div style={s('grid-column:5 / span 8')}>
+            <blockquote key={q.slotId} style={s('margin:0; animation:om-fade .5s both')}>
+              <p style={s('margin:0; max-width:22ch; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:500; font-size:clamp(24px, 4.2vw, 34px); line-height:1.2; letter-spacing:-0.025em; color:#1A1D23')}>
+                <span style={s('color:#F4601E')}>“</span>{q.text}
+              </p>
+              <footer style={s('margin-top:30px; display:flex; align-items:center; gap:14px')}>
+                <QuoteGlyph kind={q.glyph} />
+                <span>
+                  <span style={s('display:block; font-size:14px; font-weight:500')}>{q.role}</span>
+                  <span style={s(`display:block; ${MONO}; font-size:12px; color:#5A616D`)}>{q.scale}</span>
+                </span>
+              </footer>
+            </blockquote>
+          </div>
         </div>
       </div>
     </section>

@@ -28,3 +28,119 @@ a:hover { color:#F4601E; }
 @keyframes om-type { 0% { width:0; } 60%,100% { width:100%; } }
 @keyframes om-bar-pulse { 0%,100% { transform:scaleY(.55); } 50% { transform:scaleY(1); } }
 @keyframes om-tick { 0%,100% { opacity:.4; } 50% { opacity:1; } }
+
+/* --- Responsive foundation ------------------------------------------------
+   The page styles inline, so this file carries only what an inline style
+   cannot express: document-level behaviour and iOS Safari's quirks. */
+
+html {
+  /* Safari enlarges text in landscape unless this is pinned. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  /* A single overflowing child used to be clipped by the 1440px canvas.
+     At real device widths it would instead pan the whole page sideways. */
+  overflow-x: hidden;
+}
+
+/* The notch and Dynamic Island. Consumed by the sticky nav and the footer,
+   which are the only chrome that reaches the physical screen edges. */
+:root {
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+}
+
+/* Nothing may exceed its column on a narrow screen. Long unbroken strings —
+   URLs, IDs in the console traces — are the usual cause of sideways pan. */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
+
+/* Touch targets. Anything tappable clears Apple's 44px minimum on phones,
+   without disturbing the desktop sizing the design specifies. */
+@media (max-width: 640px) {
+  a, button, [role="button"], [role="tab"] { min-height: 44px; }
+  a, button, [role="button"], [role="tab"] {
+    /* Kills the grey flash iOS paints over tapped elements. */
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Horizontal rails (Work cases, industry tabs) become swipeable on touch. */
+.om-rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.om-rail::-webkit-scrollbar { display: none; }
+
+/* Respect the system setting. The page's motion is decorative throughout. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Grid collapse --------------------------------------------------------
+   The page's grids are declared inline, and every one of them is the same
+   shape: a wide main column beside a narrower aside, or an n-up row of cards.
+   Collapsing them is the one structural change that repeats across fifteen
+   files identically, so it lives here as a class rather than as a conditional
+   style string in each section. Inline styles outrank a stylesheet, which is
+   what the !important is paying for; it is confined to these rules. */
+
+@media (max-width: 1024px) {
+  .om-g12 { grid-template-columns: 1fr !important; }
+  /* Several of these grids place both children on an explicit grid-row:1 to
+     put an image beside its copy. Left alone, the collapsed single column
+     would stack them into that same row and they would overlap. */
+  .om-g12 > * { grid-column: auto !important; grid-row: auto !important; }
+  .om-g6 { grid-template-columns: repeat(3, 1fr) !important; }
+  .om-g4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .om-g3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .om-g2 { grid-template-columns: 1fr !important; }
+  .om-g2 > * { grid-column: auto !important; }
+  .om-gfoot { grid-template-columns: repeat(4, 1fr) !important; }
+  .om-gfoot > * { grid-column: auto !important; grid-row: auto !important; }
+  /* Card rows divided by right-hand rules: the last cell in each collapsed
+     row would otherwise keep a border that no longer separates anything. */
+  .om-g4 > *, .om-g3 > * { border-right: 0 !important; }
+}
+
+@media (max-width: 640px) {
+  .om-g6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .om-g4, .om-g3 { grid-template-columns: 1fr !important; }
+  /* Footer keeps two columns on a phone: four link lists stacked one per row
+     makes the footer taller than the section above it. */
+  .om-gfoot { grid-template-columns: repeat(2, 1fr) !important; }
+  .om-gsplit { grid-template-columns: 1fr !important; }
+}
+
+/* Stat strips: column count comes from the data, so they collapse to a fixed
+   two-up instead of one row per figure. */
+@media (max-width: 1024px) { .om-gstats { grid-template-columns: repeat(2, 1fr) !important; } }
+
+/* Label/value rows: the gap collapses to a line break, so the pair needs to
+   read as one unit rather than two evenly spaced rows. */
+@media (max-width: 640px) { .om-gsplit { gap: 2px !important; } }
+
+/* Console KPIs: four across at desktop, two-up everywhere below. Stacking
+   them one per row pushed the agent trace — the part that shows the product
+   actually working — a full screen further down. */
+@media (max-width: 1024px) {
+  .om-gkpi { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Footer: the brand block spans the full width above the link columns rather
+   than sitting in one half with the other half empty. */
+@media (max-width: 640px) {
+  .om-foot-brand { grid-column: 1 / -1 !important; margin-bottom: 8px; }
+  /* 44px tap targets on every link would space these lists out further than
+     the copy above them; the padding still clears a comfortable target. */
+  .om-gfoot a { min-height: 0 !important; padding: 5px 0; }
+}

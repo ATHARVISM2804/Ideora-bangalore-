@@ -3,16 +3,16 @@ import { STEPS } from '../data/content';
 
 export function Engagement({ ruleRef }) {
   return (
-    <section style={s('padding:0 0 184px')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 40px')}>
-        <div style={s('display:grid; grid-template-columns:repeat(12, 1fr); gap:20px')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 5; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:44px; line-height:0.98; letter-spacing:-0.03em')}>How an engagement runs</h2>
+    <section style={s('padding:0 0 clamp(72px, 11vw, 184px)')}>
+      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
+        <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12, 1fr); gap:20px')}>
+          <h2 data-anim="head" style={s('grid-column:1 / span 5; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>How an engagement runs</h2>
           <p style={s('grid-column:7 / span 5; margin:0; align-self:end; color:#5A616D')}>Four stages, roughly ten weeks. You approve the design before anything is built, and you keep the dashboard afterwards.</p>
         </div>
         <div style={s('margin-top:72px; position:relative')}>
           <div style={s('position:absolute; top:0; left:0; right:0; height:1px; background:#D9DDE4')} />
           <div ref={ruleRef} style={s('position:absolute; top:0; left:0; right:0; height:2px; background:#F4601E; transform:scaleX(0); transform-origin:0 50%')} />
-          <div style={s('display:grid; grid-template-columns:repeat(4, 1fr); gap:20px')}>
+          <div className="om-g4" style={s('display:grid; grid-template-columns:repeat(4, 1fr); gap:20px')}>
             {STEPS.map((st) => (
               <div key={st.n} data-anim="step" style={s('padding-right:28px')}>
                 <div style={s('width:12px; height:12px; border-radius:50%; background:#F4601E; margin-top:-6px; box-shadow:0 0 0 5px rgba(244,96,30,0.14)')} />

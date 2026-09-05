@@ -6,6 +6,8 @@ import { Hover } from '../components/Hover';
 import { useOverDark } from '../hooks/useOverDark';
 import { MENUS } from '../data/nav';
 import { NavMenu } from '../components/NavMenu';
+import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
+import { useBelowDesktop } from '../hooks/useMedia';
 
 // Two glass treatments. Both keep the same blur and saturation so the bar reads
 // as one material; only the tint, edge light, and text colour swap.
@@ -39,16 +41,25 @@ export function Nav() {
   const isActive = (menu) =>
     menu.path === pathname || menu.items.some((i) => i.path === pathname);
 
+  // Five menus, two buttons and the lockup need roughly 1000px of bar. Below
+  // that the row wraps into the glass panel, so the whole set moves into the
+  // tap-driven sheet rather than being squeezed.
+  const compact = useBelowDesktop();
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <header style={s('position:sticky; top:0; z-index:70; padding:14px 0')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 40px')}>
+    <header style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 14px')}>
+      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
         <div
           ref={barRef}
-          style={s(`display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 20px; border-radius:18px; backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
+          style={s(`position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 20px; border-radius:18px; backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
         >
           <Link to="/" style={s('display:flex; align-items:center')}>
             <img src={g.logo} alt="Ideora Labs" style={s('height:32px; width:auto; display:block')} />
           </Link>
+          {compact ? (
+            <MobileNavTrigger glass={g} open={menuOpen} setOpen={setMenuOpen} />
+          ) : (
           <nav style={s('display:flex; align-items:center; gap:4px')}>
             {MENUS.map((menu) => (
               menu.items.length > 0
@@ -91,8 +102,13 @@ export function Nav() {
               hoverStyle="background:#FF7A3D"
             >Request a Demo</Hover>
           </nav>
+          )}
         </div>
       </div>
+
+      {compact && (
+        <MobileNavSheet menus={MENUS} isActive={isActive} open={menuOpen} setOpen={setMenuOpen} />
+      )}
     </header>
   );
 }

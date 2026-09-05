@@ -12,7 +12,6 @@ import { Voices } from '../sections/Voices';
 import { Credibility } from '../sections/Credibility';
 import { Engagement } from '../sections/Engagement';
 import { Process } from '../sections/Process';
-import { ProcessResults } from '../sections/ProcessResults';
 import { Closing } from '../sections/Closing';
 
 export function Home() {
@@ -42,7 +41,6 @@ export function Home() {
       <Credibility />
       <Engagement ruleRef={ruleRef} />
       <Process spineRef={spineRef} />
-      <ProcessResults />
       <Closing />
     </div>
   );
