@@ -1,3 +1,10 @@
+// UI FIXTURE DATA. The workspaces, users, KPIs, traces and queues below are
+// sample data for the homepage console. They are illustrative of how the
+// console reads, not measured results from any deployment, and they must not
+// be cited as proof on a page: `pages.js` entries take their metrics from
+// RESULT_STATS, FACTS and CASES in content.js. Console detail may be described
+// in prose only where it is attributed to the console rather than asserted.
+//
 // One console state per industry. `status` is deliberate: only the three
 // verticals the rest of the site can evidence are marked live. Finance and
 // Legal are shown as build/pilot so the hero never claims more than the case
