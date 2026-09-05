@@ -230,6 +230,90 @@ export const PAGES = [
       body: 'One scope call tells us whether a system we already run fits your operation or whether yours needs building. Either way you leave with a scope and a price.',
     },
   },
+  {
+    path: '/industries/automotive',
+    title: 'Automotive',
+    description: 'Service centres and dealer groups running bookings, estimates and approvals through one agent instead of three inboxes. Live since February 2026.',
+    eyebrow: 'Industries',
+    heading: 'Service bookings answered in seconds, not shifts',
+    lede: 'Live in automotive since February 2026. One agent takes the WhatsApp enquiry, finds the vehicle, holds a bay, and returns a confirmed slot with an inspection link before an advisor has read the message.',
+    proof: [
+      { label: 'Live since', value: 'Feb 2026' },
+      { label: 'Auto-completed today', value: '128 tasks' },
+      { label: 'Avg handling time', value: '41s' },
+      { label: 'Exceptions', value: '2 queued' },
+    ],
+    sections: [
+      { title: 'What it replaced', body: 'Three inboxes and a spreadsheet. Bookings arrived on WhatsApp, on the phone, and through the booking tool, and an advisor held the reconciliation in their head. Since February 2026 those routes land in one queue, and the record of what was agreed is the same record the DMS reads.' },
+      { title: 'One booking, forty seconds', body: 'Enquiry in, vehicle matched, bay availability checked, slot held, confirmation and inspection link sent. When the customer approves the estimate the job status moves and parts are ordered on it. Four handoffs that used to pass between people no longer happen at all.' },
+      { title: 'The backlog, by site', body: 'A group running several sites sees each queue separately and against the others, so a site carrying eighteen open jobs is visible on the Thursday it happens rather than in a month-end report. Peak load lands Thursday morning, which is a thing you can staff for once you can see it.' },
+      { title: 'What still reaches an advisor', body: 'On a normal day, two exceptions against one hundred and twenty-eight completed tasks. A vehicle that does not match, an approval that never came back. Advisors work that short list; the routine confirmations run without them.' },
+    ],
+    related: [
+      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
+      { label: 'Ops Console', path: '/platforms/ops-console' },
+    ],
+    cta: {
+      heading: 'Compare it against your own service queue',
+      body: 'We will walk one site from enquiry to invoice, map the handoffs, and show the console populated with the work your advisors did last week.',
+    },
+  },
+  {
+    path: '/industries/real-estate',
+    title: 'Real Estate',
+    description: 'Brokerages and developers where portal and web enquiries are scored, routed and offered a viewing before an agent picks them up. Live since April 2026.',
+    eyebrow: 'Industries',
+    heading: 'Every enquiry qualified before an agent sees it',
+    lede: 'Live in real estate since April 2026. Portal and web enquiries are scored against budget, area, and readiness, then routed with a viewing already offered against the live calendar of the agent who takes them.',
+    proof: [
+      { label: 'Live since', value: 'Apr 2026' },
+      { label: 'Qualified today', value: '96 leads' },
+      { label: 'Avg qualification', value: '33s' },
+      { label: 'Agents online', value: '9 / 9' },
+    ],
+    sections: [
+      { title: 'What it replaced', body: 'Manual call-backs. An enquiry arrived, joined a list, and waited for someone to work down it, by which point the buyer had spoken to two other brokerages. Since April 2026 the qualification happens on arrival and the call-back list does not exist.' },
+      { title: 'From portal feed to confirmed viewing', body: 'A two-bedroom enquiry off the portal feed is scored, checked against the calendar of the agent it belongs to, and answered with a specific viewing slot and a floor plan. The CRM stage moves to viewing booked, and the KYC chase starts on its own.' },
+      { title: 'Where the pipeline is coming from', body: 'The queue is broken out by source, so a brokerage can see that the portal feed is carrying most of the open enquiries while referrals sit at a fifth of that. Load peaks on Saturday morning, when the fewest people are at a desk.' },
+      { title: 'What a sales director reads on Friday', body: 'One pipeline digest built from the same records the agents worked, not a separate report assembled afterwards. Open enquiries, what was qualified, and the small number of exceptions still waiting on a person.' },
+    ],
+    related: [
+      { label: 'Real Estate Automation', path: '/solutions/real-estate' },
+      { label: 'Ops Console', path: '/platforms/ops-console' },
+    ],
+    cta: {
+      heading: 'Run it against last week of enquiries',
+      body: 'Give us the enquiries your agents received and we will show which would have been qualified, routed, and offered a viewing before anyone picked up.',
+    },
+  },
+  {
+    path: '/industries/healthcare',
+    title: 'Healthcare',
+    description: 'Clinics and multi-site providers where intake, eligibility and recalls are settled before the patient reaches the desk. Live since May 2026.',
+    eyebrow: 'Industries',
+    heading: 'Intake and coverage settled before arrival',
+    lede: 'Live in healthcare since May 2026. Patients complete intake by message, coverage is verified against the payer, and the desk gets a single list of exceptions to work rather than a queue of unknowns.',
+    proof: [
+      { label: 'Live since', value: 'May 2026' },
+      { label: 'Completed today', value: '74 patients' },
+      { label: 'Avg verification', value: '52s' },
+      { label: 'Exceptions', value: '1 queued' },
+    ],
+    sections: [
+      { title: 'What it replaced', body: 'Paper intake and phone checks. The form was filled at the desk while the room waited, and coverage was confirmed by someone holding for a payer. Since May 2026 both are settled before the patient is in the building.' },
+      { title: 'One intake, before the appointment', body: 'The patient is matched to a record, eligibility is verified as active, an open slot is offered, and the intake form and directions go out by message. When the form comes back signed, the chart is prepared in the EMR and a six-month recall is flagged if one is due.' },
+      { title: 'Several clinics, one queue', body: 'A multi-site group reads every clinic from the same console, so a site carrying eleven open intakes is visible next to one carrying four. Monday morning is the peak, which is exactly when a front desk has least time to find that out for itself.' },
+      { title: 'A short list, not a queue of unknowns', body: 'On a normal day one exception is queued against seventy-four completed patients. The desk works that, and the clinic knows on Monday which slots are going unfilled instead of learning it at the end of the month.' },
+    ],
+    related: [
+      { label: 'Healthcare & Clinic Automation', path: '/solutions/healthcare' },
+      { label: 'Ops Console', path: '/platforms/ops-console' },
+    ],
+    cta: {
+      heading: 'Take one clinic and one Monday',
+      body: 'We will map every handoff between the first message and the appointment, and show what intake and coverage look like when they are finished before arrival.',
+    },
+  },
 ];
 
 // Fails loudly in dev if nav.js and pages.js drift apart. A menu item with no
