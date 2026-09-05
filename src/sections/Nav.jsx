@@ -59,7 +59,9 @@ export function Nav() {
                     glass={g}
                     active={isActive(menu)}
                     open={openLabel === menu.label}
-                    onOpenChange={(next) => setOpenLabel(next ? menu.label : null)}
+                    onOpenChange={(next) =>
+                      setOpenLabel((prev) => (next ? menu.label : prev === menu.label ? null : prev))
+                    }
                   />
                 )
                 : (
