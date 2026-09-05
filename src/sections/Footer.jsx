@@ -6,8 +6,8 @@ import { MENUS } from '../data/nav';
 const NAV_LINK = 'color:#5A616D; font-size:14px; transition:color .25s; text-decoration:none';
 const NAV_LINK_HOVER = 'color:#1A1D23';
 
-const SOLUTIONS = MENUS.find((m) => m.label === 'Solutions').items;
-const INDUSTRIES = MENUS.find((m) => m.label === 'Industries').items;
+const SOLUTIONS = MENUS.find((m) => m.label === 'Solutions')?.items ?? [];
+const INDUSTRIES = MENUS.find((m) => m.label === 'Industries')?.items ?? [];
 
 export function Footer() {
   return (
