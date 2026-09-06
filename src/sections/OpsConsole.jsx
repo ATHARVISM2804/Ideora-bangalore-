@@ -104,7 +104,7 @@ export function OpsConsole({ consoleRef }) {
       {/* Title bar */}
       <div style={s(`position:relative; display:flex; align-items:center; justify-content:space-between; gap:${compact ? '10px' : '24px'}; ${compact ? 'flex-wrap:wrap' : ''}; padding:13px clamp(14px, 3vw, 20px); border-bottom:${LINE}; background:#F5F2ED`)}>
         <div style={s('display:flex; align-items:center; gap:13px; flex:none')}>
-          <span style={s('font-family:var(--serif); font-weight:600; font-size:13px; letter-spacing:0.02em')}>IDEORA OPS CONSOLE</span>
+          <span style={s('font-family:var(--display); font-weight:600; font-size:13px; letter-spacing:0.02em')}>IDEORA OPS CONSOLE</span>
           <span style={s(`display:flex; align-items:center; gap:7px; padding:4px 10px; border-radius:99px; border:1px solid ${status.border}; background:${status.bg}; ${MONO}; font-size:11px; color:${status.text}; transition:all .3s`)}>
             <span style={s(`width:5px; height:5px; border-radius:50%; background:${status.dot}; animation:om-blink 1.8s infinite`)} />{d.status}
           </span>
@@ -121,7 +121,7 @@ export function OpsConsole({ consoleRef }) {
         {/* ── Sidebar ────────────────────────────────────────────── */}
         <div style={s(`border-right:${LINE}; display:${compact ? 'none' : 'flex'}; flex-direction:column; background:#FAF8F5`)}>
           <div style={s(`display:flex; align-items:center; gap:10px; padding:16px 16px; border-bottom:${LINE}`)}>
-            <span style={s('width:28px; height:28px; flex:none; border-radius:9px; background:linear-gradient(140deg,#F4601E,var(--accent-deep)); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:600; font-size:12px; color:#FFFFFF')}>{d.name[0]}</span>
+            <span style={s('width:28px; height:28px; flex:none; border-radius:9px; background:linear-gradient(140deg,#F4601E,var(--accent-deep)); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:600; font-size:12px; color:#FFFFFF')}>{d.name[0]}</span>
             <span style={s('min-width:0')}>
               <span style={s('display:block; font-size:12.5px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis')}>{d.workspace}</span>
               <span style={s(`display:block; ${MONO}; font-size:10px; color:var(--ink-faint)`)}>{d.name.toLowerCase()}</span>
@@ -145,7 +145,7 @@ export function OpsConsole({ consoleRef }) {
             <div style={s(`padding:12px 13px; border-radius:12px; border:${LINE}; background:${PANEL}`)}>
               <div style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>agents online</div>
               <div style={s('margin-top:6px; display:flex; align-items:baseline; gap:5px')}>
-                <Count value={Number(d.online[0])} style={s('font-family:var(--serif); font-weight:500; font-size:19px; letter-spacing:-0.02em')} />
+                <Count value={Number(d.online[0])} style={s('font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.02em')} />
                 <span style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>/ {d.online[1]}</span>
               </div>
             </div>
@@ -186,7 +186,7 @@ export function OpsConsole({ consoleRef }) {
                 <div key={k.label} data-anim="kpi" style={s(`padding:13px 14px 10px; border-radius:13px; border:${LINE}; background:${PANEL}`)}>
                   <div style={s(`${MONO}; font-size:10px; color:var(--ink-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis`)}>{k.label}</div>
                   <div style={s('margin-top:8px; display:flex; align-items:baseline; gap:5px')}>
-                    <Count value={k.value} style={s(`font-family:var(--serif); font-weight:500; font-size:clamp(20px, 3.2vw, 26px); line-height:1; letter-spacing:-0.03em; color:${accent}`)} />
+                    <Count value={k.value} style={s(`font-family:var(--display); font-weight:500; font-size:clamp(20px, 3.2vw, 26px); line-height:1; letter-spacing:-0.03em; color:${accent}`)} />
                     <span style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>{k.unit}</span>
                     <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:${k.trend === 'flat' ? 'var(--ink-faint)' : trendUp ? 'var(--accent-deep)' : 'var(--ink-faint)'}`)}>
                       {k.trend === 'flat' ? '–' : trendUp ? '↑' : '↓'} {k.delta}

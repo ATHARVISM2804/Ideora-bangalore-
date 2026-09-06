@@ -19,11 +19,10 @@
   --dark-raised: #2A2521;
   --dark-rule:   #342E28;
 
-  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --sans:  Geist, ui-sans-serif, system-ui, sans-serif;
   --mono:  'JetBrains Mono', ui-monospace, monospace;
-  /* Hero display. The same family as body text at a heavier weight
-     keeps the pairing tight; section headings stay on the serif. */
+  /* Display face. One family across the page at a heavier weight for
+     headings, which is what the reference sites do. */
   --display: Geist, ui-sans-serif, system-ui, sans-serif;
 
   --measure: 1180px;   /* editorial column */

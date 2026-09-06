@@ -13,7 +13,7 @@ export function Industries() {
   return (
     <section id="industries" style={s('padding:0 0 clamp(48px, 7vw, 96px)')}>
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
-        <h2 data-anim="head" style={s('max-width:20ch; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>Where the work already lives</h2>
+        <h2 data-anim="head" style={s('max-width:20ch; margin:0; font-family:var(--display); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>Where the work already lives</h2>
 
         <div style={s('margin-top:48px; border-top:1px solid var(--rule-strong)')}>
           {INDUSTRIES.map((ind, i) => {
@@ -28,7 +28,7 @@ export function Industries() {
                 <div style={s(`grid-column:${flip ? '1 / span 5' : '8 / span 5'}; grid-row:1`)}>
                   <div style={s('display:flex; align-items:baseline; gap:14px')}>
                     <span style={s(`${MONO}; font-size:12px; color:var(--accent-deep)`)}>{ind.code}</span>
-                    <h3 style={s('margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(24px, 4.2vw, 34px); line-height:1.0; letter-spacing:-0.03em')}>{ind.name}</h3>
+                    <h3 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(24px, 4.2vw, 34px); line-height:1.0; letter-spacing:-0.03em')}>{ind.name}</h3>
                   </div>
                   <p style={s('margin:18px 0 0; max-width:46ch; color:var(--ink-muted)')}>{ind.body}</p>
                   <Hover

@@ -71,7 +71,7 @@ export function Ring({ value, size = 74 }) {
       </svg>
       <div style={{
         position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontFamily: 'var(--serif)', fontWeight: 600,
+        fontFamily: 'var(--display)', fontWeight: 600,
         fontSize: 17, letterSpacing: '-0.02em', color: 'var(--ink)',
       }}>{value}%</div>
     </div>

@@ -69,7 +69,7 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
                   <Link
                     key={menu.label}
                     to={menu.path}
-                    style={s(`display:flex; align-items:center; min-height:52px; border-bottom:1px solid var(--rule); font-family:var(--serif); font-weight:500; font-size:19px; letter-spacing:-0.01em; text-decoration:none; color:${active ? '#F4601E' : 'var(--ink)'}`)}
+                    style={s(`display:flex; align-items:center; min-height:52px; border-bottom:1px solid var(--rule); font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.01em; text-decoration:none; color:${active ? '#F4601E' : 'var(--ink)'}`)}
                   >{menu.label}</Link>
                 );
               }
@@ -80,7 +80,7 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
                     type="button"
                     aria-expanded={expanded}
                     onClick={() => setSection(expanded ? null : menu.label)}
-                    style={s(`display:flex; align-items:center; justify-content:space-between; width:100%; min-height:52px; padding:0; border:0; background:none; cursor:pointer; font-family:var(--serif); font-weight:500; font-size:19px; letter-spacing:-0.01em; text-align:left; color:${active ? '#F4601E' : 'var(--ink)'}`)}
+                    style={s(`display:flex; align-items:center; justify-content:space-between; width:100%; min-height:52px; padding:0; border:0; background:none; cursor:pointer; font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.01em; text-align:left; color:${active ? '#F4601E' : 'var(--ink)'}`)}
                   >
                     {menu.label}
                     <span style={s(`display:block; width:9px; height:9px; margin-right:4px; border-right:1.5px solid var(--ink-muted); border-bottom:1.5px solid var(--ink-muted); transform:rotate(${expanded ? '-135deg' : '45deg'}) translateY(${expanded ? '-2px' : '-2px'}); transition:transform .3s ease`)} />

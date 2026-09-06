@@ -1,80 +1,69 @@
 import { s } from '../lib/style';
 import { CASES } from '../data/content';
-import { useBelowDesktop } from '../hooks/useMedia';
 
-const MONO = "font-family:'JetBrains Mono', monospace";
+const MONO = "font-family:var(--mono)";
 
-// A system that is not live yet does not get a "live since" date.
-const SINCE_LABEL = { live: 'live since', pilot: 'pilot since', 'in build': 'target' };
+// Dark band, taken from the reference's "how it works" treatment: light type
+// on a near-black ground, cards with a hairline and pill tags.
+//
+// The pinned sideways scroller this replaces put six cards behind a horizontal
+// gesture, which is awkward on a phone and hid four of them at any moment.
+// These are a portfolio rather than a sequence, so they are laid out as a grid
+// and carry their identifiers as labels, not as numbered steps.
+const STATUS_TONE = {
+  live:       { fg: 'var(--accent-deep)', bg: 'rgba(244,96,30,0.14)', bd: 'rgba(244,96,30,0.34)' },
+  'in build': { fg: '#C4BCB2', bg: 'rgba(255,255,255,0.06)', bd: 'rgba(255,255,255,0.16)' },
+  pilot:      { fg: '#C4BCB2', bg: 'rgba(255,255,255,0.06)', bd: 'rgba(255,255,255,0.16)' },
+};
 
-// Pinned horizontal scroller: pinRef pins the section, trackRef is translated
-// on scroll, railRef is the progress indicator. Wired up in useGsapTimeline.
-export function Work({ pinRef, trackRef, railRef }) {
-  // Below desktop the track becomes a swipeable snap rail instead. The pin is
-  // what forces the change: pinning fixes the section to the viewport and
-  // converts vertical scroll into horizontal travel, which on iOS Safari
-  // fights the address bar collapsing and the browser's own swipe-back edge
-  // gesture. Native overflow scrolling gets the same reading order with none
-  // of that. useGsapTimeline skips the pin at the same breakpoint.
-  const swipe = useBelowDesktop();
-
+function Pill({ children, tone }) {
+  const t = tone || { fg: '#A79E93', bg: 'rgba(255,255,255,0.05)', bd: 'rgba(255,255,255,0.13)' };
   return (
-    <section id="work" ref={pinRef} data-nav-dark style={s('position:relative; overflow:hidden; background:var(--dark); color:var(--bg); padding:clamp(80px, 11vw, 150px) 0 clamp(56px, 7vw, 96px)')}>
-      <div style={s('position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px); background-size:28px 28px; mask-image:linear-gradient(180deg,#000,transparent 80%); -webkit-mask-image:linear-gradient(180deg,#000,transparent 80%)')} />
-      <div className="om-g12" style={s('position:relative; max-width:var(--wide); margin:0 auto; padding:0 var(--gut); display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-        <h2 style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>Systems in production</h2>
-        <p style={s('grid-column:8 / span 4; margin:0; color:#A79E93')}>Four systems running inside client operations, two more in build. Clients are under NDA, so each is described by what it replaced.</p>
-      </div>
+    <span style={s(`display:inline-flex; align-items:center; padding:6px 12px; border-radius:999px; border:1px solid ${t.bd}; background:${t.bg}; font-size:13.5px; color:${t.fg}`)}>
+      {children}
+    </span>
+  );
+}
 
-      <div
-        className={swipe ? 'om-rail' : undefined}
-        onScroll={swipe ? (e) => {
-          const el = e.currentTarget;
-          const max = el.scrollWidth - el.clientWidth;
-          if (railRef.current) {
-            railRef.current.style.transform = `scaleX(${0.1 + (max > 0 ? el.scrollLeft / max : 0) * 0.9})`;
-          }
-        } : undefined}
-        style={s(`position:relative; margin-top:clamp(32px, 5vw, 52px); padding-left:clamp(20px, 5vw, 40px); ${swipe ? 'overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-left:clamp(20px, 5vw, 40px); padding-right:clamp(20px, 5vw, 40px)' : ''}`)}
-      >
-        <div ref={trackRef} style={s('display:flex; align-items:stretch; width:max-content')}>
-          {CASES.map((cs, i) => (
-            <div
-              key={cs.code}
-              style={s(`position:relative; flex:0 0 ${swipe ? 'min(82vw, 470px)' : '470px'}; padding:0 clamp(24px, 4vw, 44px) 0 ${i ? 'clamp(24px, 4vw, 44px)' : '0'}; ${i ? 'border-left:1px solid var(--dark-rule)' : ''}; ${swipe ? 'scroll-snap-align:start' : ''}`)}
-            >
-              {/* Ghost index sits behind the slide, giving the track a sense of
-                  position without adding another boxed card. */}
-              <span style={s('position:absolute; top:-14px; right:36px; font-family:var(--serif); font-weight:600; font-size:clamp(44px, 11vw, 112px); line-height:1; letter-spacing:-0.05em; color:rgba(255,255,255,0.035); pointer-events:none; user-select:none')}>{String(i + 1).padStart(2, '0')}</span>
+export function Work({ pinRef }) {
+  return (
+    <section id="work" ref={pinRef} data-nav-dark style={s('position:relative; overflow:hidden; background:var(--dark); color:#F2EDE7; padding:clamp(76px, 11vw, 150px) 0')}>
+      <div style={s('position:absolute; inset:0; pointer-events:none; background:radial-gradient(60% 50% at 20% 0%, rgba(244,96,30,0.10), transparent 70%)')} />
 
-              <div style={s(`position:relative; display:flex; align-items:center; gap:12px; ${MONO}; font-size:14px; color:#8A8177`)}>
-                <span style={s(`color:${cs.status === 'live' ? '#FF8A50' : '#C4BCB2'}`)}>{cs.vertical}</span>
-                {cs.status !== 'live' && (
-                  <span style={s('padding:2px 8px; border-radius:99px; border:1px solid rgba(196,188,178,0.28); background:rgba(196,188,178,0.08); font-size:10px; color:#C4BCB2')}>{cs.status}</span>
-                )}
-                <span style={s('flex:1; height:1px; background:var(--dark-rule)')} />
-                <span>{cs.code}</span>
-              </div>
-
-              <h3 style={s('position:relative; margin:26px 0 0; font-family:var(--serif); font-weight:500; font-size:clamp(21px, 3.5vw, 28px); line-height:1.06; letter-spacing:-0.03em')}>{cs.title}</h3>
-              <p style={s('position:relative; margin:18px 0 0; max-width:40ch; font-size:15px; color:#A79E93')}>{cs.body}</p>
-
-              <div style={s(`position:relative; margin-top:30px; padding-top:18px; border-top:1px solid var(--dark-rule); display:flex; flex-direction:column; gap:10px; ${MONO}; font-size:14px`)}>
-                <div style={s('display:flex; justify-content:space-between')}><span style={s('color:#8A8177')}>replaced</span><span>{cs.replaced}</span></div>
-                <div style={s('display:flex; justify-content:space-between')}>
-                  <span style={s('color:#8A8177')}>{SINCE_LABEL[cs.status]}</span>
-                  <span style={s(`color:${cs.status === 'live' ? '#FF8A50' : '#C4BCB2'}`)}>{cs.since}</span>
-                </div>
-              </div>
-            </div>
-          ))}
+      <div style={s('position:relative; max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
+        <div data-anim="head" style={s('display:flex; align-items:center; gap:14px')}>
+          <span style={s('width:26px; height:1px; background:var(--accent)')} />
+          <span className="om-label" style={s('color:var(--accent)')}>Systems in production</span>
         </div>
-      </div>
 
-      <div style={s('position:relative; max-width:var(--wide); margin:44px auto 0; padding:0 var(--gut); display:flex; align-items:center; gap:14px')}>
-        <span style={s(`${MONO}; font-size:11px; color:#8A8177`)}>{swipe ? 'swipe to advance' : 'scroll to advance'}</span>
-        <div style={s('flex:1; height:2px; border-radius:99px; background:var(--dark-rule); overflow:hidden')}>
-          <div ref={railRef} style={s('height:100%; width:100%; border-radius:99px; background:#F4601E; transform:scaleX(0.1); transform-origin:0 50%')} />
+        <h2 data-anim="head" style={s('margin:20px 0 0; max-width:18ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em; color:#FFFFFF')}>
+          Four systems running. Two more in build.
+        </h2>
+        <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:#A79E93')}>
+          Clients are under NDA, so each is described by what it does and what it replaced.
+        </p>
+
+        <div className="om-work" style={s('margin-top:clamp(36px, 5vw, 56px); display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:clamp(14px, 1.8vw, 20px)')}>
+          {CASES.map((cs) => (
+            <article
+              key={cs.code}
+              data-anim="card"
+              style={s('padding:clamp(22px, 2.4vw, 30px); border-radius:18px; border:1px solid var(--dark-rule); background:rgba(255,255,255,0.028)')}
+            >
+              <div style={s('display:flex; align-items:center; gap:10px; flex-wrap:wrap')}>
+                <span style={s(`${MONO}; font-size:12.5px; color:var(--ink-faint)`)}>{cs.code}</span>
+                <Pill tone={STATUS_TONE[cs.status]}>{cs.vertical} · {cs.status}</Pill>
+              </div>
+
+              <h3 style={s('margin:16px 0 0; font-family:var(--display); font-weight:600; font-size:clamp(19px, 1.7vw, 23px); line-height:1.2; letter-spacing:-0.026em; color:#FFFFFF')}>{cs.title}</h3>
+              <p style={s('margin:12px 0 0; font-size:15.5px; line-height:1.58; color:#A79E93')}>{cs.body}</p>
+
+              <div style={s('margin-top:20px; display:flex; align-items:center; gap:8px; flex-wrap:wrap')}>
+                <Pill>replaced {cs.replaced}</Pill>
+                <Pill>{cs.status === 'live' ? 'live since' : cs.status === 'pilot' ? 'pilot since' : 'target'} {cs.since}</Pill>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

@@ -125,8 +125,8 @@ export function useGsapTimeline(refs) {
       // down on its own as the viewport crosses the breakpoint, which also
       // covers a phone being rotated into landscape.
       mm.add('(min-width: 1025px)', () => {
-        const track = trackRef.current;
-        const pin = pinRef.current;
+        const track = trackRef?.current;
+        const pin = pinRef?.current;
         if (!track || !pin) return;
         const distance = () => Math.max(0, track.scrollWidth - pin.getBoundingClientRect().width + 80);
         gsap.to(track, {

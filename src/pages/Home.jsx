@@ -18,21 +18,19 @@ import { Closing } from '../sections/Closing';
 export function Home() {
   const rootRef = useRef(null);
   const pinRef = useRef(null);
-  const trackRef = useRef(null);
-  const railRef = useRef(null);
   const consoleRef = useRef(null);
 
   useDocumentTitle(
     'Ideora Labs — Most operations don’t fail. They wait.',
     'Ideora Labs builds and runs the systems that carry the work your team is waiting on, inside the software your business already owns.',
   );
-  useGsapTimeline({ rootRef, pinRef, trackRef, railRef, consoleRef });
+  useGsapTimeline({ rootRef, pinRef, consoleRef });
 
   return (
     <div ref={rootRef}>
       <Hero consoleRef={consoleRef} />
       <Services />
-      <Work pinRef={pinRef} trackRef={trackRef} railRef={railRef} />
+      <Work pinRef={pinRef} />
       <Voices />
       <Closing />
     </div>
