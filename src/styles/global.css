@@ -227,24 +227,21 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
   background-position: center;
 }
 
-/* Mid-page use. The hero only has to dissolve its bottom edge; a section in the
-   middle of the document has to come out of the flat --bg and go back into it,
-   or the frame reads as a pasted-in panel with two hard seams. */
+/* Mid-page use. Cover cropped ~430px off each side here, because the section is
+   taller than the 16:9 frame — and that is exactly where the routing lines are.
+   Centring the whole frame instead left a band of bare --bg above it, which read
+   as a white gap under the dark section above.
+   So the element IS the frame: full width, its own 16/9 height, anchored to the
+   top of the section. It meets the dark section flush with no gap, and fades out
+   over its own lower half into --bg, which is what the next section is anyway.
+   Sizing by aspect-ratio rather than a percentage of the section keeps the fade
+   correct at any section height. */
 .om-bgmedia--mid {
-  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 74%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 74%, transparent 100%);
-}
-
-/* This section is taller than the 16:9 frame is, so `cover` scaled the video up
-   to fill the height and cropped roughly 430px off each side — precisely where
-   the routing lines and nodes live, leaving the empty middle on screen. Fit the
-   full frame to the width instead and centre it; the mask above already fades
-   the band into --bg, so the uncovered strip top and bottom never shows a seam. */
-video.om-bgmedia--mid { object-fit: contain; }
-.om-bgposter.om-bgmedia--mid {
-  background-size: 100% auto;
-  background-position: center center;
-  background-repeat: no-repeat;
+  bottom: auto;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  mask-image: linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
 }
 
 /* Motion is decorative here, so it is the first thing to go. The poster
