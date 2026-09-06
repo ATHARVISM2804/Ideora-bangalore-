@@ -3,44 +3,39 @@ import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
-import { Problem } from '../sections/Problem';
 import { Services } from '../sections/Services';
-import { Capabilities } from '../sections/Capabilities';
-import { Industries } from '../sections/Industries';
 import { Work } from '../sections/Work';
 import { Voices } from '../sections/Voices';
 import { Credibility } from '../sections/Credibility';
-import { Engagement } from '../sections/Engagement';
-import { Process } from '../sections/Process';
 import { Closing } from '../sections/Closing';
 
+// Six sections, down from twelve. The page is read mostly on a phone by
+// owners, not operators: Problem, Capabilities, Industries, Engagement and
+// Process were removed rather than shortened, because the argument they made
+// is carried by the console and the case studies. They remain in the repo for
+// the inner pages.
+//
+// The rhythm alternates light and dark: statement, proof, statement, proof.
 export function Home() {
   const rootRef = useRef(null);
   const pinRef = useRef(null);
   const trackRef = useRef(null);
   const railRef = useRef(null);
-  const ruleRef = useRef(null);
   const consoleRef = useRef(null);
-  const spineRef = useRef(null);
 
   useDocumentTitle(
     'Ideora Labs — Systems that finish the job.',
-    'Ideora Labs builds agentic AI that works inside your existing operations. It books, checks, approves, updates, and reports without anyone chasing it.',
+    'Ideora Labs builds and runs the AI systems that carry the operational work large businesses depend on, inside the software they already own.',
   );
-  useGsapTimeline({ rootRef, pinRef, trackRef, railRef, ruleRef, consoleRef, spineRef });
+  useGsapTimeline({ rootRef, pinRef, trackRef, railRef, consoleRef });
 
   return (
     <div ref={rootRef}>
       <Hero consoleRef={consoleRef} />
-      <Problem />
       <Services />
-      <Capabilities />
-      <Industries />
       <Work pinRef={pinRef} trackRef={trackRef} railRef={railRef} />
       <Voices />
       <Credibility />
-      <Engagement ruleRef={ruleRef} />
-      <Process spineRef={spineRef} />
       <Closing />
     </div>
   );

@@ -4,7 +4,7 @@ import { FACTS } from '../data/content';
 
 export function Credibility() {
   return (
-    <section id="about" style={s('padding:0 0 clamp(72px, 11vw, 184px)')}>
+    <section id="about" style={s('padding:0 0 clamp(80px, 12vw, 170px)')}>
       <div className="om-g12" style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; align-items:start')}>
         <div style={s('grid-column:1 / span 7; border-top:1px solid var(--rule-strong)')}>
           {FACTS.map((f) => (

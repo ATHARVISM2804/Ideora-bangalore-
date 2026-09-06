@@ -30,11 +30,11 @@ export function Voices() {
   }, [autoplay]);
 
   return (
-    <section style={s('padding:clamp(48px, 7vw, 96px) 0')}>
+    <section style={s('padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
         <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>What operations leads tell us</h2>
-          <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:var(--ink-muted)')}>Quotes are attributed by role and scale only. Named references are available on request under NDA.</p>
+          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>In their words</h2>
+          <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:var(--ink-muted)')}>Attributed by role and scale only. Named references are available to serious enquiries under NDA.</p>
         </div>
 
         <div className="om-g12" style={s('margin-top:56px; display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:start')}>
@@ -58,14 +58,14 @@ export function Voices() {
 
           <div style={s('grid-column:5 / span 8')}>
             <blockquote key={q.slotId} style={s('margin:0; animation:om-fade .5s both')}>
-              <p style={s('margin:0; max-width:22ch; font-family:var(--serif); font-weight:500; font-size:clamp(24px, 4.2vw, 34px); line-height:1.2; letter-spacing:-0.025em; color:var(--ink)')}>
+              <p style={s('margin:0; max-width:26ch; font-family:var(--serif); font-weight:600; font-size:clamp(26px, 3.6vw, 46px); line-height:1.22; letter-spacing:-0.025em; color:var(--ink)')}>
                 <span style={s('color:#F4601E')}>“</span>{q.text}
               </p>
               <footer style={s('margin-top:30px; display:flex; align-items:center; gap:14px')}>
                 <QuoteGlyph kind={q.glyph} />
                 <span>
                   <span style={s('display:block; font-size:14px; font-weight:500')}>{q.role}</span>
-                  <span style={s(`display:block; ${MONO}; font-size:12px; color:var(--ink-muted)`)}>{q.scale}</span>
+                  <span style={s(`display:block; ${MONO}; font-size:14px; color:var(--ink-muted)`)}>{q.scale}</span>
                 </span>
               </footer>
             </blockquote>

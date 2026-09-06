@@ -29,7 +29,7 @@ export function Layout() {
   useScrollProgress(barRef);
 
   return (
-    <div style={s('background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:400; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:clip; position:relative')}>
+    <div style={s('background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:400; font-size:18px; line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:clip; position:relative')}>
 
       {/* Scroll progress bar */}
       <div ref={barRef} style={s('position:fixed; top:0; left:0; right:0; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:0 50%; z-index:90')} />

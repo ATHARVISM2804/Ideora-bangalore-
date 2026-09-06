@@ -70,7 +70,7 @@ export function useGsapTimeline(refs) {
         });
       });
 
-      if (spineRef.current) {
+      if (spineRef?.current) {
         const spine = spineRef.current;
         gsap.to(spine, {
           scaleY: 1, ease: 'none',
@@ -92,7 +92,7 @@ export function useGsapTimeline(refs) {
         });
       });
 
-      gsap.to(ruleRef.current, {
+      if (ruleRef?.current) gsap.to(ruleRef.current, {
         scaleX: 1, ease: 'none',
         scrollTrigger: { trigger: ruleRef.current, start: 'top 80%', end: 'top 30%', scrub: 0.4 },
       });
