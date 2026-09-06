@@ -9,12 +9,12 @@ import { NavMenu } from '../components/NavMenu';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
 import { useBelowDesktop } from '../hooks/useMedia';
 
-// Two treatments for the two grounds the bar crosses. The glass gradients and
-// edge highlights went with the revamp: a corporate bar reads as a plain
-// surface with a hairline, not as a floating translucent slab.
+// Two treatments for the two grounds the bar crosses. The bar floats as a pill
+// again, so both are translucent surfaces with an edge highlight rather than a
+// flat plane with a hairline.
 const GLASS = {
   light: {
-    bar: 'border-bottom:1px solid var(--rule); background:rgba(250,249,247,0.92)',
+    bar: 'border:1px solid rgba(255,255,255,0.7); background:rgba(255,255,255,0.62); box-shadow:inset 0 1px 0 rgba(255,255,255,0.85), 0 12px 34px -18px rgba(28,25,23,0.3)',
     link: 'var(--ink-muted)',
     linkHover: 'color:var(--ink); background:rgba(28,25,23,0.05)',
     logo: '/assets/ideora-lockup.png',
@@ -22,7 +22,7 @@ const GLASS = {
     panelItemHover: 'background:var(--bg-sunken)',
   },
   dark: {
-    bar: 'border-bottom:1px solid var(--dark-rule); background:rgba(31,27,24,0.92)',
+    bar: 'border:1px solid rgba(255,255,255,0.14); background:rgba(31,27,24,0.66); box-shadow:inset 0 1px 0 rgba(255,255,255,0.1), 0 12px 34px -18px rgba(0,0,0,0.6)',
     link: '#C4BCB2',
     linkHover: 'color:#FFFFFF; background:rgba(255,255,255,0.08)',
     logo: '/assets/ideora-lockup-light.png',
@@ -48,19 +48,21 @@ export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header style={s(`position:sticky; top:0; z-index:70; padding-top:var(--safe-t); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); transition:background .45s ease, border-color .45s ease; ${g.bar}`)}>
+    <header style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 8px; pointer-events:none')}>
       <div style={s('max-width:var(--wide); margin:0 auto; padding:0 var(--gut)')}>
         <div
           ref={barRef}
-          style={s('position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:14px 0')}
+          style={s(`position:relative; z-index:2; pointer-events:auto; display:flex; align-items:center; gap:clamp(10px, 1.6vw, 24px); padding:9px 9px 9px 20px; border-radius:999px; backdrop-filter:blur(20px) saturate(160%); -webkit-backdrop-filter:blur(20px) saturate(160%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
         >
           <Link to="/" style={s('display:flex; align-items:center')}>
             <img src={g.logo} alt="Ideora Labs" style={s('height:32px; width:auto; display:block')} />
           </Link>
           {compact ? (
-            <MobileNavTrigger glass={g} open={menuOpen} setOpen={setMenuOpen} />
+            <div style={s('margin-left:auto; display:flex')}>
+              <MobileNavTrigger glass={g} open={menuOpen} setOpen={setMenuOpen} />
+            </div>
           ) : (
-          <nav style={s('display:flex; align-items:center; gap:4px')}>
+          <nav style={s('display:flex; align-items:center; gap:2px; margin:0 auto')}>
             {MENUS.map((menu) => (
               menu.items.length > 0
                 ? (
@@ -80,29 +82,35 @@ export function Nav() {
                     key={menu.label}
                     as={Link}
                     to={menu.path}
-                    style={`color:${isActive(menu) ? 'var(--accent-deep)' : g.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; text-decoration:none; transition:color .3s, background .3s`}
+                    style={`color:${isActive(menu) ? 'var(--accent-deep)' : g.link}; font-size:14px; font-weight:500; padding:9px 15px; border-radius:999px; text-decoration:none; transition:color .3s, background .3s`}
                     hoverStyle={g.linkHover}
                   >{menu.label}</Hover>
                 )
             ))}
 
-            <Hover
+          </nav>
+          )}
+
+          {!compact && (
+            <div style={s('display:flex; align-items:center; gap:2px; flex:none')}>
+              <Hover
               as={Link}
               to="/about#contact"
-              style={`margin-left:10px; padding:10px 16px; border-radius:6px; border:1px solid var(--rule-strong); color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
+              style={`margin-left:2px; padding:9px 14px; border-radius:999px; color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s`}
               hoverStyle={g.linkHover}
-            >Talk to Us</Hover>
+              >Talk to Us</Hover>
 
-            <Hover
+              <Hover
               as={Link}
               to="/#book"
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
-              style="margin-left:8px; padding:11px 20px; border-radius:6px; background:var(--ink); color:#FAF9F7; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
+              style="margin-left:4px; padding:11px 22px; border-radius:999px; background:var(--ink); color:#FAF9F7; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
               hoverStyle="background:#000000"
-            >Request a Demo</Hover>
-          </nav>
+              >Request a Demo</Hover>
+            </div>
           )}
+
         </div>
       </div>
 

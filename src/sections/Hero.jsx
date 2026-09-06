@@ -30,14 +30,18 @@ export function Hero({ consoleRef }) {
   return (
     <section id="top">
       {/* ── Statement ─────────────────────────────────────────────── */}
-      <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(64px, 13vh, 148px) var(--gut) clamp(72px, 10vw, 128px); text-align:center')}>
-        <div data-anim="hero-1" style={s('display:flex; align-items:center; justify-content:center; gap:clamp(14px, 2vw, 24px)')}>
-          {!phone && <span style={s('flex:0 1 130px; height:1px; background:var(--rule)')} />}
-          <span className="om-label">Automotive · Real estate · Healthcare</span>
-          {!phone && <span style={s('flex:0 1 130px; height:1px; background:var(--rule)')} />}
-        </div>
+      <div style={s('position:relative; overflow:hidden')}>
+        <div className="om-sky" aria-hidden="true" />
+        <div className="om-grain" aria-hidden="true" />
+        <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:clamp(76px, 14vh, 168px) var(--gut) clamp(80px, 11vw, 136px); text-align:center')}>
+        <div data-anim="hero-1" style={s('display:flex; justify-content:center')}>
+            <span style={s('display:inline-flex; align-items:center; gap:9px; padding:8px 17px; border-radius:999px; border:1px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 6px 18px -12px rgba(28,25,23,0.4); font-size:14px; color:var(--ink-muted)')}>
+              <span style={s('width:6px; height:6px; border-radius:50%; background:var(--accent)')} />
+              {phone ? 'Automotive · Real estate · Healthcare' : 'Built for automotive, real estate and healthcare groups'}
+            </span>
+          </div>
 
-        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--serif); font-weight:600; font-size:clamp(42px, 7.6vw, 96px); line-height:1.04; letter-spacing:-0.028em; color:var(--ink)')}>
+        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(40px, 7.4vw, 92px); line-height:1.03; letter-spacing:-0.042em; color:var(--ink)')}>
           <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
             <span data-anim="hero-word" style={s('display:inline-block')}>Most</span>{' '}
             <span data-anim="hero-word" style={s('display:inline-block')}>operations</span>
@@ -47,7 +51,7 @@ export function Hero({ consoleRef }) {
             <span data-anim="hero-word" style={s('display:inline-block')}>fail.</span>{' '}
             <span data-anim="hero-word" style={s('display:inline-block')}>They</span>{' '}
             <span data-anim="hero-word" style={s('display:inline-block')}>
-              <span style={s('display:inline-block; margin-left:-0.06em; font-style:italic; color:var(--accent-deep)')}>wait</span>.
+              <span style={s('display:inline-block; color:var(--accent-deep)')}>wait</span>.
             </span>
           </span>
         </h1>
@@ -72,6 +76,8 @@ export function Hero({ consoleRef }) {
               style={`${btn}; padding:0 32px; background:var(--accent); color:#FFFFFF${phone ? '; width:100%' : ''}`}
               hoverStyle="background:#D9500F"
             >Request a briefing</Hover>
+          </div>
+            <p style={s('margin:clamp(20px, 2.4vw, 26px) 0 0; font-size:14px; color:var(--ink-faint)')}>Ninety minutes · you keep the map · no obligation</p>
           </div>
         </div>
       </div>
