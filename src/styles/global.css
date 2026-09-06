@@ -203,6 +203,56 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
   -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
 }
 
+/* Decorative backdrop video. In the hero it replaces .om-sky's colour fields,
+   per the note in Hero.jsx: .om-grain still sits over it, and the same bottom
+   mask keeps type legible where the frame meets the page. The poster sits
+   underneath so a slow connection, a decode failure, or reduced-motion all
+   land on a still rather than a blank frame. */
+.om-bgvid,
+.om-bgposter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(180deg, #000 62%, transparent 97%);
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 97%);
+}
+
+.om-bgposter {
+  background-image: url('/assets/ideorabgvideo-poster.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Mid-page use. The hero only has to dissolve its bottom edge; a section in the
+   middle of the document has to come out of the flat --bg and go back into it,
+   or the frame reads as a pasted-in panel with two hard seams. */
+.om-bgmedia--mid {
+  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 74%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 74%, transparent 100%);
+}
+
+/* This section is taller than the 16:9 frame is, so `cover` scaled the video up
+   to fill the height and cropped roughly 430px off each side — precisely where
+   the routing lines and nodes live, leaving the empty middle on screen. Fit the
+   full frame to the width instead and centre it; the mask above already fades
+   the band into --bg, so the uncovered strip top and bottom never shows a seam. */
+video.om-bgmedia--mid { object-fit: contain; }
+.om-bgposter.om-bgmedia--mid {
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Motion is decorative here, so it is the first thing to go. The poster
+   underneath carries the same image without the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .om-bgvid { display: none; }
+}
+
 .om-grain {
   position: absolute;
   inset: 0;
@@ -273,4 +323,24 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
 
 @media (prefers-reduced-motion: reduce) {
   .om-orbit, .om-orbit-tile { animation: none; }
+}
+
+/* --- Footer wordmark mark -------------------------------------------------
+   The bulb sits at the head of the oversized "Ideora" in the footer, at the
+   same weight of ink. Sized in em so it tracks the wordmark's clamp, and set
+   on the baseline so it is cropped by the footer's edge exactly as the
+   letterforms are. It points at ideora-mark-mask.png, a white-on-transparent
+   silhouette: the coloured ideora-mark.png stays for <img> use in the Stack
+   orbital, where a silhouette would render white on a white tile and vanish.
+   letterforms are. background:currentColor keeps it in step with the text
+   colour without repeating the rgba value in two places. */
+.om-foot-mark {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  margin-right: 0.04em;
+  vertical-align: baseline;
+  background: currentColor;
+  mask: url(/assets/ideora-mark-mask.png) center / contain no-repeat;
+  -webkit-mask: url(/assets/ideora-mark-mask.png) center / contain no-repeat;
 }

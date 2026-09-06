@@ -5,6 +5,7 @@ import { s } from '../lib/style';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { Nav } from '../sections/Nav';
 import { Footer } from '../sections/Footer';
+import { WhatsAppButton } from '../components/WhatsAppButton';
 
 // Router keeps scroll position across navigations; reset it, unless the target
 // is a hash anchor. ScrollTrigger.refresh() is required because the Work
@@ -42,6 +43,7 @@ export function Layout() {
         <Nav />
         <Outlet />
         <Footer />
+        <WhatsAppButton />
       </div>
     </div>
   );

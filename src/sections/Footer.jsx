@@ -68,8 +68,14 @@ export function Footer() {
 
       {/* Oversized wordmark, clipped by the footer's own edge. Decorative only:
           the band is shorter than the letterforms, so their feet are cut off. */}
-      <div aria-hidden="true" style={s('overflow:hidden; font-size:clamp(140px, 30vw, 470px); height:0.95em; margin-top:clamp(18px, 3vw, 34px); pointer-events:none; user-select:none')}>
-        <span style={s('display:block; text-align:center; white-space:nowrap; font-family:var(--display); font-weight:600; font-size:1em; line-height:0.92; letter-spacing:-0.05em; color:rgba(28,25,23,0.05)')}>Ideora</span>
+      <div aria-hidden="true" style={s('overflow:hidden; font-size:clamp(74px, 27vw, 430px); height:0.95em; margin-top:clamp(18px, 3vw, 34px); pointer-events:none; user-select:none')}>
+        <span style={s('display:block; text-align:center; white-space:nowrap; font-family:var(--display); font-weight:600; font-size:1em; line-height:0.92; letter-spacing:-0.05em; color:rgba(28,25,23,0.05)')}>
+          {/* The mark is drawn as a mask filled with currentColor rather than
+              as an <img>, so it takes the wordmark's exact tint. Dropping the
+              orange artwork in at low opacity would leave a warm shape beside
+              cool grey letters — close, but visibly two different marks. */}
+          <span className="om-foot-mark" />Ideora
+        </span>
       </div>
     </footer>
   );
