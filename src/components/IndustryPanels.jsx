@@ -7,13 +7,13 @@ import { s } from '../lib/style';
 // a colour-specific animation.
 
 const MONO = "font-family:'JetBrains Mono', monospace";
-const DIM = '#22262E';
+const DIM = 'var(--dark-raised)';
 const WARM = 'rgba(244,96,30,0.22)';
 
 function Frame({ label, meta, children, footer }) {
   return (
-    <div style={s('position:absolute; inset:0; padding:15px 16px; display:flex; flex-direction:column; background:#1A1D23')}>
-      <div style={s(`display:flex; justify-content:space-between; ${MONO}; font-size:10px; color:#8A929E`)}>
+    <div style={s('position:absolute; inset:0; padding:15px 16px; display:flex; flex-direction:column; background:var(--dark)')}>
+      <div style={s(`display:flex; justify-content:space-between; ${MONO}; font-size:10px; color:#8A8177`)}>
         <span>{label}</span><span>{meta}</span>
       </div>
       <div style={s('flex:1; display:flex; align-items:center; padding:12px 0')}>{children}</div>
@@ -59,7 +59,7 @@ export function RealEstatePanel() {
                 + (v === 2 ? ' animation:om-tick 2.2s ease-in-out infinite' : '')
               )} />
             ))}
-            <div style={s(`text-align:center; ${MONO}; font-size:9px; color:${i === 5 ? '#FF8A50' : '#5A616D'}`)}>{DAYS[i]}</div>
+            <div style={s(`text-align:center; ${MONO}; font-size:9px; color:${i === 5 ? '#FF8A50' : 'var(--ink-muted)'}`)}>{DAYS[i]}</div>
           </div>
         ))}
       </div>
@@ -81,7 +81,7 @@ export function HealthcarePanel() {
       <div style={s('width:100%; display:flex; flex-direction:column; gap:9px')}>
         {INTAKE.map((r, i) => (
           <div key={i} style={s('display:flex; align-items:center; gap:9px')}>
-            <span style={s(`width:7px; height:7px; flex:none; border-radius:50%; background:${r.done ? '#F4601E' : DIM}; border:1px solid ${r.done ? '#F4601E' : '#2E333C'}`)} />
+            <span style={s(`width:7px; height:7px; flex:none; border-radius:50%; background:${r.done ? '#F4601E' : DIM}; border:1px solid ${r.done ? '#F4601E' : 'var(--dark-rule)'}`)} />
             <span style={s(`height:6px; width:${r.w}; border-radius:99px; background:${DIM}`)} />
             {r.done ? (
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#FF8A50" strokeWidth="1.8"
@@ -90,7 +90,7 @@ export function HealthcarePanel() {
                 <path d="M2 6.4l2.6 2.6L10 3.6" />
               </svg>
             ) : (
-              <span style={s(`margin-left:auto; ${MONO}; font-size:9px; color:#5A616D`)}>…</span>
+              <span style={s(`margin-left:auto; ${MONO}; font-size:9px; color:var(--ink-muted)`)}>…</span>
             )}
           </div>
         ))}

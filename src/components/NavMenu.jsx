@@ -67,7 +67,7 @@ export function NavMenu({ menu, glass, active, open, onOpenChange }) {
         aria-haspopup="true"
         onKeyDown={onTriggerKeyDown}
         onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
-        style={s(`display:flex; align-items:center; gap:6px; border:0; background:${open ? 'rgba(26,29,35,0.06)' : 'transparent'}; cursor:pointer; font-family:inherit; color:${active ? '#F4601E' : glass.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; transition:color .3s, background .3s`)}
+        style={s(`display:flex; align-items:center; gap:6px; border:0; background:${open ? 'var(--rule)' : 'transparent'}; cursor:pointer; font-family:inherit; color:${active ? '#F4601E' : glass.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; transition:color .3s, background .3s`)}
       >
         {menu.label}
         <span
@@ -95,7 +95,7 @@ export function NavMenu({ menu, glass, active, open, onOpenChange }) {
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
             >
               <span style={s(`display:block; color:${glass.link}; font-size:14px; font-weight:500; margin-bottom:2px`)}>{item.label}</span>
-              <span style={s('display:block; color:#5A616D; font-size:12px; line-height:1.4')}>{item.blurb}</span>
+              <span style={s('display:block; color:var(--ink-muted); font-size:12px; line-height:1.4')}>{item.blurb}</span>
             </Link>
           ))}
         </div>

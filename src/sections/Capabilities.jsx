@@ -67,21 +67,21 @@ export function Capabilities() {
     <section style={s('padding:0 0 clamp(48px, 7vw, 96px)')}>
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
         <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 7; margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>Powerful capabilities. Real business impact.</h2>
-          <p data-anim="head" style={s('grid-column:9 / span 4; margin:0; color:#5A616D')}>Every system we build is assembled from the same set of capabilities, wired into the tools your team already runs on.</p>
+          <h2 data-anim="head" style={s('grid-column:1 / span 7; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.98; letter-spacing:-0.03em')}>Powerful capabilities. Real business impact.</h2>
+          <p data-anim="head" style={s('grid-column:9 / span 4; margin:0; color:var(--ink-muted)')}>Every system we build is assembled from the same set of capabilities, wired into the tools your team already runs on.</p>
         </div>
 
         {/* One continuous strip divided by hairlines rather than six boxes. */}
-        <div className="om-g6" style={s('margin-top:52px; display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid rgba(26,29,35,0.12)')}>
+        <div className="om-g6" style={s('margin-top:52px; display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid var(--rule-strong)')}>
           {CAPABILITIES.map((c, i) => (
             <div
               key={c.title}
               data-anim="step"
-              style={s(`padding:28px 22px 8px; ${i ? 'border-left:1px solid rgba(26,29,35,0.09)' : ''}`)}
+              style={s(`padding:28px 22px 8px; ${i ? 'border-left:1px solid var(--rule)' : ''}`)}
             >
               <CapIcon name={c.icon} />
-              <h3 style={s('margin:20px 0 0; min-height:40px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:17px; line-height:1.18; letter-spacing:-0.015em')}>{c.title}</h3>
-              <p style={s('margin:12px 0 0; font-size:13.5px; line-height:1.5; color:#5A616D')}>{c.body}</p>
+              <h3 style={s('margin:20px 0 0; min-height:40px; font-family:var(--serif); font-weight:600; font-size:17px; line-height:1.18; letter-spacing:-0.015em')}>{c.title}</h3>
+              <p style={s('margin:12px 0 0; font-size:13.5px; line-height:1.5; color:var(--ink-muted)')}>{c.body}</p>
             </div>
           ))}
         </div>

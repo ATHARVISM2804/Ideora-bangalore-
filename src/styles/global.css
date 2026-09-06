@@ -1,13 +1,39 @@
-html, body { margin:0; padding:0; background:#F1F3F6; }
+/* Design tokens.
+   The ground moved from a cool grey to a warm paper white so the brand orange
+   sits in a family rather than fighting it, and the ink carries the same
+   warmth. The orange is unchanged -- what changed is how little of it is used:
+   it now marks actions and live status only, not page furniture. */
+:root {
+  --bg:          #FAF9F7;   /* warm paper, was cool #F1F3F6 */
+  --bg-sunken:   #F2EFE9;   /* alternating bands */
+  --raised:      #FFFFFF;
+  --ink:         #1C1917;   /* warm near-black, was cool #1A1D23 */
+  --ink-muted:   #6E6862;
+  --ink-faint:   #9C958E;
+  --rule:        #E6E1D8;
+  --rule-strong: #D6CFC3;
+  --accent:      #F4601E;   /* brand orange, actions + live status only */
+  --accent-deep: #B8400A;   /* emphasis in text */
+  --accent-tint: #FBEFE7;
+  --dark:        #1F1B18;   /* console ground, warm */
+  --dark-raised: #2A2521;
+  --dark-rule:   #342E28;
+
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:  Geist, ui-sans-serif, system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+}
+
+html, body { margin:0; padding:0; background:var(--bg); }
 html { scroll-behavior:smooth; }
 * { box-sizing:border-box; }
-a { color:#B8400A; text-decoration:none; }
-a:hover { color:#F4601E; }
-::selection { background:#F4601E; color:#FFFFFF; }
-:focus-visible { outline:2px solid #F4601E; outline-offset:3px; }
+a { color:var(--accent-deep); text-decoration:none; }
+a:hover { color:var(--accent); }
+::selection { background:var(--accent); color:#FFFFFF; }
+:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
 ::-webkit-scrollbar { width:11px; }
-::-webkit-scrollbar-track { background:#E7EAEF; }
-::-webkit-scrollbar-thumb { background:#C3C9D3; border-radius:99px; }
+::-webkit-scrollbar-track { background:var(--bg-sunken); }
+::-webkit-scrollbar-thumb { background:var(--rule-strong); border-radius:99px; }
 @keyframes om-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 @keyframes om-blink { 0%,45% { opacity:1; } 55%,100% { opacity:0.12; } }
 @keyframes om-caret { 0%,49% { opacity:1; } 50%,100% { opacity:0; } }

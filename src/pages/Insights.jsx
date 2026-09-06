@@ -32,7 +32,7 @@ export function Insights() {
               style={s('grid-column:span 4; border-radius:16px; border:1px solid rgba(26,29,35,0.07); background:rgba(255,255,255,0.8); backdrop-filter:blur(20px) saturate(140%); -webkit-backdrop-filter:blur(20px) saturate(140%); padding:28px; display:flex; flex-direction:column; gap:14px')}
             >
               <div style={s(`${MONO}; font-size:12px; color:#B8400A`)}>{a.category}</div>
-              <h2 style={s('margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:20px; line-height:1.15; letter-spacing:-0.02em')}>{a.title}</h2>
+              <h2 style={s('margin:0; font-family:var(--serif); font-weight:600; font-size:20px; line-height:1.15; letter-spacing:-0.02em')}>{a.title}</h2>
               <p style={s('margin:0; flex:1; font-size:15px; color:#5A616D; line-height:1.5')}>{a.standfirst}</p>
               <div style={s(`${MONO}; font-size:12px; color:#5A616D`)}>{a.date}</div>
             </div>

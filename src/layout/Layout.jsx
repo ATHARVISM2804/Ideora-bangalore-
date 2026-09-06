@@ -29,15 +29,14 @@ export function Layout() {
   useScrollProgress(barRef);
 
   return (
-    <div style={s('background:#F1F3F6; color:#1A1D23; font-family:Geist, sans-serif; font-weight:400; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:clip; position:relative')}>
+    <div style={s('background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:400; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:clip; position:relative')}>
 
       {/* Scroll progress bar */}
-      <div ref={barRef} style={s('position:fixed; top:0; left:0; right:0; height:3px; background:#F4601E; transform:scaleX(0); transform-origin:0 50%; z-index:90')} />
+      <div ref={barRef} style={s('position:fixed; top:0; left:0; right:0; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:0 50%; z-index:90')} />
 
-      {/* Fixed grid backdrop, faded out below the fold */}
-      <div style={s('position:fixed; inset:0; z-index:0; pointer-events:none')}>
-        <div style={s('position:absolute; inset:0; background-image:linear-gradient(rgba(26,29,35,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,29,35,0.04) 1px, transparent 1px); background-size:80px 80px; mask-image:linear-gradient(180deg,#000,transparent 55%); -webkit-mask-image:linear-gradient(180deg,#000,transparent 55%)')} />
-      </div>
+      {/* The graph-paper backdrop went with the revamp: a visible technical
+          grid behind every section is a strong "engineering demo" signal and
+          worked against the brief for something that reads corporate. */}
 
       <div style={s('position:relative; z-index:10')}>
         <Nav />

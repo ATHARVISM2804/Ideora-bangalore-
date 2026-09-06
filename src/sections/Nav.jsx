@@ -9,27 +9,27 @@ import { NavMenu } from '../components/NavMenu';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
 import { useBelowDesktop } from '../hooks/useMedia';
 
-// Two glass treatments. Both keep the same blur and saturation so the bar reads
-// as one material; only the tint, edge light, and text colour swap.
+// Two treatments for the two grounds the bar crosses. The glass gradients and
+// edge highlights went with the revamp: a corporate bar reads as a plain
+// surface with a hairline, not as a floating translucent slab.
 const GLASS = {
   light: {
-    bar: 'border:1px solid rgba(255,255,255,0.55); background:linear-gradient(180deg, rgba(255,255,255,0.74), rgba(255,255,255,0.44)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(26,29,35,0.05), 0 20px 46px -26px rgba(26,29,35,0.45), 0 2px 10px -6px rgba(26,29,35,0.16)',
-    link: '#5A616D',
-    linkHover: 'color:#1A1D23; background:rgba(26,29,35,0.06)',
+    bar: 'border-bottom:1px solid var(--rule); background:rgba(250,249,247,0.92)',
+    link: 'var(--ink-muted)',
+    linkHover: 'color:var(--ink); background:rgba(28,25,23,0.05)',
     logo: '/assets/ideora-lockup.png',
-    panel: 'border:1px solid rgba(255,255,255,0.6); background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.72)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.95), 0 26px 60px -30px rgba(26,29,35,0.5)',
-    panelItemHover: 'background:rgba(26,29,35,0.06)',
+    panel: 'border:1px solid var(--rule); background:var(--raised); box-shadow:0 24px 50px -28px rgba(28,25,23,0.28)',
+    panelItemHover: 'background:var(--bg-sunken)',
   },
   dark: {
-    bar: 'border:1px solid rgba(255,255,255,0.14); background:linear-gradient(180deg, rgba(46,51,60,0.62), rgba(26,29,35,0.44)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 rgba(0,0,0,0.28), 0 22px 50px -28px rgba(0,0,0,0.85), 0 2px 10px -6px rgba(0,0,0,0.4)',
-    link: '#C6CCD6',
-    linkHover: 'color:#FFFFFF; background:rgba(255,255,255,0.1)',
+    bar: 'border-bottom:1px solid var(--dark-rule); background:rgba(31,27,24,0.92)',
+    link: '#C4BCB2',
+    linkHover: 'color:#FFFFFF; background:rgba(255,255,255,0.08)',
     logo: '/assets/ideora-lockup-light.png',
-    panel: 'border:1px solid rgba(255,255,255,0.16); background:linear-gradient(180deg, rgba(46,51,60,0.9), rgba(26,29,35,0.8)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), 0 26px 60px -30px rgba(0,0,0,0.9)',
-    panelItemHover: 'background:rgba(255,255,255,0.1)',
+    panel: 'border:1px solid var(--dark-rule); background:var(--dark-raised); box-shadow:0 24px 50px -28px rgba(0,0,0,0.7)',
+    panelItemHover: 'background:rgba(255,255,255,0.07)',
   },
 };
-
 export function Nav() {
   const barRef = useRef(null);
   const g = GLASS[useOverDark(barRef) ? 'dark' : 'light'];
@@ -48,11 +48,11 @@ export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 14px')}>
+    <header style={s(`position:sticky; top:0; z-index:70; padding-top:var(--safe-t); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); transition:background .45s ease, border-color .45s ease; ${g.bar}`)}>
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
         <div
           ref={barRef}
-          style={s(`position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 20px; border-radius:18px; backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
+          style={s('position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:14px 0')}
         >
           <Link to="/" style={s('display:flex; align-items:center')}>
             <img src={g.logo} alt="Ideora Labs" style={s('height:32px; width:auto; display:block')} />
@@ -80,7 +80,7 @@ export function Nav() {
                     key={menu.label}
                     as={Link}
                     to={menu.path}
-                    style={`color:${isActive(menu) ? '#F4601E' : g.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; text-decoration:none; transition:color .3s, background .3s`}
+                    style={`color:${isActive(menu) ? 'var(--accent-deep)' : g.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; text-decoration:none; transition:color .3s, background .3s`}
                     hoverStyle={g.linkHover}
                   >{menu.label}</Hover>
                 )
@@ -89,7 +89,7 @@ export function Nav() {
             <Hover
               as={Link}
               to="/about#contact"
-              style={`margin-left:10px; padding:9px 17px; border-radius:13px; border:1px solid ${g.link}; color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
+              style={`margin-left:10px; padding:9px 16px; border-radius:7px; border:1px solid var(--rule-strong); color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
               hoverStyle={g.linkHover}
             >Talk to Us</Hover>
 
@@ -98,8 +98,8 @@ export function Nav() {
               to="/#book"
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
-              style="margin-left:8px; padding:10px 18px; border-radius:13px; background:#F4601E; color:#1A1D23; font-size:14px; font-weight:500; text-decoration:none; box-shadow:0 10px 26px -14px rgba(244,96,30,0.95); transition:transform .18s ease-out, background .25s"
-              hoverStyle="background:#FF7A3D"
+              style="margin-left:8px; padding:10px 18px; border-radius:7px; background:var(--accent); color:#FFFFFF; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
+              hoverStyle="background:#D9500F"
             >Request a Demo</Hover>
           </nav>
           )}

@@ -1,6 +1,6 @@
 import { s } from '../lib/style';
 
-const MONO = "font-family:'JetBrains Mono', monospace";
+const MONO = "font-family:var(--sans)";
 
 // ── Credibility ────────────────────────────────────────────────────────────
 // Illustrates the claim the facts beside it make: "Your existing stack. No rip
@@ -11,12 +11,12 @@ const STACK = ['Your CRM', 'Your DMS', 'Calendars', 'WhatsApp'];
 
 export function CredibilityDiagram() {
   return (
-    <div style={s('position:absolute; inset:0; padding:26px 24px; display:flex; flex-direction:column; background:#F7F8FA; background-image:linear-gradient(rgba(26,29,35,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,29,35,0.05) 1px, transparent 1px); background-size:22px 22px')}>
-      <div style={s(`${MONO}; font-size:10.5px; color:#5A616D`)}>your existing stack</div>
+    <div style={s('position:absolute; inset:0; padding:26px 24px; display:flex; flex-direction:column; background:var(--bg-sunken); background-image:linear-gradient(rgba(28,25,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(28,25,23,0.05) 1px, transparent 1px); background-size:22px 22px')}>
+      <div style={s(`${MONO}; font-size:10.5px; color:var(--ink-muted)`)}>your existing stack</div>
 
       <div className="om-g2" style={s('margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:8px')}>
         {STACK.map((n) => (
-          <div key={n} style={s('padding:9px 11px; border-radius:9px; border:1px solid rgba(26,29,35,0.1); background:#FFFFFF; font-size:12px; color:#1A1D23; box-shadow:0 4px 10px -8px rgba(26,29,35,0.5)')}>{n}</div>
+          <div key={n} style={s('padding:9px 11px; border-radius:9px; border:1px solid var(--rule); background:#FFFFFF; font-size:12px; color:var(--ink); box-shadow:0 4px 10px -8px rgba(28,25,23,0.5)')}>{n}</div>
         ))}
       </div>
 
@@ -31,8 +31,8 @@ export function CredibilityDiagram() {
 
       <div style={s('padding:12px 14px; border-radius:11px; border:1px solid rgba(244,96,30,0.4); background:rgba(244,96,30,0.1); display:flex; align-items:center; gap:9px')}>
         <span style={s('width:6px; height:6px; border-radius:50%; background:#F4601E; animation:om-blink 1.8s infinite')} />
-        <span style={s('font-size:13px; font-weight:500; color:#B8400A')}>Ideora agent layer</span>
-        <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:#B8400A`)}>read · act · log</span>
+        <span style={s('font-size:13px; font-weight:500; color:var(--accent-deep)')}>Ideora agent layer</span>
+        <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:var(--accent-deep)`)}>read · act · log</span>
       </div>
 
       <svg viewBox="0 0 200 22" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: 22 }} aria-hidden="true">
@@ -40,9 +40,9 @@ export function CredibilityDiagram() {
               vectorEffect="non-scaling-stroke" style={{ animation: 'om-dash 1.8s linear infinite', opacity: 0.65 }} />
       </svg>
 
-      <div style={s('margin-top:auto; padding:13px 14px; border-radius:11px; background:#1A1D23; color:#F1F3F6; display:flex; align-items:center; gap:9px')}>
+      <div style={s('margin-top:auto; padding:13px 14px; border-radius:11px; background:var(--dark); color:var(--bg); display:flex; align-items:center; gap:9px')}>
         <span style={s('font-size:13px; font-weight:500')}>One operational record</span>
-        <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:#8A929E`)}>everyone reads from</span>
+        <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:#8A8177`)}>everyone reads from</span>
       </div>
     </div>
   );
@@ -61,18 +61,18 @@ const RUN = [
 
 export function MethodFlow() {
   return (
-    <div style={s('position:absolute; inset:0; padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:0; background:#F7F8FA; background-image:linear-gradient(rgba(26,29,35,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,29,35,0.05) 1px, transparent 1px); background-size:22px 22px')}>
+    <div style={s('position:absolute; inset:0; padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:0; background:var(--bg-sunken); background-image:linear-gradient(rgba(28,25,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(28,25,23,0.05) 1px, transparent 1px); background-size:22px 22px')}>
       {RUN.map(([verb, rest], i) => {
         const last = i === RUN.length - 1;
         return (
           <div key={verb} style={s('display:flex; align-items:flex-start; gap:12px')}>
             <div style={s('display:flex; flex-direction:column; align-items:center; flex:none')}>
-              <span style={s(`width:9px; height:9px; border-radius:50%; background:${last ? '#F4601E' : '#FFFFFF'}; border:1.5px solid ${last ? '#F4601E' : 'rgba(26,29,35,0.22)'}; animation:om-tick ${2.2 + i * 0.25}s ease-in-out ${i * 0.25}s infinite`)} />
-              {!last && <span style={s('width:1.5px; height:28px; background:linear-gradient(180deg, rgba(244,96,30,0.5), rgba(26,29,35,0.12))')} />}
+              <span style={s(`width:9px; height:9px; border-radius:50%; background:${last ? '#F4601E' : '#FFFFFF'}; border:1.5px solid ${last ? '#F4601E' : 'rgba(28,25,23,0.22)'}; animation:om-tick ${2.2 + i * 0.25}s ease-in-out ${i * 0.25}s infinite`)} />
+              {!last && <span style={s('width:1.5px; height:28px; background:linear-gradient(180deg, rgba(244,96,30,0.5), var(--rule-strong))')} />}
             </div>
             <div style={s('padding-bottom:' + (last ? '0' : '10px'))}>
-              <span style={s(`${MONO}; font-size:12px; color:#B8400A`)}>{verb}</span>
-              <span style={s('font-size:13px; color:#5A616D')}> {rest}</span>
+              <span style={s(`${MONO}; font-size:12px; color:var(--accent-deep)`)}>{verb}</span>
+              <span style={s('font-size:13px; color:var(--ink-muted)')}> {rest}</span>
             </div>
           </div>
         );
@@ -96,7 +96,7 @@ const GLYPHS = {
 export function QuoteGlyph({ kind }) {
   return (
     <span style={s('width:44px; height:44px; flex:none; border-radius:50%; border:1px solid rgba(244,96,30,0.28); background:rgba(244,96,30,0.09); display:flex; align-items:center; justify-content:center')}>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#B8400A" strokeWidth="1.5"
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--accent-deep)" strokeWidth="1.5"
            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d={GLYPHS[kind] || GLYPHS.realestate} />
       </svg>
@@ -117,7 +117,7 @@ const FAULTS = {
 export function FaultGlyph({ kind }) {
   return (
     <span style={s('width:34px; height:34px; flex:none; border-radius:10px; border:1px solid rgba(244,96,30,0.25); background:rgba(244,96,30,0.08); display:flex; align-items:center; justify-content:center')}>
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#B8400A" strokeWidth="1.5"
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--accent-deep)" strokeWidth="1.5"
            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d={FAULTS[kind] || FAULTS.waiting} />
       </svg>
