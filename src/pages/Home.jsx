@@ -23,8 +23,8 @@ export function Home() {
   const consoleRef = useRef(null);
 
   useDocumentTitle(
-    'Ideora Labs — Systems that finish the job.',
-    'Ideora Labs builds and runs the AI systems that carry the operational work large businesses depend on, inside the software they already own.',
+    'Ideora Labs — Most operations don’t fail. They wait.',
+    'Ideora Labs builds and runs the systems that carry the work your team is waiting on, inside the software your business already owns.',
   );
   useGsapTimeline({ rootRef, pinRef, trackRef, railRef, consoleRef });
 

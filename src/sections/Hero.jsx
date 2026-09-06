@@ -37,21 +37,24 @@ export function Hero({ consoleRef }) {
           {!phone && <span style={s('flex:0 1 130px; height:1px; background:var(--rule)')} />}
         </div>
 
-        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--serif); font-weight:600; font-size:clamp(46px, 8.6vw, 104px); line-height:1.02; letter-spacing:-0.028em; color:var(--ink)')}>
+        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--serif); font-weight:600; font-size:clamp(42px, 7.6vw, 96px); line-height:1.04; letter-spacing:-0.028em; color:var(--ink)')}>
           <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
-            <span data-anim="hero-word" style={s('display:inline-block')}>Systems</span>{' '}
-            <span data-anim="hero-word" style={s('display:inline-block')}>that</span>
+            <span data-anim="hero-word" style={s('display:inline-block')}>Most</span>{' '}
+            <span data-anim="hero-word" style={s('display:inline-block')}>operations</span>
           </span>
           <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
-            <span data-anim="hero-word" style={s('display:inline-block; font-style:italic; color:var(--accent-deep)')}>finish</span>{' '}
-            <span data-anim="hero-word" style={s('display:inline-block')}>the</span>{' '}
-            <span data-anim="hero-word" style={s('display:inline-block')}>job.</span>
+            <span data-anim="hero-word" style={s('display:inline-block')}>don’t</span>{' '}
+            <span data-anim="hero-word" style={s('display:inline-block')}>fail.</span>{' '}
+            <span data-anim="hero-word" style={s('display:inline-block')}>They</span>{' '}
+            <span data-anim="hero-word" style={s('display:inline-block')}>
+              <span style={s('display:inline-block; margin-left:-0.06em; font-style:italic; color:var(--accent-deep)')}>wait</span>.
+            </span>
           </span>
         </h1>
 
         <div data-anim="hero-2">
           <p style={s('margin:clamp(28px, 3.6vw, 40px) auto 0; max-width:46ch; font-size:clamp(18px, 1.5vw, 21px); line-height:1.62; color:var(--ink-muted)')}>
-            We build and run the systems that carry your operational work — booking, approvals, follow-up, reporting — inside the software your business already owns.
+            We build and run the systems that carry the work your team is waiting on — booking, approvals, follow-up, reporting — inside the software your business already owns.
           </p>
 
           <div style={s(`margin-top:clamp(34px, 4vw, 48px); display:flex; align-items:stretch; justify-content:center; gap:12px; ${phone ? 'flex-direction:column-reverse' : ''}`)}>
