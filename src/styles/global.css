@@ -205,7 +205,9 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
 
 /* Decorative backdrop video. In the hero it replaces .om-sky's colour fields,
    per the note in Hero.jsx: .om-grain still sits over it, and the same bottom
-   mask keeps type legible where the frame meets the page. The poster sits
+   frame stays at full strength almost to its bottom edge and dissolves only in
+   the last 8%, which is enough to avoid ending on a hard line against --bg
+   without washing out the lower half of the artwork. The poster sits
    underneath so a slow connection, a decode failure, or reduced-motion all
    land on a still rather than a blank frame. */
 .om-bgvid,
@@ -217,8 +219,8 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
   object-fit: cover;
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(180deg, #000 62%, transparent 97%);
-  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 97%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 92%, transparent 100%);
 }
 
 .om-bgposter {
@@ -239,8 +241,8 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
   bottom: auto;
   height: auto;
   aspect-ratio: 16 / 9;
-  mask-image: linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
 }
 
 @media (max-width: 640px) {
