@@ -3,14 +3,7 @@ import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
 import { OpsConsole } from './OpsConsole';
-
-const PRACTICES = [
-  'Agentic AI development',
-  'Real estate automation',
-  'Healthcare and clinics',
-  'Service centres',
-  'Productised systems',
-];
+import { Surfaces } from './Surfaces';
 
 // The hero gives each idea its own screen: the statement, then the numbers,
 // then the product. Crowding all three into one view is what made it read as
@@ -88,14 +81,8 @@ export function Hero({ consoleRef }) {
         <OpsConsole consoleRef={consoleRef} />
       </div>
 
-      <div style={s('max-width:var(--measure); margin:clamp(48px, 7vw, 88px) auto 0; padding:0 var(--gut)')}>
-        <div style={s('padding-top:26px; border-top:1px solid var(--rule); display:flex; align-items:baseline; justify-content:center; gap:clamp(16px, 3vw, 36px); flex-wrap:wrap')}>
-          <span className="om-label" style={s('flex:none')}>Practices</span>
-          {PRACTICES.map((n) => (
-            <span key={n} style={s('font-size:16px; color:var(--ink-muted)')}>{n}</span>
-          ))}
-        </div>
-      </div>
+      <Surfaces />
+
     </section>
   );
 }

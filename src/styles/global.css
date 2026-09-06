@@ -224,3 +224,42 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
 @media (prefers-reduced-motion: reduce) {
   .om-sky { animation: none; }
 }
+
+/* --- Surfaces marquee -----------------------------------------------------
+   One continuous row of the systems the agents run inside. The track holds
+   two identical copies and translates by exactly -50%, so the second copy is
+   under the cursor at the moment the first finishes and the loop has no seam.
+   The duplicate is aria-hidden, so a screen reader hears the list once. */
+
+.om-marquee {
+  overflow: hidden;
+  /* Fade at both edges instead of a hard cut, so items enter and leave rather
+     than appearing at the viewport boundary. */
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.om-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: om-marquee 52s linear infinite;
+  will-change: transform;
+}
+
+/* Motion that answers an action: the row holds still while it is being read. */
+.om-marquee:hover .om-marquee-track,
+.om-marquee:focus-within .om-marquee-track { animation-play-state: paused; }
+
+/* The global reduced-motion rule collapses every duration to 0.01ms, which
+   would snap this track to its end position and hide half the list. Stop the
+   animation outright and hand the row to the reader as a scroller instead. */
+@media (prefers-reduced-motion: reduce) {
+  .om-marquee { overflow-x: auto; }
+  .om-marquee-track { animation: none !important; }
+}
+
+/* Hero figures: four across at desktop, two-up below. Stacking them one per
+   row turns a glanceable strip into a screen of scrolling, which is the
+   opposite of what a figure row is for. */
+@media (max-width: 1024px) { .om-figs { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 420px)  { .om-figs { grid-template-columns: repeat(2, 1fr) !important; } }

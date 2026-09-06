@@ -1,75 +1,86 @@
 import { useState } from 'react';
 import { s } from '../lib/style';
-import { spot } from '../lib/handlers';
-import { MethodFlow } from '../components/SectionArt';
+import { useBelowDesktop } from '../hooks/useMedia';
 import { SERVICES } from '../data/content';
 
-const MONO = "font-family:var(--sans)";
-
+// Selector list beside a detail panel: the five practices are always all
+// visible, and choosing one swaps the panel rather than pushing the page
+// around, which an accordion did.
 export function Services() {
-  const [open, setOpen] = useState(0);
+  const [active, setActive] = useState(0);
+  const stacked = useBelowDesktop();
+  const svc = SERVICES[active];
+
+  const bullets = [
+    ['Delivers', svc.delivers],
+    ['Connects to', svc.connects],
+    ['Time to live', svc.time],
+  ];
 
   return (
-    <section id="services" style={s('padding:0 0 clamp(80px, 12vw, 170px)')}>
-      <div className="om-g12" style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; align-items:start')}>
-        <div style={s('grid-column:1 / span 4; position:sticky; top:130px')}>
-          <h2 data-anim="head" style={s('margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>What we build</h2>
-          <p style={s('margin:24px 0 0; max-width:40ch; color:var(--ink-muted)')}>Five practices, one method: we map the handoffs your team does by hand, then build systems that do them in your live software.</p>
-          <div className="om-label" style={s('margin-top:34px')}>Five practices</div>
-          <div style={s('margin-top:28px; position:relative; border-radius:14px; overflow:hidden; border:1px solid var(--rule); height:200px')}>
-            <MethodFlow />
-          </div>
-        </div>
+    <section id="services" style={s('padding:clamp(76px, 11vw, 150px) 0')}>
+      <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
+        <div className="om-label" data-anim="head">What we build</div>
+        <h2 data-anim="head" style={s('margin:18px 0 0; max-width:16ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em; color:var(--ink)')}>
+          Five practices. One method.
+        </h2>
+        <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
+          We map the handoffs your team does by hand, then build systems that do them in your live software — and report what they did.
+        </p>
 
-        <div style={s('grid-column:6 / span 7; display:flex; flex-direction:column; gap:12px')}>
-          {SERVICES.map((svc, i) => {
-            const isOpen = open === i;
-            const plusRotate = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
-            const borderColor = isOpen ? 'var(--rule-strong)' : 'var(--rule)';
-            const cardBg = isOpen ? 'var(--raised)' : 'transparent';
-            const badgeBorder = isOpen ? 'rgba(244,96,30,0.35)' : 'var(--rule)';
-            const badgeBg = isOpen ? 'rgba(244,96,30,0.12)' : '#FFFFFF';
-            const badgeColor = isOpen ? 'var(--accent-deep)' : 'var(--ink-muted)';
+        <div style={s(`margin-top:clamp(40px, 5vw, 64px); display:grid; grid-template-columns:${stacked ? '1fr' : 'minmax(240px, 0.8fr) 1.6fr'}; gap:clamp(16px, 2.4vw, 32px); align-items:start`)}>
 
-            return (
-              <div
-                key={svc.code}
-                data-anim="card"
-                onMouseMove={spot}
-                style={s(`position:relative; overflow:hidden; border-radius:16px; border:1px solid ${borderColor}; background:${cardBg}; backdrop-filter:blur(20px) saturate(140%); -webkit-backdrop-filter:blur(20px) saturate(140%); box-shadow:0 20px 46px -34px rgba(28,25,23,0.5); transition:border-color .35s, background .35s`)}
-              >
-                <div style={s('position:absolute; inset:0; pointer-events:none; background:radial-gradient(460px circle at var(--mx, 50%) var(--my, 50%), rgba(244,96,30,0.08), transparent 60%)')} />
+          {/* Selector */}
+          <div style={s('display:flex; flex-direction:column; gap:6px')}>
+            {SERVICES.map((item, i) => {
+              const on = i === active;
+              return (
                 <button
+                  key={item.code}
                   type="button"
-                  onClick={() => setOpen(isOpen ? -1 : i)}
-                  style={s('position:relative; width:100%; background:none; border:0; padding:24px; display:flex; align-items:center; justify-content:space-between; gap:20px; cursor:pointer; text-align:left; font-family:inherit; color:var(--ink)')}
+                  aria-pressed={on}
+                  onClick={() => setActive(i)}
+                  style={s(`display:block; width:100%; text-align:left; padding:16px 18px; cursor:pointer; border-radius:14px; border:1px solid ${on ? 'rgba(244,96,30,0.38)' : 'transparent'}; background:${on ? 'var(--accent-tint)' : 'transparent'}; font-family:inherit; transition:background .3s, border-color .3s`)}
                 >
-                  <span style={s('display:flex; align-items:center; gap:20px')}>
-                    <span style={s(`width:36px; height:36px; flex:none; border-radius:11px; border:1px solid ${badgeBorder}; background:${badgeBg}; display:flex; align-items:center; justify-content:center; ${MONO}; font-size:14px; color:${badgeColor}; transition:all .35s`)}>{svc.code}</span>
-                    <span style={s('font-family:var(--serif); font-weight:600; font-size:20px; line-height:1.1; letter-spacing:-0.025em')}>{svc.title}</span>
-                  </span>
-                  <span style={s('position:relative; width:26px; height:26px; flex:none')}>
-                    <span style={s(`position:absolute; top:12px; left:4px; width:18px; height:2px; border-radius:2px; background:${badgeColor}; transition:background .3s`)} />
-                    <span style={s(`position:absolute; top:12px; left:4px; width:18px; height:2px; border-radius:2px; background:${badgeColor}; transform:${plusRotate}; transition:transform .4s cubic-bezier(.16,.84,.24,1), background .3s`)} />
-                  </span>
+                  <span style={s(`display:block; font-size:16.5px; font-weight:500; color:${on ? 'var(--accent-deep)' : 'var(--ink)'}; transition:color .3s`)}>{item.title}</span>
+                  <span style={s('display:block; margin-top:5px; font-size:14.5px; line-height:1.45; color:var(--ink-muted)')}>{item.short}</span>
                 </button>
+              );
+            })}
+          </div>
 
-                {isOpen && (
-                  <div style={s('position:relative; padding:0 24px 28px 72px; animation:om-fade .5s both')}>
-                    <p style={s('margin:0 0 24px; max-width:58ch; color:var(--ink-muted)')}>{svc.body}</p>
-                    <dl style={s('margin:0; display:grid; grid-template-columns:150px 1fr; gap:0; border-top:1px solid var(--rule)')}>
-                      <dt className="om-label" style={s('padding:14px 0; align-self:start')}>Delivers</dt>
-                      <dd style={s('margin:0; padding:14px 0; font-size:16px; line-height:1.55; border-bottom:1px solid var(--rule)')}>{svc.delivers}</dd>
-                      <dt className="om-label" style={s('padding:14px 0; align-self:start; border-top:1px solid var(--rule)')}>Connects to</dt>
-                      <dd style={s('margin:0; padding:14px 0; font-size:16px; line-height:1.55; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)')}>{svc.connects}</dd>
-                      <dt className="om-label" style={s('padding:14px 0; align-self:start')}>Time to live</dt>
-                      <dd style={s('margin:0; padding:14px 0; font-size:16px; color:var(--accent-deep)')}>{svc.time}</dd>
-                    </dl>
-                  </div>
-                )}
+          {/* Detail */}
+          <div style={s('padding:clamp(24px, 3vw, 40px); border-radius:20px; border:1px solid var(--rule); background:#FFFFFF; box-shadow:0 24px 60px -34px rgba(28,25,23,0.16)')}>
+            <div key={svc.code} style={s('animation:om-fade .4s both')}>
+              <h3 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:clamp(21px, 2.1vw, 28px); line-height:1.15; letter-spacing:-0.028em')}>{svc.title}</h3>
+              <p style={s('margin:16px 0 0; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--ink-muted)')}>{svc.body}</p>
+
+              <ul style={s('margin:26px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px')}>
+                {bullets.map(([label, value]) => (
+                  <li key={label} style={s('display:flex; gap:12px; align-items:baseline')}>
+                    <span style={s('width:6px; height:6px; flex:none; border-radius:50%; background:var(--accent); transform:translateY(-2px)')} />
+                    <span style={s('font-size:16px; line-height:1.5')}>
+                      <span style={s('color:var(--ink-faint)')}>{label} — </span>
+                      <span style={s('color:var(--ink)')}>{value}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* The method every practice runs on, stated once. */}
+              <div style={s('margin-top:28px; padding:16px 18px; border-radius:14px; border:1px solid var(--rule); background:var(--bg-sunken)')}>
+                <div className="om-label" style={s('font-size:11.5px')}>One method</div>
+                <div style={s('margin-top:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap')}>
+                  {['read the request', 'check the record', 'act in your system', 'log the outcome'].map((step, i) => (
+                    <span key={step} style={s('display:inline-flex; align-items:center; gap:10px; font-size:14.5px; color:var(--ink-muted)')}>
+                      {i > 0 && <span style={s('color:var(--ink-faint)')}>→</span>}
+                      {step}
+                    </span>
+                  ))}
+                </div>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
