@@ -12,12 +12,6 @@ const PRACTICES = [
   'Productised systems',
 ];
 
-const PROOF = [
-  { value: '6–10 wks', label: 'to your first system live' },
-  { value: '0', label: 'systems replaced to make room' },
-  { value: '24/7', label: 'operating, without a night shift' },
-];
-
 // The hero gives each idea its own screen: the statement, then the numbers,
 // then the product. Crowding all three into one view is what made it read as
 // a template — a page that is confident about its argument does not need to
@@ -37,7 +31,7 @@ export function Hero({ consoleRef }) {
             mask so type stays legible against the bottom of the frame. */}
         <div className="om-sky" aria-hidden="true" />
         <div className="om-grain" aria-hidden="true" />
-        <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:clamp(76px, 14vh, 168px) var(--gut) clamp(80px, 11vw, 136px); text-align:center')}>
+        <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:clamp(64px, 11vh, 132px) var(--gut) clamp(30px, 3.6vw, 52px); text-align:center')}>
         <div data-anim="hero-1" style={s('display:flex; justify-content:center')}>
             <span style={s('display:inline-flex; align-items:center; gap:9px; padding:8px 17px; border-radius:999px; border:1px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 6px 18px -12px rgba(28,25,23,0.4); font-size:14px; color:var(--ink-muted)')}>
               <span style={s('width:6px; height:6px; border-radius:50%; background:var(--accent)')} />
@@ -86,20 +80,8 @@ export function Hero({ consoleRef }) {
         </div>
       </div>
 
-      {/* ── The numbers, given their own air ──────────────────────── */}
-      <div style={s('border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background:var(--bg-sunken)')}>
-        <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(48px, 6vw, 80px) var(--gut); display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:clamp(28px, 4vw, 56px); text-align:center')}>
-          {PROOF.map((f) => (
-            <div key={f.label} data-anim="step">
-              <div style={s('font-family:var(--serif); font-weight:600; font-size:clamp(34px, 4.4vw, 54px); line-height:1; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink)')}>{f.value}</div>
-              <div style={s('margin-top:14px; font-size:16px; line-height:1.5; color:var(--ink-muted)')}>{f.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* ── The product, running ──────────────────────────────────── */}
-      <div style={s('max-width:var(--wide); margin:0 auto; padding:clamp(56px, 8vw, 104px) var(--gut) 0')}>
+      <div style={s('max-width:var(--wide); margin:0 auto; padding:clamp(8px, 1.5vw, 20px) var(--gut) 0')}>
         <OpsConsole consoleRef={consoleRef} />
       </div>
 
