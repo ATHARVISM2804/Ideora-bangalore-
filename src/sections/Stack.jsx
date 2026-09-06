@@ -32,11 +32,8 @@ export function Stack() {
             />
           ))}
 
-          {/* The agent layer */}
-          <span style={s(`position:absolute; left:50%; top:50%; width:${stacked ? 74 : 92}px; height:${stacked ? 74 : 92}px; margin:${stacked ? -37 : -46}px 0 0 ${stacked ? -37 : -46}px; display:flex; align-items:center; justify-content:center; border-radius:${stacked ? 22 : 26}px; background:var(--dark); color:#F2EDE7; box-shadow:0 18px 40px -18px rgba(28,25,23,0.5); font-size:${stacked ? 11 : 12.5}px; line-height:1.25; font-weight:500`)}>
-            Agent<br />layer
-          </span>
-
+          {/* The systems revolve; the mark stays put. */}
+          <div className="om-orbit">
           {STACK.map((item, i) => {
             const angle = (i / STACK.length) * Math.PI * 2 - Math.PI / 2;
             const x = centre + Math.cos(angle) * radius;
@@ -46,10 +43,17 @@ export function Stack() {
               <span
                 key={item.short}
                 title={item.label}
-                style={s(`position:absolute; left:${x}px; top:${y}px; width:${tile}px; height:${tile}px; margin:${-tile / 2}px 0 0 ${-tile / 2}px; display:flex; align-items:center; justify-content:center; border-radius:${stacked ? 14 : 17}px; border:1px solid var(--rule); background:var(--raised); box-shadow:0 8px 22px -12px rgba(28,25,23,0.3); font-size:${stacked ? 12 : 13.5}px; font-weight:500; color:var(--ink); animation:om-float ${7 + (i % 4)}s ease-in-out ${i * 0.4}s infinite`)}
+                className="om-orbit-tile"
+                style={s(`position:absolute; left:${x}px; top:${y}px; width:${tile}px; height:${tile}px; margin:${-tile / 2}px 0 0 ${-tile / 2}px; display:flex; align-items:center; justify-content:center; border-radius:${stacked ? 14 : 17}px; border:1px solid var(--rule); background:var(--raised); box-shadow:0 8px 22px -12px rgba(28,25,23,0.3); font-size:${stacked ? 12 : 13.5}px; font-weight:500; color:var(--ink)`)}
               >{item.short}</span>
             );
           })}
+          </div>
+
+          {/* Ideora sits at the centre, still. */}
+          <span style={s(`position:absolute; left:50%; top:50%; width:${stacked ? 78 : 100}px; height:${stacked ? 78 : 100}px; margin:${stacked ? -39 : -50}px 0 0 ${stacked ? -39 : -50}px; display:flex; align-items:center; justify-content:center; border-radius:${stacked ? 24 : 30}px; border:1px solid var(--rule); background:var(--raised); box-shadow:0 18px 44px -18px rgba(28,25,23,0.28)`)}>
+            <img src="/assets/ideora-mark.png" alt="Ideora Labs" style={s(`width:${stacked ? 44 : 58}px; height:auto; display:block`)} />
+          </span>
         </div>
 
         <div style={s('margin-top:clamp(28px, 3.6vw, 44px); display:flex; justify-content:center; gap:10px; flex-wrap:wrap')}>
