@@ -25,6 +25,19 @@ export const CAPABILITIES = [
     body: "Real-time dashboards for smarter leadership decisions." },
 ];
 
+// What the agent layer plugs into. Every one of these already appears in a
+// practice's "connects to" line; the orbital states them in one place.
+export const STACK = [
+  { short: "DMS", label: "Dealer management" },
+  { short: "CRM", label: "Your CRM" },
+  { short: "EMR", label: "Clinical records" },
+  { short: "Cal", label: "Calendars" },
+  { short: "WA",  label: "WhatsApp Business" },
+  { short: "Pay", label: "Payer APIs" },
+  { short: "Prt", label: "Portal feeds" },
+  { short: "Sig", label: "E-signature" },
+];
+
 export const PROBLEMS = [
   { glyph: "waiting", meter: "stall", read: "waiting 4h 12m", code: "fault 01", title: "Work waits on people",
     body: "An estimate sits unapproved because nobody called back. The job is not blocked by capacity, it is blocked by a follow-up that never happened." },
@@ -126,16 +139,16 @@ export const STEPS = [
 ];
 
 export const PROC = [
-  { step: "Step 01", kind: "radar", side: "left", title: "SCOPE CALL",
+  { n: "01", title: "Scope call", tags: ["90 minutes", "You keep the map"],
     body: "We walk the process you want automated, meet the people who run it today, and agree what success looks like before anything is designed." },
-  { step: "Step 02", kind: "blueprint", side: "right", title: "BLUEPRINT & DESIGN",
+  { n: "02", title: "Blueprint and design", tags: ["Fixed scope", "Fixed price"],
     body: "We map the architecture, the systems it touches, and what runs automatically versus what a person reviews — then fix the scope and the price." },
-  { step: "Step 03", kind: "code", side: "left", title: "BUILD IN THE OPEN",
+  { n: "03", title: "Build in the open", tags: ["Weekly builds", "Your staging data"],
     body: "You see working software every week, not a status update. Each build runs against your staging data the same day it ships." },
-  { step: "Step 04", kind: "graph", side: "right", title: "INTEGRATE & CONNECT",
+  { n: "04", title: "Integrate and connect", tags: ["Your permissions", "Real volume first"],
     body: "The agent is wired into your live systems with your permissions and escalation rules, then run against real volume before cutover." },
-  { step: "Step 05", kind: "dash", side: "left", title: "RUN & REPORT",
-    body: "We operate the system and you keep the dashboard. Backlog, ageing, and exceptions are visible the day they happen." }
+  { n: "05", title: "Run and report", tags: ["We operate it", "You keep the dashboard"],
+    body: "We operate the system and you keep the dashboard. Backlog, ageing and exceptions are visible the day they happen." }
 ];
 
 export const RESULT_STATS = [

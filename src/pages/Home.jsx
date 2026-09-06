@@ -4,7 +4,9 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
 import { Services } from '../sections/Services';
+import { HowItWorks } from '../sections/HowItWorks';
 import { Work } from '../sections/Work';
+import { Stack } from '../sections/Stack';
 import { Voices } from '../sections/Voices';
 import { Closing } from '../sections/Closing';
 
@@ -30,7 +32,9 @@ export function Home() {
     <div ref={rootRef}>
       <Hero consoleRef={consoleRef} />
       <Services />
+      <HowItWorks />
       <Work pinRef={pinRef} />
+      <Stack />
       <Voices />
       <Closing />
     </div>
