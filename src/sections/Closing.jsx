@@ -12,7 +12,7 @@ export function Closing() {
           <div className="om-g12" style={s('position:relative; display:grid; grid-template-columns:repeat(12, 1fr); gap:20px')}>
             <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:600; font-size:clamp(31px, 5.2vw, 50px); line-height:1.1; letter-spacing:-0.035em')}>Bring us the process nobody wants to own.</h2>
             <div data-anim="head" style={s('grid-column:8 / span 5; align-self:end')}>
-              <p style={s('margin:0; color:#A79E93')}>Ninety minutes with you and your operations lead. We map the handoffs on the call and tell you which of them a system can take over first. You keep the map whether or not you work with us.</p>
+              <p style={s('margin:0; color:#A79E93')}>Ninety minutes with you and your operations lead. We map the handoffs on the call and tell you which a system can take first. You keep the map either way.</p>
               <Hover
                 as="a"
                 href="#book"

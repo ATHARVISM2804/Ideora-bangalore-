@@ -14,7 +14,7 @@ export function Services() {
       <div className="om-g12" style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; align-items:start')}>
         <div style={s('grid-column:1 / span 4; position:sticky; top:130px')}>
           <h2 data-anim="head" style={s('margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>What we build</h2>
-          <p style={s('margin:24px 0 0; max-width:40ch; color:var(--ink-muted)')}>Five practices, one method. We map the handoffs your team performs manually, then build agents that perform them against your live systems and report what they did.</p>
+          <p style={s('margin:24px 0 0; max-width:40ch; color:var(--ink-muted)')}>Five practices, one method: we map the handoffs your team does by hand, then build systems that do them in your live software.</p>
           <div style={s(`margin-top:32px; display:inline-flex; align-items:center; gap:9px; padding:8px 15px; border-radius:99px; border:1px solid var(--rule); background:#FFFFFF; ${MONO}; font-size:14px; color:var(--ink-muted)`)}>select a practice to expand</div>
           <div style={s('margin-top:28px; position:relative; border-radius:14px; overflow:hidden; border:1px solid var(--rule); height:200px')}>
             <MethodFlow />

@@ -23,7 +23,7 @@ export function Work({ pinRef, trackRef, railRef }) {
       <div style={s('position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px); background-size:28px 28px; mask-image:linear-gradient(180deg,#000,transparent 80%); -webkit-mask-image:linear-gradient(180deg,#000,transparent 80%)')} />
       <div className="om-g12" style={s('position:relative; max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
         <h2 style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>Systems in production</h2>
-        <p style={s('grid-column:8 / span 4; margin:0; color:#A79E93')}>Four systems running inside client operations, two more in build. Clients are under NDA, so each is described by what it does and what it replaced.</p>
+        <p style={s('grid-column:8 / span 4; margin:0; color:#A79E93')}>Four systems running inside client operations, two more in build. Clients are under NDA, so each is described by what it replaced.</p>
       </div>
 
       <div
