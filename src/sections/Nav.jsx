@@ -49,7 +49,7 @@ export function Nav() {
 
   return (
     <header style={s(`position:sticky; top:0; z-index:70; padding-top:var(--safe-t); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); transition:background .45s ease, border-color .45s ease; ${g.bar}`)}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
+      <div style={s('max-width:var(--wide); margin:0 auto; padding:0 var(--gut)')}>
         <div
           ref={barRef}
           style={s('position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:14px 0')}
@@ -89,7 +89,7 @@ export function Nav() {
             <Hover
               as={Link}
               to="/about#contact"
-              style={`margin-left:10px; padding:9px 16px; border-radius:7px; border:1px solid var(--rule-strong); color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
+              style={`margin-left:10px; padding:10px 16px; border-radius:6px; border:1px solid var(--rule-strong); color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s, border-color .25s`}
               hoverStyle={g.linkHover}
             >Talk to Us</Hover>
 
@@ -98,8 +98,8 @@ export function Nav() {
               to="/#book"
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
-              style="margin-left:8px; padding:10px 18px; border-radius:7px; background:var(--accent); color:#FFFFFF; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
-              hoverStyle="background:#D9500F"
+              style="margin-left:8px; padding:11px 20px; border-radius:6px; background:var(--ink); color:#FAF9F7; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
+              hoverStyle="background:#000000"
             >Request a Demo</Hover>
           </nav>
           )}

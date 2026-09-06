@@ -6,7 +6,6 @@ import { Hero } from '../sections/Hero';
 import { Services } from '../sections/Services';
 import { Work } from '../sections/Work';
 import { Voices } from '../sections/Voices';
-import { Credibility } from '../sections/Credibility';
 import { Closing } from '../sections/Closing';
 
 // Six sections, down from twelve. The page is read mostly on a phone by
@@ -35,7 +34,6 @@ export function Home() {
       <Services />
       <Work pinRef={pinRef} trackRef={trackRef} railRef={railRef} />
       <Voices />
-      <Credibility />
       <Closing />
     </div>
   );

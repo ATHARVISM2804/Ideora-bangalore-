@@ -31,7 +31,7 @@ export function Voices() {
 
   return (
     <section style={s('padding:clamp(76px, 11vw, 150px) 0')}>
-      <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px)')}>
+      <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
         <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
           <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>In their words</h2>
           <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:var(--ink-muted)')}>Attributed by role and scale only. Named references are available to serious enquiries under NDA.</p>

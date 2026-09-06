@@ -73,7 +73,7 @@ export function OpsConsole({ consoleRef }) {
   const phone = useIsPhone();
 
   return (
-    <div ref={consoleRef} onMouseMove={spot} style={s('position:relative; max-width:1400px; margin:0 auto; overflow:hidden; border-radius:20px; border:1px solid var(--dark-rule); background:#191512; color:#F2EDE7; box-shadow:0 40px 90px -50px rgba(31,27,24,0.55)')} data-anim="console">
+    <div ref={consoleRef} onMouseMove={spot} style={s('position:relative; max-width:var(--wide); margin:0 auto; overflow:hidden; border-radius:20px; border:1px solid var(--dark-rule); background:#191512; color:#F2EDE7; box-shadow:0 40px 90px -50px rgba(31,27,24,0.55)')} data-anim="console">
       <div style={s('position:absolute; inset:0; pointer-events:none; background:radial-gradient(700px circle at var(--mx, 60%) var(--my, 10%), rgba(244,96,30,0.13), transparent 62%)')} />
 
       {/* Title bar */}

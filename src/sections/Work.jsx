@@ -21,7 +21,7 @@ export function Work({ pinRef, trackRef, railRef }) {
   return (
     <section id="work" ref={pinRef} data-nav-dark style={s('position:relative; overflow:hidden; background:var(--dark); color:var(--bg); padding:clamp(80px, 11vw, 150px) 0 clamp(56px, 7vw, 96px)')}>
       <div style={s('position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px); background-size:28px 28px; mask-image:linear-gradient(180deg,#000,transparent 80%); -webkit-mask-image:linear-gradient(180deg,#000,transparent 80%)')} />
-      <div className="om-g12" style={s('position:relative; max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
+      <div className="om-g12" style={s('position:relative; max-width:var(--wide); margin:0 auto; padding:0 var(--gut); display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
         <h2 style={s('grid-column:1 / span 6; margin:0; font-family:var(--serif); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>Systems in production</h2>
         <p style={s('grid-column:8 / span 4; margin:0; color:#A79E93')}>Four systems running inside client operations, two more in build. Clients are under NDA, so each is described by what it replaced.</p>
       </div>
@@ -71,7 +71,7 @@ export function Work({ pinRef, trackRef, railRef }) {
         </div>
       </div>
 
-      <div style={s('position:relative; max-width:1400px; margin:44px auto 0; padding:0 clamp(20px, 5vw, 40px); display:flex; align-items:center; gap:14px')}>
+      <div style={s('position:relative; max-width:var(--wide); margin:44px auto 0; padding:0 var(--gut); display:flex; align-items:center; gap:14px')}>
         <span style={s(`${MONO}; font-size:11px; color:#8A8177`)}>{swipe ? 'swipe to advance' : 'scroll to advance'}</span>
         <div style={s('flex:1; height:2px; border-radius:99px; background:var(--dark-rule); overflow:hidden')}>
           <div ref={railRef} style={s('height:100%; width:100%; border-radius:99px; background:#F4601E; transform:scaleX(0.1); transform-origin:0 50%')} />
