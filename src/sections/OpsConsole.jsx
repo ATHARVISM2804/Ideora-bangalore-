@@ -77,7 +77,7 @@ export function OpsConsole({ consoleRef }) {
       role="tablist"
       aria-label="Industry"
       className={compact ? 'om-rail' : undefined}
-      style={s(`position:relative; z-index:2; margin:0 auto ${compact ? '-14px' : '-22px'}; display:flex; align-items:center; gap:2px; width:max-content; max-width:100%; padding:5px; border-radius:999px; border:1px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.72); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%); box-shadow:0 10px 30px -14px rgba(28,25,23,0.24)`)}
+      style={s(`position:relative; z-index:2; margin:0 auto ${compact ? '14px' : '20px'}; display:flex; align-items:center; gap:2px; width:max-content; max-width:100%; padding:5px; border-radius:999px; border:1px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.72); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%); box-shadow:0 10px 30px -14px rgba(28,25,23,0.24)`)}
     >
       {DASHBOARDS.map((item, i) => {
         const on = i === active;

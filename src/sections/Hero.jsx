@@ -24,7 +24,10 @@ export function Hero({ consoleRef }) {
   return (
     <section id="top">
       {/* ── Statement ─────────────────────────────────────────────── */}
-      <div style={s('position:relative; overflow:hidden')}>
+      {/* Pulled up under the sticky bar and padded back by the same amount.
+          The bar floats over the sky; without this the frame starts below the
+          header and the page's flat --bg shows above it as a seam. */}
+      <div style={s('position:relative; overflow:hidden; margin-top:calc(-1 * var(--nav-h, 0px)); padding-top:var(--nav-h, 0px)')}>
         {/* Backdrop. When the video arrives it replaces .om-sky and nothing
             else changes: drop a <video autoPlay muted loop playsInline> here
             with the same absolute fill, keep .om-grain over it, and keep the

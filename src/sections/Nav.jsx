@@ -8,6 +8,7 @@ import { MENUS } from '../data/nav';
 import { NavMenu } from '../components/NavMenu';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
 import { useBelowDesktop } from '../hooks/useMedia';
+import { useNavHeight } from '../hooks/useNavHeight';
 
 // Two treatments for the two grounds the bar crosses. The bar floats as a pill
 // again, so both are translucent surfaces with an edge highlight rather than a
@@ -47,8 +48,11 @@ export function Nav() {
   const compact = useBelowDesktop();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const headerRef = useRef(null);
+  useNavHeight(headerRef);
+
   return (
-    <header style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 8px; pointer-events:none')}>
+    <header ref={headerRef} style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 8px; pointer-events:none')}>
       <div style={s('max-width:1320px; margin:0 auto; padding:0 var(--gut)')}>
         <div
           ref={barRef}
