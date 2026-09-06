@@ -30,10 +30,11 @@ export function Hero({ consoleRef }) {
   return (
     <section id="top">
       {/* ── Statement ─────────────────────────────────────────────── */}
-      <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(56px, 12vh, 132px) var(--gut) clamp(64px, 10vw, 120px)')}>
-        <div data-anim="hero-1" style={s('display:flex; align-items:center; gap:14px')}>
+      <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(64px, 13vh, 148px) var(--gut) clamp(72px, 10vw, 128px); text-align:center')}>
+        <div data-anim="hero-1" style={s('display:flex; align-items:center; justify-content:center; gap:clamp(14px, 2vw, 24px)')}>
+          {!phone && <span style={s('flex:0 1 130px; height:1px; background:var(--rule)')} />}
           <span className="om-label">Automotive · Real estate · Healthcare</span>
-          {!phone && <span style={s('flex:1; height:1px; background:var(--rule)')} />}
+          {!phone && <span style={s('flex:0 1 130px; height:1px; background:var(--rule)')} />}
         </div>
 
         <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--serif); font-weight:600; font-size:clamp(46px, 8.6vw, 104px); line-height:1.02; letter-spacing:-0.028em; color:var(--ink)')}>
@@ -49,11 +50,11 @@ export function Hero({ consoleRef }) {
         </h1>
 
         <div data-anim="hero-2">
-          <p style={s('margin:clamp(28px, 3.6vw, 40px) 0 0; max-width:44ch; font-size:clamp(18px, 1.5vw, 21px); line-height:1.62; color:var(--ink-muted)')}>
+          <p style={s('margin:clamp(28px, 3.6vw, 40px) auto 0; max-width:46ch; font-size:clamp(18px, 1.5vw, 21px); line-height:1.62; color:var(--ink-muted)')}>
             We build and run the systems that carry your operational work — booking, approvals, follow-up, reporting — inside the software your business already owns.
           </p>
 
-          <div style={s(`margin-top:clamp(32px, 4vw, 44px); display:flex; align-items:stretch; gap:12px; ${phone ? 'flex-direction:column-reverse' : ''}`)}>
+          <div style={s(`margin-top:clamp(34px, 4vw, 48px); display:flex; align-items:stretch; justify-content:center; gap:12px; ${phone ? 'flex-direction:column-reverse' : ''}`)}>
             <Hover
               as="a"
               href="#services"
@@ -74,7 +75,7 @@ export function Hero({ consoleRef }) {
 
       {/* ── The numbers, given their own air ──────────────────────── */}
       <div style={s('border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background:var(--bg-sunken)')}>
-        <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(44px, 6vw, 76px) var(--gut); display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:clamp(28px, 4vw, 56px)')}>
+        <div style={s('max-width:var(--measure); margin:0 auto; padding:clamp(48px, 6vw, 80px) var(--gut); display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:clamp(28px, 4vw, 56px); text-align:center')}>
           {PROOF.map((f) => (
             <div key={f.label} data-anim="step">
               <div style={s('font-family:var(--serif); font-weight:600; font-size:clamp(34px, 4.4vw, 54px); line-height:1; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; color:var(--ink)')}>{f.value}</div>
@@ -90,7 +91,7 @@ export function Hero({ consoleRef }) {
       </div>
 
       <div style={s('max-width:var(--measure); margin:clamp(48px, 7vw, 88px) auto 0; padding:0 var(--gut)')}>
-        <div style={s('padding-top:26px; border-top:1px solid var(--rule); display:flex; align-items:baseline; gap:clamp(16px, 3vw, 36px); flex-wrap:wrap')}>
+        <div style={s('padding-top:26px; border-top:1px solid var(--rule); display:flex; align-items:baseline; justify-content:center; gap:clamp(16px, 3vw, 36px); flex-wrap:wrap')}>
           <span className="om-label" style={s('flex:none')}>Practices</span>
           {PRACTICES.map((n) => (
             <span key={n} style={s('font-size:16px; color:var(--ink-muted)')}>{n}</span>

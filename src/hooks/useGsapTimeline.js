@@ -22,11 +22,32 @@ export function useGsapTimeline(refs) {
     const ctx = gsap.context(() => {
       const ease = 'power3.out';
 
-      const intro = gsap.timeline();
-      intro.from('[data-anim="hero-1"]', { y: 18, opacity: 0, duration: 0.7, ease });
-      intro.from('[data-anim="hero-word"]', { yPercent: 108, opacity: 0, duration: 1.05, stagger: 0.075, ease: 'expo.out' }, 0.1);
-      intro.from('[data-anim="hero-2"]', { y: 26, opacity: 0, duration: 0.8, ease }, 0.5);
-      intro.from('[data-anim="console"]', { y: 70, opacity: 0, scale: 0.985, duration: 1.1, ease }, 0.6);
+      // The opening sequence is the page's one orchestrated moment, so it is
+      // paced rather than hurried: the rules draw, the headline rises word by
+      // word out of its mask with the blur clearing as it settles, then the
+      // supporting copy and the product follow.
+      //
+      // Gated on prefers-reduced-motion. A blurred rise is precisely the kind
+      // of motion that setting exists to suppress, and skipping the timeline
+      // leaves the content in its natural state rather than hidden.
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+        intro.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.9, ease: 'power2.out' });
+        intro.from('[data-anim="hero-1"] span[style*="height:1px"]', {
+          scaleX: 0, transformOrigin: '50% 50%', duration: 1.2, ease: 'power3.inOut',
+        }, 0.05);
+
+        intro.from('[data-anim="hero-word"]', {
+          yPercent: 118,
+          filter: 'blur(10px)',
+          duration: 1.45,
+          stagger: 0.085,
+        }, 0.25);
+
+        intro.from('[data-anim="hero-2"]', { y: 22, opacity: 0, duration: 1.1, ease: 'power3.out' }, 0.95);
+        intro.from('[data-anim="console"]', { y: 60, opacity: 0, duration: 1.25, ease: 'power3.out' }, 1.15);
+      });
 
       // The console re-animates on every industry switch, so it drives its own
       // counters, bars and trace rows. This pass covers the rest of the page.
