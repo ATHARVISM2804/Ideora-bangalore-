@@ -49,13 +49,13 @@ export function Nav() {
 
   return (
     <header style={s('position:sticky; top:0; z-index:70; padding:calc(var(--safe-t) + 14px) 0 8px; pointer-events:none')}>
-      <div style={s('max-width:var(--wide); margin:0 auto; padding:0 var(--gut)')}>
+      <div style={s('max-width:1320px; margin:0 auto; padding:0 var(--gut)')}>
         <div
           ref={barRef}
-          style={s(`position:relative; z-index:2; pointer-events:auto; display:flex; align-items:center; gap:clamp(10px, 1.6vw, 24px); padding:9px 9px 9px 20px; border-radius:999px; backdrop-filter:blur(20px) saturate(160%); -webkit-backdrop-filter:blur(20px) saturate(160%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
+          style={s(`position:relative; z-index:2; pointer-events:auto; display:flex; align-items:center; gap:clamp(10px, 1.6vw, 24px); padding:5px 5px 5px 17px; border-radius:999px; backdrop-filter:blur(20px) saturate(160%); -webkit-backdrop-filter:blur(20px) saturate(160%); transition:background .45s ease, border-color .45s ease, box-shadow .45s ease; ${g.bar}`)}
         >
           <Link to="/" style={s('display:flex; align-items:center')}>
-            <img src={g.logo} alt="Ideora Labs" style={s('height:32px; width:auto; display:block')} />
+            <img src={g.logo} alt="Ideora Labs" style={s('height:24px; width:auto; display:block')} />
           </Link>
           {compact ? (
             <div style={s('margin-left:auto; display:flex')}>
@@ -82,7 +82,7 @@ export function Nav() {
                     key={menu.label}
                     as={Link}
                     to={menu.path}
-                    style={`color:${isActive(menu) ? 'var(--accent-deep)' : g.link}; font-size:14px; font-weight:500; padding:9px 15px; border-radius:999px; text-decoration:none; transition:color .3s, background .3s`}
+                    style={`color:${isActive(menu) ? 'var(--accent-deep)' : g.link}; font-size:14.5px; font-weight:450; padding:8px 13px; border-radius:999px; text-decoration:none; transition:color .3s, background .3s`}
                     hoverStyle={g.linkHover}
                   >{menu.label}</Hover>
                 )
@@ -96,7 +96,7 @@ export function Nav() {
               <Hover
               as={Link}
               to="/about#contact"
-              style={`margin-left:2px; padding:9px 14px; border-radius:999px; color:${g.link}; font-size:14px; font-weight:500; text-decoration:none; transition:color .25s, background .25s`}
+              style={`margin-left:2px; padding:8px 13px; border-radius:999px; color:${g.link}; font-size:14.5px; font-weight:450; text-decoration:none; transition:color .25s, background .25s`}
               hoverStyle={g.linkHover}
               >Talk to Us</Hover>
 
@@ -105,7 +105,7 @@ export function Nav() {
               to="/#book"
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
-              style="margin-left:4px; padding:11px 22px; border-radius:999px; background:var(--ink); color:#FAF9F7; font-size:14px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
+              style="margin-left:4px; padding:8px 18px; border-radius:999px; background:var(--ink); color:#FAF9F7; font-size:14.5px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"
               hoverStyle="background:#000000"
               >Request a Demo</Hover>
             </div>

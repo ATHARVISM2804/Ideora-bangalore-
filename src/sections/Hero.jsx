@@ -31,6 +31,10 @@ export function Hero({ consoleRef }) {
     <section id="top">
       {/* ── Statement ─────────────────────────────────────────────── */}
       <div style={s('position:relative; overflow:hidden')}>
+        {/* Backdrop. When the video arrives it replaces .om-sky and nothing
+            else changes: drop a <video autoPlay muted loop playsInline> here
+            with the same absolute fill, keep .om-grain over it, and keep the
+            mask so type stays legible against the bottom of the frame. */}
         <div className="om-sky" aria-hidden="true" />
         <div className="om-grain" aria-hidden="true" />
         <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:clamp(76px, 14vh, 168px) var(--gut) clamp(80px, 11vw, 136px); text-align:center')}>
@@ -41,7 +45,7 @@ export function Hero({ consoleRef }) {
             </span>
           </div>
 
-        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(40px, 7.4vw, 92px); line-height:1.03; letter-spacing:-0.042em; color:var(--ink)')}>
+        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(34px, 4.7vw, 74px); line-height:1.06; letter-spacing:-0.038em; color:var(--ink)')}>
           <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
             <span data-anim="hero-word" style={s('display:inline-block')}>Most</span>{' '}
             <span data-anim="hero-word" style={s('display:inline-block')}>operations</span>
@@ -57,7 +61,7 @@ export function Hero({ consoleRef }) {
         </h1>
 
         <div data-anim="hero-2">
-          <p style={s('margin:clamp(28px, 3.6vw, 40px) auto 0; max-width:46ch; font-size:clamp(18px, 1.5vw, 21px); line-height:1.62; color:var(--ink-muted)')}>
+          <p style={s('margin:clamp(22px, 2.6vw, 30px) auto 0; max-width:52ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
             We build and run the systems that carry the work your team is waiting on — booking, approvals, follow-up, reporting — inside the software your business already owns.
           </p>
 

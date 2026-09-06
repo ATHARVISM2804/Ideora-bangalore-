@@ -30,7 +30,7 @@ export function Icon({ name, size = 16, style }) {
 // shows its shape rather than its absolute scale. The viewBox is a fixed
 // coordinate space stretched to the card's width; non-scaling-stroke keeps the
 // line an even weight despite the non-uniform scale.
-export function Spark({ values, color = '#6E6862', h = 26 }) {
+export function Spark({ values, color = '#B4ABA0', h = 26 }) {
   const W = 100;
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -41,7 +41,7 @@ export function Spark({ values, color = '#6E6862', h = 26 }) {
   ];
   const line = values.map((v, i) => pt(v, i).map((n) => n.toFixed(2)).join(',')).join(' ');
   const area = `${line} ${W},${h} 0,${h}`;
-  const id = `sp${color.replace('#', '')}`;
+  const id = `sp${color.replace(/[^a-zA-Z0-9]/g, '')}`;
 
   return (
     <svg viewBox={`0 0 ${W} ${h}`} preserveAspectRatio="none"
@@ -65,23 +65,23 @@ export function Ring({ value, size = 74 }) {
   return (
     <div style={{ position: 'relative', width: size, height: size, flex: 'none' }}>
       <svg width={size} height={size} style={{ display: 'block', transform: 'rotate(-90deg)' }} aria-hidden="true">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--dark-rule)" strokeWidth="5" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#EBE6DE" strokeWidth="5" />
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#F4601E" strokeWidth="5"
                 strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)} />
       </svg>
       <div style={{
         position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontFamily: 'var(--serif)', fontWeight: 600,
-        fontSize: 17, letterSpacing: '-0.02em', color: '#F2EDE7',
+        fontSize: 17, letterSpacing: '-0.02em', color: 'var(--ink)',
       }}>{value}%</div>
     </div>
   );
 }
 
 const PILL = {
-  ok:   { label: 'ok',      color: '#8A8177', bg: 'rgba(196,188,178,0.09)', dot: '#6E6862' },
-  wait: { label: 'waited',  color: '#C4BCB2', bg: 'rgba(196,188,178,0.12)', dot: '#8A8177' },
-  done: { label: 'done',    color: '#FF8A50', bg: 'rgba(244,96,30,0.13)',   dot: '#F4601E' },
+  ok:   { label: 'ok',      color: 'var(--ink-faint)', bg: 'rgba(110,104,98,0.09)', dot: 'var(--ink-faint)' },
+  wait: { label: 'waited',  color: 'var(--ink-muted)', bg: 'rgba(110,104,98,0.12)', dot: 'var(--ink-faint)' },
+  done: { label: 'done',    color: 'var(--accent-deep)', bg: 'rgba(244,96,30,0.13)',   dot: '#F4601E' },
 };
 
 export function StatusPill({ kind }) {
