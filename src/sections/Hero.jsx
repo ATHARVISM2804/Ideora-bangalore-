@@ -35,24 +35,30 @@ export function Hero({ consoleRef }) {
               </span>
             </div>
 
+            {/* Was "Most operations don't fail. They wait." — a good line, but a
+                diagnosis: the largest type on the page told the reader what was
+                wrong with their business and never said what they get. This
+                names the same problem in their own words and resolves it. */}
             <h1 style={s('margin:clamp(24px, 3.2vw, 38px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(36px, 4.4vw, 68px); line-height:1.04; letter-spacing:-0.018em; color:var(--ink)')}>
               <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
-                <span data-anim="hero-word" style={s('display:inline-block')}>Most</span>{' '}
-                <span data-anim="hero-word" style={s('display:inline-block')}>operations</span>
+                <span data-anim="hero-word" style={s('display:inline-block')}>The</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>work</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>your</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>team</span>
               </span>
               <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
-                <span data-anim="hero-word" style={s('display:inline-block')}>don’t</span>{' '}
-                <span data-anim="hero-word" style={s('display:inline-block')}>fail.</span>{' '}
-                <span data-anim="hero-word" style={s('display:inline-block')}>They</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>never</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>gets</span>{' '}
+                <span data-anim="hero-word" style={s('display:inline-block')}>to.</span>{' '}
                 <span data-anim="hero-word" style={s('display:inline-block')}>
-                  <span style={s('display:inline-block; color:var(--accent-deep)')}>wait</span>.
+                  <span style={s('display:inline-block; color:var(--accent-deep)')}>Done</span>.
                 </span>
               </span>
             </h1>
 
             <div data-anim="hero-2">
               <p style={s('margin:clamp(20px, 2.4vw, 28px) 0 0; max-width:50ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
-                Bookings, approvals, follow-up: handled the moment they arrive, inside the software you already own.
+                Bookings, approvals, follow-up: answered the moment they arrive, inside the software you already own.
               </p>
 
               <div style={s(`margin-top:clamp(30px, 3.4vw, 42px); display:flex; align-items:stretch; gap:12px; ${phone ? 'flex-direction:column-reverse' : ''}`)}>
