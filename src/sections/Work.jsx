@@ -1,8 +1,6 @@
 import { s } from '../lib/style';
 import { CASES } from '../data/content';
 
-const MONO = "font-family:var(--mono)";
-
 // Dark band, taken from the reference's "how it works" treatment: light type
 // on a near-black ground, cards with a hairline and pill tags.
 //
@@ -36,7 +34,7 @@ export function Work({ pinRef }) {
           <span className="om-label" style={s('color:var(--accent)')}>Systems in production</span>
         </div>
 
-        <h2 data-anim="head" style={s('margin:20px 0 0; max-width:18ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em; color:#FFFFFF')}>
+        <h2 data-anim="head" style={s('margin:20px 0 0; max-width:18ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.017em; color:#FFFFFF')}>
           Four systems running. Two more in build.
         </h2>
         <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:#A79E93')}>
@@ -50,12 +48,13 @@ export function Work({ pinRef }) {
               data-anim="card"
               style={s('padding:clamp(22px, 2.4vw, 30px); border-radius:18px; border:1px solid var(--dark-rule); background:rgba(255,255,255,0.028)')}
             >
+              {/* The sys_NN code went with the revamp: engineering shorthand
+                  beside a badge that already names the vertical and its status. */}
               <div style={s('display:flex; align-items:center; gap:10px; flex-wrap:wrap')}>
-                <span style={s(`${MONO}; font-size:12.5px; color:var(--ink-faint)`)}>{cs.code}</span>
                 <Pill tone={STATUS_TONE[cs.status]}>{cs.vertical} · {cs.status}</Pill>
               </div>
 
-              <h3 style={s('margin:16px 0 0; font-family:var(--display); font-weight:600; font-size:clamp(19px, 1.7vw, 23px); line-height:1.2; letter-spacing:-0.026em; color:#FFFFFF')}>{cs.title}</h3>
+              <h3 style={s('margin:16px 0 0; font-family:var(--display); font-weight:600; font-size:clamp(19px, 1.7vw, 23px); line-height:1.2; letter-spacing:-0.012em; color:#FFFFFF')}>{cs.title}</h3>
               <p style={s('margin:12px 0 0; font-size:15.5px; line-height:1.58; color:#A79E93')}>{cs.body}</p>
 
               <div style={s('margin-top:20px; display:flex; align-items:center; gap:8px; flex-wrap:wrap')}>

@@ -45,7 +45,7 @@ export function Footer() {
       <div className="om-gfoot" style={s('position:relative; z-index:1; max-width:var(--wide); margin:0 auto; padding:0 var(--gut); display:grid; grid-template-columns:1.5fr repeat(4, 1fr); gap:clamp(28px, 3vw, 44px) clamp(20px, 2.4vw, 36px)')}>
         <div className="om-foot-brand">
           <img src="/assets/ideora-lockup.png" alt="Ideora Labs" style={s('height:34px; width:auto; display:block')} />
-          <p style={s('margin:20px 0 0; font-size:15px; line-height:1.5; max-width:26ch')}>Agentic AI and operational automation for large operators.</p>
+          <p style={s('margin:20px 0 0; font-size:15px; line-height:1.5; max-width:26ch')}>We build and run the systems that carry the work your operation waits on.</p>
         </div>
 
         {COLUMNS.map((col) => (
@@ -60,7 +60,7 @@ export function Footer() {
       </div>
 
       <div style={s('position:relative; z-index:1; max-width:var(--wide); margin:clamp(40px, 5vw, 64px) auto 0; padding:24px var(--gut) 0; gap:12px; flex-wrap:wrap; border-top:1px solid var(--rule); display:flex; justify-content:space-between; font-size:13px')}>
-        <span>© 2026 Ideora Labs. Agentic systems for live operations.</span>
+        <span>© 2026 Ideora Labs. Systems that run live operations.</span>
         <span style={s('display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px')}>
           <span style={s('width:6px; height:6px; border-radius:50%; background:var(--accent); animation:om-blink 2.4s infinite')} />all systems nominal
         </span>
@@ -69,7 +69,7 @@ export function Footer() {
       {/* Oversized wordmark, clipped by the footer's own edge. Decorative only:
           the band is shorter than the letterforms, so their feet are cut off. */}
       <div aria-hidden="true" style={s('overflow:hidden; font-size:clamp(74px, 27vw, 430px); height:0.95em; margin-top:clamp(18px, 3vw, 34px); pointer-events:none; user-select:none')}>
-        <span style={s('display:block; text-align:center; white-space:nowrap; font-family:var(--display); font-weight:600; font-size:1em; line-height:0.92; letter-spacing:-0.05em; color:rgba(28,25,23,0.05)')}>
+        <span style={s('display:block; text-align:center; white-space:nowrap; font-family:var(--display); font-weight:600; font-size:1em; line-height:0.92; letter-spacing:-0.022em; color:rgba(28,25,23,0.05)')}>
           {/* The mark is drawn as a mask filled with currentColor rather than
               as an <img>, so it takes the wordmark's exact tint. Dropping the
               orange artwork in at low opacity would leave a warm shape beside

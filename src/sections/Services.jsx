@@ -21,7 +21,7 @@ export function Services() {
     <section id="services" style={s('padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
         <div className="om-label" data-anim="head">What we build</div>
-        <h2 data-anim="head" style={s('margin:18px 0 0; max-width:16ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em; color:var(--ink)')}>
+        <h2 data-anim="head" style={s('margin:18px 0 0; max-width:16ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.017em; color:var(--ink)')}>
           Five practices. One method.
         </h2>
         <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
@@ -52,7 +52,7 @@ export function Services() {
           {/* Detail */}
           <div style={s('padding:clamp(24px, 3vw, 40px); border-radius:20px; border:1px solid var(--rule); background:#FFFFFF; box-shadow:0 24px 60px -34px rgba(28,25,23,0.16)')}>
             <div key={svc.code} style={s('animation:om-fade .4s both')}>
-              <h3 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:clamp(21px, 2.1vw, 28px); line-height:1.15; letter-spacing:-0.028em')}>{svc.title}</h3>
+              <h3 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:clamp(21px, 2.1vw, 28px); line-height:1.15; letter-spacing:-0.013em')}>{svc.title}</h3>
               <p style={s('margin:16px 0 0; max-width:52ch; font-size:16.5px; line-height:1.6; color:var(--ink-muted)')}>{svc.body}</p>
 
               <ul style={s('margin:26px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px')}>

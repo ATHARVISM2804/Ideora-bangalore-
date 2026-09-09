@@ -27,15 +27,18 @@ export const CAPABILITIES = [
 
 // What the agent layer plugs into. Every one of these already appears in a
 // practice's "connects to" line; the orbital states them in one place.
+// The tiles carry words now rather than three-letter codes. DMS, CRM and EMR
+// stay because a dealer principal and a practice manager use those words daily;
+// "Prt", "Sig" and "WA" were abbreviated to fit a tile, not to be understood.
 export const STACK = [
-  { short: "DMS", label: "Dealer management" },
-  { short: "CRM", label: "Your CRM" },
-  { short: "EMR", label: "Clinical records" },
-  { short: "Cal", label: "Calendars" },
-  { short: "WA",  label: "WhatsApp Business" },
-  { short: "Pay", label: "Payer APIs" },
-  { short: "Prt", label: "Portal feeds" },
-  { short: "Sig", label: "E-signature" },
+  { short: "DMS",       label: "Dealer management" },
+  { short: "CRM",       label: "Your CRM" },
+  { short: "Records",   label: "Clinical records" },
+  { short: "Calendars", label: "Calendars" },
+  { short: "WhatsApp",  label: "WhatsApp Business" },
+  { short: "Insurers",  label: "Insurers and payers" },
+  { short: "Portals",   label: "Portal feeds" },
+  { short: "E-sign",    label: "E-signature" },
 ];
 
 export const PROBLEMS = [
@@ -43,35 +46,35 @@ export const PROBLEMS = [
     body: "An estimate sits unapproved because nobody called back. The job is not blocked by capacity, it is blocked by a follow-up that never happened." },
   { glyph: "silo", meter: "split", read: "3 versions of the truth", code: "fault 02", title: "Systems do not talk",
     body: "The booking tool, the DMS, and WhatsApp each hold a different version of the truth. Staff reconcile them by hand, all day, from memory." },
-  { glyph: "blind", meter: "late", read: "seen 28 days late", code: "fault 03", title: "Nobody can see the queue",
+  { glyph: "blind", meter: "late", read: "seen 28 days late", code: "fault 03", title: "Nobody can see the backlog",
     body: "Management finds out about the backlog at the end of the month, when the report arrives and the week it describes is already gone." }
 ];
 
 export const SERVICES = [
-  { code: "01", short: "Agents that run your operations", title: "Agentic AI and automation development",
-    body: "Custom agents that operate your systems the way a trained coordinator would: read the request, check the record, take the action, log the outcome. Built against your APIs, your permissions, and your escalation rules.",
+  { code: "01", short: "Agents that run your operations", title: "Custom automation for your operations",
+    body: "Custom agents that operate your systems the way a trained coordinator would: read the request, check the record, take the action, log the outcome. Built around your permissions and your escalation rules.",
     delivers: "Agents that complete multi-step operational tasks end to end, with a full trace of every action.",
-    connects: "REST · webhooks · SQL · WhatsApp Business · email · calendars",
+    connects: "Your CRM, WhatsApp, email and calendars",
     time: "8 to 10 weeks" },
   { code: "02", short: "Enquiries qualified before contact", title: "Real estate automation",
     body: "Enquiry qualification, viewing scheduling, and document chasing handled continuously so agents spend their day with buyers who are ready.",
     delivers: "Qualified enquiries, confirmed viewings, and a document checklist that closes itself.",
-    connects: "CRM · portal feeds · calendars · e-signature",
+    connects: "Your CRM, portal feeds, calendars and e-signature",
     time: "6 to 8 weeks" },
   { code: "03", short: "Intake settled before arrival", title: "Healthcare and clinic automation",
     body: "Intake, eligibility checks, reminders, and recall lists run before the patient reaches the desk. Clinical judgement stays with clinicians.",
     delivers: "Completed intake, verified coverage, and a filled schedule with named exceptions.",
-    connects: "EMR · practice management · payer APIs · SMS",
+    connects: "Your patient records, practice software, insurers and SMS",
     time: "8 weeks" },
   { code: "04", short: "Bookings answered in seconds", title: "Service centre automation",
     body: "One agent across booking, estimate approval, parts status, and customer updates, working the same records your advisors and DMS already use.",
     delivers: "Bookings held, estimates approved, and a bay schedule that reflects reality by 9am.",
-    connects: "DMS · booking tool · WhatsApp · parts catalogue",
+    connects: "Your dealer system, booking tool, WhatsApp and parts catalogue",
     time: "6 to 8 weeks" },
   { code: "05", short: "Shipped in weeks, not quarters", title: "Productised systems",
     body: "Systems we have already built and deployed, configured to your data instead of designed from scratch. Shorter build, same operating model.",
     delivers: "A running system on your data, with the standard dashboard and managed operation.",
-    connects: "Your existing stack · standard connector set",
+    connects: "Whatever you already run",
     time: "3 to 5 weeks" }
 ];
 
@@ -128,7 +131,7 @@ export const FACTS = [
   { label: "Verticals live", value: "Automotive · Real estate · Healthcare" },
   { label: "Deployment window", value: "6 to 10 weeks to first system in production" },
   { label: "Engagement model", value: "Fixed scope build, then managed operation" },
-  { label: "Built on", value: "Your existing stack. No rip and replace." }
+  { label: "Built on", value: "Your existing systems. No rip and replace." }
 ];
 
 export const STEPS = [

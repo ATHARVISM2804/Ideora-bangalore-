@@ -21,9 +21,10 @@
 
   --sans:  Geist, ui-sans-serif, system-ui, sans-serif;
   --mono:  'JetBrains Mono', ui-monospace, monospace;
-  /* Display face. One family across the page at a heavier weight for
-     headings, which is what the reference sites do. */
-  --display: Geist, ui-sans-serif, system-ui, sans-serif;
+  /* Display face. An editorial serif for headings against the sans body: the
+     single strongest signal separating an established firm from a tech product.
+     The audience is senior operators, and one family throughout read as SaaS. */
+  --display: Newsreader, ui-serif, Georgia, 'Times New Roman', serif;
 
   --measure: 1180px;   /* editorial column */
   --wide:    1440px;   /* artifacts: console, case track */

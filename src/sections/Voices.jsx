@@ -33,7 +33,7 @@ export function Voices() {
     <section style={s('padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
         <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--display); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.03em')}>In their words</h2>
+          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--display); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.014em')}>In their words</h2>
           <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:var(--ink-muted)')}>Attributed by role and scale only. Named references are available to serious enquiries under NDA.</p>
         </div>
 
@@ -58,7 +58,7 @@ export function Voices() {
 
           <div style={s('grid-column:5 / span 8')}>
             <blockquote key={q.slotId} style={s('margin:0; animation:om-fade .5s both')}>
-              <p style={s('margin:0; max-width:26ch; font-family:var(--display); font-weight:600; font-size:clamp(26px, 3.6vw, 46px); line-height:1.22; letter-spacing:-0.025em; color:var(--ink)')}>
+              <p style={s('margin:0; max-width:26ch; font-family:var(--display); font-weight:600; font-size:clamp(26px, 3.6vw, 46px); line-height:1.22; letter-spacing:-0.012em; color:var(--ink)')}>
                 <span style={s('color:#F4601E')}>“</span>{q.text}
               </p>
               <footer style={s('margin-top:30px; display:flex; align-items:center; gap:14px')}>

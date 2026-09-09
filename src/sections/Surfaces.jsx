@@ -37,7 +37,7 @@ function Row({ hidden }) {
       {SURFACES.map(([name, proto]) => (
         <span key={name} style={s('display:inline-flex; align-items:baseline; gap:10px; flex:none; padding:0 clamp(22px, 2.6vw, 40px)')}>
           <span style={s('width:5px; height:5px; flex:none; border-radius:50%; background:var(--rule-strong); transform:translateY(-4px)')} />
-          <span style={s('font-family:var(--display); font-weight:500; font-size:clamp(19px, 1.9vw, 27px); letter-spacing:-0.02em; white-space:nowrap; color:var(--ink-muted)')}>{name}</span>
+          <span style={s('font-family:var(--display); font-weight:500; font-size:clamp(19px, 1.9vw, 27px); letter-spacing:-0.009em; white-space:nowrap; color:var(--ink-muted)')}>{name}</span>
           <span style={s('font-family:var(--mono); font-size:11px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink-faint)')}>{proto}</span>
         </span>
       ))}
@@ -68,7 +68,7 @@ export function Surfaces() {
         >
           {FIGURES.map((f) => (
             <div key={f.label} style={s('background:var(--bg); padding:clamp(24px, 3vw, 38px) clamp(16px, 2vw, 28px)')}>
-              <div style={s('font-family:var(--display); font-weight:600; font-size:clamp(30px, 3.4vw, 46px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums; color:var(--ink)')}>{f.value}</div>
+              <div style={s('font-family:var(--display); font-weight:600; font-size:clamp(30px, 3.4vw, 46px); line-height:1; letter-spacing:-0.018em; font-variant-numeric:tabular-nums; color:var(--ink)')}>{f.value}</div>
               <div style={s('margin-top:12px; font-size:15px; font-weight:500; color:var(--ink)')}>{f.label}</div>
               <div style={s('margin-top:4px; font-size:14px; color:var(--ink-faint)')}>{f.note}</div>
             </div>

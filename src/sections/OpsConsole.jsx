@@ -145,7 +145,7 @@ export function OpsConsole({ consoleRef }) {
             <div style={s(`padding:12px 13px; border-radius:12px; border:${LINE}; background:${PANEL}`)}>
               <div style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>agents online</div>
               <div style={s('margin-top:6px; display:flex; align-items:baseline; gap:5px')}>
-                <Count value={Number(d.online[0])} style={s('font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.02em')} />
+                <Count value={Number(d.online[0])} style={s('font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.009em')} />
                 <span style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>/ {d.online[1]}</span>
               </div>
             </div>
@@ -186,7 +186,7 @@ export function OpsConsole({ consoleRef }) {
                 <div key={k.label} data-anim="kpi" style={s(`padding:13px 14px 10px; border-radius:13px; border:${LINE}; background:${PANEL}`)}>
                   <div style={s(`${MONO}; font-size:10px; color:var(--ink-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis`)}>{k.label}</div>
                   <div style={s('margin-top:8px; display:flex; align-items:baseline; gap:5px')}>
-                    <Count value={k.value} style={s(`font-family:var(--display); font-weight:500; font-size:clamp(20px, 3.2vw, 26px); line-height:1; letter-spacing:-0.03em; color:${accent}`)} />
+                    <Count value={k.value} style={s(`font-family:var(--display); font-weight:500; font-size:clamp(20px, 3.2vw, 26px); line-height:1; letter-spacing:-0.014em; color:${accent}`)} />
                     <span style={s(`${MONO}; font-size:10px; color:var(--ink-faint)`)}>{k.unit}</span>
                     <span style={s(`margin-left:auto; ${MONO}; font-size:10px; color:${k.trend === 'flat' ? 'var(--ink-faint)' : trendUp ? 'var(--accent-deep)' : 'var(--ink-faint)'}`)}>
                       {k.trend === 'flat' ? '–' : trendUp ? '↑' : '↓'} {k.delta}

@@ -30,7 +30,7 @@ export function About() {
         <div className="om-g12" style={s(WRAP)}>
           <div data-nav-dark style={s('grid-column:1 / span 12; border-radius:24px; background:#1A1D23; color:#F1F3F6; padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
             <div>
-              <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.03em')}>Talk to us about your operation</h2>
+              <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>Talk to us about your operation</h2>
               <p style={s('margin:16px 0 0; max-width:52ch; color:#C6CCD6')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
             </div>
             <div style={s('flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:10px')}>

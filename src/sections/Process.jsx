@@ -33,7 +33,7 @@ export function Process({ spineRef }) {
     <section id="process" style={s('padding:0 0 clamp(36px, 5vw, 64px); position:relative')}>
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); text-align:center')}>
         <span data-anim="head" style={s(`display:inline-flex; align-items:center; gap:9px; padding:8px 18px; border-radius:99px; background:var(--dark); color:#FFFFFF; ${MONO}; font-size:12px; letter-spacing:0.04em`)}>PROCESS</span>
-        <h2 data-anim="head" style={s('margin:28px auto 0; max-width:18ch; font-family:var(--display); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.94; letter-spacing:-0.035em')}>Easy process, powerful results</h2>
+        <h2 data-anim="head" style={s('margin:28px auto 0; max-width:18ch; font-family:var(--display); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.94; letter-spacing:-0.016em')}>Easy process, powerful results</h2>
         <p data-anim="head" style={s('margin:26px auto 0; max-width:44ch; font-size:16px; color:var(--ink-muted)')}>A structured engagement that puts a working system inside your operation fast — and shows you every step before it runs.</p>
       </div>
 
@@ -68,7 +68,7 @@ export function Process({ spineRef }) {
               <div style={s(`grid-column:${p.pillCol}; grid-row:${stacked ? 1 : 1}; display:flex; justify-content:${stacked ? 'flex-start' : p.pillJustify}; padding:${stacked ? '0 0 0 26px' : p.pillPad}`)}>
                 <div data-anim="proc-pill" style={s(`display:flex; flex-direction:${stacked ? 'row' : p.pillDir}; align-items:center; gap:16px`)}>
                   <span style={s(`width:56px; height:56px; flex:none; border-radius:50%; background:#FFFFFF; border:1px solid var(--rule); box-shadow:0 12px 28px -16px rgba(28,25,23,0.5); display:flex; align-items:center; justify-content:center; ${MONO}; font-size:13px; color:var(--accent-deep)`)}>{p.pillNum}</span>
-                  <span style={s('font-family:var(--display); font-weight:500; font-size:20px; letter-spacing:-0.02em; color:var(--ink-muted)')}>{p.step}</span>
+                  <span style={s('font-family:var(--display); font-weight:500; font-size:20px; letter-spacing:-0.009em; color:var(--ink-muted)')}>{p.step}</span>
                 </div>
               </div>
             </div>
@@ -81,8 +81,8 @@ export function Process({ spineRef }) {
           {RESULT_STATS.map((r) => (
             <div key={r.label} data-anim="card" style={s('padding:28px 26px; border-right:1px solid var(--rule)')}>
               <div style={s('display:flex; align-items:baseline; gap:2px')}>
-                <span data-count={r.value} style={s('font-family:var(--display); font-weight:500; font-size:clamp(27px, 4.8vw, 40px); line-height:1; letter-spacing:-0.035em; color:var(--ink)')}>{r.value}</span>
-                <span style={s('font-family:var(--display); font-weight:500; font-size:20px; letter-spacing:-0.02em; color:var(--accent-deep)')}>{r.suffix}</span>
+                <span data-count={r.value} style={s('font-family:var(--display); font-weight:500; font-size:clamp(27px, 4.8vw, 40px); line-height:1; letter-spacing:-0.016em; color:var(--ink)')}>{r.value}</span>
+                <span style={s('font-family:var(--display); font-weight:500; font-size:20px; letter-spacing:-0.009em; color:var(--accent-deep)')}>{r.suffix}</span>
               </div>
               <div style={s('margin-top:16px; font-size:15px; font-weight:500')}>{r.label}</div>
               <div style={s(`margin-top:4px; ${MONO}; font-size:12px; color:var(--ink-muted)`)}>{r.note}</div>

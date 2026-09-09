@@ -10,7 +10,7 @@ export function Credibility() {
           {FACTS.map((f) => (
             <div key={f.label} data-anim="step" className="om-gsplit" style={s('display:grid; grid-template-columns:minmax(140px, 210px) 1fr; gap:clamp(8px, 3vw, 28px); align-items:baseline; padding:22px 4px; border-bottom:1px solid var(--rule)')}>
               <span style={s('font-size:14px; color:var(--ink-muted)')}>{f.label}</span>
-              <span style={s('font-size:19px; letter-spacing:-0.01em')}>{f.value}</span>
+              <span style={s('font-size:19px; letter-spacing:-0.004em')}>{f.value}</span>
             </div>
           ))}
         </div>

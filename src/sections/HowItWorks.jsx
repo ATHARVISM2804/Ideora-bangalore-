@@ -16,7 +16,7 @@ export function HowItWorks() {
           <span className="om-label" style={s('color:var(--accent-deep)')}>How it works</span>
         </div>
 
-        <h2 data-anim="head" style={s('margin:20px 0 0; max-width:17ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em')}>
+        <h2 data-anim="head" style={s('margin:20px 0 0; max-width:17ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.017em')}>
           From first call to a system you own.
         </h2>
         <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
@@ -35,7 +35,7 @@ export function HowItWorks() {
                 </div>
 
                 <div style={s(`padding:clamp(20px, 2.4vw, 28px); margin-bottom:${last ? '0' : '4px'}; border-radius:18px; border:1px solid var(--rule); background:var(--raised)`)}>
-                  <h3 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:clamp(18px, 1.7vw, 22px); line-height:1.25; letter-spacing:-0.024em')}>{p.title}</h3>
+                  <h3 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:clamp(18px, 1.7vw, 22px); line-height:1.25; letter-spacing:-0.011em')}>{p.title}</h3>
                   <p style={s('margin:10px 0 0; max-width:62ch; font-size:16px; line-height:1.58; color:var(--ink-muted)')}>{p.body}</p>
                   <div style={s('margin-top:18px; display:flex; gap:8px; flex-wrap:wrap')}>
                     {p.tags.map((tag) => (

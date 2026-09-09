@@ -2,8 +2,7 @@ import { s } from '../lib/style';
 import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
-import { OpsConsole } from './OpsConsole';
-import { Surfaces } from './Surfaces';
+import { Outcome } from './Outcome';
 
 // The hero gives each idea its own screen: the statement, then the numbers,
 // then the product. Crowding all three into one view is what made it read as
@@ -34,7 +33,7 @@ export function Hero({ consoleRef }) {
             </span>
           </div>
 
-        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(34px, 4.7vw, 74px); line-height:1.06; letter-spacing:-0.038em; color:var(--ink)')}>
+        <h1 style={s('margin:clamp(28px, 4vw, 44px) 0 0; font-family:var(--display); font-weight:600; font-size:clamp(34px, 4.7vw, 74px); line-height:1.06; letter-spacing:-0.018em; color:var(--ink)')}>
           <span style={s('display:block; overflow:hidden; padding-bottom:0.16em; margin-bottom:-0.16em')}>
             <span data-anim="hero-word" style={s('display:inline-block')}>Most</span>{' '}
             <span data-anim="hero-word" style={s('display:inline-block')}>operations</span>
@@ -75,12 +74,11 @@ export function Hero({ consoleRef }) {
         </div>
       </div>
 
-      {/* ── The product, running ──────────────────────────────────── */}
-      <div style={s('max-width:var(--wide); margin:0 auto; padding:clamp(8px, 1.5vw, 20px) var(--gut) 0')}>
-        <OpsConsole consoleRef={consoleRef} />
-      </div>
-
-      <Surfaces />
+      {/* ── What it changes ───────────────────────────────────────── */}
+      {/* Was a simulated ops console and a strip of integration protocols.
+          Both proved the product to an engineer; neither meant anything to the
+          owner this page is written for. */}
+      <Outcome cardRef={consoleRef} />
 
     </section>
   );
