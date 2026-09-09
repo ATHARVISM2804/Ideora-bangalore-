@@ -13,7 +13,7 @@ const ROWS = [
     label: 'Answering an enquiry',
     before: 'Four to six hours',
     after: 'Forty seconds',
-    note: 'Median time to a confirmed answer, not a holding reply.',
+    note: 'Median time to a confirmed answer. Holding replies do not count.',
   },
   {
     label: 'People it takes to book one job',

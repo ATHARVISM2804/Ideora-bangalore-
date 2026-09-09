@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { s } from '../lib/style';
 import { CASES } from '../data/content';
+import { WA_DEMO, WA_LINK } from '../lib/whatsapp';
 
 const MONO = "font-family:'JetBrains Mono', monospace";
 const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
@@ -78,7 +79,7 @@ export function PageCta({ heading, body }) {
             <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>{heading}</h2>
             <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>{body}</p>
           </div>
-          <Link to="/#book" style={s('flex:none; padding:14px 24px; border-radius:13px; background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 32px -16px rgba(244,96,30,0.7)')}>Request a Demo</Link>
+          <a href={WA_DEMO} {...WA_LINK} style={s('flex:none; padding:14px 24px; border-radius:13px; background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 32px -16px rgba(244,96,30,0.7)')}>Request a Demo</a>
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import { s } from '../lib/style';
 import { spot, magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
 import { FACTS } from '../data/content';
+import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 
 export function Closing() {
   return (
@@ -27,7 +28,8 @@ export function Closing() {
               <p style={s('margin:0; color:var(--ink-muted)')}>Ninety minutes with you and your operations lead. We map the handoffs on the call and tell you which a system can take first. You keep the map either way.</p>
               <Hover
                 as="a"
-                href="#book"
+                href={WA_BRIEFING}
+                {...WA_LINK}
                 onMouseMove={magnetMove}
                 onMouseLeave={magnetLeave}
                 style="display:inline-flex; align-items:center; margin-top:34px; padding:14px 26px; border-radius:8px; background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:500; box-shadow:0 18px 40px -20px rgba(244,96,30,0.55); transition:transform .18s ease-out, background .25s"

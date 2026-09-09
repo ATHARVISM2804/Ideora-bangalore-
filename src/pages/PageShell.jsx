@@ -2,7 +2,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { PageHero, ProofStrip, ProseSections, Deliverables, CaseStudy, Faq, Related, PageCta } from './blocks';
 
 export function PageShell({ page }) {
-  useDocumentTitle(`${page.title} — Ideora Labs`, page.description);
+  useDocumentTitle(`${page.title} | Ideora Labs`, page.description);
 
   return (
     <div>

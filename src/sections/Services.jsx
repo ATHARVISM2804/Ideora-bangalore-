@@ -25,7 +25,7 @@ export function Services() {
           Five practices. One method.
         </h2>
         <p data-anim="head" style={s('margin:22px 0 0; max-width:56ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
-          We map the handoffs your team does by hand, then build systems that do them in your live software — and report what they did.
+          We map the handoffs your team does by hand, then build systems that do them in your live software, and report back on what they did.
         </p>
 
         <div style={s(`margin-top:clamp(40px, 5vw, 64px); display:grid; grid-template-columns:${stacked ? '1fr' : 'minmax(min(240px, 100%), 0.8fr) 1.6fr'}; gap:clamp(16px, 2.4vw, 32px); align-items:start`)}>
@@ -60,7 +60,7 @@ export function Services() {
                   <li key={label} style={s('display:flex; gap:12px; align-items:baseline')}>
                     <span style={s('width:6px; height:6px; flex:none; border-radius:50%; background:var(--accent); transform:translateY(-2px)')} />
                     <span style={s('font-size:16px; line-height:1.5')}>
-                      <span style={s('color:var(--ink-faint)')}>{label} — </span>
+                      <span style={s('color:var(--ink-faint)')}>{label}: </span>
                       <span style={s('color:var(--ink)')}>{value}</span>
                     </span>
                   </li>

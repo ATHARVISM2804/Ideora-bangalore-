@@ -6,6 +6,7 @@ import { Hover } from '../components/Hover';
 import { useOverDark } from '../hooks/useOverDark';
 import { MENUS } from '../data/nav';
 import { NavMenu } from '../components/NavMenu';
+import { WA_TALK, WA_DEMO, WA_LINK } from '../lib/whatsapp';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
 import { useBelowDesktop } from '../hooks/useMedia';
 import { useNavHeight } from '../hooks/useNavHeight';
@@ -98,15 +99,17 @@ export function Nav() {
           {!compact && (
             <div style={s('display:flex; align-items:center; gap:2px; flex:none')}>
               <Hover
-              as={Link}
-              to="/about#contact"
+              as="a"
+              href={WA_TALK}
+              {...WA_LINK}
               style={`margin-left:2px; padding:8px 13px; border-radius:999px; color:${g.link}; font-size:14.5px; font-weight:450; text-decoration:none; transition:color .25s, background .25s`}
               hoverStyle={g.linkHover}
               >Talk to Us</Hover>
 
               <Hover
-              as={Link}
-              to="/#book"
+              as="a"
+              href={WA_DEMO}
+              {...WA_LINK}
               onMouseMove={magnetMove}
               onMouseLeave={magnetLeave}
               style="margin-left:4px; padding:8px 18px; border-radius:999px; background:var(--ink); color:#FAF9F7; font-size:14.5px; font-weight:500; text-decoration:none; transition:transform .18s ease-out, background .25s"

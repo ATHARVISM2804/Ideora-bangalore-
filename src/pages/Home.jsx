@@ -24,7 +24,7 @@ export function Home() {
   const consoleRef = useRef(null);
 
   useDocumentTitle(
-    'Ideora Labs — Most operations don’t fail. They wait.',
+    'Ideora Labs | Most operations don’t fail. They wait.',
     'Ideora Labs builds and runs the systems that carry the work your team is waiting on, inside the software your business already owns.',
   );
   useGsapTimeline({ rootRef, pinRef, consoleRef });

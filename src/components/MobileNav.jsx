@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { s } from '../lib/style';
+import { WA_TALK, WA_DEMO, WA_LINK } from '../lib/whatsapp';
 
 // The phone counterpart to NavMenu. The desktop menus open on hover, which a
 // touch screen has no way to express: iOS fires a synthetic hover on first tap
@@ -105,8 +106,8 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
             })}
 
             <div style={s('display:flex; flex-direction:column; gap:10px; margin-top:24px')}>
-              <Link to="/about#contact" style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; border:1px solid var(--rule-strong); color:var(--ink); font-size:15px; font-weight:500; text-decoration:none')}>Talk to Us</Link>
-              <Link to="/#book" style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; background:#F4601E; color:var(--ink); font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 30px -16px rgba(244,96,30,0.95)')}>Request a Demo</Link>
+              <a href={WA_TALK} {...WA_LINK} onClick={() => setOpen(false)} style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; border:1px solid var(--rule-strong); color:var(--ink); font-size:15px; font-weight:500; text-decoration:none')}>Talk to Us</a>
+              <a href={WA_DEMO} {...WA_LINK} onClick={() => setOpen(false)} style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; background:#F4601E; color:var(--ink); font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 30px -16px rgba(244,96,30,0.95)')}>Request a Demo</a>
             </div>
           </div>
         </div>

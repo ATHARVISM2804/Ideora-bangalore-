@@ -3,6 +3,7 @@ import { useIsPhone, useBelowDesktop } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
 import { AutomationMap } from './AutomationMap';
+import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 
 // Statement on the left, what we sell on the right. The centred
 // arrangement this replaces gave the fold a single sentence and no anchor; a
@@ -69,7 +70,8 @@ export function Hero() {
                 >See what we build</Hover>
                 <Hover
                   as="a"
-                  href="#book"
+                  href={WA_BRIEFING}
+                  {...WA_LINK}
                   onMouseMove={magnetMove}
                   onMouseLeave={magnetLeave}
                   style={`${btn}; padding:0 32px; background:var(--accent); color:#FFFFFF${phone ? '; width:100%' : ''}`}

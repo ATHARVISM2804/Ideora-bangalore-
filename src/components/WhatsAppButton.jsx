@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Hover } from './Hover';
+import { WA_GREETING, WA_LINK } from '../lib/whatsapp';
 
 // The mobile nav sheet is a full-screen overlay, and a floating button must not
 // hover on top of it. Sitting below it on z-index alone did not hold: the sheet
@@ -19,13 +20,6 @@ function useOverlayOpen() {
 
   return locked;
 }
-
-// Click-to-chat, not a bot: wa.me opens WhatsApp with the number and a first
-// message already typed. Digits only, country code first, no + and no spaces —
-// wa.me silently fails on a formatted number.
-const NUMBER = '919738720404';
-const GREETING = 'Hi Ideora — I would like to talk about automating our operations.';
-const HREF = `https://wa.me/${NUMBER}?text=${encodeURIComponent(GREETING)}`;
 
 // Sits above the page but below the nav (z-70), so an open mobile menu covers
 // it rather than the button floating on top of the sheet. Safe-area insets keep
@@ -49,9 +43,8 @@ export function WhatsAppButton() {
   return (
     <Hover
       as="a"
-      href={HREF}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={WA_GREETING}
+      {...WA_LINK}
       aria-label="Chat with Ideora Labs on WhatsApp"
       aria-hidden={hidden || undefined}
       tabIndex={hidden ? -1 : undefined}

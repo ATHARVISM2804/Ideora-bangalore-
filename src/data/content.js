@@ -12,17 +12,17 @@
 // brief; "inquiries" is spelled "enquiries" to match the rest of the site.
 export const CAPABILITIES = [
   { icon: "voice",     title: "AI Voice",
-    body: "Voice systems that handle calls, enquiries and support." },
+    body: "Answers the phone, takes the details and books the job." },
   { icon: "chat",      title: "WhatsApp Automation",
-    body: "Engage, respond and resolve conversations at scale." },
+    body: "Replies on WhatsApp and carries the conversation to a result." },
   { icon: "workflow",  title: "Workflow Automation",
-    body: "Automate end-to-end processes across systems." },
+    body: "Runs a process from the first message to the closed job." },
   { icon: "crm",       title: "Intelligent CRM",
-    body: "360° customer view with intelligent engagement." },
+    body: "One customer record your whole team can actually trust." },
   { icon: "analytics", title: "Predictive Analytics",
-    body: "Turn data into predictions and proactive actions." },
+    body: "Spots what is about to go wrong while there is time to act." },
   { icon: "dashboard", title: "Management Intelligence",
-    body: "Real-time dashboards for smarter leadership decisions." },
+    body: "Shows you the operation as it stands right now, not last month." },
 ];
 
 // What the agent layer plugs into. Every one of these already appears in a
@@ -71,8 +71,8 @@ export const SERVICES = [
     delivers: "Bookings held, estimates approved, and a bay schedule that reflects reality by 9am.",
     connects: "Your dealer system, booking tool, WhatsApp and parts catalogue",
     time: "6 to 8 weeks" },
-  { code: "05", short: "Shipped in weeks, not quarters", title: "Productised systems",
-    body: "Systems we have already built and deployed, configured to your data instead of designed from scratch. Shorter build, same operating model.",
+  { code: "05", short: "Shipped in weeks", title: "Productised systems",
+    body: "Systems we have already built and deployed, then configured to your data. Shorter build, same operating model.",
     delivers: "A running system on your data, with the standard dashboard and managed operation.",
     connects: "Whatever you already run",
     time: "3 to 5 weeks" }
@@ -82,14 +82,14 @@ export const INDUSTRIES = [
   { code: "01", name: "Automotive", panel: "automotive", slotId: "v5-ind-auto", slotHint: "Drop a workshop or service bay photo",
     body: "Bookings, estimates, and approvals move through one system instead of three inboxes. Advisors stop transcribing and start closing jobs the system has already prepared." },
   { code: "02", name: "Real estate", panel: "realestate", slotId: "v5-ind-realestate", slotHint: "Drop a property or office photo",
-    body: "Enquiries are qualified, viewings are scheduled against real calendars, and documents are chased until they arrive. Agents see a shortlist, not missed calls." },
+    body: "Enquiries are qualified, viewings are scheduled against real calendars, and documents are chased until they arrive. Agents open the day with a shortlist." },
   { code: "03", name: "Healthcare", panel: "healthcare", slotId: "v5-ind-health", slotHint: "Drop a clinic or front-desk photo",
     body: "Intake, insurance checks, and recalls run before the patient arrives. The desk handles exceptions, and the clinic knows on Monday which slots go unfilled." }
 ];
 
 export const CASES = [
   { vertical: "Automotive", code: "sys_01", status: "live",
-    title: "Service bookings answered in seconds, not shifts",
+    title: "Service bookings answered in seconds",
     body: "Takes the enquiry, finds the vehicle, holds a bay and returns a confirmed slot before an advisor has read the message.",
     replaced: "3 inboxes · 1 spreadsheet", since: "Feb 2026" },
   { vertical: "Real estate", code: "sys_02", status: "live",
@@ -98,11 +98,11 @@ export const CASES = [
     replaced: "manual call-backs", since: "Apr 2026" },
   { vertical: "Healthcare", code: "sys_03", status: "live",
     title: "Intake and coverage settled before arrival",
-    body: "Intake completed by message and coverage verified with the payer, so the desk works a list of exceptions, not unknowns.",
+    body: "Intake completed by message and coverage verified with the payer, so the desk works a short list of exceptions and nothing else.",
     replaced: "paper intake · phone checks", since: "May 2026" },
   { vertical: "Cross-vertical", code: "sys_04", status: "live",
     title: "A queue management can read on a Monday",
-    body: "Every action writes to one record, so backlog, ageing and exceptions are visible the day they happen, not at month end.",
+    body: "Every action writes to one record, so backlog, ageing and exceptions are visible the day they happen, weeks before month end.",
     replaced: "month-end reporting", since: "Jun 2026" },
   { vertical: "Finance", code: "sys_05", status: "in build",
     title: "Onboarding cleared before a reviewer opens it",
@@ -110,7 +110,7 @@ export const CASES = [
     replaced: "manual KYC checks", since: "Q4 2026" },
   { vertical: "Legal", code: "sys_06", status: "pilot",
     title: "Matters opened without partner time",
-    body: "Conflict checks, engagement letters and ID chasing complete before a partner sees the file — ready to bill, not to set up.",
+    body: "Conflict checks, engagement letters and ID chasing are done before a partner opens the file. It arrives ready to bill.",
     replaced: "manual intake · paper conflicts", since: "Aug 2026" }
 ];
 
@@ -145,9 +145,9 @@ export const PROC = [
   { n: "01", title: "Scope call", tags: ["90 minutes", "You keep the map"],
     body: "We walk the process you want automated, meet the people who run it today, and agree what success looks like before anything is designed." },
   { n: "02", title: "Blueprint and design", tags: ["Fixed scope", "Fixed price"],
-    body: "We map the architecture, the systems it touches, and what runs automatically versus what a person reviews — then fix the scope and the price." },
+    body: "We map the architecture, the systems it touches, and what runs automatically versus what a person reviews. Then we fix the scope and the price." },
   { n: "03", title: "Build in the open", tags: ["Weekly builds", "Your staging data"],
-    body: "You see working software every week, not a status update. Each build runs against your staging data the same day it ships." },
+    body: "You see working software every week. Nobody sends you a status update instead. Each build runs against your staging data the same day it ships." },
   { n: "04", title: "Integrate and connect", tags: ["Your permissions", "Real volume first"],
     body: "The system is wired into the software you already run, with your permissions and escalation rules, then run against real volume before cutover." },
   { n: "05", title: "Run and report", tags: ["We operate it", "You keep the dashboard"],

@@ -7,13 +7,13 @@ import { FACTS } from '../data/content';
 const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
 
 const SECTIONS = [
-  { title: 'Who we are', body: 'A team that builds agentic AI and operational automation for large operators. We work in automotive, real estate and healthcare today, wiring agents into the systems these operations already run rather than replacing them.' },
-  { title: 'How we work', body: 'Every build starts with an operations audit and ends with us running the system, not handing it off. The scope and the price are fixed before a line is written, and the workflow is approved by your team before it is built.' },
+  { title: 'Who we are', body: 'A team that builds agentic AI and operational automation for large operators. We work in automotive, real estate and healthcare today, wiring agents into the systems these operations already run instead of replacing them.' },
+  { title: 'How we work', body: 'Every build starts with an operations audit and ends with us running the system. We do not hand it over and walk away. The scope and the price are fixed before a line is written, and the workflow is approved by your team before it is built.' },
   { title: 'What we will not do', body: 'We do not ask an operator to rip out a CRM, a DMS or an EMR to get an agent live. We build against the stack you already have, under your permissions, and we say plainly when a process is better handled by a person.' },
 ];
 
 export function About() {
-  useDocumentTitle('About — Ideora Labs', 'Who builds Ideora Labs and how the fixed-scope build and managed operation actually works.');
+  useDocumentTitle('About | Ideora Labs', 'Who builds Ideora Labs and how the fixed-scope build and managed operation actually works.');
 
   return (
     <div>
@@ -33,8 +33,8 @@ export function About() {
               <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
             </div>
             <div style={s('display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0')}>
-              <Hover as="a" href="mailto:work@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; overflow-wrap:anywhere; transition:color .25s`} hoverStyle="color:var(--accent)">work@ideoralabs.com</Hover>
-              <span style={s('color:var(--ink-faint); font-size:14px')}>Pune · Dubai</span>
+              <Hover as="a" href="mailto:info@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; overflow-wrap:anywhere; transition:color .25s`} hoverStyle="color:var(--accent)">info@ideoralabs.com</Hover>
+              <span style={s('color:var(--ink-faint); font-size:14px')}>Bengaluru</span>
             </div>
           </div>
         </div>

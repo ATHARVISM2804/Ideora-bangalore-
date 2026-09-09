@@ -54,15 +54,16 @@ export function Footer() {
 
         <FooterColumn head="Company" items={[{ path: '/about', label: 'About' }, { path: '/insights', label: 'Insights' }]}>
           <Hover as={Link} to="/about#contact" style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>Contact</Hover>
-          <Hover as="a" href="mailto:work@ideoralabs.com" style="color:var(--ink); font-size:15px; transition:color .25s; text-decoration:none" hoverStyle="color:var(--accent)">work@ideoralabs.com</Hover>
-          <span style={s('font-size:15px; color:var(--ink-faint)')}>Pune · Dubai</span>
+          <Hover as="a" href="mailto:info@ideoralabs.com" style="color:var(--ink); font-size:15px; transition:color .25s; text-decoration:none" hoverStyle="color:var(--accent)">info@ideoralabs.com</Hover>
+          <span style={s('font-size:15px; color:var(--ink-faint)')}>Bengaluru</span>
         </FooterColumn>
       </div>
 
       <div style={s('position:relative; z-index:1; max-width:var(--wide); margin:clamp(40px, 5vw, 64px) auto 0; padding:24px var(--gut) 0; gap:12px; flex-wrap:wrap; border-top:1px solid var(--rule); display:flex; justify-content:space-between; font-size:13px')}>
         <span>© 2026 Ideora Labs. Systems that run live operations.</span>
-        <span style={s('display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px')}>
-          <span style={s('width:6px; height:6px; border-radius:50%; background:var(--accent); animation:om-blink 2.4s infinite')} />all systems nominal
+        <span style={s('display:flex; align-items:center; gap:5px; font-family:var(--mono); font-size:12px')}>
+          designed and developed by
+          <Hover as="a" href="https://velyxlabs.in" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:500; text-decoration:none; transition:opacity .25s" hoverStyle="opacity:0.65">velyxlabs</Hover>
         </span>
       </div>
 

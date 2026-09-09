@@ -34,7 +34,7 @@ export function Process({ spineRef }) {
       <div style={s('max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); text-align:center')}>
         <span data-anim="head" style={s(`display:inline-flex; align-items:center; gap:9px; padding:8px 18px; border-radius:99px; background:var(--dark); color:#FFFFFF; ${MONO}; font-size:12px; letter-spacing:0.04em`)}>PROCESS</span>
         <h2 data-anim="head" style={s('margin:28px auto 0; max-width:18ch; font-family:var(--display); font-weight:500; font-size:clamp(28px, 5.2vw, 44px); line-height:0.94; letter-spacing:-0.016em')}>Easy process, powerful results</h2>
-        <p data-anim="head" style={s('margin:26px auto 0; max-width:44ch; font-size:16px; color:var(--ink-muted)')}>A structured engagement that puts a working system inside your operation fast — and shows you every step before it runs.</p>
+        <p data-anim="head" style={s('margin:26px auto 0; max-width:44ch; font-size:16px; color:var(--ink-muted)')}>A structured engagement that puts a working system inside your operation fast, and shows you every step before it runs.</p>
       </div>
 
       <div style={s('position:relative; max-width:1400px; margin:clamp(44px, 7vw, 72px) auto 0; padding:0 clamp(20px, 5vw, 40px)')}>

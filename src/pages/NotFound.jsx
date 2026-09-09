@@ -3,7 +3,7 @@ import { s } from '../lib/style';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function NotFound() {
-  useDocumentTitle('Not found — Ideora Labs', 'That page does not exist.');
+  useDocumentTitle('Not found | Ideora Labs', 'That page does not exist.');
 
   return (
     <section style={s('padding:clamp(64px, 10vw, 160px) 0 clamp(80px, 12vw, 200px)')}>

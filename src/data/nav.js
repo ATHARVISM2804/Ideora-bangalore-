@@ -23,7 +23,7 @@ export const MENUS = [
       { label: 'Operations automation', path: '/solutions/agentic-ai', blurb: 'Systems that finish the work end to end.' },
       { label: 'Real estate', path: '/solutions/real-estate', blurb: 'Every enquiry qualified before an agent sees it.' },
       { label: 'Clinics and healthcare', path: '/solutions/healthcare', blurb: 'Intake and cover settled before arrival.' },
-      { label: 'Service centres', path: '/solutions/service-centre', blurb: 'Bookings answered in seconds, not shifts.' },
+      { label: 'Service centres', path: '/solutions/service-centre', blurb: 'Bookings answered in seconds.' },
       { label: 'Ready-made systems', path: '/solutions/productised-systems', blurb: 'Fixed scope, fixed window, run for you.' },
     ],
   },

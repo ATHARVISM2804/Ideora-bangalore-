@@ -10,12 +10,12 @@ const ARTICLES = [
   { category: 'Integrations', title: 'No rip and replace, and what that actually means', standfirst: 'Connecting agents to a CRM or DMS you already run, without asking anyone to migrate a system that already works.', date: 'Feb 2026' },
   { category: 'Automotive', title: 'What a service centre queue looks like from one console', standfirst: 'Reading booking, estimate and parts status as one record, so nobody reconciles separate tools by hand at the end of the day.', date: 'Mar 2026' },
   { category: 'Real estate', title: 'Qualifying an enquiry before a person sees it', standfirst: 'Scoring budget, area and readiness on arrival, so what reaches an agent already carries the qualification behind it.', date: 'Apr 2026' },
-  { category: 'Healthcare', title: 'Coverage checked before the appointment, not at the desk', standfirst: 'Verifying eligibility days ahead of a visit changes what the front desk does on the morning it happens.', date: 'May 2026' },
+  { category: 'Healthcare', title: 'Coverage checked days before the appointment', standfirst: 'Verifying eligibility days ahead of a visit changes what the front desk does on the morning it happens.', date: 'May 2026' },
   { category: 'Method', title: 'Why we fix the scope before we design the system', standfirst: 'Agreeing what an agent may action, and what it must route to a person, before anything is built.', date: 'Jun 2026' },
 ];
 
 export function Insights() {
-  useDocumentTitle('Insights — Ideora Labs', 'Notes on operational automation, integrations and the agentic systems we build.');
+  useDocumentTitle('Insights | Ideora Labs', 'Notes on operational automation, integrations and the agentic systems we build.');
 
   return (
     <div>
