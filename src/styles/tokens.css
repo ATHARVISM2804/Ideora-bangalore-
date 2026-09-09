@@ -1,0 +1,135 @@
+/* ===========================================================================
+   Design tokens.
+
+   The ground is a warm paper white so the brand orange sits in a family
+   rather than fighting it, and the ink carries the same warmth. What changed
+   in the systematisation pass is not the palette but its enforcement: every
+   value a section can need is named here, so nothing is typed at a call site.
+
+   Before this file the repo held 14 tokens against 34 raw hex literals, 50
+   font sizes, 98 padding values, 20 shadows and 16 radii.
+   =========================================================================== */
+
+:root {
+  /* --- Ground ----------------------------------------------------------- */
+  --bg:          #FAF9F7;   /* warm paper */
+  --bg-sunken:   #F2EFE9;   /* alternating bands */
+  --raised:      #FFFFFF;   /* cards and panels */
+
+  /* --- Ink -------------------------------------------------------------- */
+  --ink:         #1C1917;   /* 16.6:1 on --bg */
+  --ink-muted:   #6E6862;   /*  5.2:1 — body copy, passes AA          */
+  --ink-faint:   #736C64;   /*  4.9:1 on paper, 4.5:1 on the sunken   */
+                            /*  band. It has to clear AA on both,     */
+                            /*  since labels sit on either. Was       */
+                            /*  #9C958E at 2.81:1, which failed and   */
+                            /*  coloured every eyebrow on the site.   */
+  --ink-ghost:   #9C958E;   /*  2.8:1 — decorative rules and glyphs   */
+                            /*  ONLY. Never text.                     */
+
+  /* --- Rules ------------------------------------------------------------ */
+  --rule:        #E6E1D8;
+  --rule-strong: #D6CFC3;
+
+  /* --- Accent -----------------------------------------------------------
+     Two oranges with two jobs. --accent is a surface and a marker: status
+     dots, the progress bar, hover states, the live indicator. White text on
+     it is 3.2:1, so it is never a button fill and never text on paper.
+     --accent-deep is the text-and-action orange: 5.3:1 on paper, and white
+     on it is 5.6:1, so it carries every primary button.                  */
+  --accent:      #F4601E;
+  --accent-deep: #B8400A;
+  --accent-hover:#9C3607;   /* pressed / hovered primary button */
+  --accent-tint: #FBEFE7;
+  --accent-line: rgba(184, 64, 10, 0.28);
+
+  /* --- Type ------------------------------------------------------------- */
+  --sans:    Geist, ui-sans-serif, system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --display: Newsreader, ui-serif, Georgia, 'Times New Roman', serif;
+
+  /* A nine-step scale in rem, so browser font-size preferences are honoured.
+     The site previously had a hard 18px root and zero rem anywhere. */
+  --t-d1:    clamp(2.375rem, 4.6vw, 4.25rem);    /* 38 → 68  page title   */
+  --t-d2:    clamp(1.875rem, 3.4vw, 2.875rem);   /* 30 → 46  section head */
+  --t-d3:    clamp(1.375rem, 2vw, 1.625rem);     /* 22 → 26  subhead      */
+  --t-d4:    1.1875rem;                          /* 19       card title   */
+  --t-lede:  clamp(1.0625rem, 1.15vw, 1.1875rem);/* 17 → 19  standfirst   */
+  --t-body:  1.0625rem;                          /* 17                    */
+  --t-sm:    0.9375rem;                          /* 15                    */
+  --t-xs:    0.8125rem;                          /* 13                    */
+  --t-label: 0.75rem;                            /* 12       eyebrow      */
+
+  --lh-display: 1.06;
+  --lh-heading: 1.2;
+  --lh-body:    1.6;
+  --lh-loose:   1.7;
+
+  --ls-display: -0.021em;
+  --ls-heading: -0.013em;
+  --ls-label:    0.13em;
+
+  --w-normal: 400;
+  --w-medium: 500;
+  --w-bold:   600;   /* display settles here everywhere */
+
+  /* --- Space: an 8pt scale ---------------------------------------------- */
+  --s-1: 0.25rem;   /*  4 */
+  --s-2: 0.5rem;    /*  8 */
+  --s-3: 0.75rem;   /* 12 */
+  --s-4: 1rem;      /* 16 */
+  --s-5: 1.5rem;    /* 24 */
+  --s-6: 2rem;      /* 32 */
+  --s-7: 3rem;      /* 48 */
+  --s-8: 4rem;      /* 64 */
+  --s-9: 6rem;      /* 96 */
+
+  /* One section rhythm, replacing twelve. */
+  --band:       clamp(4.5rem, 9vw, 8.25rem);   /* 72 → 132 */
+  --band-tight: clamp(3rem, 6vw, 5rem);        /* 48 →  80 */
+
+  /* --- Shape ------------------------------------------------------------ */
+  --r-btn:   8px;
+  --r-card:  16px;
+  --r-panel: 22px;
+  --r-pill:  999px;
+
+  /* --- Elevation --------------------------------------------------------
+     Four shadows, all one hue: the ink colour at low alpha, lifted high and
+     spread wide so the edge stays soft on paper. */
+  --sh-card:  0 1px 2px rgba(28, 25, 23, 0.04), 0 18px 40px -32px rgba(28, 25, 23, 0.30);
+  --sh-lift:  0 2px 4px rgba(28, 25, 23, 0.05), 0 30px 60px -38px rgba(28, 25, 23, 0.42);
+  --sh-panel: 0 30px 70px -50px rgba(28, 25, 23, 0.45);
+  --sh-btn:   0 12px 28px -14px rgba(184, 64, 10, 0.50);
+
+  /* --- Measure ----------------------------------------------------------
+     Two containers, not four. --measure carries every text-led section;
+     --wide is for artefacts that earn the extra room (the hero map, the
+     footer). Prose is capped in characters, not pixels. */
+  --measure: 1180px;
+  --wide:    1440px;
+  --gut:     clamp(1.375rem, 5vw, 3.5rem);   /* 22 → 56 */
+  /* Set in rem, not ch, for two reasons. `ch` is the width of the digit zero,
+     which in Geist is wider than the average lowercase letter, so a nominal
+     68ch measured out at 76 real characters. And because the fonts load with
+     display:swap, `ch` resolves against the fallback on first paint and the
+     column visibly re-wraps when Geist arrives -- 1ch measured 11.27px on the
+     fallback against 9.16px on Geist. These are measured character counts. */
+  --prose:        35rem;    /* ~68 characters */
+  --prose-narrow: 27rem;    /* ~53 characters, for a standfirst */
+
+  /* --- Motion ----------------------------------------------------------- */
+  --dur-fast: 0.15s;
+  --dur:      0.25s;
+  --dur-slow: 0.45s;
+  --ease:     cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* --- Device ----------------------------------------------------------- */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+
+  /* Published by useNavHeight so the hero can reach behind the sticky bar. */
+  --nav-h: 0px;
+}

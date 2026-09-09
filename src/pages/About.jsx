@@ -1,10 +1,9 @@
-import { s } from '../lib/style';
+import { useRef } from 'react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { PageHero, ProofStrip, ProseSections } from './blocks';
-import { Hover } from '../components/Hover';
 import { FACTS } from '../data/content';
-
-const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
+import { Section, Container, Label } from '../components/ui';
 
 const SECTIONS = [
   { title: 'Who we are', body: 'A team that builds agentic AI and operational automation for large operators. We work in automotive, real estate and healthcare today, wiring agents into the systems these operations already run instead of replacing them.' },
@@ -13,10 +12,13 @@ const SECTIONS = [
 ];
 
 export function About() {
+  const rootRef = useRef(null);
+
   useDocumentTitle('About | Ideora Labs', 'Who builds Ideora Labs and how the fixed-scope build and managed operation actually works.');
+  useGsapTimeline({ rootRef });
 
   return (
-    <div>
+    <div ref={rootRef}>
       <PageHero
         eyebrow="About"
         heading="Agentic AI, built by people who answer for it"
@@ -25,20 +27,30 @@ export function About() {
       <ProofStrip items={FACTS} />
       <ProseSections sections={SECTIONS} />
 
-      <section id="contact" style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
-        <div className="om-g12" style={s(WRAP)}>
-          <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:clamp(28px, 5vw, 64px) clamp(22px, 4vw, 56px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:clamp(20px, 3vw, 40px)')}>
-            <div>
-              <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>Talk to us about your operation</h2>
-              <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
-            </div>
-            <div style={s('display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0')}>
-              <Hover as="a" href="mailto:info@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; overflow-wrap:anywhere; transition:color .25s`} hoverStyle="color:var(--accent)">info@ideoralabs.com</Hover>
-              <span style={s('color:var(--ink-faint); font-size:14px')}>Bengaluru</span>
+      <Section id="contact" edge="bottom">
+        <Container>
+          <div className="panel">
+            <div className="panel__body page-cta">
+              <div>
+                <h2>Talk to us about your operation</h2>
+                <p className="body-muted prose--narrow" style={{ marginTop: 'var(--s-4)' }}>
+                  Tell us the process that stalls most and we will walk it with you before anything is scoped.
+                </p>
+              </div>
+              <div>
+                <Label>Direct</Label>
+                <a
+                  href="mailto:info@ideoralabs.com"
+                  style={{ display: 'block', marginTop: 'var(--s-3)', color: 'var(--ink)', overflowWrap: 'anywhere' }}
+                >
+                  info@ideoralabs.com
+                </a>
+                <span className="fine" style={{ display: 'block', marginTop: 'var(--s-1)' }}>Bengaluru</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
     </div>
   );
 }

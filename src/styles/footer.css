@@ -1,0 +1,86 @@
+/* ===========================================================================
+   Footer.
+   =========================================================================== */
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--band-tight);
+  border-top: 1px solid var(--rule);
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--ink-muted);
+}
+
+/* The brand block takes half again the width of a link column; the four link
+   columns are equal so they read as an even rhythm across the page. */
+.footer__wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: var(--s-6) var(--s-5);
+}
+
+.footer__brand { max-width: 14rem; }
+.footer__logo { height: 34px; width: auto; }
+.footer__blurb { margin-top: var(--s-5); }
+
+.footer__head { margin-bottom: var(--s-4); }
+.footer__list { display: flex; flex-direction: column; gap: var(--s-3); }
+
+.footer__link {
+  font-size: var(--t-sm);
+  line-height: 1.4;
+  color: var(--ink-muted);
+}
+.footer__link:hover { color: var(--ink); }
+.footer__link--strong { color: var(--ink); overflow-wrap: anywhere; }
+.footer__link--strong:hover { color: var(--accent-deep); }
+.footer__place { font-size: var(--t-sm); color: var(--ink-faint); }
+
+.footer__legal {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wide);
+  margin: var(--s-7) auto 0;
+  padding: var(--s-5) var(--gut) 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  font-size: var(--t-xs);
+}
+.footer__credit { font-family: var(--mono); }
+.footer__credit a { color: var(--accent-deep); font-weight: var(--w-medium); }
+
+.footer__mark {
+  overflow: hidden;
+  height: 0.95em;
+  margin-top: var(--s-5);
+  font-family: var(--display);
+  font-weight: var(--w-bold);
+  font-size: clamp(4.5rem, 27vw, 26.875rem);
+  line-height: 0.92;
+  letter-spacing: -0.022em;
+  text-align: center;
+  white-space: nowrap;
+  color: rgba(28, 25, 23, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 1024px) {
+  .footer__wrap { grid-template-columns: repeat(4, 1fr); }
+  .footer__brand { grid-column: 1 / -1; max-width: 22rem; }
+}
+@media (max-width: 640px) {
+  /* Two columns on a phone: four link lists stacked one per row makes the
+     footer taller than the section above it. */
+  .footer__wrap { grid-template-columns: repeat(2, 1fr); }
+}

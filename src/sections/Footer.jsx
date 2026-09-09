@@ -1,82 +1,71 @@
 import { Link } from 'react-router-dom';
-import { s } from '../lib/style';
-import { Hover } from '../components/Hover';
 import { MENUS } from '../data/nav';
-
-const NAV_LINK = 'color:var(--ink-muted); font-size:15px; line-height:1.4; transition:color .25s; text-decoration:none';
-const NAV_LINK_HOVER = 'color:var(--ink)';
-
-// Wide-tracked caps, the quietest thing on the page. These label the columns
-// rather than competing with them, so they sit two steps down in weight and
-// colour from the links beneath.
-const COL_HEAD = 'margin:0 0 18px; font-family:var(--sans); font-size:12.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-faint)';
 
 const menu = (label) => MENUS.find((m) => m.label === label)?.items ?? [];
 
 // Columns come from the same MENUS the navbar renders, so the footer cannot
-// drift from it. Only the four menus that hold items are listed: About and
-// Insights are single pages and live in the Company column instead.
+// drift from it. Only the menus that hold items are listed: About and Insights
+// are single pages and live in the Company column instead.
 const COLUMNS = [
   { head: 'How it works', items: menu('How it works') },
   { head: 'Solutions', items: menu('Solutions') },
   { head: 'Industries', items: menu('Industries') },
 ];
 
+// The column heads were <h2> elements, which put four headings in the footer at
+// the same level as the section headings of the page above it. They label lists;
+// they are not document structure.
 function FooterColumn({ head, items, children }) {
   return (
-    <div style={s('display:flex; flex-direction:column; align-items:flex-start')}>
-      <h2 style={s(COL_HEAD)}>{head}</h2>
-      <div style={s('display:flex; flex-direction:column; align-items:flex-start; gap:12px')}>
+    <div>
+      <p className="label footer__head">{head}</p>
+      <ul className="footer__list">
         {items.map((item) => (
-          <Hover key={item.path} as={Link} to={item.path} style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>{item.label}</Hover>
+          <li key={item.path}><Link to={item.path} className="footer__link">{item.label}</Link></li>
         ))}
         {children}
-      </div>
+      </ul>
     </div>
   );
 }
 
 export function Footer() {
   return (
-    <footer style={s('position:relative; overflow:hidden; border-top:1px solid var(--rule); background:rgba(255,255,255,0.62); backdrop-filter:blur(16px); padding:clamp(52px, 7vw, 88px) 0 0; color:var(--ink-muted)')}>
-      {/* Brand block takes half again the width of a link column; the four link
-          columns are equal so they read as an even rhythm across the page. The
-          breakpoints in global.css override this template on the way down. */}
-      <div className="om-gfoot" style={s('position:relative; z-index:1; max-width:var(--wide); margin:0 auto; padding:0 var(--gut); display:grid; grid-template-columns:1.5fr repeat(4, 1fr); gap:clamp(28px, 3vw, 44px) clamp(20px, 2.4vw, 36px)')}>
-        <div className="om-foot-brand">
-          <img src="/assets/ideora-lockup.png" alt="Ideora Labs" style={s('height:34px; width:auto; display:block')} />
-          <p style={s('margin:20px 0 0; font-size:15px; line-height:1.5; max-width:26ch')}>We build and run the systems that carry the work your operation waits on.</p>
+    <footer className="footer">
+      <div className="footer__wrap">
+        <div className="footer__brand">
+          <img src="/assets/ideora-lockup.png" alt="Ideora Labs" width="130" height="34" className="footer__logo" />
+          <p className="small footer__blurb">
+            We build and run the systems that carry the work your operation waits on.
+          </p>
         </div>
 
         {COLUMNS.map((col) => (
           <FooterColumn key={col.head} head={col.head} items={col.items} />
         ))}
 
-        <FooterColumn head="Company" items={[{ path: '/about', label: 'About' }, { path: '/insights', label: 'Insights' }]}>
-          <Hover as={Link} to="/about#contact" style={NAV_LINK} hoverStyle={NAV_LINK_HOVER}>Contact</Hover>
-          <Hover as="a" href="mailto:info@ideoralabs.com" style="color:var(--ink); font-size:15px; transition:color .25s; text-decoration:none" hoverStyle="color:var(--accent)">info@ideoralabs.com</Hover>
-          <span style={s('font-size:15px; color:var(--ink-faint)')}>Bengaluru</span>
+        <FooterColumn
+          head="Company"
+          items={[{ path: '/about', label: 'About' }, { path: '/insights', label: 'Insights' }]}
+        >
+          <li><Link to="/about#contact" className="footer__link">Contact</Link></li>
+          <li><a href="mailto:info@ideoralabs.com" className="footer__link footer__link--strong">info@ideoralabs.com</a></li>
+          <li><span className="footer__place">Bengaluru</span></li>
         </FooterColumn>
       </div>
 
-      <div style={s('position:relative; z-index:1; max-width:var(--wide); margin:clamp(40px, 5vw, 64px) auto 0; padding:24px var(--gut) 0; gap:12px; flex-wrap:wrap; border-top:1px solid var(--rule); display:flex; justify-content:space-between; font-size:13px')}>
+      <div className="footer__legal">
         <span>© 2026 Ideora Labs. Systems that run live operations.</span>
-        <span style={s('display:flex; align-items:center; gap:5px; font-family:var(--mono); font-size:12px')}>
-          designed and developed by
-          <Hover as="a" href="https://velyxlabs.in" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:500; text-decoration:none; transition:opacity .25s" hoverStyle="opacity:0.65">velyxlabs</Hover>
+        <span className="footer__credit">
+          designed and developed by{' '}
+          <a href="https://velyxlabs.in" target="_blank" rel="noopener noreferrer">velyxlabs</a>
         </span>
       </div>
 
       {/* Oversized wordmark, clipped by the footer's own edge. Decorative only:
           the band is shorter than the letterforms, so their feet are cut off. */}
-      <div aria-hidden="true" style={s('overflow:hidden; font-size:clamp(74px, 27vw, 430px); height:0.95em; margin-top:clamp(18px, 3vw, 34px); pointer-events:none; user-select:none')}>
-        <span style={s('display:block; text-align:center; white-space:nowrap; font-family:var(--display); font-weight:600; font-size:1em; line-height:0.92; letter-spacing:-0.022em; color:rgba(28,25,23,0.05)')}>
-          {/* The mark is drawn as a mask filled with currentColor rather than
-              as an <img>, so it takes the wordmark's exact tint. Dropping the
-              orange artwork in at low opacity would leave a warm shape beside
-              cool grey letters — close, but visibly two different marks. */}
-          <span className="om-foot-mark" />Ideora
-        </span>
+      <div aria-hidden="true" className="footer__mark">
+        <span className="foot-mark" />Ideora
       </div>
     </footer>
   );

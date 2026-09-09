@@ -1,10 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { s } from '../lib/style';
 
 const CLOSE_DELAY = 120;
 
-export function NavMenu({ menu, glass, active, open, onOpenChange }) {
+// A disclosure holding a list of links.
+//
+// It previously declared role="menu" / role="menuitem". That pattern describes
+// an application menu and suppresses link semantics, so a screen reader stopped
+// announcing these as links and stopped offering them in a links list. Site
+// navigation is a list of links inside a nav, which is what it is now. The
+// keyboard model is unchanged -- it was already the best code in the repo.
+export function NavMenu({ menu, active, open, onOpenChange }) {
   const timer = useRef(null);
   const triggerRef = useRef(null);
   const itemRefs = useRef([]);
@@ -56,7 +62,7 @@ export function NavMenu({ menu, glass, active, open, onOpenChange }) {
 
   return (
     <div
-      style={s('position:relative')}
+      className="navmenu"
       onMouseEnter={() => { cancelClose(); onOpenChange(true); }}
       onMouseLeave={scheduleClose}
     >
@@ -64,41 +70,31 @@ export function NavMenu({ menu, glass, active, open, onOpenChange }) {
         ref={triggerRef}
         type="button"
         aria-expanded={open}
-        aria-haspopup="true"
+        className={`nav__link navmenu__trigger${active ? ' is-active' : ''}${open ? ' is-open' : ''}`}
         onKeyDown={onTriggerKeyDown}
         onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
-        style={s(`display:flex; align-items:center; gap:6px; border:0; background:${open ? 'var(--rule)' : 'transparent'}; cursor:pointer; font-family:inherit; color:${active ? '#F4601E' : glass.link}; font-size:14px; font-weight:500; padding:8px 14px; border-radius:12px; transition:color .3s, background .3s`)}
       >
         {menu.label}
-        <span
-          aria-hidden="true"
-          style={s(`display:inline-block; font-size:10px; line-height:1; transform:rotate(${open ? 180 : 0}deg); transition:transform .25s ease`)}
-        >▾</span>
+        <span aria-hidden="true" className="navmenu__caret">▾</span>
       </button>
 
       {open && (
-        <div
-          role="menu"
-          aria-label={menu.label}
-          style={s(`position:absolute; top:calc(100% + 10px); left:0; min-width:280px; padding:8px; border-radius:16px; backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); z-index:80; ${glass.panel}`)}
-        >
+        <ul className="navmenu__panel" aria-label={menu.label}>
           {menu.items.map((item, i) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              role="menuitem"
-              ref={(el) => { itemRefs.current[i] = el; }}
-              onKeyDown={(e) => onItemKeyDown(e, i)}
-              onClick={() => close({ refocus: false })}
-              style={s(`display:block; padding:10px 12px; border-radius:11px; text-decoration:none; transition:background .2s`)}
-              onMouseEnter={(e) => Object.assign(e.currentTarget.style, s(glass.panelItemHover))}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
-            >
-              <span style={s(`display:block; color:${glass.link}; font-size:14px; font-weight:500; margin-bottom:2px`)}>{item.label}</span>
-              <span style={s('display:block; color:var(--ink-muted); font-size:12px; line-height:1.4')}>{item.blurb}</span>
-            </Link>
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                ref={(el) => { itemRefs.current[i] = el; }}
+                onKeyDown={(e) => onItemKeyDown(e, i)}
+                onClick={() => close({ refocus: false })}
+                className="navmenu__item"
+              >
+                <span className="navmenu__item-label">{item.label}</span>
+                <span className="navmenu__item-blurb">{item.blurb}</span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

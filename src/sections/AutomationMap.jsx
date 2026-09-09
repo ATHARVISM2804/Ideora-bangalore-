@@ -1,11 +1,10 @@
-import { s } from '../lib/style';
 import { useIsPhone, useMedia } from '../hooks/useMedia';
 import { SERVICES } from '../data/content';
 
 // The hub beside the hero statement: what we sell, around the mark.
 //
 // Was the six places work stalls in an operation. That described the problem
-// twice, since the sentence beside it already names them — a reader arriving
+// twice, since the sentence beside it already names them -- a reader arriving
 // on the fold should see the offer, not the diagnosis restated.
 //
 // Derived from SERVICES so the practices here cannot drift from the ones the
@@ -22,7 +21,7 @@ const NAME = {
 
 const AREAS = [
   ...SERVICES.map((sv) => ({ title: NAME[sv.code] || sv.title, note: sv.short })),
-  // Not a build practice, so not in SERVICES — but it is what the engagement
+  // Not a build practice, so not in SERVICES -- but it is what the engagement
   // actually is, and the sixth card would otherwise be empty.
   { title: 'Managed operation', note: 'We run it, you get the report' },
 ];
@@ -42,26 +41,23 @@ const NODES = AREAS.map((a, i) => {
   return { ...a, side, x, y, cx: x + CARD.w / 2, cy: y + CARD.h / 2 };
 });
 
+const pct = (n, of) => `${(n / of) * 100}%`;
+
 // A straight line from the card's inner edge to the hub's rim. Calm rather than
 // glowing: the reference's light-trails read as a product demo.
-function connector(n) {
+function edgePoint(n) {
   const from = { x: n.side === 'left' ? n.x + CARD.w : n.x, y: n.cy };
   const dx = HUB.x - from.x;
   const dy = HUB.y - from.y;
   const len = Math.hypot(dx, dy);
   const to = { x: HUB.x - (dx / len) * HUB.r, y: HUB.y - (dy / len) * HUB.r };
-  const mx = (from.x + to.x) / 2;
-  return `M ${from.x} ${from.y} C ${mx} ${from.y}, ${mx} ${to.y}, ${to.x} ${to.y}`;
+  return { from, to };
 }
 
-// Where a connector meets the hub: same maths the path ends on, so the dot and
-// the line always agree.
-function rimPoint(n) {
-  const from = { x: n.side === 'left' ? n.x + CARD.w : n.x, y: n.cy };
-  const dx = HUB.x - from.x;
-  const dy = HUB.y - from.y;
-  const len = Math.hypot(dx, dy);
-  return { x: HUB.x - (dx / len) * HUB.r, y: HUB.y - (dy / len) * HUB.r };
+function connector(n) {
+  const { from, to } = edgePoint(n);
+  const mx = (from.x + to.x) / 2;
+  return `M ${from.x} ${from.y} C ${mx} ${from.y}, ${mx} ${to.y}, ${to.x} ${to.y}`;
 }
 
 export function AutomationMap() {
@@ -72,31 +68,33 @@ export function AutomationMap() {
   // same six areas read fine as a plain two-column list.
   if (phone) {
     return (
-      <div style={s('display:grid; grid-template-columns:1fr 1fr; gap:10px')}>
+      <ul className="map-list">
         {AREAS.map((a) => (
-          <div key={a.title} style={s('padding:14px 14px; border:1px solid var(--rule); border-radius:12px; background:var(--raised)')}>
-            <div style={s('font-family:var(--display); font-weight:600; font-size:16px; color:var(--ink)')}>{a.title}</div>
-            <div style={s('margin-top:3px; font-size:12.5px; line-height:1.4; color:var(--ink-muted)')}>{a.note}</div>
-          </div>
+          <li key={a.title} className="map-list__item">
+            <span className="map-card__title">{a.title}</span>
+            <span className="map-card__note">{a.note}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     );
   }
 
   return (
-    <div style={s(`position:relative; width:100%; max-width:640px; margin:0 auto; aspect-ratio:${VB.w} / ${VB.h}`)}>
-      <svg viewBox={`0 0 ${VB.w} ${VB.h}`} style={s('position:absolute; inset:0; width:100%; height:100%; overflow:visible')} aria-hidden="true">
+    // Positions are computed from the viewBox geometry, so they stay inline --
+    // this is the case an inline style is actually for. Everything static about
+    // these elements lives in the stylesheet.
+    <div className="map" style={{ aspectRatio: `${VB.w} / ${VB.h}` }}>
+      <svg viewBox={`0 0 ${VB.w} ${VB.h}`} className="map__svg" aria-hidden="true">
         {/* The connector, its arrival point on the rim, and a pulse that runs
             card -> hub. The motion is the message: work arriving and being
             taken. Staggered so it reads as a steady flow rather than a
             six-lane heartbeat. */}
         {NODES.map((n, i) => {
-          const d = connector(n);
           const id = `om-path-${i}`;
-          const rim = rimPoint(n);
+          const { to: rim } = edgePoint(n);
           return (
             <g key={n.title}>
-              <path id={id} d={d} fill="none" stroke="var(--rule-strong)" strokeWidth="1.25" />
+              <path id={id} d={connector(n)} fill="none" stroke="var(--rule-strong)" strokeWidth="1.25" />
               <circle cx={rim.x} cy={rim.y} r="3.5" fill="var(--accent)" />
               {!still && (
                 <circle r="4.5" fill="var(--accent)">
@@ -124,18 +122,31 @@ export function AutomationMap() {
 
       {/* Hub. The mark rather than a label: "orchestration layer" is the kind
           of phrase this page is being rewritten to remove. */}
-      <div style={s(`position:absolute; left:${((HUB.x - HUB.r) / VB.w) * 100}%; top:${((HUB.y - HUB.r) / VB.h) * 100}%; width:${((HUB.r * 2) / VB.w) * 100}%; aspect-ratio:1; border-radius:50%; border:1px solid var(--rule); background:var(--raised); box-shadow:0 24px 60px -34px rgba(28,25,23,0.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center`)}>
-        <img src="/assets/ideora-mark.png" alt="" aria-hidden="true" style={s('width:38%; height:auto; display:block')} />
-        <span style={s('font-family:var(--display); font-weight:600; font-size:clamp(13px, 1.15vw, 16px); line-height:1.15; color:var(--ink)')}>Ideora</span>
+      <div
+        className="map__hub"
+        style={{
+          left: pct(HUB.x - HUB.r, VB.w),
+          top: pct(HUB.y - HUB.r, VB.h),
+          width: pct(HUB.r * 2, VB.w),
+        }}
+      >
+        <img src="/assets/ideora-mark.png" alt="" aria-hidden="true" className="map__mark" />
+        <span className="map__hub-label">Ideora</span>
       </div>
 
       {NODES.map((n) => (
         <div
           key={n.title}
-          style={s(`position:absolute; left:${(n.x / VB.w) * 100}%; top:${(n.y / VB.h) * 100}%; width:${(CARD.w / VB.w) * 100}%; height:${(CARD.h / VB.h) * 100}%; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(12px, 1.4vw, 18px); border:1px solid var(--rule); border-radius:14px; background:var(--raised); box-shadow:0 16px 40px -34px rgba(28,25,23,0.5)`)}
+          className="map__card"
+          style={{
+            left: pct(n.x, VB.w),
+            top: pct(n.y, VB.h),
+            width: pct(CARD.w, VB.w),
+            height: pct(CARD.h, VB.h),
+          }}
         >
-          <div style={s('font-family:var(--display); font-weight:600; font-size:clamp(14px, 1.2vw, 17.5px); line-height:1.2; color:var(--ink)')}>{n.title}</div>
-          <div style={s('margin-top:3px; font-size:clamp(11px, 0.9vw, 13px); line-height:1.4; color:var(--ink-muted)')}>{n.note}</div>
+          <span className="map-card__title">{n.title}</span>
+          <span className="map-card__note">{n.note}</span>
         </div>
       ))}
     </div>

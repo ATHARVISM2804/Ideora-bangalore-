@@ -1,0 +1,117 @@
+/* ===========================================================================
+   Bands, containers, and the grid.
+
+   This file replaces the block of `!important` grid-collapse overrides that
+   used to live in global.css. Those existed for one reason: inline styles
+   outrank a stylesheet, so the only way to reach a grid declared in a style
+   attribute was to shout over it. Layout now lives in classes, so the
+   overrides are unnecessary and the responsive rules are ordinary CSS.
+
+   Breakpoints: 640 (phone), 900 (tablet), 1024 (small desktop). The 900 step
+   is new -- everything from a 641px phablet to a 1023px iPad Pro portrait
+   previously got one identical treatment, and the 12-column-to-single-column
+   jump at exactly 1024 was abrupt for a 900px window.
+   =========================================================================== */
+
+/* --- Bands --------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  padding-block: var(--band);
+}
+.section--tight  { padding-block: var(--band-tight); }
+.section--top    { padding-block: var(--band) 0; }
+.section--bottom { padding-block: 0 var(--band); }
+
+/* Alternating ground. The rules top and bottom are what make the change of
+   colour read as a deliberate band rather than a gradient seam. */
+.section--sunken {
+  background: var(--bg-sunken);
+  border-block: 1px solid var(--rule);
+}
+
+/* --- Containers ----------------------------------------------------------
+   Two widths, one gutter. Was four widths (1180 / 1440 / 1400 / 1320) and two
+   gutters, which is why adjacent sections visibly failed to line up. */
+
+.container {
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+.container--wide { max-width: var(--wide); }
+
+/* --- Grid ---------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+
+/* Column spans. Each collapses in two steps rather than one, so the tablet
+   range gets a layout of its own. */
+.col-full { grid-column: 1 / -1; }
+.col-7    { grid-column: span 7; }
+.col-8    { grid-column: span 8; }
+.col-5    { grid-column: span 5; }
+.col-4    { grid-column: span 4; }
+
+@media (max-width: 1024px) {
+  .col-7, .col-8 { grid-column: span 9; }
+  .col-4, .col-5 { grid-column: span 12; }
+}
+@media (max-width: 900px) {
+  .grid { gap: var(--s-4); }
+  .col-7, .col-8 { grid-column: 1 / -1; }
+}
+
+/* --- Auto-fit card rows --------------------------------------------------
+   `min()` inside `minmax()` is what stops an auto-fit track overflowing its
+   container below the stated minimum. The repo already used this idiom
+   correctly in four places; it is now the only way card rows are built. */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  gap: var(--s-4);
+}
+.cards--wide { grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); }
+
+/* A fixed four-up. auto-fit fitted three across the editorial column and left
+   the fourth card stranded on its own row, which reads as a mistake rather
+   than as a grid. */
+.cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1024px) { .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px)  { .cards--4 { grid-template-columns: 1fr; } }
+
+/* Three-up, same idea. */
+.cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .cards--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .cards--3 { grid-template-columns: 1fr; } }
+
+/* --- Stack ---------------------------------------------------------------
+   Vertical rhythm inside a block, so sections stop hand-rolling margin-top on
+   every child. */
+
+.stack > * + *      { margin-top: var(--s-4); }
+.stack--sm > * + *  { margin-top: var(--s-2); }
+.stack--lg > * + *  { margin-top: var(--s-5); }
+.stack--xl > * + *  { margin-top: var(--s-7); }
+
+/* --- Prose measure -------------------------------------------------------
+   Body copy on the sub-pages was running to 80+ characters against a 1400px
+   container. Capped in ch so it holds at every size. */
+
+.prose      { max-width: var(--prose); }
+.prose--narrow { max-width: var(--prose-narrow); }
+
+/* --- Horizontal rails ---------------------------------------------------- */
+
+.rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.rail::-webkit-scrollbar { display: none; }

@@ -1,9 +1,8 @@
-import { s } from '../lib/style';
+import { useRef } from 'react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { PageHero } from './blocks';
-
-const MONO = "font-family:'JetBrains Mono', monospace";
-const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
+import { Section, Container, Card } from '../components/ui';
 
 const ARTICLES = [
   { category: 'Operations', title: 'The estimate that sits unapproved', standfirst: 'Why the biggest delay in a service bay is rarely a parts shortage, and almost always a follow-up nobody owns.', date: 'Jan 2026' },
@@ -15,30 +14,35 @@ const ARTICLES = [
 ];
 
 export function Insights() {
+  const rootRef = useRef(null);
+
   useDocumentTitle('Insights | Ideora Labs', 'Notes on operational automation, integrations and the agentic systems we build.');
+  useGsapTimeline({ rootRef });
 
   return (
-    <div>
+    <div ref={rootRef}>
       <PageHero
         eyebrow="Insights"
         heading="Notes on operational automation"
         lede="Short pieces on the handoffs we automate, the systems we connect to, and the method behind a fixed-scope build."
       />
-      <section style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
-        <div className="om-g12" style={s(WRAP)}>
-          {ARTICLES.map((a) => (
-            <div
-              key={a.title}
-              style={s('grid-column:span 4; border-radius:16px; border:1px solid rgba(26,29,35,0.07); background:rgba(255,255,255,0.8); backdrop-filter:blur(20px) saturate(140%); -webkit-backdrop-filter:blur(20px) saturate(140%); padding:28px; display:flex; flex-direction:column; gap:14px')}
-            >
-              <div style={s(`${MONO}; font-size:12px; color:#B8400A`)}>{a.category}</div>
-              <h2 style={s('margin:0; font-family:var(--display); font-weight:600; font-size:20px; line-height:1.15; letter-spacing:-0.009em')}>{a.title}</h2>
-              <p style={s('margin:0; flex:1; font-size:15px; color:#5A616D; line-height:1.5')}>{a.standfirst}</p>
-              <div style={s(`${MONO}; font-size:12px; color:#5A616D`)}>{a.date}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Section edge="bottom">
+        <Container>
+          <div className="cards cards--3">
+            {ARTICLES.map((a) => (
+              // Deliberately not a link and deliberately not lifting on hover:
+              // there are no article routes yet, and a card that behaves like
+              // it will navigate and then does not is worse than a static one.
+              <Card key={a.title} data-anim="card" className="stack">
+                <div className="stat__label" style={{ color: 'var(--accent-deep)' }}>{a.category}</div>
+                <h2 style={{ fontSize: 'var(--t-d4)', lineHeight: 1.25 }}>{a.title}</h2>
+                <p className="small">{a.standfirst}</p>
+                <div className="stat__label">{a.date}</div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
     </div>
   );
 }

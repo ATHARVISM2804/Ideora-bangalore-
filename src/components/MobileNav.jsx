@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { s } from '../lib/style';
 import { WA_TALK, WA_DEMO, WA_LINK } from '../lib/whatsapp';
+import { Button } from './ui';
 
 // The phone counterpart to NavMenu. The desktop menus open on hover, which a
 // touch screen has no way to express: iOS fires a synthetic hover on first tap
 // and the link fires on the second, so the dropdowns were both undiscoverable
 // and easy to trigger by accident. Here each menu is an accordion the reader
 // opens deliberately, and every row is a real tap target.
-export function MobileNavTrigger({ glass, open, setOpen }) {
-  const bar = glass.link;
+
+export function MobileNavTrigger({ open, setOpen }) {
   return (
     <button
       type="button"
       aria-label={open ? 'Close menu' : 'Open menu'}
       aria-expanded={open}
       onClick={() => setOpen((v) => !v)}
-      style={s('display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:44px; height:44px; padding:0; border:0; border-radius:12px; background:transparent; cursor:pointer')}
+      className="navsheet__trigger"
     >
-      <span style={s(`display:block; width:20px; height:1.5px; border-radius:2px; background:${bar}; transition:transform .3s ease; transform:${open ? 'translateY(6.5px) rotate(45deg)' : 'none'}`)} />
-      <span style={s(`display:block; width:20px; height:1.5px; border-radius:2px; background:${bar}; transition:opacity .2s ease; opacity:${open ? 0 : 1}`)} />
-      <span style={s(`display:block; width:20px; height:1.5px; border-radius:2px; background:${bar}; transition:transform .3s ease; transform:${open ? 'translateY(-6.5px) rotate(-45deg)' : 'none'}`)} />
+      <span className="navsheet__bar" />
+      <span className="navsheet__bar" />
+      <span className="navsheet__bar" />
     </button>
   );
 }
@@ -28,10 +28,12 @@ export function MobileNavTrigger({ glass, open, setOpen }) {
 export function MobileNavSheet({ menus, isActive, open, setOpen }) {
   const [section, setSection] = useState(null);
   const { pathname, hash } = useLocation();
+  const sheetRef = useRef(null);
+  const restoreRef = useRef(null);
 
   // Navigating from inside the sheet has to close it; the route changes
   // underneath but the overlay would otherwise stay up over the new page.
-  useEffect(() => { setOpen(false); }, [pathname, hash]);
+  useEffect(() => { setOpen(false); }, [pathname, hash, setOpen]);
 
   // The sheet scrolls on its own, so the page behind it must not. Without
   // this, iOS scrolls the document under the overlay and the reader returns
@@ -43,75 +45,107 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
     return () => { document.body.style.overflow = prev; };
   }, [open]);
 
+  // Focus management. The sheet previously had none: Tab walked straight out
+  // of it into the page behind, and closing it dropped focus at the top of the
+  // document rather than back on the button that opened it.
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    if (!open) {
+      restoreRef.current?.focus?.();
+      restoreRef.current = null;
+      return;
+    }
+
+    restoreRef.current = document.activeElement;
+    const node = sheetRef.current;
+    const focusables = () => Array.from(
+      node?.querySelectorAll('a[href], button:not([disabled])') ?? [],
+    );
+    focusables()[0]?.focus();
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') { setOpen(false); return; }
+      if (e.key !== 'Tab') return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open]);
+  }, [open, setOpen]);
+
+  if (!open) return null;
 
   return (
     <>
-      {open && (
-        <div
-          style={s('position:fixed; left:0; right:0; top:0; bottom:0; z-index:1; background:rgba(31,27,24,0.34); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); animation:om-fade .2s both')}
-          onClick={() => setOpen(false)}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={s('position:absolute; left:0; right:0; top:0; max-height:100dvh; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--bg); border-bottom:1px solid var(--rule); box-shadow:0 30px 70px -40px rgba(28,25,23,0.7); padding:calc(var(--safe-t) + 76px) clamp(20px, 5vw, 40px) calc(var(--safe-b) + 28px)')}
-          >
-            {menus.map((menu) => {
-              const expanded = section === menu.label;
-              const active = isActive(menu);
+      {/* The scrim is a sibling of the sheet, not its parent, so dismissing by
+          tapping outside does not mean putting a click handler on an element
+          that wraps the dialog. It is presentational: Escape and the trigger
+          are the keyboard routes out. */}
+      <div className="navsheet__scrim" aria-hidden="true" onClick={() => setOpen(false)} />
 
-              if (menu.items.length === 0) {
-                return (
-                  <Link
-                    key={menu.label}
-                    to={menu.path}
-                    style={s(`display:flex; align-items:center; min-height:52px; border-bottom:1px solid var(--rule); font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.004em; text-decoration:none; color:${active ? '#F4601E' : 'var(--ink)'}`)}
-                  >{menu.label}</Link>
-                );
-              }
+      <div
+        ref={sheetRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        className="navsheet"
+      >
+        {menus.map((menu) => {
+          const expanded = section === menu.label;
+          const active = isActive(menu);
 
-              return (
-                <div key={menu.label} style={s('border-bottom:1px solid var(--rule)')}>
-                  <button
-                    type="button"
-                    aria-expanded={expanded}
-                    onClick={() => setSection(expanded ? null : menu.label)}
-                    style={s(`display:flex; align-items:center; justify-content:space-between; width:100%; min-height:52px; padding:0; border:0; background:none; cursor:pointer; font-family:var(--display); font-weight:500; font-size:19px; letter-spacing:-0.004em; text-align:left; color:${active ? '#F4601E' : 'var(--ink)'}`)}
-                  >
-                    {menu.label}
-                    <span style={s(`display:block; width:9px; height:9px; margin-right:4px; border-right:1.5px solid var(--ink-muted); border-bottom:1.5px solid var(--ink-muted); transform:rotate(${expanded ? '-135deg' : '45deg'}) translateY(${expanded ? '-2px' : '-2px'}); transition:transform .3s ease`)} />
-                  </button>
+          if (menu.items.length === 0) {
+            return (
+              <div key={menu.label} className="navsheet__group">
+                <Link to={menu.path} className={`navsheet__row${active ? ' is-active' : ''}`}>
+                  {menu.label}
+                </Link>
+              </div>
+            );
+          }
 
-                  {expanded && (
-                    <div style={s('padding:2px 0 14px; animation:om-fade .25s both')}>
-                      {menu.items.map((item) => (
-                        <Link
-                          key={item.path}
-                          to={item.path}
-                          style={s(`display:block; padding:11px 0 11px 14px; border-left:2px solid ${pathname === item.path ? '#F4601E' : 'var(--rule)'}; text-decoration:none`)}
-                        >
-                          <span style={s(`display:block; font-size:15px; font-weight:500; color:${pathname === item.path ? '#F4601E' : 'var(--ink)'}`)}>{item.label}</span>
-                          <span style={s('display:block; margin-top:2px; font-size:13px; line-height:1.45; color:var(--ink-muted)')}>{item.blurb}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+          return (
+            <div key={menu.label} className="navsheet__group">
+              <button
+                type="button"
+                aria-expanded={expanded}
+                onClick={() => setSection(expanded ? null : menu.label)}
+                className={`navsheet__row${active ? ' is-active' : ''}`}
+              >
+                {menu.label}
+                <span aria-hidden="true" className="navsheet__caret">▾</span>
+              </button>
+
+              {expanded && (
+                <div className="navsheet__sub">
+                  {menu.items.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`navsheet__sublink${pathname === item.path ? ' is-active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
-              );
-            })}
-
-            <div style={s('display:flex; flex-direction:column; gap:10px; margin-top:24px')}>
-              <a href={WA_TALK} {...WA_LINK} onClick={() => setOpen(false)} style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; border:1px solid var(--rule-strong); color:var(--ink); font-size:15px; font-weight:500; text-decoration:none')}>Talk to Us</a>
-              <a href={WA_DEMO} {...WA_LINK} onClick={() => setOpen(false)} style={s('display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:14px; background:#F4601E; color:var(--ink); font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 30px -16px rgba(244,96,30,0.95)')}>Request a Demo</a>
+              )}
             </div>
-          </div>
+          );
+        })}
+
+        <div className="navsheet__actions">
+          <Button href={WA_DEMO} {...WA_LINK} block onClick={() => setOpen(false)}>
+            Request a demo
+          </Button>
+          <Button href={WA_TALK} {...WA_LINK} variant="secondary" block onClick={() => setOpen(false)}>
+            Talk to us
+          </Button>
         </div>
-      )}
+      </div>
     </>
   );
 }

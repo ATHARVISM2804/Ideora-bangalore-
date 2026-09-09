@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import { s } from '../lib/style';
-import { QuoteGlyph } from '../components/SectionArt';
+import { useEffect, useState, useRef } from 'react';
+import { QuoteGlyph } from '../components/QuoteGlyph';
 import { QUOTES } from '../data/content';
+import { Section, Container } from '../components/ui';
 
-const MONO = "font-family:var(--sans)";
 const CYCLE_MS = 7000;
 
 const VERTICAL = {
@@ -18,9 +17,14 @@ function prefersReducedMotion() {
 
 // One statement at a time, at a size worth reading. Three quotes shrunk into a
 // grid gave each of them less weight than any single one deserves.
+//
+// The rail is a tab list. It previously had no ARIA at all: five plain buttons
+// swapping a quote that rotated every seven seconds, with nothing telling a
+// screen reader that the buttons controlled the quote or that it had changed.
 export function Voices() {
   const [active, setActive] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const tabRefs = useRef([]);
   const q = QUOTES[active];
 
   useEffect(() => {
@@ -29,49 +33,92 @@ export function Voices() {
     return () => clearInterval(t);
   }, [autoplay]);
 
+  function pick(i) {
+    setActive(i);
+    // Any deliberate choice stops the carousel: continuing to rotate under
+    // someone who has just chosen what to read is the reason carousels are
+    // disliked.
+    setAutoplay(false);
+  }
+
+  function onKeyDown(e) {
+    const last = QUOTES.length - 1;
+    let next = null;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = active === last ? 0 : active + 1;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = active === 0 ? last : active - 1;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = last;
+    if (next === null) return;
+    e.preventDefault();
+    pick(next);
+    tabRefs.current[next]?.focus();
+  }
+
   return (
-    <section style={s('padding:clamp(76px, 11vw, 150px) 0')}>
-      <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
-        <div className="om-g12" style={s('display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:end')}>
-          <h2 data-anim="head" style={s('grid-column:1 / span 6; margin:0; font-family:var(--display); font-weight:500; font-size:clamp(31px, 5.4vw, 52px); line-height:0.98; letter-spacing:-0.014em')}>In their words</h2>
-          <p data-anim="head" style={s('grid-column:8 / span 4; margin:0; color:var(--ink-muted)')}>Attributed by role and scale only. Named references are available to serious enquiries under NDA.</p>
+    <Section>
+      <Container>
+        <div className="voices__head">
+          <h2 data-anim="head">In their words</h2>
+          <p data-anim="head" className="body-muted">
+            Attributed by role and scale only. Named references are available to serious enquiries under NDA.
+          </p>
         </div>
 
-        <div className="om-g12" style={s('margin-top:56px; display:grid; grid-template-columns:repeat(12,1fr); gap:20px; align-items:start')}>
-          {/* Which vertical is speaking, and the control for it */}
-          <div style={s('grid-column:1 / span 3; display:flex; flex-direction:column; border-top:1px solid var(--rule-strong)')}>
+        <div className="voices">
+          <div
+            className="voices__tabs"
+            role="tablist"
+            aria-label="Choose an industry"
+            aria-orientation="vertical"
+            tabIndex={-1}
+            onKeyDown={onKeyDown}
+          >
             {QUOTES.map((item, i) => {
               const on = i === active;
               return (
                 <button
                   key={item.slotId}
+                  ref={(el) => { tabRefs.current[i] = el; }}
                   type="button"
-                  onClick={() => { setActive(i); setAutoplay(false); }}
-                  style={s(`display:flex; align-items:center; gap:11px; padding:15px 4px; border:0; border-bottom:1px solid var(--rule); background:none; cursor:pointer; font-family:inherit; font-size:14px; text-align:left; color:${on ? 'var(--ink)' : '#8A8177'}; transition:color .3s`)}
+                  role="tab"
+                  id={`voice-tab-${item.slotId}`}
+                  aria-selected={on}
+                  aria-controls="voice-panel"
+                  tabIndex={on ? 0 : -1}
+                  onClick={() => pick(i)}
+                  className="voices__tab"
                 >
-                  <span style={s(`width:7px; height:7px; flex:none; border-radius:50%; background:${on ? '#F4601E' : 'transparent'}; border:1.5px solid ${on ? '#F4601E' : 'rgba(28,25,23,0.22)'}; transition:all .3s`)} />
+                  <span className="voices__marker" aria-hidden="true" />
                   {VERTICAL[item.glyph]}
                 </button>
               );
             })}
           </div>
 
-          <div style={s('grid-column:5 / span 8')}>
-            <blockquote key={q.slotId} style={s('margin:0; animation:om-fade .5s both')}>
-              <p style={s('margin:0; max-width:26ch; font-family:var(--display); font-weight:600; font-size:clamp(26px, 3.6vw, 46px); line-height:1.22; letter-spacing:-0.012em; color:var(--ink)')}>
-                <span style={s('color:#F4601E')}>“</span>{q.text}
+          {/* aria-live so the rotation is announced rather than swapping
+              silently under an assistive-tech reader. */}
+          <div
+            role="tabpanel"
+            id="voice-panel"
+            aria-labelledby={`voice-tab-${q.slotId}`}
+            aria-live="polite"
+            tabIndex={0}
+          >
+            <blockquote key={q.slotId} className="fade-in" style={{ margin: 0 }}>
+              <p className="voices__quote">
+                <span className="voices__mark" aria-hidden="true">“</span>{q.text}
               </p>
-              <footer style={s('margin-top:30px; display:flex; align-items:center; gap:14px')}>
+              <footer className="voices__by">
                 <QuoteGlyph kind={q.glyph} />
                 <span>
-                  <span style={s('display:block; font-size:14px; font-weight:500')}>{q.role}</span>
-                  <span style={s(`display:block; ${MONO}; font-size:14px; color:var(--ink-muted)`)}>{q.scale}</span>
+                  <span style={{ display: 'block', fontSize: 'var(--t-sm)', fontWeight: 'var(--w-medium)' }}>{q.role}</span>
+                  <span className="small" style={{ display: 'block' }}>{q.scale}</span>
                 </span>
               </footer>
             </blockquote>
           </div>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
