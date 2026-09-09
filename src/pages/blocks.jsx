@@ -134,3 +134,53 @@ export function CaseStudy({ vertical, situation, built, changed }) {
     </section>
   );
 }
+
+// What the client actually receives. A services page that only describes an
+// approach leaves the reader guessing what lands on their desk; this is the
+// deliverables list, in nouns.
+export function Deliverables({ items, head = 'What you get' }) {
+  if (!items?.length) return null;
+  return (
+    <section style={s('padding:0 0 clamp(56px, 8vw, 110px)')}>
+      <div style={s(WRAP)}>
+        <div style={s('grid-column:1 / span 12')}>
+          <div className="om-label">{head}</div>
+          <div style={s('margin-top:clamp(22px, 2.6vw, 32px); display:grid; grid-template-columns:repeat(auto-fit, minmax(258px, 1fr)); gap:clamp(16px, 2vw, 24px)')}>
+            {items.map((it) => (
+              <div key={it.title} style={s('padding:clamp(20px, 2.2vw, 26px); border:1px solid var(--rule); border-radius:14px; background:var(--raised)')}>
+                <div style={s('display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--accent-tint); color:var(--accent-deep); font-size:13px; font-weight:600')}>✓</div>
+                <div style={s('margin-top:14px; font-family:var(--display); font-weight:600; font-size:18.5px; line-height:1.25; color:var(--ink)')}>{it.title}</div>
+                <p style={s('margin:8px 0 0; font-size:15.5px; line-height:1.55; color:var(--ink-muted)')}>{it.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// The objections. A senior operator reads a services page with four or five
+// worries already formed — cost, disruption, their people, what happens when it
+// gets something wrong. Answering them on the page is worth more than another
+// paragraph of capability.
+export function Faq({ items, head = 'Questions we get asked' }) {
+  if (!items?.length) return null;
+  return (
+    <section style={s('padding:0 0 clamp(56px, 8vw, 110px)')}>
+      <div style={s(WRAP)}>
+        <div style={s('grid-column:1 / span 12')}>
+          <div className="om-label">{head}</div>
+          <dl style={s('margin:clamp(22px, 2.6vw, 32px) 0 0; border-top:1px solid var(--rule)')}>
+            {items.map((it) => (
+              <div key={it.q} style={s('padding:clamp(20px, 2.4vw, 28px) 0; border-bottom:1px solid var(--rule); display:grid; grid-template-columns:minmax(0, 1fr); gap:10px')}>
+                <dt style={s('font-family:var(--display); font-weight:600; font-size:clamp(18px, 1.5vw, 21px); line-height:1.3; color:var(--ink)')}>{it.q}</dt>
+                <dd style={s('margin:0; max-width:74ch; font-size:16px; line-height:1.62; color:var(--ink-muted)')}>{it.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}

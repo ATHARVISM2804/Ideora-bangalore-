@@ -9,7 +9,7 @@ import { ALL_PAGE_PATHS } from './nav';
 export const PAGES = [
   {
     path: '/platforms/ops-console',
-    title: 'Ops Console',
+    title: 'Your operations dashboard',
     description: 'One operational record every team reads from: jobs, queues, agents, and the exceptions that need a person.',
     eyebrow: 'Platforms',
     heading: 'A queue management can read on a Monday',
@@ -25,9 +25,21 @@ export const PAGES = [
       { title: 'Exceptions are the interface', body: 'Agents complete the routine work silently. The console surfaces only what needs judgement, named and attributed, so a supervisor works a short list instead of auditing a long one.' },
       { title: 'Reporting that matches reality', body: 'The numbers on the dashboard are the same records the agents wrote. There is no separate reporting pipeline to fall out of sync with the operation it describes.' },
     ],
+    deliverables: [
+      { title: 'One queue', body: 'Every job lands in one list, whichever system it started in. Nobody reconciles inboxes to find out where something is.' },
+      { title: 'Named exceptions', body: 'The handful that need a decision, attributed to a person, with the reason they stopped. Everything else completes without you.' },
+      { title: 'Ageing you can see', body: 'How long work has been sitting, visible the day it happens rather than at month end.' },
+      { title: 'A report that matches', body: 'Built from the same records your team works. There is no second reporting pipeline to fall out of step with reality.' },
+    ],
+    faq: [
+      { q: 'Does my team have to work inside another system?', a: 'No. They keep using the software they already use. The dashboard is for whoever needs the overview — usually an owner, a general manager or an operations lead.' },
+      { q: 'Who can see which sites and which figures?', a: 'Access follows the permissions you already have. We agree who sees what during the design step, before anything is built.' },
+      { q: 'What if the dashboard disagrees with our own system?', a: 'It cannot. Every figure comes from the same actions your team and our systems take against your records. Nothing is recalculated in a separate place.' },
+      { q: 'Is this another subscription to manage?', a: 'The engagement is a fixed-scope build, then a managed operation. The dashboard comes with the system rather than being sold separately.' },
+    ],
     related: [
-      { label: 'Agent Runtime', path: '/platforms/agent-runtime' },
-      { label: 'Integrations Layer', path: '/platforms/integrations' },
+      { label: 'Always running', path: '/platforms/agent-runtime' },
+      { label: 'Works with your software', path: '/platforms/integrations' },
     ],
     cta: {
       heading: 'See the console against your own queue',
@@ -36,7 +48,7 @@ export const PAGES = [
   },
   {
     path: '/platforms/agent-runtime',
-    title: 'Agent Runtime',
+    title: 'Always-on operations',
     description: 'Where agents execute, retry, and hand work to one another, and where a failed step becomes a named exception instead of a silent drop.',
     eyebrow: 'Platforms',
     heading: 'Agents that finish, or say why they stopped',
@@ -53,9 +65,21 @@ export const PAGES = [
       { title: 'Handoffs are explicit', body: 'Work moves between agents the way it moves between people, except the transfer is recorded. One agent holds the bay, another updates the job status when the estimate is approved, and a third notifies the advisor. Nothing waits in an inbox because nobody knew it was theirs.' },
       { title: 'Capacity you can see', body: 'The runtime reports its own health: agents online against agents expected, uptime, and the median time a task takes to complete. Twelve of twelve agents online at 99.98% uptime is what we run against, and it is on the console you keep rather than in a report we send.' },
     ],
+    deliverables: [
+      { title: 'Cover outside office hours', body: 'Enquiries that arrive at nine in the evening are answered at nine in the evening, not at nine the next morning.' },
+      { title: 'Retries that do not need chasing', body: 'When a system is briefly unavailable the work is retried. It does not sit in a failed state waiting for somebody to notice.' },
+      { title: 'A named exception when it stops', body: 'If something genuinely cannot complete, it reaches a person with the reason attached rather than disappearing.' },
+      { title: 'A full record of every action', body: 'What was done, when, and against which record. If a customer disputes something, you can show what happened.' },
+    ],
+    faq: [
+      { q: 'What happens when it gets something wrong?', a: 'It stops and routes to a person as a named exception, with the reason. What it may act on alone and what it must route for approval is agreed with you in the design step and enforced in the build.' },
+      { q: 'Do we need anyone on call?', a: 'No. We run it. Exceptions arrive in your queue during your hours; keeping the systems up is our side of the engagement.' },
+      { q: 'What if our own software goes down?', a: 'Work waits and retries rather than failing. When your system comes back the queue clears without anyone re-entering anything.' },
+      { q: 'Can we turn parts of it off?', a: 'Yes. Each step is scoped with you, and anything you would rather keep with a person stays with a person.' },
+    ],
     related: [
-      { label: 'Ops Console', path: '/platforms/ops-console' },
-      { label: 'Integrations Layer', path: '/platforms/integrations' },
+      { label: 'Your dashboard', path: '/platforms/ops-console' },
+      { label: 'Works with your software', path: '/platforms/integrations' },
     ],
     cta: {
       heading: 'Run one of your workflows through it',
@@ -64,7 +88,7 @@ export const PAGES = [
   },
   {
     path: '/platforms/integrations',
-    title: 'Integrations Layer',
+    title: 'Works with your software',
     description: 'The connection into the systems you already run: your CRM, DMS, EMR, calendars and messaging, with no rip and replace.',
     eyebrow: 'Platforms',
     heading: 'Your existing stack. No rip and replace.',
@@ -81,9 +105,21 @@ export const PAGES = [
       { title: 'Your permissions, your escalation rules', body: 'Agents are given scoped access, the same way a coordinator would be. What they may action alone, what they must route for approval, and what they are not permitted to touch are agreed before the build and enforced in the connection itself.' },
       { title: 'Scoped before it is wired', body: 'Every integration is mapped in the design step and approved before a line is written, so the systems it touches, the fields it writes, and the volume it runs against are known ahead of cutover rather than discovered during it.' },
     ],
+    deliverables: [
+      { title: 'No migration', body: 'Your data stays where it is. We read and write to the systems you already run rather than moving you onto ours.' },
+      { title: 'No second system to keep in sync', body: 'One record stays the record. Nothing is copied into a parallel database that drifts within a month.' },
+      { title: 'Your permissions', body: 'Our systems act under access you grant and can withdraw, with the same limits your own staff work within.' },
+      { title: 'Nobody retrained', body: 'Your team carries on in the software they know. The change is that less reaches them, not that they work somewhere new.' },
+    ],
+    faq: [
+      { q: 'What if our software is old, or in-house?', a: 'That is common and usually workable. The scope call establishes what your systems can expose before anything is promised or priced.' },
+      { q: 'Will this slow our systems down?', a: 'It works the way a member of staff does — reading and writing records as work arrives, at the pace the work arrives.' },
+      { q: 'What happens to the connection if we change software later?', a: 'The connection is rebuilt against the new system. The work it does, and the record of what it did, carries over.' },
+      { q: 'Do you need access to everything?', a: 'No, and we would rather not have it. Access is scoped to the processes in the build and agreed in writing first.' },
+    ],
     related: [
-      { label: 'Ops Console', path: '/platforms/ops-console' },
-      { label: 'Agent Runtime', path: '/platforms/agent-runtime' },
+      { label: 'Your dashboard', path: '/platforms/ops-console' },
+      { label: 'Always running', path: '/platforms/agent-runtime' },
     ],
     cta: {
       heading: 'Bring us your stack as it is',
@@ -92,7 +128,7 @@ export const PAGES = [
   },
   {
     path: '/solutions/agentic-ai',
-    title: 'Agentic AI & Automation',
+    title: 'Operations automation',
     description: 'Custom agents that complete multi-step operational tasks end to end, built against your APIs, your permissions, and your escalation rules.',
     eyebrow: 'Solutions',
     heading: 'Custom agents that complete the work end to end',
@@ -109,9 +145,21 @@ export const PAGES = [
       { title: 'A trace behind every action', body: 'Every step an agent takes is written down: what came in, what it matched, what it changed, and when. If a supervisor asks why a booking moved, the answer is a record, not a reconstruction.' },
       { title: 'Faster, but only where you said so', body: 'Median task completion drops to around 40 seconds on work that was taking four to six hours, and it does so only on the work you have decided an agent should hold. What must route to a person is fixed in the design step.' },
     ],
+    deliverables: [
+      { title: 'A mapped operation', body: 'Before anything is built you get the map: every handoff in the process, who touches it, and where it waits. Yours to keep either way.' },
+      { title: 'A system that finishes work', body: 'Not a prompt box. It reads the request, checks the record, takes the action and logs the outcome, against your live systems.' },
+      { title: 'Agreed limits', body: 'What it may do alone and what it must route to a person, decided by you in the design step and enforced in the build.' },
+      { title: 'A run record', body: 'Every action it took, against which record, and when. You can answer a customer or an auditor without reconstructing anything.' },
+    ],
+    faq: [
+      { q: 'How is this different from the automation we already have?', a: 'Rules stop at the first thing they did not expect. These systems complete multi-step work and, when they genuinely cannot, hand it to a person with the reason attached rather than failing silently.' },
+      { q: 'What does it cost?', a: 'Scope and price are fixed before a line is written, at the design step. After launch it is a managed operation rather than a licence per seat.' },
+      { q: 'How long until something is running?', a: 'Six to ten weeks to a first system in production, depending on how many systems it has to reach.' },
+      { q: 'What happens to the people doing this work now?', a: 'The routine part stops reaching them. What remains is the exceptions, which is the part that needed a person in the first place.' },
+    ],
     related: [
-      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
-      { label: 'Productised Systems', path: '/solutions/productised-systems' },
+      { label: 'Service centres', path: '/solutions/service-centre' },
+      { label: 'Ready-made systems', path: '/solutions/productised-systems' },
     ],
     cta: {
       heading: 'Start with the process that stalls most',
@@ -120,7 +168,7 @@ export const PAGES = [
   },
   {
     path: '/solutions/real-estate',
-    title: 'Real Estate Automation',
+    title: 'Real estate automation',
     description: 'Enquiry qualification, viewing scheduling, and document chasing run continuously, so agents spend the day with buyers who are ready.',
     eyebrow: 'Solutions',
     heading: 'Enquiries qualified, viewings booked, documents chased',
@@ -137,9 +185,21 @@ export const PAGES = [
       { title: 'Documents that chase themselves', body: 'Identity and KYC paperwork is requested, reminded, and re-reminded until it arrives, then filed against the deal. The checklist closes without anyone keeping it in their head.' },
       { title: 'What stays with the agent', body: 'Negotiation, judgement, and the relationship. The system removes the call-backs and the chasing around them; it does not sell the unit.' },
     ],
+    deliverables: [
+      { title: 'Enquiries answered on arrival', body: 'Portal, web and WhatsApp enquiries get a real answer as they land, not a holding reply and a call-back queue.' },
+      { title: 'Qualification before contact', body: 'Scored against budget, area and readiness, so what reaches an agent is already worth their hour.' },
+      { title: 'A viewing already offered', body: 'Routed with a slot proposed against the live calendar rather than an agent starting the negotiation from nothing.' },
+      { title: 'Document chasing that continues', body: 'Paperwork is followed up without anyone remembering to. The checklist closes itself.' },
+    ],
+    faq: [
+      { q: 'Will it talk to buyers in our name?', a: 'It answers in your brand and within the limits you set. Anything outside them is routed to an agent with the context attached.' },
+      { q: 'Our agents have their own way of working. Does this change it?', a: 'No. They keep their CRM and their calendar. What changes is which enquiries reach them and how much is already done when they do.' },
+      { q: 'What about portal feeds we do not control?', a: 'Portal and web enquiries are read as they arrive. We connect to the feeds you already receive rather than asking a portal to change anything.' },
+      { q: 'What if a lead is mishandled?', a: 'Scoring rules are agreed with you and visible. Anything the system is unsure of goes to a person rather than being decided quietly.' },
+    ],
     related: [
       { label: 'Real Estate', path: '/industries/real-estate' },
-      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/solutions/agentic-ai' },
     ],
     cta: {
       heading: 'Put it against a week of your enquiries',
@@ -148,7 +208,7 @@ export const PAGES = [
   },
   {
     path: '/solutions/healthcare',
-    title: 'Healthcare & Clinic Automation',
+    title: 'Healthcare and clinic automation',
     description: 'Intake, eligibility checks, reminders and recall lists run before the patient reaches the desk, with clinical judgement left to clinicians.',
     eyebrow: 'Solutions',
     heading: 'The desk work done before the patient arrives',
@@ -165,9 +225,21 @@ export const PAGES = [
       { title: 'Reminders and recalls that run themselves', body: 'Reminders go out on schedule and recall lists are worked continuously, so a six-month review is flagged when it falls due rather than when someone has time to run the report.' },
       { title: 'Clinical judgement stays with clinicians', body: 'The system handles intake, coverage, scheduling, and follow-up. It does not triage, advise, or make a clinical call, and the exceptions it raises are administrative ones for the desk to work.' },
     ],
+    deliverables: [
+      { title: 'Intake completed before arrival', body: 'Patients complete intake by message. The first minute at the desk is not a form.' },
+      { title: 'Cover verified with the payer', body: 'Eligibility checked on arrival of the booking, so the desk is not finding out on the morning.' },
+      { title: 'A named list of exceptions', body: 'The desk works the handful of unresolved cases rather than a queue of unknowns.' },
+      { title: 'Recalls that run themselves', body: 'Reviews are flagged when they fall due, not when somebody has time to work the list.' },
+    ],
+    faq: [
+      { q: 'Does anything clinical get decided by a system?', a: 'No. Clinical judgement stays with clinicians. This covers intake, cover, scheduling, reminders and recall — the administrative work around the appointment.' },
+      { q: 'How is patient data handled?', a: 'It stays in your clinical records. Nothing is migrated into another database, and access is scoped to the processes in the build and agreed in writing.' },
+      { q: 'What if a payer check fails?', a: 'It becomes a named exception with the reason, in time for the desk to act, rather than a surprise on the day.' },
+      { q: 'Will our front desk staff need training?', a: 'No. They work in the same practice software. Less arrives at them and what does arrive has already been checked.' },
+    ],
     related: [
       { label: 'Healthcare', path: '/industries/healthcare' },
-      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/solutions/agentic-ai' },
     ],
     cta: {
       heading: 'Take one clinic and one week',
@@ -176,7 +248,7 @@ export const PAGES = [
   },
   {
     path: '/solutions/service-centre',
-    title: 'Service Centre Automation',
+    title: 'Service centre automation',
     description: 'One agent across booking, estimate approval, parts status and customer updates, working the same records your advisors and DMS already use.',
     eyebrow: 'Solutions',
     heading: 'One agent across booking, estimate and update',
@@ -193,9 +265,21 @@ export const PAGES = [
       { title: 'A bay schedule that matches the shop floor', body: 'Because the agent writes to the same records the advisors and the DMS use, the schedule at 9am is the schedule that is actually being worked. Nobody reconciles three inboxes and a spreadsheet to find out.' },
       { title: 'Advisors on the jobs that need them', body: 'Routine confirmation, chasing, and status updates run without a person. What reaches an advisor is the exception: the vehicle that does not match, the approval that never came, the part that is not in the catalogue.' },
     ],
+    deliverables: [
+      { title: 'Bookings answered in seconds', body: 'The enquiry is taken, the vehicle found, a bay held and a confirmed slot returned before an advisor has read the message.' },
+      { title: 'Estimates chased to a decision', body: 'Approvals are followed up until they are answered, so jobs are not sitting unapproved because nobody called back.' },
+      { title: 'A bay schedule that is real', body: 'The schedule at nine is the schedule being worked, because it is written from the same records the advisors and your dealer system use.' },
+      { title: 'Advisors on the jobs that need them', body: 'What reaches an advisor is the exception: the vehicle that does not match, the part that is not in the catalogue.' },
+    ],
+    faq: [
+      { q: 'Will customers know they are not talking to a person?', a: 'You decide the tone and what it says. It answers within agreed limits and hands to an advisor the moment something falls outside them.' },
+      { q: 'Does this replace our dealer management system?', a: 'No. It works the same records your advisors and your dealer system already use. Nothing is ripped out.' },
+      { q: 'What about parts availability?', a: 'It checks against your catalogue. Where a part is not there, that becomes a named exception for an advisor rather than a booking that fails on the day.' },
+      { q: 'We have several sites. Does it handle that?', a: 'Yes. Each site\'s queue is read separately and against the others, so a backlog forming at one is visible the day it forms.' },
+    ],
     related: [
       { label: 'Automotive', path: '/industries/automotive' },
-      { label: 'Agentic AI & Automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/solutions/agentic-ai' },
     ],
     cta: {
       heading: 'Bring us one site and its backlog',
@@ -204,7 +288,7 @@ export const PAGES = [
   },
   {
     path: '/solutions/productised-systems',
-    title: 'Productised Systems',
+    title: 'Ready-made systems',
     description: 'Systems we have already built and deployed, configured to your data instead of designed from scratch: a shorter build, the same operating model.',
     eyebrow: 'Solutions',
     heading: 'Already built. Configured to your data.',
@@ -221,9 +305,21 @@ export const PAGES = [
       { title: 'Where it fits, and where it does not', body: 'If your process looks like a process we have already automated, this is the shorter route. If it does not, a fixed-scope build is the honest answer and we will say so at the scope call rather than at the demo.' },
       { title: 'Standard connectors first', body: 'The connector set covers the systems these verticals usually run on. Anything outside it is scoped as work, priced, and agreed before the build, not absorbed quietly into the timeline.' },
     ],
+    deliverables: [
+      { title: 'A shorter build', body: 'Systems we have already built and run, configured to your data rather than designed from scratch. Three to five weeks rather than eight to ten.' },
+      { title: 'The same operating model', body: 'Fixed scope, then we run it. A shorter build does not mean you are handed something to look after yourself.' },
+      { title: 'Your data, your permissions', body: 'Configured against the systems you already run, under access you grant and can withdraw.' },
+      { title: 'An honest answer at the scope call', body: 'If your process does not fit one of these, a fixed-scope build is the right answer and we will say so then, not at the demo.' },
+    ],
+    faq: [
+      { q: 'How is this cheaper than a custom build?', a: 'The design work is already done. What remains is configuration against your data and connecting to your systems, which is why the window is shorter.' },
+      { q: 'What if we need something it does not do?', a: 'Then it is the wrong product for you and we will say so. A ready-made system stretched to fit an unusual process ends up costing more than building for it.' },
+      { q: 'Do we get the same support?', a: 'Yes. It is the same managed operation — we run it and report on it.' },
+      { q: 'Can we move to a custom build later?', a: 'Yes. It runs on your systems and your records, so extending it is a scoping conversation rather than a migration.' },
+    ],
     related: [
-      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
-      { label: 'Real Estate Automation', path: '/solutions/real-estate' },
+      { label: 'Service centres', path: '/solutions/service-centre' },
+      { label: 'Real estate', path: '/solutions/real-estate' },
     ],
     cta: {
       heading: 'Find out which route you are on',
@@ -254,9 +350,21 @@ export const PAGES = [
       situation: 'Service enquiries arriving across WhatsApp, a shared inbox and the phone. Nothing was lost exactly, but anything that came in after the counter closed waited until an advisor opened the inbox the next morning.',
       changed: 'Median time to a confirmed answer is now forty seconds, and advisors open the day on jobs that are already booked rather than on a queue of messages to read.',
     },
+    deliverables: [
+      { title: 'Enquiries answered out of hours', body: 'The evening and weekend messages that used to wait for the counter to open are answered as they arrive.' },
+      { title: 'Approvals that do not stall', body: 'Estimates are chased to a decision, so jobs are not held up because nobody called the customer back.' },
+      { title: 'One view across sites', body: 'A backlog building at one site is visible against the others on the day, not in a month-end report.' },
+      { title: 'Advisors on real work', body: 'Routine confirmation and status chasing runs without a person. Advisors get the jobs that need judgement.' },
+    ],
+    faq: [
+      { q: 'Does this work with our dealer management system?', a: 'Yes. It reads and writes the records your advisors already use. There is no migration and nothing is replaced.' },
+      { q: 'We are a multi-site group. Where do you start?', a: 'One site and its backlog. It is a fair test, it is quick to scope, and what works there is repeated across the group.' },
+      { q: 'What do our advisors have to learn?', a: 'Nothing. They work where they work now. The change is how much reaches them.' },
+      { q: 'How long before it is live?', a: 'Six to ten weeks to a first system in production. The scope call is ninety minutes and you keep the map either way.' },
+    ],
     related: [
-      { label: 'Service Centre Automation', path: '/solutions/service-centre' },
-      { label: 'Ops Console', path: '/platforms/ops-console' },
+      { label: 'Service centres', path: '/solutions/service-centre' },
+      { label: 'Your dashboard', path: '/platforms/ops-console' },
     ],
     cta: {
       heading: 'Compare it against your own service queue',
@@ -287,9 +395,21 @@ export const PAGES = [
       situation: 'Portal and web enquiries arriving faster than the team could call back, so the first real response was often the next working day — by which time the buyer had usually asked someone else.',
       changed: 'Enquiries are scored and routed as they arrive, with a viewing already offered against a live calendar. Agents spend their day with buyers who are ready rather than on call-backs.',
     },
+    deliverables: [
+      { title: 'Every enquiry qualified', body: 'Scored on arrival against budget, area and readiness, so agents spend their day with buyers who are ready.' },
+      { title: 'Viewings offered, not chased', body: 'Routed with a slot already proposed against the agent\'s live calendar.' },
+      { title: 'Paperwork that closes itself', body: 'Documents are followed up continuously instead of depending on somebody remembering.' },
+      { title: 'A pipeline a director can read', body: 'Where enquiries came from and what happened to them, visible without anyone compiling it.' },
+    ],
+    faq: [
+      { q: 'Do we have to change CRM?', a: 'No. It works with the CRM, portal feeds and calendars you already use.' },
+      { q: 'How does it handle enquiries that are not serious?', a: 'It scores them and routes accordingly, so agents are not spending the morning on enquiries that were never going to transact.' },
+      { q: 'Who answers the buyer first?', a: 'The system does, within limits you agree, and hands to an agent with the context already gathered.' },
+      { q: 'What happens to leads outside office hours?', a: 'They are answered when they arrive. That is usually where the difference shows first.' },
+    ],
     related: [
-      { label: 'Real Estate Automation', path: '/solutions/real-estate' },
-      { label: 'Ops Console', path: '/platforms/ops-console' },
+      { label: 'Real estate', path: '/solutions/real-estate' },
+      { label: 'Your dashboard', path: '/platforms/ops-console' },
     ],
     cta: {
       heading: 'Read your own pipeline this way',
@@ -320,9 +440,21 @@ export const PAGES = [
       situation: 'Intake on paper and coverage checked by phone, so the desk found out about a problem on the morning of the appointment, with the patient already on their way.',
       changed: 'Intake and coverage are settled before arrival. The desk works a named list of exceptions instead of a queue of unknowns, and the first minute at the desk is not a form.',
     },
+    deliverables: [
+      { title: 'Intake settled before arrival', body: 'Completed by message, so the desk is not handing out forms and re-keying them.' },
+      { title: 'Cover checked in advance', body: 'Verified with the payer when the booking is made rather than on the morning.' },
+      { title: 'Recalls that run continuously', body: 'Reviews flagged when due, so the clinic is not working an ageing list in whatever time is left.' },
+      { title: 'One queue across clinics', body: 'A site running behind is visible next to the others, before the patient is.' },
+    ],
+    faq: [
+      { q: 'Is any clinical decision automated?', a: 'No. Clinical judgement stays with clinicians. This is the administrative work around the appointment.' },
+      { q: 'Where does patient data live?', a: 'In your clinical records, where it is now. Nothing is migrated, and access is scoped to the processes in the build.' },
+      { q: 'What does the front desk actually do differently?', a: 'They work a named list of exceptions instead of a queue of unknowns. The routine intake and cover checks have already happened.' },
+      { q: 'We run several clinics. Does it handle multi-site?', a: 'Yes. Each clinic is read separately and against the others, so load is visible before it becomes a problem.' },
+    ],
     related: [
-      { label: 'Healthcare & Clinic Automation', path: '/solutions/healthcare' },
-      { label: 'Ops Console', path: '/platforms/ops-console' },
+      { label: 'Clinics and healthcare', path: '/solutions/healthcare' },
+      { label: 'Your dashboard', path: '/platforms/ops-console' },
     ],
     cta: {
       heading: 'Start with your busiest Monday',
