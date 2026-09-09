@@ -1,19 +1,18 @@
 import { s } from '../lib/style';
-import { useBelowDesktop } from '../hooks/useMedia';
 import { STACK } from '../data/content';
 
-// The reference's orbital, carrying our claim rather than a platform list:
-// the systems a client already runs, orbiting the systems we run that read and
-// writes to them. "No rip and replace" was previously a line of text.
+// Was an orbital diagram: eight tiles rotating around the mark. Two problems.
+// The tiles counter-rotate to stay upright and did not cancel cleanly, so half
+// the labels sat at an angle — hard to read, and harder for the reader this
+// page is written for. And a systems diagram answers an architect's question,
+// where the one actually being asked here is "will you disturb my business?"
+//
+// So the section states the answer instead: here is what you keep.
 export function Stack() {
-  const stacked = useBelowDesktop();
-  const size = stacked ? 300 : 460;
-  const centre = size / 2;
-  const radius = stacked ? 118 : 182;
-
   return (
-    <section id="stack" style={s('position:relative; padding:clamp(76px, 11vw, 150px) 0; overflow:hidden')}>
-      <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:0 var(--gut); text-align:center')}>
+    <section id="stack" style={s('position:relative; padding:clamp(76px, 11vw, 150px) 0')}>
+      <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut); text-align:center')}>
+
         <div className="om-label" data-anim="head">Works with what you already have</div>
         <h2 data-anim="head" style={s('margin:18px auto 0; max-width:18ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.017em')}>
           Nothing gets ripped out.
@@ -22,43 +21,26 @@ export function Stack() {
           Our systems read and write to the software your team already uses. No migration, no second system to keep in sync.
         </p>
 
-        <div style={s(`position:relative; width:${size}px; height:${size}px; margin:clamp(40px, 5vw, 64px) auto 0`)}>
-          {/* Orbit guides */}
-          {[radius, radius * 0.66, radius * 0.34].map((r) => (
-            <span
-              key={r}
-              aria-hidden="true"
-              style={s(`position:absolute; left:50%; top:50%; width:${r * 2}px; height:${r * 2}px; margin:${-r}px 0 0 ${-r}px; border-radius:50%; border:1px dashed var(--rule-strong); opacity:0.7`)}
-            />
-          ))}
-
-          {/* The systems revolve; the mark stays put. */}
-          <div className="om-orbit">
-          {STACK.map((item, i) => {
-            const angle = (i / STACK.length) * Math.PI * 2 - Math.PI / 2;
-            const x = centre + Math.cos(angle) * radius;
-            const y = centre + Math.sin(angle) * radius;
-            const tileW = stacked ? 84 : 104;
-            const tileH = stacked ? 34 : 40;
-            return (
-              <span
-                key={item.short}
-                title={item.label}
-                className="om-orbit-tile"
-                style={s(`position:absolute; left:${x}px; top:${y}px; width:${tileW}px; height:${tileH}px; margin:${-tileH / 2}px 0 0 ${-tileW / 2}px; display:flex; align-items:center; justify-content:center; border-radius:999px; border:1px solid var(--rule); background:var(--raised); box-shadow:0 8px 22px -12px rgba(28,25,23,0.3); font-size:${stacked ? 12 : 13.5}px; font-weight:500; color:var(--ink); white-space:nowrap`)}
-              >{item.short}</span>
-            );
-          })}
+        <div
+          data-anim="card"
+          style={s('margin:clamp(36px, 4.5vw, 60px) auto 0; max-width:920px; border:1px solid var(--rule); border-radius:18px; background:var(--raised); box-shadow:0 30px 70px -55px rgba(28,25,23,0.45); overflow:hidden; text-align:left')}
+        >
+          <div style={s('padding:clamp(24px, 3vw, 36px); display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:clamp(14px, 1.8vw, 22px) clamp(20px, 3vw, 40px)')}>
+            {STACK.map((item) => (
+              <div key={item.label} style={s('display:flex; align-items:center; gap:12px')}>
+                {/* A tick rather than a node: this is a list of what keeps
+                    working, not a diagram of what connects to what. */}
+                <span aria-hidden="true" style={s('flex:none; width:22px; height:22px; border-radius:50%; background:var(--accent-tint); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600')}>✓</span>
+                <span style={s('font-size:16.5px; line-height:1.35; color:var(--ink)')}>{item.label}</span>
+              </div>
+            ))}
           </div>
 
-          {/* Ideora sits at the centre, still. */}
-          <span style={s(`position:absolute; left:50%; top:50%; width:${stacked ? 78 : 100}px; height:${stacked ? 78 : 100}px; margin:${stacked ? -39 : -50}px 0 0 ${stacked ? -39 : -50}px; display:flex; align-items:center; justify-content:center; border-radius:${stacked ? 24 : 30}px; border:1px solid var(--rule); background:var(--raised); box-shadow:0 18px 44px -18px rgba(28,25,23,0.28)`)}>
-            <img src="/assets/ideora-mark.png" alt="Ideora Labs" style={s(`width:${stacked ? 44 : 58}px; height:auto; display:block`)} />
-          </span>
+          <div style={s('padding:18px clamp(24px, 3vw, 36px); border-top:1px solid var(--rule); background:var(--bg-sunken); font-size:15px; line-height:1.55; color:var(--ink-muted)')}>
+            Your data stays where it is, and your team keeps working the way they already do. Nothing is replaced and nobody is retrained.
+          </div>
         </div>
 
-        {/* The pill row that repeated all eight names is gone: the tiles
-            carry them now. */}
       </div>
     </section>
   );

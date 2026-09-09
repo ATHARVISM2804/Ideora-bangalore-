@@ -264,17 +264,6 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
 @media (max-width: 1024px) { .om-figs { grid-template-columns: repeat(2, 1fr) !important; } }
 @media (max-width: 420px)  { .om-figs { grid-template-columns: repeat(2, 1fr) !important; } }
 
-/* Orbit. The ring carries the tiles round; each tile counter-rotates at the
-   same rate so its label stays upright rather than tumbling. */
-.om-orbit { position: absolute; inset: 0; animation: om-orbit-spin 52s linear infinite; }
-.om-orbit-tile { animation: om-orbit-spin-rev 52s linear infinite; }
-
-@keyframes om-orbit-spin     { from { transform: rotate(0deg); }  to { transform: rotate(360deg); } }
-@keyframes om-orbit-spin-rev { from { transform: rotate(0deg); }  to { transform: rotate(-360deg); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .om-orbit, .om-orbit-tile { animation: none; }
-}
 
 /* --- Footer wordmark mark -------------------------------------------------
    The bulb sits at the head of the oversized "Ideora" in the footer, at the
