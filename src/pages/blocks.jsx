@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { s } from '../lib/style';
+import { CASES } from '../data/content';
 
 const MONO = "font-family:'JetBrains Mono', monospace";
 const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
@@ -78,6 +79,56 @@ export function PageCta({ heading, body }) {
             <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>{body}</p>
           </div>
           <Link to="/#book" style={s('flex:none; padding:14px 24px; border-radius:13px; background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 32px -16px rgba(244,96,30,0.7)')}>Request a Demo</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// A case study, built from the CASES entry for a vertical rather than from new
+// claims. The site states that clients are under NDA, so there is no company
+// name, no logo and no revenue figure here — what it does, what it replaced,
+// and when it went live is everything we can actually stand behind.
+export function CaseStudy({ vertical, situation, built, changed }) {
+  const cs = CASES.find((c) => c.vertical === vertical);
+  if (!cs) return null;
+
+  const COL = [
+    { head: 'The situation', body: situation },
+    { head: 'What we built', body: built || cs.body },
+    { head: 'What changed',  body: changed },
+  ].filter((c) => c.body);
+
+  return (
+    <section style={s('padding:0 0 clamp(56px, 8vw, 120px)')}>
+      <div style={s(WRAP)}>
+        <div style={s('grid-column:1 / span 12; border:1px solid var(--rule); border-radius:20px; background:var(--raised); overflow:hidden; box-shadow:0 30px 70px -55px rgba(28,25,23,0.45)')}>
+
+          <div style={s('padding:clamp(28px, 3.4vw, 44px) clamp(24px, 3vw, 44px) 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap')}>
+            <span className="om-label">Case study</span>
+            <span style={s('display:inline-flex; align-items:center; gap:7px; padding:5px 12px; border-radius:999px; border:1px solid rgba(244,96,30,0.34); background:var(--accent-tint); font-size:13px; color:var(--accent-deep)')}>
+              <span style={s('width:6px; height:6px; border-radius:50%; background:var(--accent)')} />
+              {cs.vertical} · {cs.status === 'live' ? `live since ${cs.since}` : `${cs.status} · ${cs.since}`}
+            </span>
+          </div>
+
+          <h2 style={s('margin:16px 0 0; padding:0 clamp(24px, 3vw, 44px); max-width:22ch; font-family:var(--display); font-weight:600; font-size:clamp(25px, 3vw, 38px); line-height:1.1; letter-spacing:-0.013em; color:var(--ink)')}>
+            {cs.title}
+          </h2>
+
+          <div style={s(`margin-top:clamp(26px, 3vw, 38px); padding:0 clamp(24px, 3vw, 44px) clamp(28px, 3.4vw, 40px); display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:clamp(20px, 2.6vw, 36px)`)}>
+            {COL.map((c) => (
+              <div key={c.head}>
+                <div className="om-label" style={s('font-size:10.5px; letter-spacing:0.13em')}>{c.head}</div>
+                <p style={s('margin:10px 0 0; font-size:16px; line-height:1.6; color:var(--ink-muted)')}>{c.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={s('padding:16px clamp(24px, 3vw, 44px); border-top:1px solid var(--rule); background:var(--bg-sunken); font-size:14.5px; color:var(--ink-muted)')}>
+            Replaced {cs.replaced}. Client is under NDA, so the system is described by what it does rather than who runs it.
+          </div>
+
         </div>
       </div>
     </section>

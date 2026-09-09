@@ -249,6 +249,11 @@ export const PAGES = [
       { title: 'The backlog, by site', body: 'A group running several sites reads each queue separately and against the others, so a backlog forming at one site is visible the day it forms rather than in a month-end report. In the console, an automotive workspace shows load peaking on a Thursday morning, which is a thing you can staff for once you can see it.' },
       { title: 'What still reaches an advisor', body: 'An advisor starts the shift on jobs that are already booked, rather than on an inbox that has to be read before the day can begin. Exceptions are named and attributed, and they are the only thing an advisor is asked to work. The routine confirmations run without one.' },
     ],
+    caseStudy: {
+      vertical: 'Automotive',
+      situation: 'Service enquiries arriving across WhatsApp, a shared inbox and the phone. Nothing was lost exactly, but anything that came in after the counter closed waited until an advisor opened the inbox the next morning.',
+      changed: 'Median time to a confirmed answer is now forty seconds, and advisors open the day on jobs that are already booked rather than on a queue of messages to read.',
+    },
     related: [
       { label: 'Service Centre Automation', path: '/solutions/service-centre' },
       { label: 'Ops Console', path: '/platforms/ops-console' },
@@ -277,6 +282,11 @@ export const PAGES = [
       { title: 'A shortlist, not missed calls', body: 'The reasoning travels with the enquiry, so an agent picking one up can see why it is theirs and what has already been agreed with the buyer. Negotiation and the relationship stay where they were. The chasing around them does not.' },
       { title: 'Where the pipeline is coming from', body: 'The queue is broken out by source, so a brokerage can see which channel is carrying it and which is quiet. What a brokerage workspace shows in our own console is the portal feed holding most of the open enquiries, and the week landing hardest on a Saturday morning, when the fewest people are at a desk.' },
     ],
+    caseStudy: {
+      vertical: 'Real estate',
+      situation: 'Portal and web enquiries arriving faster than the team could call back, so the first real response was often the next working day — by which time the buyer had usually asked someone else.',
+      changed: 'Enquiries are scored and routed as they arrive, with a viewing already offered against a live calendar. Agents spend their day with buyers who are ready rather than on call-backs.',
+    },
     related: [
       { label: 'Real Estate Automation', path: '/solutions/real-estate' },
       { label: 'Ops Console', path: '/platforms/ops-console' },
@@ -305,6 +315,11 @@ export const PAGES = [
       { title: 'Several clinics, one queue', body: 'A multi-site group reads every clinic from the same console, so a site with intake still open on the morning of an appointment is visible before the patient is. Monday morning is the peak in the clinic workspace our console ships with, which is when a front desk has least time to work that out for itself.' },
       { title: 'Recalls that do not wait for a report', body: 'The clinic knows on Monday which slots are going unfilled, and it knows in the same place which patients are overdue a review. Neither fact waits on a report being pulled at the end of the month, and neither one has to be held by the person who happens to remember it.' },
     ],
+    caseStudy: {
+      vertical: 'Healthcare',
+      situation: 'Intake on paper and coverage checked by phone, so the desk found out about a problem on the morning of the appointment, with the patient already on their way.',
+      changed: 'Intake and coverage are settled before arrival. The desk works a named list of exceptions instead of a queue of unknowns, and the first minute at the desk is not a form.',
+    },
     related: [
       { label: 'Healthcare & Clinic Automation', path: '/solutions/healthcare' },
       { label: 'Ops Console', path: '/platforms/ops-console' },

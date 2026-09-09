@@ -2,6 +2,7 @@ import { s } from '../lib/style';
 import { useIsPhone, useBelowDesktop } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
+import { FACTS } from '../data/content';
 import { Outcome } from './Outcome';
 import { AutomationMap } from './AutomationMap';
 
@@ -73,6 +74,19 @@ export function Hero({ consoleRef }) {
               </div>
 
               <p style={s('margin:clamp(18px, 2.2vw, 24px) 0 0; font-size:14px; color:var(--ink-faint)')}>Ninety minutes · you keep the map · no obligation</p>
+
+              {/* The fold had a column of empty space under the buttons. Three
+                  facts from FACTS fill it with the things a first-time reader
+                  actually wants: who it is running for, how long it takes, and
+                  what the commercial arrangement is. */}
+              <div style={s('margin-top:clamp(30px, 3.6vw, 46px); padding-top:clamp(22px, 2.6vw, 30px); border-top:1px solid var(--rule); display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:clamp(16px, 2vw, 28px)')}>
+                {FACTS.slice(0, 3).map((f) => (
+                  <div key={f.label}>
+                    <div className="om-label" style={s('font-size:10.5px; letter-spacing:0.13em')}>{f.label}</div>
+                    <div style={s('margin-top:7px; font-size:14.5px; line-height:1.45; color:var(--ink)')}>{f.value}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
