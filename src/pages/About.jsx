@@ -4,7 +4,6 @@ import { PageHero, ProofStrip, ProseSections } from './blocks';
 import { Hover } from '../components/Hover';
 import { FACTS } from '../data/content';
 
-const MONO = "font-family:'JetBrains Mono', monospace";
 const WRAP = 'max-width:1400px; margin:0 auto; padding:0 clamp(20px, 5vw, 40px); display:grid; grid-template-columns:repeat(12, 1fr); gap:20px';
 
 const SECTIONS = [
@@ -28,14 +27,14 @@ export function About() {
 
       <section id="contact" style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
         <div className="om-g12" style={s(WRAP)}>
-          <div data-nav-dark style={s('grid-column:1 / span 12; border-radius:24px; background:#1A1D23; color:#F1F3F6; padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
+          <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
             <div>
               <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>Talk to us about your operation</h2>
-              <p style={s('margin:16px 0 0; max-width:52ch; color:#C6CCD6')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
+              <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
             </div>
             <div style={s('flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:10px')}>
-              <Hover as="a" href="mailto:work@ideoralabs.com" style={`${MONO}; font-size:16px; color:#F1F3F6; text-decoration:none; transition:color .25s`} hoverStyle="color:#F4601E">work@ideoralabs.com</Hover>
-              <span style={s('color:#C6CCD6; font-size:14px')}>Pune · Dubai</span>
+              <Hover as="a" href="mailto:work@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; transition:color .25s`} hoverStyle="color:var(--accent)">work@ideoralabs.com</Hover>
+              <span style={s('color:var(--ink-faint); font-size:14px')}>Pune · Dubai</span>
             </div>
           </div>
         </div>

@@ -59,7 +59,7 @@ export function Related({ items }) {
           <div style={s(`${MONO}; font-size:12px; color:#5A616D; margin-bottom:16px`)}>related</div>
           <div style={s('display:flex; gap:12px; flex-wrap:wrap')}>
             {items.map((it) => (
-              <Link key={it.path} to={it.path} style={s('padding:10px 16px; border-radius:99px; border:1px solid rgba(26,29,35,0.1); background:#FFFFFF; color:#1A1D23; font-size:14px; text-decoration:none')}>{it.label}</Link>
+              <Link key={it.path} to={it.path} style={s('padding:10px 16px; border-radius:99px; border:1px solid var(--rule); background:var(--raised); color:var(--ink); font-size:14px; text-decoration:none')}>{it.label}</Link>
             ))}
           </div>
         </div>
@@ -72,12 +72,12 @@ export function PageCta({ heading, body }) {
   return (
     <section style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
       <div className="om-g12" style={s(WRAP)}>
-        <div data-nav-dark style={s('grid-column:1 / span 12; border-radius:24px; background:#1A1D23; color:#F1F3F6; padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
+        <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
           <div>
             <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>{heading}</h2>
-            <p style={s('margin:16px 0 0; max-width:52ch; color:#C6CCD6')}>{body}</p>
+            <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>{body}</p>
           </div>
-          <Link to="/#book" style={s('flex:none; padding:14px 24px; border-radius:13px; background:#F4601E; color:#1A1D23; font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 10px 26px -14px rgba(244,96,30,0.95)')}>Request a Demo</Link>
+          <Link to="/#book" style={s('flex:none; padding:14px 24px; border-radius:13px; background:var(--accent); color:#FFFFFF; font-size:15px; font-weight:500; text-decoration:none; box-shadow:0 14px 32px -16px rgba(244,96,30,0.7)')}>Request a Demo</Link>
         </div>
       </div>
     </section>
