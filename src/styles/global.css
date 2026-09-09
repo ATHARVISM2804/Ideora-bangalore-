@@ -203,58 +203,6 @@ h1, h2, h3, p, li, a, span { overflow-wrap: break-word; }
   -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
 }
 
-/* Decorative backdrop video. In the hero it replaces .om-sky's colour fields,
-   per the note in Hero.jsx: .om-grain still sits over it, and the same bottom
-   frame stays at full strength almost to its bottom edge and dissolves only in
-   the last 8%, which is enough to avoid ending on a hard line against --bg
-   without washing out the lower half of the artwork. The poster sits
-   underneath so a slow connection, a decode failure, or reduced-motion all
-   land on a still rather than a blank frame. */
-.om-bgvid,
-.om-bgposter {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  z-index: 0;
-  mask-image: linear-gradient(180deg, #000 0%, #000 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 92%, transparent 100%);
-}
-
-.om-bgposter {
-  background-size: cover;
-  background-position: center;
-}
-
-/* Mid-page use. Cover cropped ~430px off each side here, because the section is
-   taller than the 16:9 frame — and that is exactly where the routing lines are.
-   Centring the whole frame instead left a band of bare --bg above it, which read
-   as a white gap under the dark section above.
-   So the element IS the frame: full width, its own 16/9 height, anchored to the
-   top of the section. It meets the dark section flush with no gap, and fades out
-   over its own lower half into --bg, which is what the next section is anyway.
-   Sizing by aspect-ratio rather than a percentage of the section keeps the fade
-   correct at any section height. */
-.om-bgmedia--mid {
-  bottom: auto;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
-}
-
-@media (max-width: 640px) {
-  .om-bgmedia--mid { aspect-ratio: 9 / 16; }
-}
-
-/* Motion is decorative here, so it is the first thing to go. The poster
-   underneath carries the same image without the movement. */
-@media (prefers-reduced-motion: reduce) {
-  .om-bgvid { display: none; }
-}
-
 .om-grain {
   position: absolute;
   inset: 0;

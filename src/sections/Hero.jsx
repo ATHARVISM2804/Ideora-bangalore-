@@ -4,7 +4,6 @@ import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
 import { OpsConsole } from './OpsConsole';
 import { Surfaces } from './Surfaces';
-import { BackdropVideo } from '../components/BackdropVideo';
 
 // The hero gives each idea its own screen: the statement, then the numbers,
 // then the product. Crowding all three into one view is what made it read as
@@ -22,13 +21,10 @@ export function Hero({ consoleRef }) {
           The bar floats over the sky; without this the frame starts below the
           header and the page's flat --bg shows above it as a seam. */}
       <div style={s('position:relative; overflow:hidden; margin-top:calc(-1 * var(--nav-h, 0px)); padding-top:var(--nav-h, 0px)')}>
-        {/* Backdrop. The video replaces .om-sky's colour fields; .om-grain
-            still sits over it and the mask still fades the frame into the page.
-            The poster is a sibling underneath rather than only the video's
-            poster attribute, so it also covers reduced-motion and the phone
-            case below. Phones get the still: 1.4MB of decorative video is not
-            worth a mobile connection, and the frame is legible on its own. */}
-        <BackdropVideo />
+        {/* Backdrop. Layered colour fields rather than footage: the video read
+            as tech-product atmosphere, and this page is being read by senior
+            operators who want the argument, not the mood. */}
+        <div className="om-sky" aria-hidden="true" />
         <div className="om-grain" aria-hidden="true" />
         <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:clamp(64px, 11vh, 132px) var(--gut) clamp(30px, 3.6vw, 52px); text-align:center')}>
         <div data-anim="hero-1" style={s('display:flex; justify-content:center')}>

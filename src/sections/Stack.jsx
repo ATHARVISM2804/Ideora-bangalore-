@@ -1,7 +1,6 @@
 import { s } from '../lib/style';
 import { useBelowDesktop } from '../hooks/useMedia';
 import { STACK } from '../data/content';
-import { BackdropVideo } from '../components/BackdropVideo';
 
 // The reference's orbital, carrying our claim rather than a platform list:
 // the systems a client already runs, orbiting the agent layer that reads and
@@ -14,9 +13,6 @@ export function Stack() {
 
   return (
     <section id="stack" style={s('position:relative; padding:clamp(76px, 11vw, 150px) 0; overflow:hidden')}>
-      {/* Same backdrop as the hero, masked at both ends and held back so the
-          orbit rings and tiles stay the thing you read. */}
-      <BackdropVideo mid opacity={0.6} />
       <div style={s('position:relative; z-index:1; max-width:var(--measure); margin:0 auto; padding:0 var(--gut); text-align:center')}>
         <div className="om-label" data-anim="head">Runs inside your stack</div>
         <h2 data-anim="head" style={s('margin:18px auto 0; max-width:18ch; font-family:var(--display); font-weight:600; font-size:clamp(30px, 4.2vw, 56px); line-height:1.06; letter-spacing:-0.036em')}>
