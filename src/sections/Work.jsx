@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { s } from '../lib/style';
 import { CASES } from '../data/content';
-import { ImageSlot } from '../components/ImageSlot';
+import { CaseArt } from '../components/CaseArt';
 import { Hover } from '../components/Hover';
 
 // The case studies. Sits directly after "what we build", because the question a
@@ -24,18 +24,6 @@ const CASE_PATH = {
   'Cross-vertical': '/platforms/ops-console',
 };
 
-// What photograph belongs in each frame, written as an instruction because the
-// repo has no case-study photography. Pass a `src` to ImageSlot and the
-// placeholder disappears on its own.
-const CASE_IMAGE = {
-  'Automotive':     'Service bay or workshop floor',
-  'Real estate':    'Brokerage office or a viewing',
-  'Healthcare':     'Clinic reception or front desk',
-  'Cross-vertical': 'Operations team at work',
-  'Finance':        'Onboarding or review desk',
-  'Legal':          'Matter intake or file room',
-};
-
 function Pill({ children, tone }) {
   const t = tone || { fg: 'var(--ink-muted)', bg: 'var(--bg)', bd: 'var(--rule)' };
   return (
@@ -52,7 +40,7 @@ function CaseBody({ cs, to }) {
   return (
     <>
       <div style={s('aspect-ratio:16 / 10; background:var(--bg-sunken); border-bottom:1px solid var(--rule)')}>
-        <ImageSlot placeholder={CASE_IMAGE[cs.vertical] || 'Drop a photo'} alt="" />
+        <CaseArt vertical={cs.vertical} />
       </div>
 
       <div style={s('padding:clamp(20px, 2.2vw, 26px)')}>
