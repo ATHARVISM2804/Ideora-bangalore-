@@ -12,7 +12,7 @@
 // brief; "inquiries" is spelled "enquiries" to match the rest of the site.
 export const CAPABILITIES = [
   { icon: "voice",     title: "AI Voice",
-    body: "Natural voice agents that handle calls, enquiries and support." },
+    body: "Voice systems that handle calls, enquiries and support." },
   { icon: "chat",      title: "WhatsApp Automation",
     body: "Engage, respond and resolve conversations at scale." },
   { icon: "workflow",  title: "Workflow Automation",
@@ -51,9 +51,9 @@ export const PROBLEMS = [
 ];
 
 export const SERVICES = [
-  { code: "01", short: "Agents that run your operations", title: "Custom automation for your operations",
-    body: "Custom agents that operate your systems the way a trained coordinator would: read the request, check the record, take the action, log the outcome. Built around your permissions and your escalation rules.",
-    delivers: "Agents that complete multi-step operational tasks end to end, with a full trace of every action.",
+  { code: "01", short: "Systems that run your operations", title: "Custom automation for your operations",
+    body: "Systems that work your software the way a trained coordinator would: read the request, check the record, take the action, log the outcome. Built around your permissions and your escalation rules.",
+    delivers: "Systems that complete multi-step operational work end to end, with a record of every action.",
     connects: "Your CRM, WhatsApp, email and calendars",
     time: "8 to 10 weeks" },
   { code: "02", short: "Enquiries qualified before contact", title: "Real estate automation",
@@ -67,7 +67,7 @@ export const SERVICES = [
     connects: "Your patient records, practice software, insurers and SMS",
     time: "8 weeks" },
   { code: "04", short: "Bookings answered in seconds", title: "Service centre automation",
-    body: "One agent across booking, estimate approval, parts status, and customer updates, working the same records your advisors and DMS already use.",
+    body: "One system across booking, estimate approval, parts status, and customer updates, working the same records your advisors and DMS already use.",
     delivers: "Bookings held, estimates approved, and a bay schedule that reflects reality by 9am.",
     connects: "Your dealer system, booking tool, WhatsApp and parts catalogue",
     time: "6 to 8 weeks" },
@@ -80,7 +80,7 @@ export const SERVICES = [
 
 export const INDUSTRIES = [
   { code: "01", name: "Automotive", panel: "automotive", slotId: "v5-ind-auto", slotHint: "Drop a workshop or service bay photo",
-    body: "Bookings, estimates, and approvals move through one agent instead of three inboxes. Advisors stop transcribing and start closing jobs the agent has already prepared." },
+    body: "Bookings, estimates, and approvals move through one system instead of three inboxes. Advisors stop transcribing and start closing jobs the system has already prepared." },
   { code: "02", name: "Real estate", panel: "realestate", slotId: "v5-ind-realestate", slotHint: "Drop a property or office photo",
     body: "Enquiries are qualified, viewings are scheduled against real calendars, and documents are chased until they arrive. Agents see a shortlist, not missed calls." },
   { code: "03", name: "Healthcare", panel: "healthcare", slotId: "v5-ind-health", slotHint: "Drop a clinic or front-desk photo",
@@ -149,7 +149,7 @@ export const PROC = [
   { n: "03", title: "Build in the open", tags: ["Weekly builds", "Your staging data"],
     body: "You see working software every week, not a status update. Each build runs against your staging data the same day it ships." },
   { n: "04", title: "Integrate and connect", tags: ["Your permissions", "Real volume first"],
-    body: "The agent is wired into your live systems with your permissions and escalation rules, then run against real volume before cutover." },
+    body: "The system is wired into the software you already run, with your permissions and escalation rules, then run against real volume before cutover." },
   { n: "05", title: "Run and report", tags: ["We operate it", "You keep the dashboard"],
     body: "We operate the system and you keep the dashboard. Backlog, ageing and exceptions are visible the day they happen." }
 ];
@@ -158,6 +158,6 @@ export const RESULT_STATS = [
   { value: 40, suffix: "s", label: "median task completion", note: "was 4 to 6 hours" },
   { value: 0, suffix: "", label: "human touches per booking", note: "exceptions only" },
   { value: 6, suffix: " wks", label: "to first system live", note: "fixed scope" },
-  { value: 12, suffix: "/12", label: "agents online right now", note: "99.98% uptime" }
+  { value: 12, suffix: "/12", label: "systems running right now", note: "99.98% uptime" }
 ];
 
