@@ -2,13 +2,12 @@ import { s } from '../lib/style';
 import { useIsPhone, useBelowDesktop } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { Hover } from '../components/Hover';
-import { Outcome } from './Outcome';
 import { AutomationMap } from './AutomationMap';
 
 // Statement on the left, what we sell on the right. The centred
 // arrangement this replaces gave the fold a single sentence and no anchor; a
 // split hero says what we do and where it applies in one screen.
-export function Hero({ consoleRef }) {
+export function Hero() {
   const phone = useIsPhone();
   const narrow = useBelowDesktop();
 
@@ -91,9 +90,6 @@ export function Hero({ consoleRef }) {
 
         </div>
       </div>
-
-      {/* ── What it changes ───────────────────────────────────────── */}
-      <Outcome cardRef={consoleRef} />
 
     </section>
   );

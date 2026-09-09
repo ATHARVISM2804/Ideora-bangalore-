@@ -9,7 +9,7 @@ export function HowItWorks() {
   const stacked = useBelowDesktop();
 
   return (
-    <section id="how" style={s('padding:clamp(76px, 11vw, 150px) 0; border-top:1px solid var(--rule); background:var(--bg-sunken)')}>
+    <section id="how" style={s('padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
         <div data-anim="head" style={s('display:flex; align-items:center; gap:14px')}>
           <span style={s('width:26px; height:1px; background:var(--accent)')} />

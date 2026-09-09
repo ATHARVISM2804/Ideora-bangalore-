@@ -28,7 +28,7 @@ export function Services() {
           We map the handoffs your team does by hand, then build systems that do them in your live software — and report what they did.
         </p>
 
-        <div style={s(`margin-top:clamp(40px, 5vw, 64px); display:grid; grid-template-columns:${stacked ? '1fr' : 'minmax(240px, 0.8fr) 1.6fr'}; gap:clamp(16px, 2.4vw, 32px); align-items:start`)}>
+        <div style={s(`margin-top:clamp(40px, 5vw, 64px); display:grid; grid-template-columns:${stacked ? '1fr' : 'minmax(min(240px, 100%), 0.8fr) 1.6fr'}; gap:clamp(16px, 2.4vw, 32px); align-items:start`)}>
 
           {/* Selector */}
           <div style={s('display:flex; flex-direction:column; gap:6px')}>
@@ -69,7 +69,7 @@ export function Services() {
 
               {/* The method every practice runs on, stated once. */}
               <div style={s('margin-top:28px; padding:16px 18px; border-radius:14px; border:1px solid var(--rule); background:var(--bg-sunken)')}>
-                <div className="om-label" style={s('font-size:11.5px')}>One method</div>
+                <div className="om-label" style={s('font-size:12.5px')}>One method</div>
                 <div style={s('margin-top:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap')}>
                   {['read the request', 'check the record', 'act in your system', 'log the outcome'].map((step, i) => (
                     <span key={step} style={s('display:inline-flex; align-items:center; gap:10px; font-size:14.5px; color:var(--ink-muted)')}>

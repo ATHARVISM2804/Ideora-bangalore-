@@ -9,7 +9,7 @@ const NAV_LINK_HOVER = 'color:var(--ink)';
 // Wide-tracked caps, the quietest thing on the page. These label the columns
 // rather than competing with them, so they sit two steps down in weight and
 // colour from the links beneath.
-const COL_HEAD = 'margin:0 0 18px; font-family:var(--sans); font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint)';
+const COL_HEAD = 'margin:0 0 18px; font-family:var(--sans); font-size:12.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-faint)';
 
 const menu = (label) => MENUS.find((m) => m.label === label)?.items ?? [];
 
@@ -17,7 +17,7 @@ const menu = (label) => MENUS.find((m) => m.label === label)?.items ?? [];
 // drift from it. Only the four menus that hold items are listed: About and
 // Insights are single pages and live in the Company column instead.
 const COLUMNS = [
-  { head: 'Platforms', items: menu('Platforms') },
+  { head: 'How it works', items: menu('How it works') },
   { head: 'Solutions', items: menu('Solutions') },
   { head: 'Industries', items: menu('Industries') },
 ];

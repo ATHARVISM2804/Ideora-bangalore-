@@ -3,6 +3,7 @@ import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
+import { Outcome } from '../sections/Outcome';
 import { Services } from '../sections/Services';
 import { HowItWorks } from '../sections/HowItWorks';
 import { Work } from '../sections/Work';
@@ -30,7 +31,8 @@ export function Home() {
 
   return (
     <div ref={rootRef}>
-      <Hero consoleRef={consoleRef} />
+      <Hero />
+      <Outcome cardRef={consoleRef} />
       <Services />
       <Work pinRef={pinRef} />
       <HowItWorks />

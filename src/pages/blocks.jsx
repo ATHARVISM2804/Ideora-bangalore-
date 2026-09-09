@@ -73,7 +73,7 @@ export function PageCta({ heading, body }) {
   return (
     <section style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
       <div className="om-g12" style={s(WRAP)}>
-        <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
+        <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:clamp(28px, 5vw, 64px) clamp(22px, 4vw, 56px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:clamp(20px, 3vw, 40px)')}>
           <div>
             <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>{heading}</h2>
             <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>{body}</p>
@@ -116,7 +116,7 @@ export function CaseStudy({ vertical, situation, built, changed }) {
             {cs.title}
           </h2>
 
-          <div style={s(`margin-top:clamp(26px, 3vw, 38px); padding:0 clamp(24px, 3vw, 44px) clamp(28px, 3.4vw, 40px); display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:clamp(20px, 2.6vw, 36px)`)}>
+          <div style={s(`margin-top:clamp(26px, 3vw, 38px); padding:0 clamp(24px, 3vw, 44px) clamp(28px, 3.4vw, 40px); display:grid; grid-template-columns:repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap:clamp(20px, 2.6vw, 36px)`)}>
             {COL.map((c) => (
               <div key={c.head}>
                 <div className="om-label" style={s('font-size:10.5px; letter-spacing:0.13em')}>{c.head}</div>
@@ -145,7 +145,7 @@ export function Deliverables({ items, head = 'What you get' }) {
       <div style={s(WRAP)}>
         <div style={s('grid-column:1 / span 12')}>
           <div className="om-label">{head}</div>
-          <div style={s('margin-top:clamp(22px, 2.6vw, 32px); display:grid; grid-template-columns:repeat(auto-fit, minmax(258px, 1fr)); gap:clamp(16px, 2vw, 24px)')}>
+          <div style={s('margin-top:clamp(22px, 2.6vw, 32px); display:grid; grid-template-columns:repeat(auto-fit, minmax(min(258px, 100%), 1fr)); gap:clamp(16px, 2vw, 24px)')}>
             {items.map((it) => (
               <div key={it.title} style={s('padding:clamp(20px, 2.2vw, 26px); border:1px solid var(--rule); border-radius:14px; background:var(--raised)')}>
                 <div style={s('display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--accent-tint); color:var(--accent-deep); font-size:13px; font-weight:600')}>✓</div>

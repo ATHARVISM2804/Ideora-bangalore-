@@ -27,13 +27,13 @@ export function About() {
 
       <section id="contact" style={s('padding:0 0 clamp(64px, 10vw, 160px)')}>
         <div className="om-g12" style={s(WRAP)}>
-          <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px')}>
+          <div style={s('grid-column:1 / span 12; border-radius:24px; background:var(--raised); color:var(--ink); border:1px solid var(--rule); padding:clamp(28px, 5vw, 64px) clamp(22px, 4vw, 56px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:clamp(20px, 3vw, 40px)')}>
             <div>
               <h2 style={s('margin:0; font-family:var(--display); font-weight:500; font-size:clamp(25px, 4.4vw, 36px); line-height:1.05; letter-spacing:-0.014em')}>Talk to us about your operation</h2>
               <p style={s('margin:16px 0 0; max-width:52ch; color:var(--ink-muted)')}>Tell us the process that stalls most and we will walk it with you before anything is scoped.</p>
             </div>
-            <div style={s('flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:10px')}>
-              <Hover as="a" href="mailto:work@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; transition:color .25s`} hoverStyle="color:var(--accent)">work@ideoralabs.com</Hover>
+            <div style={s('display:flex; flex-direction:column; align-items:flex-start; gap:10px; min-width:0')}>
+              <Hover as="a" href="mailto:work@ideoralabs.com" style={`font-size:16px; color:var(--ink); text-decoration:none; overflow-wrap:anywhere; transition:color .25s`} hoverStyle="color:var(--accent)">work@ideoralabs.com</Hover>
               <span style={s('color:var(--ink-faint); font-size:14px')}>Pune · Dubai</span>
             </div>
           </div>

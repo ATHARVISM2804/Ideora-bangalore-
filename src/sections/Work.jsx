@@ -98,7 +98,7 @@ export function Work({ pinRef }) {
           Clients are under NDA, so each is described by what it does and what it replaced.
         </p>
 
-        <div className="om-work" style={s('margin-top:clamp(36px, 5vw, 56px); display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:clamp(14px, 1.8vw, 20px)')}>
+        <div className="om-work" style={s('margin-top:clamp(36px, 5vw, 56px); display:grid; grid-template-columns:repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap:clamp(14px, 1.8vw, 20px)')}>
           {CASES.map((cs) => <CaseCard key={cs.code} cs={cs} />)}
         </div>
       </div>

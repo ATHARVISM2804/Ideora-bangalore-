@@ -7,7 +7,7 @@ export function Closing() {
   return (
     <section id="book" style={s('padding:0 0 clamp(80px, 12vw, 170px)')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut) clamp(56px, 8vw, 96px)')}>
-        <div style={s('display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:clamp(24px, 3vw, 44px); border-top:1px solid var(--rule); padding-top:clamp(32px, 4vw, 48px)')}>
+        <div style={s('display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap:clamp(24px, 3vw, 44px); border-top:1px solid var(--rule); padding-top:clamp(32px, 4vw, 48px)')}>
           {FACTS.map((f) => (
             <div key={f.label} data-anim="step">
               <div className="om-label">{f.label}</div>

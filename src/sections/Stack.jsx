@@ -10,7 +10,7 @@ import { STACK } from '../data/content';
 // So the section states the answer instead: here is what you keep.
 export function Stack() {
   return (
-    <section id="stack" style={s('position:relative; padding:clamp(76px, 11vw, 150px) 0')}>
+    <section id="stack" style={s('position:relative; background:var(--bg-sunken); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut); text-align:center')}>
 
         <div className="om-label" data-anim="head">Works with what you already have</div>
@@ -25,7 +25,7 @@ export function Stack() {
           data-anim="card"
           style={s('margin:clamp(36px, 4.5vw, 60px) auto 0; max-width:920px; border:1px solid var(--rule); border-radius:18px; background:var(--raised); box-shadow:0 30px 70px -55px rgba(28,25,23,0.45); overflow:hidden; text-align:left')}
         >
-          <div style={s('padding:clamp(24px, 3vw, 36px); display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:clamp(14px, 1.8vw, 22px) clamp(20px, 3vw, 40px)')}>
+          <div style={s('padding:clamp(24px, 3vw, 36px); display:grid; grid-template-columns:repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap:clamp(14px, 1.8vw, 22px) clamp(20px, 3vw, 40px)')}>
             {STACK.map((item) => (
               <div key={item.label} style={s('display:flex; align-items:center; gap:12px')}>
                 {/* A tick rather than a node: this is a list of what keeps

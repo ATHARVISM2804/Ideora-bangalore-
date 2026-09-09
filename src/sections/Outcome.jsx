@@ -33,14 +33,17 @@ export function Outcome({ cardRef }) {
   const phone = useIsPhone();
 
   return (
-    <section id="outcome" style={s('padding:clamp(56px, 7vw, 96px) 0 clamp(20px, 3vw, 40px)')}>
+    <section id="outcome" style={s('background:var(--bg-sunken); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:clamp(76px, 11vw, 150px) 0')}>
       <div style={s('max-width:var(--measure); margin:0 auto; padding:0 var(--gut)')}>
 
         <div style={s('text-align:center')}>
-          <div className="om-label" data-anim="head">What changes</div>
+          <div className="om-label" data-anim="head">Before and after</div>
           <h2 data-anim="head" style={s('margin:16px auto 0; max-width:24ch; font-family:var(--display); font-weight:600; font-size:clamp(28px, 3.6vw, 46px); line-height:1.1; letter-spacing:-0.014em; color:var(--ink)')}>
-            The same work, without the wait.
+            The same work, without the waiting.
           </h2>
+          <p data-anim="head" style={s('margin:20px auto 0; max-width:52ch; font-size:clamp(16.5px, 1.25vw, 18.5px); line-height:1.6; color:var(--ink-muted)')}>
+            Nothing about the job changes. What changes is how long it sits before somebody gets to it.
+          </p>
         </div>
 
         <div
