@@ -32,8 +32,8 @@ export function Home() {
     <div ref={rootRef}>
       <Hero consoleRef={consoleRef} />
       <Services />
-      <HowItWorks />
       <Work pinRef={pinRef} />
+      <HowItWorks />
       <Stack />
       <Voices />
       <Closing />
