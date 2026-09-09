@@ -1,5 +1,5 @@
 import { s } from '../lib/style';
-import { useIsPhone } from '../hooks/useMedia';
+import { useIsPhone, useMedia } from '../hooks/useMedia';
 
 // The hub beside the hero statement. The reference this follows put a
 // technology stack around the centre — APIs, databases, RPA. That answers what
@@ -42,8 +42,19 @@ function connector(n) {
   return `M ${from.x} ${from.y} C ${mx} ${from.y}, ${mx} ${to.y}, ${to.x} ${to.y}`;
 }
 
+// Where a connector meets the hub: same maths the path ends on, so the dot and
+// the line always agree.
+function rimPoint(n) {
+  const from = { x: n.side === 'left' ? n.x + CARD.w : n.x, y: n.cy };
+  const dx = HUB.x - from.x;
+  const dy = HUB.y - from.y;
+  const len = Math.hypot(dx, dy);
+  return { x: HUB.x - (dx / len) * HUB.r, y: HUB.y - (dy / len) * HUB.r };
+}
+
 export function AutomationMap() {
   const phone = useIsPhone();
+  const still = useMedia('(prefers-reduced-motion: reduce)');
 
   // A 640-wide diagram squeezed onto a phone makes six unreadable cards. The
   // same six areas read fine as a plain two-column list.
@@ -63,15 +74,40 @@ export function AutomationMap() {
   return (
     <div style={s(`position:relative; width:100%; max-width:640px; margin:0 auto; aspect-ratio:${VB.w} / ${VB.h}`)}>
       <svg viewBox={`0 0 ${VB.w} ${VB.h}`} style={s('position:absolute; inset:0; width:100%; height:100%; overflow:visible')} aria-hidden="true">
-        {NODES.map((n) => (
-          <path key={n.title} d={connector(n)} fill="none" stroke="var(--rule-strong)" strokeWidth="1.25" />
-        ))}
-        {NODES.map((n) => {
-          const dx = HUB.x - (n.side === 'left' ? n.x + CARD.w : n.x);
-          const dy = HUB.y - n.cy;
-          const len = Math.hypot(dx, dy);
-          return <circle key={n.title} cx={HUB.x - (dx / len) * HUB.r} cy={HUB.y - (dy / len) * HUB.r} r="3.5" fill="var(--accent)" />;
+        {/* The connector, its arrival point on the rim, and a pulse that runs
+            card -> hub. The motion is the message: work arriving and being
+            taken. Staggered so it reads as a steady flow rather than a
+            six-lane heartbeat. */}
+        {NODES.map((n, i) => {
+          const d = connector(n);
+          const id = `om-path-${i}`;
+          const rim = rimPoint(n);
+          return (
+            <g key={n.title}>
+              <path id={id} d={d} fill="none" stroke="var(--rule-strong)" strokeWidth="1.25" />
+              <circle cx={rim.x} cy={rim.y} r="3.5" fill="var(--accent)" />
+              {!still && (
+                <circle r="4.5" fill="var(--accent)">
+                  <animateMotion dur="3.4s" begin={`${i * 0.55}s`} repeatCount="indefinite">
+                    <mpath href={`#${id}`} />
+                  </animateMotion>
+                  {/* Fades in as it leaves the card and out as it lands, so the
+                      dot does not pop in and out at the endpoints. */}
+                  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.8;1"
+                           dur="3.4s" begin={`${i * 0.55}s`} repeatCount="indefinite" />
+                </circle>
+              )}
+            </g>
+          );
         })}
+
+        {/* A slow ring off the hub: something is running, without a spinner. */}
+        {!still && (
+          <circle cx={HUB.x} cy={HUB.y} r={HUB.r} fill="none" stroke="var(--accent)" strokeWidth="1.5">
+            <animate attributeName="r" values={`${HUB.r};${HUB.r + 26}`} dur="3.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.34;0" dur="3.4s" repeatCount="indefinite" />
+          </circle>
+        )}
       </svg>
 
       {/* Hub. The mark rather than a label: "orchestration layer" is the kind
