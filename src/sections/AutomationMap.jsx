@@ -1,27 +1,39 @@
 import { s } from '../lib/style';
 import { useIsPhone, useMedia } from '../hooks/useMedia';
+import { SERVICES } from '../data/content';
 
-// The hub beside the hero statement. The reference this follows put a
-// technology stack around the centre — APIs, databases, RPA. That answers what
-// the thing is built from. These are the six places work actually stalls in an
-// operation, which is what the reader is buying us to fix, and they are the
-// same six the hero sentence names.
+// The hub beside the hero statement: what we sell, around the mark.
+//
+// Was the six places work stalls in an operation. That described the problem
+// twice, since the sentence beside it already names them — a reader arriving
+// on the fold should see the offer, not the diagnosis restated.
+//
+// Derived from SERVICES so the practices here cannot drift from the ones the
+// "what we build" section lists. Card titles are short display names because
+// "Healthcare and clinic automation" does not fit a card; the note under each
+// is that service's own one-line outcome.
+const NAME = {
+  '01': 'Operations automation',
+  '02': 'Real estate',
+  '03': 'Healthcare',
+  '04': 'Service centres',
+  '05': 'Productised systems',
+};
+
 const AREAS = [
-  { title: 'Enquiries', note: 'Calls, WhatsApp, web forms' },
-  { title: 'Bookings',  note: 'Slots held and confirmed' },
-  { title: 'Approvals', note: 'Estimates and sign-off' },
-  { title: 'Follow-up', note: 'Chasing, reminders, recalls' },
-  { title: 'Intake',    note: 'Forms, documents, cover' },
-  { title: 'Reporting', note: 'Daily, weekly, month end' },
+  ...SERVICES.map((sv) => ({ title: NAME[sv.code] || sv.title, note: sv.short })),
+  // Not a build practice, so not in SERVICES — but it is what the engagement
+  // actually is, and the sixth card would otherwise be empty.
+  { title: 'Managed operation', note: 'We run it, you get the report' },
 ];
 
 // Drawn in a fixed viewBox so the connector geometry is exact rather than
 // measured at runtime: three cards a side, hub in the middle.
 const VB = { w: 640, h: 540 };
 const HUB = { x: 320, y: 270, r: 82 };
-const CARD = { w: 196, h: 74 };
+const CARD = { w: 200, h: 92 };
 const COL_X = { left: 8, right: VB.w - 8 - CARD.w };
-const ROW_Y = [26, 233, 440];
+const ROW_Y = [14, 224, 434];
 
 const NODES = AREAS.map((a, i) => {
   const side = i < 3 ? 'left' : 'right';
@@ -122,8 +134,8 @@ export function AutomationMap() {
           key={n.title}
           style={s(`position:absolute; left:${(n.x / VB.w) * 100}%; top:${(n.y / VB.h) * 100}%; width:${(CARD.w / VB.w) * 100}%; height:${(CARD.h / VB.h) * 100}%; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(12px, 1.4vw, 18px); border:1px solid var(--rule); border-radius:14px; background:var(--raised); box-shadow:0 16px 40px -34px rgba(28,25,23,0.5)`)}
         >
-          <div style={s('font-family:var(--display); font-weight:600; font-size:clamp(15px, 1.35vw, 19px); line-height:1.15; color:var(--ink)')}>{n.title}</div>
-          <div style={s('margin-top:3px; font-size:clamp(11.5px, 0.95vw, 13.5px); line-height:1.35; color:var(--ink-muted)')}>{n.note}</div>
+          <div style={s('font-family:var(--display); font-weight:600; font-size:clamp(14px, 1.2vw, 17.5px); line-height:1.2; color:var(--ink)')}>{n.title}</div>
+          <div style={s('margin-top:3px; font-size:clamp(11px, 0.9vw, 13px); line-height:1.4; color:var(--ink-muted)')}>{n.note}</div>
         </div>
       ))}
     </div>

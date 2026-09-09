@@ -5,7 +5,7 @@ import { Hover } from '../components/Hover';
 import { Outcome } from './Outcome';
 import { AutomationMap } from './AutomationMap';
 
-// Statement on the left, the six places work stalls on the right. The centred
+// Statement on the left, what we sell on the right. The centred
 // arrangement this replaces gave the fold a single sentence and no anchor; a
 // split hero says what we do and where it applies in one screen.
 export function Hero({ consoleRef }) {
@@ -83,8 +83,8 @@ export function Hero({ consoleRef }) {
             </div>
           </div>
 
-          {/* Where a business actually stalls, rather than what the software is
-              built from — the same six the sentence above names. */}
+          {/* What we sell, around the mark. The sentence beside it already
+              names where work stalls; the fold should not say that twice. */}
           <div data-anim="console">
             <AutomationMap />
           </div>
