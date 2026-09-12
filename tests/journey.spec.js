@@ -281,6 +281,7 @@ test('every product page meets the template contract', async ({ page }) => {
     // Workflow, inputs, integrations, controls, the management view, the
     // deployment sequence and the evidence -- the eight buying questions, less
     // the labelled screens, which need product screenshots nobody has yet.
+    await expect(page.locator('.wf__step').first()).toBeVisible();
     const steps = await page.locator('.wf__step').count();
     expect(steps, `${path} workflow steps`).toBeGreaterThanOrEqual(5);
     expect(steps, `${path} workflow steps`).toBeLessThanOrEqual(7);
@@ -310,7 +311,11 @@ test('the property transcript is labelled as a demonstration', async ({ page }) 
   // about a client nobody approved.
   await page.goto('/products/ideora-property');
 
+  // `.count()` returns immediately; on a slower engine it read zero before the
+  // lazy route had painted. expect() auto-waits, so the first assertion is what
+  // establishes the block is there.
   const lines = page.locator('.chat__line');
+  await expect(lines.first()).toBeVisible();
   expect(await lines.count()).toBeGreaterThan(4);
 
   // The turn where the system hands over rather than answering is the point of
@@ -324,6 +329,7 @@ test('the property transcript is labelled as a demonstration', async ({ page }) 
 test('the products index names a primary buyer for each product', async ({ page }) => {
   await page.goto('/products');
 
+  await expect(page.locator('.pchoose__buyer').first()).toBeVisible();
   await expect(page.locator('.pchoose__buyer')).toHaveCount(4);
   await expect(page.locator('.pchoose__card').first()).toContainText('Clinic or hospital owner');
 
