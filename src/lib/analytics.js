@@ -13,6 +13,7 @@
 // The full event vocabulary. Anything not on this list is a typo, and in dev
 // it says so rather than silently reporting nothing for a quarter.
 export const EVENTS = [
+  'web_vitals',
   'product_view',
   'demo_start',
   'demo_complete',
