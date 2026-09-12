@@ -1,8 +1,8 @@
-# Blocks a deployment when an internal link resolves to nothing.
+# The gate between a change and a client seeing it.
 #
-# The audit found thirteen linked routes returning 404 in production. This is
-# the gate that stops that happening again: the link check runs before the
-# build, and the build runs on every push and pull request.
+# The audit found thirteen linked routes returning 404 in production, plus
+# defects nobody caught because "it looked fine" was the only check. Each job
+# below exists because something in that class actually went wrong.
 name: CI
 
 on:
@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    name: Lint, links and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +23,55 @@ jobs:
       - run: npm ci
       - name: Lint
         run: npx oxlint src/
+      # Fails when an internal href, a redirect or vercel.json drifts from the
+      # route table. This is the one that would have caught the audit's
+      # headline finding before a client opened the site.
       - name: Check internal links and redirects
         run: npm run check:links
-      - name: Build
-        run: npm run build
+      - run: npm run build
+
+  browsers:
+    name: Core journey on every engine
+    runs-on: ubuntu-latest
+    # The specification's browser matrix. Behaviour assertions rather than
+    # pixels, so the same file runs on WebKit and Firefox.
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:browsers
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: journey-traces
+          path: test-results/
+          retention-days: 7
+
+  visual:
+    name: Visual regression
+    runs-on: ubuntu-latest
+    # Must run in the same container the baselines were generated in. Font
+    # rasterisation differs between platforms, so a macOS baseline compared on
+    # Linux fails every shot for reasons nobody can act on. The committed
+    # baselines are the -linux ones; regenerate them with this same image.
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:visual
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-diffs
+          path: test-results/
+          retention-days: 7

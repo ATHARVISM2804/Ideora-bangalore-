@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CASES } from '../data/content';
-import { WA_DEMO, WA_LINK } from '../lib/whatsapp';
+import { WA_BRIEFING, WA_DEMO, WA_LINK } from '../lib/whatsapp';
 import { Section, Container, Label, Button, Card, Pill, Stat } from '../components/ui';
 
 // The eleven data-driven pages share one shape, so they share one set of
@@ -84,7 +84,18 @@ export function PageCta({ heading, body }) {
               <h2>{heading}</h2>
               <p className="body-muted prose--narrow" style={{ marginTop: 'var(--s-4)' }}>{body}</p>
             </div>
-            <Button href={WA_DEMO} {...WA_LINK}>Request a demo</Button>
+            {/* The site's one primary ask. This block closes every prose and
+                product page, and it was still offering a demo while the hero,
+                the nav and the closing all offered a thirty-minute call --
+                a fourth variant of the first step, on twenty pages. */}
+            <Button
+              href={WA_BRIEFING}
+              {...WA_LINK}
+              data-track="discovery_start"
+              data-track-cta_location="page_cta"
+            >
+              Book a 30-minute discovery call
+            </Button>
           </div>
         </div>
       </Container>

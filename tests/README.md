@@ -1,0 +1,49 @@
+# Tests
+
+Two suites, with different jobs.
+
+## `journey.spec.js` — behaviour, on every engine
+
+Runs on Chromium, Firefox, WebKit and emulated iPhone and Pixel. Asserts what a
+buyer does: the home-to-product-to-booking path, that every legacy URL still
+resolves, that the menu works by keyboard, that the contact form says what is
+wrong, and that nothing scrolls sideways.
+
+Assertions only, no pixels, which is why it can run on engines where a
+screenshot comparison would be meaningless.
+
+```
+npm run test:browsers
+```
+
+## `visual.spec.js` — pixels, on one engine
+
+Catches the regression where a token change or a new rule quietly breaks a
+layout three pages away. Seven layouts at 390, 768, 1280 and 1440.
+
+The pages are the ones with a distinct arrangement, not all twenty-five: the
+product template covers every product page, the prose template covers every
+service, industry and legal page.
+
+```
+npm run test:visual
+```
+
+### Updating baselines
+
+Baselines are platform-specific — fonts rasterise differently on macOS and
+Linux — and CI compares the **Linux** ones. Regenerate them in the same
+container CI uses, never on your own machine:
+
+```
+docker run --rm -v "$PWD":/w -w /w --network host \
+  mcr.microsoft.com/playwright:v1.63.0-noble \
+  bash -lc "npm ci && npx playwright test --project=visual --update-snapshots"
+```
+
+**That `npm ci` writes Linux binaries into your mounted `node_modules` and will
+break your local toolchain.** Run `npm install` afterwards to restore it.
+
+Review every changed snapshot before committing. A baseline updated without
+being looked at is worse than no baseline: it silently blesses the regression
+it was meant to catch.
