@@ -13,7 +13,7 @@ export const waHref = (message) =>
 export const WA_GREETING = waHref('Hi Ideora, I would like to talk about automating our operations.');
 export const WA_TALK = waHref('Hi Ideora, I would like to talk about our operations.');
 export const WA_DEMO = waHref('Hi Ideora, I would like to request a demo.');
-export const WA_BRIEFING = waHref('Hi Ideora, I would like to book a briefing call.');
+export const WA_BRIEFING = waHref('Hi Ideora, I would like to book a 30-minute discovery call.');
 
 // wa.me leaves the site, so every one of these opens in a new tab and drops the
 // opener reference. Spread onto the anchor rather than repeated at each call.

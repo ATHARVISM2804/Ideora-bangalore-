@@ -30,7 +30,7 @@ export function Hero() {
           <div>
             <div data-anim="hero-1" style={{ display: 'flex' }}>
               <Pill live className="hero__badge">
-                {phone ? 'Automotive · Real estate · Healthcare' : 'Built for automotive, real estate and healthcare groups'}
+                {phone ? 'Custom AI automation · Automotive, property, healthcare' : 'Custom AI automation for automotive, property and healthcare groups'}
               </Pill>
             </div>
 
@@ -71,12 +71,12 @@ export function Hero() {
 
               <div className="hero__actions">
                 <Button href={WA_BRIEFING} {...WA_LINK} onMouseMove={magnetMove} onMouseLeave={magnetLeave}>
-                  Request a briefing
+                  Book a 30-minute discovery call
                 </Button>
                 <Button href="#services" variant="secondary">See what we build</Button>
               </div>
 
-              <p className="fine hero__reassure">Ninety minutes · you keep the map · no obligation</p>
+              <p className="fine hero__reassure">Thirty minutes · you keep the map · no obligation</p>
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const CLOSE_DELAY = 120;
@@ -13,6 +13,7 @@ const CLOSE_DELAY = 120;
 export function NavMenu({ menu, active, open, onOpenChange }) {
   const timer = useRef(null);
   const triggerRef = useRef(null);
+  const panelId = useId();
   const itemRefs = useRef([]);
 
   // A bare timeout would keep firing after unmount during a route change.
@@ -70,6 +71,7 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
         ref={triggerRef}
         type="button"
         aria-expanded={open}
+        aria-controls={panelId}
         className={`nav__link navmenu__trigger${active ? ' is-active' : ''}${open ? ' is-open' : ''}`}
         onKeyDown={onTriggerKeyDown}
         onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
@@ -79,7 +81,7 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
       </button>
 
       {open && (
-        <ul className="navmenu__panel" aria-label={menu.label}>
+        <ul id={panelId} className="navmenu__panel" aria-label={menu.label}>
           {menu.items.map((item, i) => (
             <li key={item.path}>
               <Link

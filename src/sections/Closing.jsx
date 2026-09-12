@@ -26,7 +26,7 @@ export function Closing() {
 
           <div data-anim="head">
             <p className="body-muted">
-              Ninety minutes with you and your operations lead. We map the handoffs on the call
+              Thirty minutes with you and your operations lead. We map the handoffs on the call
               and tell you which a system can take first. You keep the map either way.
             </p>
             <Button
@@ -36,7 +36,7 @@ export function Closing() {
               onMouseLeave={magnetLeave}
               style={{ marginTop: 'var(--s-6)' }}
             >
-              Request a briefing
+              Book a 30-minute discovery call
             </Button>
           </div>
         </div>

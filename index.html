@@ -19,6 +19,54 @@
 
     <title>Ideora Labs | Systems that finish the job.</title>
     <meta name="description" content="Ideora Labs builds agentic AI that works inside your existing operations. It books, checks, approves, updates, and reports without anyone chasing it." />
+
+    <!-- Canonical and social cards. This is a single-page app, so these are the
+         home-page defaults; sub-routes are covered by the per-page <Seo> head
+         that overrides title, description and canonical at runtime. -->
+    <link rel="canonical" href="https://www.ideoralabs.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ideora Labs" />
+    <meta property="og:url" content="https://www.ideoralabs.com/" />
+    <meta property="og:title" content="Ideora Labs | Systems that finish the job." />
+    <meta property="og:description" content="Agentic AI that books, checks, approves and reports inside the software your team already uses." />
+    <meta property="og:image" content="https://www.ideoralabs.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ideora Labs — systems that finish the job." />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ideora Labs | Systems that finish the job." />
+    <meta name="twitter:description" content="Agentic AI that books, checks, approves and reports inside the software your team already uses." />
+    <meta name="twitter:image" content="https://www.ideoralabs.com/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.ideoralabs.com/#organization",
+            "name": "Ideora Labs",
+            "url": "https://www.ideoralabs.com/",
+            "logo": "https://www.ideoralabs.com/assets/ideora-lockup.png",
+            "description": "Ideora Labs builds agentic AI systems that run inside a company's existing operations software.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Bengaluru",
+              "addressRegion": "Karnataka",
+              "addressCountry": "IN"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.ideoralabs.com/#website",
+            "url": "https://www.ideoralabs.com/",
+            "name": "Ideora Labs",
+            "publisher": { "@id": "https://www.ideoralabs.com/#organization" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
