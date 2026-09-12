@@ -5,6 +5,10 @@
 // page first. It drives the homepage chooser, the products index and the
 // Product structured data, so a product exists in exactly one place.
 //
+// `buyer` is the single primary role from the index table; `audience` on the
+// product page is the fuller list. The catalogue names one person so a reader
+// scanning four cards can find themselves in one of them.
+//
 // `status` is honest and shown as text, never colour alone. "Live" means it is
 // running in production for a client today.
 //
@@ -17,6 +21,7 @@
 export const PRODUCTS = [
   {
     name: 'Ideora Health',
+    buyer: 'Clinic or hospital owner',
     path: '/products/ideora-health',
     industry: 'healthcare',
     audience: 'Clinics, specialty hospitals and diagnostics',
@@ -27,6 +32,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Ideora Auto',
+    buyer: 'Dealer or service-centre head',
     path: '/products/ideora-auto',
     industry: 'automotive',
     audience: 'Dealer groups and multi-site service centres',
@@ -37,6 +43,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Ideora Property',
+    buyer: 'Real-estate sales director',
     path: '/products/ideora-property',
     industry: 'real estate',
     audience: 'Developers, brokerages and project sales teams',
@@ -47,6 +54,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Operations Console',
+    buyer: 'Corporate operations leader',
     path: '/products/operations-console',
     industry: 'cross-industry',
     audience: 'Management teams across multiple sites and queues',

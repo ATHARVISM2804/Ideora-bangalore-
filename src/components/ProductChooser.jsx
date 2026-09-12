@@ -57,6 +57,7 @@ export function ProductChooser({
                   )}
                 </span>
 
+                {showStatus && <span className="pchoose__buyer">{p.buyer}</span>}
                 <span className="pchoose__promise">{p.promise}</span>
 
                 <span className="pchoose__foot">

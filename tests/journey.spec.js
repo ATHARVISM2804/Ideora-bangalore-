@@ -278,10 +278,23 @@ test('every product page meets the template contract', async ({ page }) => {
     await expect(page.locator('.page-hero__for')).toBeVisible();
     await expect(page.locator('.page-hero__actions a')).toHaveCount(2);
 
-    // Workflow, integrations, controls and the management view.
-    expect(await page.locator('.wf__step').count(), `${path} workflow steps`).toBeGreaterThanOrEqual(5);
+    // Workflow, inputs, integrations, controls, the management view, the
+    // deployment sequence and the evidence -- the eight buying questions, less
+    // the labelled screens, which need product screenshots nobody has yet.
+    const steps = await page.locator('.wf__step').count();
+    expect(steps, `${path} workflow steps`).toBeGreaterThanOrEqual(5);
+    expect(steps, `${path} workflow steps`).toBeLessThanOrEqual(7);
+    expect(await page.locator('.wf__step--human').count(), `${path} human exception`).toBeGreaterThan(0);
+
+    expect(await page.locator('.inputs__item').count(), `${path} inputs`).toBeGreaterThan(0);
     expect(await page.locator('.intg__row').count(), `${path} integrations`).toBeGreaterThan(0);
     expect(await page.locator('.dash__item').count(), `${path} dashboard`).toBeGreaterThan(0);
+    expect(await page.locator('.deploy__step').count(), `${path} deployment`).toBe(6);
+
+    // An outcome renders only with the source beside it. The block refuses to
+    // render at all otherwise, so this asserts both.
+    await expect(page.locator('.evidence > div')).toHaveCount(3);
+    await expect(page.locator('.panel__foot').last()).not.toBeEmpty();
 
     // The next step keeps the product context rather than dropping the reader
     // into a generic enquiry.
@@ -289,5 +302,33 @@ test('every product page meets the template contract', async ({ page }) => {
     await expect(final).toHaveText(`Book a review of ${name}`);
     const href = await final.getAttribute('href');
     expect(decodeURIComponent(href), `${path} CTA loses product context`).toContain(name);
+  }
+});
+
+test('the property transcript is labelled as a demonstration', async ({ page }) => {
+  // A conversation that looks real must say it is not, or it becomes a claim
+  // about a client nobody approved.
+  await page.goto('/products/ideora-property');
+
+  const lines = page.locator('.chat__line');
+  expect(await lines.count()).toBeGreaterThan(4);
+
+  // The turn where the system hands over rather than answering is the point of
+  // showing it at all.
+  await expect(page.locator('.chat__line--human')).not.toHaveCount(0);
+
+  const note = page.locator('.chat').locator('xpath=following-sibling::p[1]');
+  await expect(note).toContainText(/demonstration|synthetic/i);
+});
+
+test('the products index names a primary buyer for each product', async ({ page }) => {
+  await page.goto('/products');
+
+  await expect(page.locator('.pchoose__buyer')).toHaveCount(4);
+  await expect(page.locator('.pchoose__card').first()).toContainText('Clinic or hospital owner');
+
+  // Product name always visible, never replaced by the industry label.
+  for (const name of ['Ideora Health', 'Ideora Auto', 'Ideora Property', 'Operations Console']) {
+    await expect(page.locator('.pchoose__name', { hasText: name })).toBeVisible();
   }
 });

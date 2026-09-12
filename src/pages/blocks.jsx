@@ -361,3 +361,120 @@ export function Demo({ demo, head = 'See it working' }) {
     </Section>
   );
 }
+
+// What the system needs to receive before it can act. The per-product pages
+// list this as its own row, and it matters commercially: it is the first thing
+// a buyer's IT lead checks, because every item is a field somebody has to be
+// able to hand over.
+export function Inputs({ items, head = 'What it needs to receive' }) {
+  if (!items?.length) return null;
+  return (
+    <Section edge="bottom" tight>
+      <Container>
+        <Label as="h2" className="label--head">{head}</Label>
+        <ul className="inputs" style={{ marginTop: 'var(--s-5)' }}>
+          {items.map((it) => <li key={it} className="inputs__item">{it}</li>)}
+        </ul>
+      </Container>
+    </Section>
+  );
+}
+
+// "How is it deployed?" -- discovery, configuration, integration, UAT,
+// training and support. The six steps on the homepage describe how Ideora
+// works in general; this is the same sequence answered for one product, which
+// is what a buyer evaluating that product is actually asking.
+export function Deployment({ items, head = 'How it gets deployed' }) {
+  if (!items?.length) return null;
+  return (
+    <Section edge="bottom" tight>
+      <Container>
+        <Label as="h2" className="label--head">{head}</Label>
+        <ol className="deploy" style={{ marginTop: 'var(--s-5)' }}>
+          {items.map((it, i) => (
+            <li key={it.title} data-anim="card" className="deploy__step">
+              <span className="deploy__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 className="deploy__title">{it.title}</h3>
+                <p className="small">{it.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+// The proof block the product template asks for: baseline, workflow, outcome,
+// where the figure came from, and a link to the study. Deliberately refuses to
+// render an outcome without a source -- an unsourced number on a product page
+// is the exact thing the evidence rule exists to stop.
+export function Evidence({ proof, head = 'What it changed' }) {
+  if (!proof?.outcome || !proof?.source) return null;
+  return (
+    <Section edge="bottom">
+      <Container>
+        <div className="panel">
+          <div className="panel__body">
+            <Label as="h2" className="label--head">{head}</Label>
+
+            <div className="evidence" style={{ marginTop: 'var(--s-5)' }}>
+              {[['Before', proof.baseline], ['What we built', proof.workflow], ['After', proof.outcome]].map(
+                ([k, v]) => (
+                  <div key={k}>
+                    <Label as="span">{k}</Label>
+                    <p className="small" style={{ marginTop: 'var(--s-2)' }}>{v}</p>
+                  </div>
+                ),
+              )}
+            </div>
+
+            {proof.caseStudy && (
+              <Pill
+                as={Link}
+                to={proof.caseStudy}
+                className="pill--link"
+                data-track="case_study_view"
+                style={{ marginTop: 'var(--s-6)' }}
+              >
+                Read the full case study
+              </Pill>
+            )}
+          </div>
+          <div className="panel__foot">{proof.source}</div>
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+// A conversation, shown rather than described.
+//
+// The property page is asked for one full lead transcript with personally
+// identifiable information removed. This is synthetic -- written to the same
+// rules the live system follows, not lifted from a client -- and the panel
+// says so, because a demonstration passed off as a real customer is the kind
+// of claim the evidence rule exists to prevent.
+export function Transcript({ transcript, head = 'One conversation, start to finish' }) {
+  if (!transcript?.lines?.length) return null;
+  return (
+    <Section edge="bottom" tone="sunken">
+      <Container>
+        <Label as="h2" className="label--head">{head}</Label>
+        <p className="body-muted prose--narrow" style={{ marginTop: 'var(--s-4)' }}>{transcript.intro}</p>
+
+        <ol className="chat" style={{ marginTop: 'var(--s-6)' }}>
+          {transcript.lines.map((l, i) => (
+            <li key={i} className={`chat__line chat__line--${l.from}`}>
+              <span className="chat__who">{l.from === 'them' ? 'Lead' : l.from === 'system' ? 'Ideora' : 'Agent'}</span>
+              <p className="chat__text">{l.text}</p>
+            </li>
+          ))}
+        </ol>
+
+        <p className="fine" style={{ marginTop: 'var(--s-5)' }}>{transcript.note}</p>
+      </Container>
+    </Section>
+  );
+}

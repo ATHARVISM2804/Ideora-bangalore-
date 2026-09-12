@@ -9,7 +9,8 @@ import { useJsonLd } from '../hooks/useJsonLd';
 import { ORIGIN } from '../lib/site';
 import {
   PageHero, ProofStrip, Workflow, Demo, ProseSections, Deliverables,
-  Integrations, Controls, Dashboard, CaseStudy, Faq, Related, PageCta,
+  Inputs, Integrations, Controls, Dashboard, Deployment, Evidence, Transcript,
+  CaseStudy, Faq, Related, PageCta,
 } from './blocks';
 
 // One entry from data/pages.js, rendered.
@@ -91,9 +92,13 @@ export function PageShell({ page }) {
       <Demo demo={page.demo} />
       <ProseSections sections={page.sections} />
       <Deliverables items={page.deliverables} />
+      <Inputs items={page.inputs} />
       <Integrations items={page.integrations} note={page.integrationsNote} />
       <Controls items={page.controls} />
       <Dashboard items={page.dashboard} />
+      <Transcript transcript={page.transcript} />
+      <Evidence proof={page.evidence} />
+      <Deployment items={page.deployment} />
       {page.caseStudy && <CaseStudy {...page.caseStudy} />}
       <Faq items={page.faq} />
       <Related items={page.related} />

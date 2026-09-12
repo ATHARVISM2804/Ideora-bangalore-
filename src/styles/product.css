@@ -648,3 +648,85 @@
   gap: var(--s-3);
   margin-top: var(--s-6);
 }
+
+/* --- Inputs --------------------------------------------------------------- */
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--s-3) var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inputs__item {
+  padding: var(--s-3) 0 var(--s-3) var(--s-4);
+  border-left: 2px solid var(--rule-strong);
+  font-size: var(--t-sm);
+  color: var(--ink-muted);
+}
+
+/* --- Deployment ----------------------------------------------------------- */
+.deploy { display: grid; gap: var(--s-3); margin: 0; padding: 0; list-style: none; }
+
+.deploy__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.deploy__n { font-family: var(--mono); font-size: var(--t-sm); color: var(--ink-faint); }
+.deploy__title { margin: 0 0 var(--s-2); font-size: var(--t-d4); line-height: 1.25; }
+
+/* --- Evidence ------------------------------------------------------------- */
+.evidence {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+
+/* --- Transcript ----------------------------------------------------------- */
+.chat { display: grid; gap: var(--s-3); margin: 0; padding: 0; list-style: none; max-width: 44rem; }
+
+.chat__line {
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-card);
+  background: var(--raised);
+  border: 1px solid var(--rule);
+}
+
+.chat__line--them { margin-right: var(--s-8); }
+.chat__line--system { margin-left: var(--s-8); border-color: var(--accent-line); }
+.chat__line--human { margin-left: var(--s-8); border-color: var(--signal); }
+
+.chat__who {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.chat__line--system .chat__who { color: var(--accent-deep); }
+.chat__line--human .chat__who { color: var(--signal-ink); }
+.chat__text { margin: 0; font-size: var(--t-sm); color: var(--ink); }
+
+@media (max-width: 47.99em) {
+  .evidence { grid-template-columns: minmax(0, 1fr); }
+  .chat__line--them { margin-right: var(--s-5); }
+  .chat__line--system,
+  .chat__line--human { margin-left: var(--s-5); }
+}
+
+/* The primary buyer, shown on the products index where the card is a
+   catalogue entry. The homepage chooser leaves it out: that card matches a
+   reference render, and four job titles there compete with the product names. */
+.pchoose__buyer {
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
