@@ -7,6 +7,12 @@
 //
 // `status` is honest and shown as text, never colour alone. "Live" means it is
 // running in production for a client today.
+//
+// The specification's wording for these CTAs is "Watch the health workflow".
+// That promises a recorded video, and there is not one yet -- walkthroughs are
+// run live against demonstration data. When the four product demos are
+// recorded (P1, WEB-101), "See" becomes "Watch" here and the Demo block's
+// fallback copy comes out.
 
 export const PRODUCTS = [
   {
@@ -46,7 +52,7 @@ export const PRODUCTS = [
     audience: 'Management teams across multiple sites and queues',
     promise: 'Queues, exceptions, ageing and management reporting',
     outcome: 'One view of work done, work waiting and the exceptions that need a person, built from the same records the work happened in.',
-    cta: 'See the management console',
+    cta: 'View the management console',
     status: 'included',
   },
 ];

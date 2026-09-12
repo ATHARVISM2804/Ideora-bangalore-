@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useGsapTimeline } from '../hooks/useGsapTimeline';
@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { PageHero, PageCta } from './blocks';
 import { Section, Container, Label, Pill } from '../components/ui';
 import { CASE_STUDIES, APPROVAL_NOTE } from '../data/caseStudies';
+import { track } from '../lib/analytics';
 
 // One case study, in the order a buyer evaluates it: who, what it was like
 // before, what we built, what changed, and where the number came from.
@@ -23,6 +24,13 @@ export function CaseStudy() {
     c?.context || '',
   );
   useGsapTimeline({ rootRef });
+
+  // Fires on the page itself, not only on the index card that led here. Most
+  // case-study views arrive from search or a shared link and never touch the
+  // index, so counting only the card undercounts the asset that did the work.
+  useEffect(() => {
+    if (c) track('case_study_view', { industry: c.industry, product: c.product, case_study: c.slug });
+  }, [c]);
 
   // An unknown slug is a 404, not an empty page that looks like a failure.
   if (!c) return <Navigate to="/case-studies" replace />;

@@ -51,7 +51,9 @@
   /* A nine-step scale in rem, so browser font-size preferences are honoured.
      The site previously had a hard 18px root and zero rem anywhere. */
   --t-d1:    clamp(2.375rem, 4.6vw, 4.25rem);    /* 38 → 68  page title   */
-  --t-d2:    clamp(1.875rem, 3.4vw, 2.875rem);   /* 30 → 46  section head */
+  --t-d2:    clamp(2rem, 3.4vw, 2.875rem);       /* 32 → 46  section head.
+                                                        Floor was 30; the spec
+                                                        asks 32-38 on mobile. */
   --t-d3:    clamp(1.375rem, 2vw, 1.625rem);     /* 22 → 26  subhead      */
   --t-d4:    1.1875rem;                          /* 19       card title   */
   --t-lede:  clamp(1.0625rem, 1.15vw, 1.1875rem);/* 17 → 19  standfirst   */

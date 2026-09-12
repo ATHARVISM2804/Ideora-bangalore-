@@ -260,7 +260,7 @@ export const PAGES = [
       { label: 'Ready-made systems', path: '/services/productised-systems' },
     ],
     cta: {
-      heading: 'Start with the process that stalls most',
+      heading: 'Discuss a custom workflow',
       body: 'We run a scope call on one workflow, agree what success looks like, and fix the scope and the price before anything is designed.',
     },
   },
@@ -761,7 +761,7 @@ export const PAGES = [
       { label: 'Real estate', path: '/products/ideora-property' },
     ],
     cta: {
-      heading: 'Find out which route you are on',
+      heading: 'Discuss a custom workflow',
       body: 'One scope call tells us whether a system we already run fits your operation or whether yours needs building. Either way you leave with a scope and a price.',
     },
   },
@@ -802,6 +802,7 @@ export const PAGES = [
       { q: 'How long before it is live?', a: 'Six to ten weeks to a first system in production. The scope call is ninety minutes and you keep the map either way.' },
     ],
     related: [
+      { label: 'Case study: service bookings', path: '/case-studies/service-centre-bookings' },
       { label: 'Service centres', path: '/products/ideora-auto' },
       { label: 'Your dashboard', path: '/products/operations-console' },
     ],
@@ -847,6 +848,7 @@ export const PAGES = [
       { q: 'What happens to leads outside office hours?', a: 'They are answered when they arrive. That is usually where the difference shows first.' },
     ],
     related: [
+      { label: 'Case study: lead qualification', path: '/case-studies/property-lead-qualification' },
       { label: 'Real estate', path: '/products/ideora-property' },
       { label: 'Your dashboard', path: '/products/operations-console' },
     ],
@@ -892,6 +894,7 @@ export const PAGES = [
       { q: 'We run several clinics. Does it handle multi-site?', a: 'Yes. Each clinic is read separately and against the others, so load is visible before it becomes a problem.' },
     ],
     related: [
+      { label: 'Case study: intake and coverage', path: '/case-studies/clinic-intake-and-coverage' },
       { label: 'Clinics and healthcare', path: '/products/ideora-health' },
       { label: 'Your dashboard', path: '/products/operations-console' },
     ],
