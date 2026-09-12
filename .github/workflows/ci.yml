@@ -37,6 +37,13 @@ jobs:
     # pixels, so the same file runs on WebKit and Firefox.
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
+      # Actions runs the container as root, but $HOME stays /github/home, which
+      # the image owns as pwuser. Firefox refuses to start in that state:
+      # "Running Nightly as root in a regular user's session is not supported."
+      # Chromium and WebKit do not care, so this failed on exactly one engine.
+      options: --user root
+    env:
+      HOME: /root
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
