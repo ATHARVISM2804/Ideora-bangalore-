@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { ALL_PAGE_PATHS } from './data/nav';
 import { REDIRECTS } from './data/redirects';
 import { RouteFallback } from './components/RouteFallback';
+import { ErrorState } from './pages/ErrorState';
 
 // Home is bundled with the shell because it is the entry point for almost
 // every visit. Everything else is split out behind a lazy route.
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     HydrateFallback: RouteFallback,
+    // Catches anything a child route throws -- a render error, a chunk that
+    // failed to load -- and renders it inside the shell, so a reader keeps the
+    // navigation and the footer instead of getting a white page.
+    errorElement: <ErrorState />,
     children: [
       { index: true, element: <Home /> },
 

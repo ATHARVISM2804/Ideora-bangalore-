@@ -5,6 +5,7 @@
    keyframes, and the `!important` grid-collapse overrides -- has moved into
    the files below or been deleted as unreachable. */
 
+@import './fonts.css';
 @import './tokens.css';
 @import './base.css';
 @import './layout.css';

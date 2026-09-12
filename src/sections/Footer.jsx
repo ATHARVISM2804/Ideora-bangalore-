@@ -18,7 +18,9 @@ const COLUMNS = [
 const LEGAL = [
   { path: '/security', label: 'Security and data' },
   { path: '/privacy', label: 'Privacy' },
+  { path: '/cookies', label: 'Cookie choices' },
   { path: '/terms', label: 'Terms' },
+  { path: '/subprocessors', label: 'Sub-processors' },
   { path: '/responsible-ai', label: 'Responsible AI' },
 ];
 

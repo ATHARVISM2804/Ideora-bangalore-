@@ -28,6 +28,10 @@ jobs:
       # headline finding before a client opened the site.
       - name: Check internal links and redirects
         run: npm run check:links
+      # The publishing controls the content model asks for, enforced where the
+      # content actually lives. A thin product page fails the build.
+      - name: Check content completeness
+        run: npm run check:content
       - run: npm run build
 
   browsers:

@@ -82,7 +82,7 @@ export const OWN_COMPONENT = new Set(['/about', '/insights', '/products', '/case
 
 // Reachable from the footer rather than the menu. A buyer's legal and IT
 // reviewers look for these; they do not belong in a sales nav.
-export const FOOTER_ONLY_PATHS = ['/privacy', '/terms', '/responsible-ai'];
+export const FOOTER_ONLY_PATHS = ['/privacy', '/terms', '/responsible-ai', '/subprocessors', '/cookies'];
 
 export const ALL_PAGE_PATHS = [
   ...new Set([

@@ -338,3 +338,51 @@ test('the products index names a primary buyer for each product', async ({ page 
     await expect(page.locator('.pchoose__name', { hasText: name })).toBeVisible();
   }
 });
+
+test('every industry page carries its required sections and cross-links', async ({ page }) => {
+  // The industry template asks for problems, relevant products, typical
+  // integrations, controls, case studies and a CTA. Integrations and controls
+  // were missing on all three: the pages established relevance and then could
+  // not answer the two questions an IT reviewer asks next.
+  for (const path of ['/industries/healthcare', '/industries/automotive', '/industries/real-estate']) {
+    await page.goto(path);
+
+    await expect(page.locator('.prose-row').first()).toBeVisible();
+    expect(await page.locator('.intg__row').count(), `${path} integrations`).toBeGreaterThan(0);
+    expect(await page.locator('.cards--2 .card').count(), `${path} controls`).toBeGreaterThan(0);
+
+    const links = await page.locator('.pill--link').evaluateAll((els) => els.map((e) => e.getAttribute('href')));
+    expect(links.some((h) => h.startsWith('/products/')), `${path} links no product`).toBe(true);
+    expect(links.some((h) => h.startsWith('/case-studies/')), `${path} links no case study`).toBe(true);
+    await expect(page.locator('.page-cta')).toBeVisible();
+  }
+});
+
+test('a failure renders the error state inside the shell', async ({ page }) => {
+  // There was no 500 state at all: a thrown render or a chunk that failed to
+  // load produced a white page with no navigation and no way onward.
+  await page.goto('/this-route-does-not-exist');
+
+  await expect(page.locator('h1')).toBeVisible();
+  await expect(page.locator('header')).toBeVisible();
+  await expect(page.locator('footer')).toBeVisible();
+
+  // And a way out, not just an apology.
+  await expect(page.getByRole('link', { name: /back to home/i })).toBeVisible();
+});
+
+test('unhandled failures reach monitoring', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => { Promise.reject(new Error('simulated failure')); });
+
+  await expect
+    .poll(() => page.evaluate(() => (window.dataLayer || []).filter((e) => e.event === 'app_error').length))
+    .toBeGreaterThan(0);
+
+  // The payload says where it came from, without carrying a full stack.
+  const reported = await page.evaluate(() =>
+    (window.dataLayer || []).find((e) => e.event === 'app_error'),
+  );
+  expect(reported.source).toBe('unhandled_rejection');
+  expect(reported.page_path).toBe('/');
+});

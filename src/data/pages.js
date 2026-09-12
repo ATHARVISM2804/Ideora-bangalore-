@@ -968,6 +968,52 @@ export const PAGES = [
   },
   {
     path: '/industries/automotive',
+    integrations: [
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number in your name',
+      },
+      {
+        name: 'Voice',
+        how: 'Answers the service line and writes what was agreed into the job card',
+        needs: 'A number we can route, or a SIP trunk',
+      },
+      {
+        name: 'Dealer CRM or DMS',
+        how: 'Read capacity, create and update the job card',
+        needs: 'API or database access and a named system owner',
+      },
+      {
+        name: 'Workshop calendar',
+        how: 'Bay and technician availability read and written',
+        needs: 'Your existing planning tool',
+      },
+      {
+        name: 'Payments',
+        how: 'Payment link issued and status read back',
+        needs: 'Your existing gateway account',
+      },
+    ],
+    integrationsNote: 'Capacity forecasting is offered only where production data supports it. We would rather leave it switched off than show a number your service manager cannot act on.',
+    controls: [
+      {
+        title: 'Safety findings go to a person',
+        body: 'Anything reading as a safety concern escalates to an advisor rather than being answered. The system books and updates; it does not make a technical judgement.',
+      },
+      {
+        title: 'Money needs a human yes',
+        body: 'Estimate values, discounts and goodwill sit behind an approval point you define. Nothing commits your margin on its own.',
+      },
+      {
+        title: 'Capacity you can override',
+        body: 'The floor can block, move or release slots at any time. The system reads the same diary your team edits.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, approval and write is stored with a timestamp and a result, so a disputed job can be reconstructed.',
+      },
+    ],
     title: 'Automotive',
     description: 'Service centres and dealer groups running bookings, estimates and approvals through one agent instead of three inboxes. Live since February 2026.',
     eyebrow: 'Industries',
@@ -1014,6 +1060,57 @@ export const PAGES = [
   },
   {
     path: '/industries/real-estate',
+    integrations: [
+      {
+        name: 'Lead ads and portals',
+        how: 'Webhook or feed into one intake',
+        needs: 'Page or portal admin access',
+      },
+      {
+        name: 'Website forms',
+        how: 'Posted server-side with source and consent attached',
+        needs: 'A form we can point at an endpoint',
+      },
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number in your name',
+      },
+      {
+        name: 'CRM',
+        how: 'Create and update lead, qualification and next action',
+        needs: 'API access and an agreed field map',
+      },
+      {
+        name: 'Inventory feed',
+        how: 'Read availability and pricing for matching',
+        needs: 'A feed or export we can read on a schedule',
+      },
+      {
+        name: 'Agent calendars',
+        how: 'Read availability and write site visits',
+        needs: 'Calendar access per agent',
+      },
+    ],
+    integrationsNote: 'Transcripts shown in a demonstration are synthetic. Where we show a real lead journey, personally identifiable information is removed first and the client has approved it.',
+    controls: [
+      {
+        title: 'Price and legal questions go to a person',
+        body: 'The system qualifies and books. It does not negotiate, quote off-list, or answer a legal question about a project.',
+      },
+      {
+        title: 'Routing rules you own',
+        body: 'Which agent gets which lead, and what counts as a premium lead, is a rule you set and change without a rebuild.',
+      },
+      {
+        title: 'Consent and opt-out respected',
+        body: 'Consent is captured at source and an opt-out stops contact immediately, across every channel.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, qualification and CRM write is stored with a timestamp and a result, so a disputed lead can be reconstructed.',
+      },
+    ],
     title: 'Real Estate',
     description: 'Brokerages and developers whose agents open the day on a shortlist of qualified enquiries instead of a list of calls to return. Live since April 2026.',
     eyebrow: 'Industries',
@@ -1060,6 +1157,47 @@ export const PAGES = [
   },
   {
     path: '/industries/healthcare',
+    integrations: [
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number in your name',
+      },
+      {
+        name: 'Calendar or HIS',
+        how: 'Direct connector where an API exists; a supervised worker where one does not',
+        needs: 'Test credentials and a named system owner',
+      },
+      {
+        name: 'CRM',
+        how: 'Create and update contact, appointment and source records',
+        needs: 'API access and an agreed field map',
+      },
+      {
+        name: 'Payments',
+        how: 'Payment link issued and status read back',
+        needs: 'Your existing gateway account',
+      },
+    ],
+    integrationsNote: 'We do not claim HIPAA, DPDP or medical-device compliance. What we will do is answer a security questionnaire in writing and let your IT team review the integration scope before anything is connected.',
+    controls: [
+      {
+        title: 'Clinical wording never gets answered',
+        body: 'Anything that reads as urgent or symptomatic routes to a person immediately. These systems book appointments; they do not discuss conditions, triage or treatment.',
+      },
+      {
+        title: 'Consent is captured at source',
+        body: 'Consent state is recorded with the enquiry and an opt-out stops contact across every channel at once.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, action and write carries a timestamp, a source and a result, so any booking can be reconstructed end to end.',
+      },
+      {
+        title: 'Your records stay in your systems',
+        body: 'Appointments are written into the calendar or HIS you already run. Patient data is not moved out of the region you operate in, and it is not used to train models.',
+      },
+    ],
     title: 'Healthcare',
     description: 'Clinics and multi-site providers whose front desk starts the day knowing exactly which appointments need attention. Live since May 2026.',
     eyebrow: 'Industries',
@@ -1268,6 +1406,52 @@ export const PAGES = [
     related: [
       { label: 'Security and data', path: '/security' },
       { label: 'Privacy', path: '/privacy' },
+    ],
+  },
+
+  {
+    path: '/subprocessors',
+    title: 'Sub-processors',
+    description: 'The third parties Ideora Labs uses to deliver its systems, what each one does, and where it processes data.',
+    eyebrow: 'Legal',
+    trail: [{ label: 'Security and data', path: '/security' }],
+    heading: 'Who else touches the data',
+    lede: 'A security reviewer asks this second, right after where the data lives. These are the parties involved in running a system for you. The list below is the standing one; the exact set for your engagement is confirmed in writing before contract, and you are told before it changes.',
+    sections: [
+      { title: 'Model provider', body: 'Runs the language model that reads an enquiry and decides what it means. It receives the content of the message being handled and nothing else: no patient record, no CRM export, no customer database. Requests are not used to train the provider’s models.' },
+      { title: 'WhatsApp Business provider', body: 'Carries messages between your customer and the system on the official Business API. The provider account is in your name, so the number and the message history belong to you rather than to us.' },
+      { title: 'Hosting', body: 'Runs the workflow services and stores the working state and audit trail. Hosted in India. This is the only party that holds data at rest for any length of time.' },
+      { title: 'Your own systems', body: 'Your CRM, DMS, HIS, calendars and payment gateway are not our sub-processors: they are yours. We hold credentials to write into them, scoped to the smallest permission the workflow needs and revocable by you at any time.' },
+    ],
+    faq: [
+      { q: 'Will you name the specific companies?', a: 'Yes, in writing, before contract and under NDA if you prefer. They are not listed on a public page because the set differs by engagement and by region, and a stale public list is worse than no list.' },
+      { q: 'What happens if one changes?', a: 'Your named contact is told before it takes effect, not after. If a change is not acceptable to you, it is grounds to pause or exit under the contract.' },
+      { q: 'Do any of them train on our data?', a: 'No. That is a contractual term with the model provider, not a setting, and it is one of the things a security questionnaire from your side should ask us to put in writing.' },
+    ],
+    related: [
+      { label: 'Security and data', path: '/security' },
+      { label: 'Privacy', path: '/privacy' },
+      { label: 'Responsible AI', path: '/responsible-ai' },
+    ],
+  },
+
+  {
+    path: '/cookies',
+    title: 'Cookie choices',
+    description: 'What this website stores in your browser, why, and how to refuse it.',
+    eyebrow: 'Legal',
+    heading: 'Cookie choices',
+    lede: 'This is a short page because this site does very little. There is no advertising network on it, no profiling, and nothing that follows you to another website.',
+    sections: [
+      { title: 'What the site sets on its own', body: 'Nothing that identifies you. The site does not use cookies to log you in, remember you between visits, or build a profile, because it has no account to log into and nothing to personalise.' },
+      { title: 'Measurement', body: 'If analytics is enabled, it may set a first-party cookie so that one visitor reading four pages counts as one visit rather than four. It records which pages and products were viewed and which buttons were pressed. It never receives your name, email, phone number or the contents of anything you type.' },
+      { title: 'How to refuse it', body: 'Your browser’s “block cookies” or “do not track” setting is respected and nothing on this site breaks when you use it. Every page, form and link works with cookies fully disabled; you can check that now without losing anything.' },
+      { title: 'What we would have to tell you first', body: 'If this site ever sets an advertising or profiling cookie, it will ask before doing it, in a way you can decline without losing access to anything. We do not consider a banner that only offers “accept” to be asking.' },
+    ],
+    related: [
+      { label: 'Privacy', path: '/privacy' },
+      { label: 'Security and data', path: '/security' },
+      { label: 'Terms', path: '/terms' },
     ],
   },
 

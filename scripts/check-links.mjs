@@ -70,7 +70,10 @@ for (const file of files) {
     if (fragment) anchors.push({ file, href, fragment });
     if (href.startsWith('/api/') || href.startsWith('/assets/')) continue;
     if (href.startsWith('/src/') || href.startsWith('/node_modules/')) continue;
-    if (/\.[a-z0-9]{2,4}$/i.test(href)) continue; // a file, not a route
+    if (href.startsWith('/fonts/')) continue;
+    // A file, not a route. The bound was {2,4}, which let .woff2 through and
+    // reported six self-hosted fonts as broken links.
+    if (/\.[a-z0-9]{2,5}$/i.test(href)) continue;
     if (!known.has(href)) {
       failures.push(`${file.replace(root + '/', '')}: links to ${href}, which is not a route`);
     }

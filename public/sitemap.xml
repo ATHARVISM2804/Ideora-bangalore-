@@ -36,6 +36,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.ideoralabs.com/cookies</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.ideoralabs.com/how-it-works</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
@@ -122,6 +127,11 @@
   </url>
   <url>
     <loc>https://www.ideoralabs.com/services/productised-systems</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/subprocessors</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
   </url>

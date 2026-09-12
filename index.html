@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- The two faces the first screen sets in. Self-hosted, so they are on
+         the same connection as everything else and need no preconnect. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-300600.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-400.woff2" crossorigin />
+
     <!-- The one above-the-fold asset. Preloaded with the same source set the
          picture element uses, so the browser fetches exactly the width it will
          render rather than a second copy. -->
@@ -17,8 +20,6 @@
       imagesizes="(max-width: 1024px) calc(100vw - 2.75rem), 40vw"
       fetchpriority="high"
     />
-
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Favicons. The .ico is listed for browsers that only read that, and
          also lives at the root because crawlers request /favicon.ico whether
          or not it is linked. -->
