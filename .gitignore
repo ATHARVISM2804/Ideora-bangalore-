@@ -31,3 +31,9 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Visual-regression baselines are committed for Linux only -- that is what CI
+# compares against. A macOS run writes its own -darwin set locally, which is
+# useful for checking a change before pushing but must not be committed: it
+# doubles the repo's image weight and nothing ever reads it.
+tests/**/*-darwin.png

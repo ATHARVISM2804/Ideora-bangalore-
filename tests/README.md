@@ -44,6 +44,10 @@ docker run --rm -v "$PWD":/w -w /w --network host \
 **That `npm ci` writes Linux binaries into your mounted `node_modules` and will
 break your local toolchain.** Run `npm install` afterwards to restore it.
 
+Only the `-linux` baselines are committed. A macOS run writes its own `-darwin`
+set, which is useful for checking a change before you push but is gitignored:
+nothing reads it, and committing both doubled the repo's image weight.
+
 Review every changed snapshot before committing. A baseline updated without
 being looked at is worse than no baseline: it silently blesses the regression
 it was meant to catch.
