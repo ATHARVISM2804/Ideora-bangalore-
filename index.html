@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- The one above-the-fold asset. Preloaded with the same source set the
+         picture element uses, so the browser fetches exactly the width it will
+         render rather than a second copy. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      href="/assets/hero-system-960.avif"
+      imagesrcset="/assets/hero-system-480.avif 480w, /assets/hero-system-720.avif 720w, /assets/hero-system-960.avif 960w, /assets/hero-system-1240.avif 1240w"
+      imagesizes="(max-width: 1024px) calc(100vw - 2.75rem), 40vw"
+      fetchpriority="high"
+    />
+
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Favicons. The .ico is listed for browsers that only read that, and
          also lives at the root because crawlers request /favicon.ico whether

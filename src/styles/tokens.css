@@ -130,7 +130,10 @@
      --wide is for artefacts that earn the extra room (the hero map, the
      footer). Prose is capped in characters, not pixels. */
   --measure: 1180px;
-  --wide:    1440px;
+  --wide:    1280px;  /* The spec caps content at 1216-1280 and says never to
+                         stretch copy indefinitely. This was 1440, which on a
+                         wide monitor ran the hero the full width of the
+                         viewport. */
   --gut:     clamp(1.375rem, 5vw, 3.5rem);   /* 22 → 56 */
   /* Set in rem, not ch, for two reasons. `ch` is the width of the digit zero,
      which in Geist is wider than the average lowercase letter, so a nominal

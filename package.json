@@ -13,7 +13,7 @@
     "check:links": "node scripts/check-links.mjs",
     "test": "playwright test",
     "test:visual": "playwright test --project=visual",
-    "test:browsers": "playwright test --project=chromium --project=firefox --project=webkit --project=mobile-safari --project=mobile-chrome",
+    "test:browsers": "playwright test --project=chromium --project=firefox --project=webkit --project=mobile-safari --project=mobile-chrome --project=mobile",
     "test:update": "playwright test --project=visual --update-snapshots"
   },
   "dependencies": {

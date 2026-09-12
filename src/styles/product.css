@@ -463,3 +463,34 @@
 /* Orange, as the reference sets it: the label is the one piece of the block
    that has to read as a prompt rather than a caption. */
 .pchoose-head .label { color: var(--accent-deep); }
+
+/* --- Touch targets -------------------------------------------------------
+   The specification asks for 44x44 CSS pixels on every interactive target.
+   These are all inline or icon-sized links that measured 23-38px on a phone.
+   Padding rather than font-size, so the design does not change -- only the
+   area a thumb can land on. */
+@media (pointer: coarse), (max-width: 47.99em) {
+  .crumbs { padding-top: var(--s-2); }
+
+  .crumbs__item a,
+  .trustband__link,
+  .contact__list a,
+  .nf__quiet,
+  .link-quiet {
+    display: inline-block;
+    padding-block: calc((2.75rem - 1.4em) / 2);
+  }
+
+  .pill--link { min-height: 2.75rem; display: inline-flex; align-items: center; }
+
+  /* A checkbox cannot be padded to 44px without distorting it, so the box grows
+     and its label -- which is the larger target, and is what most people
+     actually tap -- carries the rest of the row. */
+  .field--check { min-height: 2.75rem; }
+  .field--check input { width: 1.5rem; min-height: 1.5rem; }
+
+  .nav__logo { display: inline-flex; align-items: center; min-height: 2.75rem; }
+
+  .footer__legal a,
+  .footer__credit a { display: inline-block; padding-block: calc((2.75rem - 1.4em) / 2); }
+}

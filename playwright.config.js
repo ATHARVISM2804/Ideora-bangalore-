@@ -52,6 +52,11 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
     {
+      name: 'mobile',
+      testMatch: /mobile\.spec\.js/,
+      use: { ...devices['iPhone 13'] },
+    },
+    {
       name: 'mobile-safari',
       testMatch: /journey\.spec\.js/,
       use: { ...devices['iPhone 13'] },

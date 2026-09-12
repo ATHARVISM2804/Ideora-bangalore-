@@ -228,6 +228,36 @@
   color: #FFFFFF;
 }
 
+/* The label is desktop-superfluous -- there is a "Book a 30-min call" in the
+   bar two inches away -- and mobile-essential, because the responsive
+   specification asks for a persistent discovery action and a green circle is
+   not one. */
+.wa-fab__label { display: none; }
+
+@media (max-width: 47.99em) {
+  .wa-fab {
+    left: auto;
+    width: auto;
+    height: 3rem;
+    gap: var(--s-2);
+    padding-inline: var(--s-4);
+    border-radius: var(--r-pill);
+  }
+
+  .wa-fab svg { width: 1.15rem; height: 1.15rem; flex: none; }
+
+  .wa-fab__label {
+    display: block;
+    font-size: var(--t-sm);
+    font-weight: var(--w-medium);
+    white-space: nowrap;
+  }
+
+  /* The persistent action must not cover footer links, consent controls or
+     form errors. Nothing scrolls under it because the page ends above it. */
+  body { padding-bottom: calc(3rem + var(--s-6)); }
+}
+
 .navsheet__trigger {
   display: flex;
   flex-direction: column;

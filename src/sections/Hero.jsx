@@ -1,6 +1,6 @@
 import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
-import { AutomationMap } from './AutomationMap';
+import { HeroVisual } from '../components/HeroVisual';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { Container, Button, Pill } from '../components/ui';
 
@@ -19,10 +19,12 @@ const WORDS = [
 // the supporting line, which is how the responsive specification renders it.
 // Carried whole, the sentence set to seven lines at 42px and pushed the
 // buttons off the first screen.
-const PHONE_WORDS = [
-  ['AI', 'systems', 'that', 'handle'],
-  ['enquiries,', 'bookings'],
-];
+//
+// One group rather than several: the desktop breaks are chosen for a 735px
+// column, and forcing them into 346px made "AI systems that handle" wrap on
+// its own and cost a fifth line. Left to flow, it fills each line before
+// starting the next, which is also what stops a one-word line at the end.
+const PHONE_WORDS = [['AI', 'systems', 'that', 'handle', 'enquiries,', 'bookings']];
 
 // Statement on the left, what we sell on the right. The centred arrangement
 // this replaces gave the fold a single sentence and no anchor; a split hero
@@ -116,7 +118,7 @@ export function Hero() {
           {/* What we sell, around the mark. The sentence beside it already
               names where work stalls; the fold should not say that twice. */}
           <div data-anim="console" className="hero__visual">
-            <AutomationMap />
+            <HeroVisual />
           </div>
         </Container>
       </div>

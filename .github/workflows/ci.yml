@@ -31,7 +31,7 @@ jobs:
       - run: npm run build
 
   browsers:
-    name: Core journey on every engine
+    name: Core journey and mobile acceptance
     runs-on: ubuntu-latest
     # The specification's browser matrix. Behaviour assertions rather than
     # pixels, so the same file runs on WebKit and Firefox.
