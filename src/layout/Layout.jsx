@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useScrollProgress } from '../hooks/useScrollProgress';
+import { withGsap } from '../lib/gsap';
 import { Nav } from '../sections/Nav';
 import { Footer } from '../sections/Footer';
 import { WhatsAppButton } from '../components/WhatsAppButton';
@@ -19,7 +19,10 @@ function useRouteScrollReset() {
       return;
     }
     window.scrollTo(0, 0);
-    ScrollTrigger.refresh();
+    // Only meaningful once triggers exist. Before the library has loaded there
+    // is nothing to refresh, and asking for it would pull GSAP into the
+    // critical path through the back door.
+    withGsap(({ ScrollTrigger }) => ScrollTrigger.refresh());
   }, [pathname, hash]);
 }
 

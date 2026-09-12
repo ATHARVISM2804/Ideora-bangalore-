@@ -1,8 +1,5 @@
-import { useLayoutEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useEffect } from 'react';
+import { loadGsap, prefersReducedMotion } from '../lib/gsap';
 
 // Page motion. Two rules govern everything here:
 //
@@ -19,83 +16,104 @@ gsap.registerPlugin(ScrollTrigger);
 export function useGsapTimeline(refs) {
   const { rootRef, parallaxRef } = refs;
 
-  useLayoutEffect(() => {
+  // useEffect, not useLayoutEffect: the library is fetched rather than bundled,
+  // so there is nothing to do synchronously before paint. That is the point --
+  // the page paints first and the motion attaches to it afterwards.
+  useEffect(() => {
     const root = rootRef.current;
-    if (!root) return;
+    if (!root) return undefined;
 
-    const mm = gsap.matchMedia();
+    // No tweens for this reader, so do not fetch the library either.
+    if (prefersReducedMotion()) return undefined;
 
-    const ctx = gsap.context(() => {
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const q = (sel) => Array.from(root.querySelectorAll(sel));
+    let ctx;
+    let mm;
+    let cancelled = false;
 
-        // The opening sequence is the page's one orchestrated moment, so it is
-        // paced rather than hurried: the headline rises word by word out of
-        // its mask with the blur clearing as it settles, then the supporting
-        // copy and the product follow.
-        //
-        // Only the home page has a word-split headline. Building the timeline
-        // unconditionally made GSAP warn about four missing targets on each of
-        // the other thirteen routes.
-        if (q('[data-anim="hero-word"]').length) {
-          const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
-          intro.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.9, ease: 'power2.out' });
-          intro.from('[data-anim="hero-word"]', {
-            yPercent: 118,
-            filter: 'blur(10px)',
-            duration: 1.45,
-            stagger: 0.085,
-          }, 0.25);
-          intro.from('[data-anim="hero-2"]', { y: 22, opacity: 0, duration: 1.1, ease: 'power3.out' }, 0.95);
-          intro.from('[data-anim="console"]', { y: 60, opacity: 0, duration: 1.25, ease: 'power3.out' }, 1.15);
-        } else {
-          // Elsewhere the eyebrow just fades in on its own.
-          gsap.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.7, ease: 'power2.out' });
-        }
+    loadGsap().then(({ gsap }) => {
+      // The route changed while the library was in flight.
+      if (cancelled || !rootRef.current) return;
 
-        q('[data-count]').forEach((el) => {
-          const target = parseFloat(el.getAttribute('data-count'));
-          if (!isFinite(target)) return;
-          const obj = { v: 0 };
-          gsap.to(obj, {
-            v: target, duration: 1.6, ease: 'power2.out',
-            onUpdate: () => { el.textContent = Math.round(obj.v); },
-            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+      mm = gsap.matchMedia();
+
+      ctx = gsap.context(() => {
+        mm.add('(prefers-reduced-motion: no-preference)', () => {
+          const q = (sel) => Array.from(root.querySelectorAll(sel));
+
+          // The opening sequence is the page's one orchestrated moment, so it is
+          // paced rather than hurried: the headline rises word by word out of
+          // its mask with the blur clearing as it settles, then the supporting
+          // copy and the product follow.
+          //
+          // Only the home page has a word-split headline. Building the timeline
+          // unconditionally made GSAP warn about four missing targets on each of
+          // the other thirteen routes.
+          if (q('[data-anim="hero-word"]').length) {
+            const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+            intro.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.9, ease: 'power2.out' });
+            intro.from('[data-anim="hero-word"]', {
+              yPercent: 118,
+              filter: 'blur(10px)',
+              duration: 1.45,
+              stagger: 0.085,
+            }, 0.25);
+            intro.from('[data-anim="hero-2"]', { y: 22, opacity: 0, duration: 1.1, ease: 'power3.out' }, 0.95);
+            intro.from('[data-anim="console"]', { y: 60, opacity: 0, duration: 1.25, ease: 'power3.out' }, 1.15);
+          } else {
+            // Elsewhere the eyebrow just fades in on its own.
+            gsap.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.7, ease: 'power2.out' });
+          }
+
+          q('[data-count]').forEach((el) => {
+            const target = parseFloat(el.getAttribute('data-count'));
+            if (!isFinite(target)) return;
+            const obj = { v: 0 };
+            gsap.to(obj, {
+              v: target, duration: 1.6, ease: 'power2.out',
+              onUpdate: () => { el.textContent = Math.round(obj.v); },
+              scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+            });
+          });
+
+          if (parallaxRef?.current) {
+            gsap.to(parallaxRef.current, {
+              y: -46, ease: 'none',
+              scrollTrigger: { trigger: parallaxRef.current, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
+            });
+          }
+
+          // Entrances are fade-only. Sliding every heading and card up the screen
+          // is the generic default and it moved content under the reader; the
+          // page's deliberate motion lives in the hero sequence and the map.
+          q('[data-anim="head"]').forEach((el) => {
+            gsap.from(el, {
+              opacity: 0, duration: 0.5, ease: 'power3.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+            });
+          });
+
+          const groups = new Map();
+          q('[data-anim="card"], [data-anim="step"]').forEach((el) => {
+            const parent = el.parentElement;
+            if (!groups.has(parent)) groups.set(parent, []);
+            groups.get(parent).push(el);
+          });
+          groups.forEach((els, parent) => {
+            gsap.from(els, {
+              opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power3.out',
+              scrollTrigger: { trigger: parent, start: 'top 86%', toggleActions: 'play none none none' },
+            });
           });
         });
+      }, root);
+    });
 
-        if (parallaxRef?.current) {
-          gsap.to(parallaxRef.current, {
-            y: -46, ease: 'none',
-            scrollTrigger: { trigger: parallaxRef.current, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
-          });
-        }
-
-        // Entrances are fade-only. Sliding every heading and card up the screen
-        // is the generic default and it moved content under the reader; the
-        // page's deliberate motion lives in the hero sequence and the map.
-        q('[data-anim="head"]').forEach((el) => {
-          gsap.from(el, {
-            opacity: 0, duration: 0.5, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-          });
-        });
-
-        const groups = new Map();
-        q('[data-anim="card"], [data-anim="step"]').forEach((el) => {
-          const parent = el.parentElement;
-          if (!groups.has(parent)) groups.set(parent, []);
-          groups.get(parent).push(el);
-        });
-        groups.forEach((els, parent) => {
-          gsap.from(els, {
-            opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power3.out',
-            scrollTrigger: { trigger: parent, start: 'top 86%', toggleActions: 'play none none none' },
-          });
-        });
-      });
-    }, root);
-
-    return () => { mm.revert(); ctx.revert(); };
+    return () => {
+      cancelled = true;
+      // Either may be undefined: the route can unmount before the library
+      // arrives, which is exactly what `cancelled` is for.
+      mm?.revert();
+      ctx?.revert();
+    };
   }, [rootRef, parallaxRef]);
 }
