@@ -629,3 +629,22 @@
 /* The chooser closes with a bottom band and the strip opens with a rule, which
    together left 130px of empty paper between the cards and the first fact. */
 .promises { margin-top: calc(-1 * var(--s-7)); }
+
+/* --- Product hero --------------------------------------------------------- */
+.page-hero__for {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+  max-width: 34rem;
+  font-size: var(--t-sm);
+  color: var(--ink-muted);
+}
+
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+}

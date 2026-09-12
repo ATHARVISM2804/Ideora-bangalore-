@@ -15,6 +15,16 @@ export const WA_TALK = waHref('Hi Ideora, I would like to talk about our operati
 export const WA_DEMO = waHref('Hi Ideora, I would like to request a demo.');
 export const WA_BRIEFING = waHref('Hi Ideora, I would like to book a 30-minute discovery call.');
 
+// Product context, preserved into the first message. The template contract
+// asks the next step to carry which product the buyer was reading; without it
+// every enquiry arrives identical and somebody has to ask.
+export const waProduct = (product, intent) =>
+  waHref(
+    intent === 'review'
+      ? `Hi Ideora, I would like a product review of ${product}.`
+      : `Hi Ideora, I would like to see the ${product} workflow.`,
+  );
+
 // wa.me leaves the site, so every one of these opens in a new tab and drops the
 // opener reference. Spread onto the anchor rather than repeated at each call.
 export const WA_LINK = { target: '_blank', rel: 'noopener noreferrer' };

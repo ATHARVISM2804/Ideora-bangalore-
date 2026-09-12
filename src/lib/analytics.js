@@ -30,6 +30,8 @@ export const EVENTS = [
 // and then quietly breaks when someone adds `email` to a form payload, so it is
 // enforced here rather than written in a comment.
 const FORBIDDEN = /^(name|email|business_?email|phone|mobile|message|patient|address|company_?name)$/i;
+// `company_name` is forbidden above; `company` alone is too, for the same
+// reason -- it identifies the visitor's organisation.
 const EMAILISH = /@|^\+?\d[\d\s-]{7,}$/;
 
 function scrub(props) {

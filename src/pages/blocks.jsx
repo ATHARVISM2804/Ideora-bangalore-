@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CASES } from '../data/content';
-import { WA_BRIEFING, WA_DEMO, WA_LINK } from '../lib/whatsapp';
+import { WA_BRIEFING, WA_DEMO, WA_LINK, waProduct } from '../lib/whatsapp';
 import { Section, Container, Label, Button, Card, Pill, Stat } from '../components/ui';
 
 // The eleven data-driven pages share one shape, so they share one set of
@@ -9,7 +9,10 @@ import { Section, Container, Label, Button, Card, Pill, Stat } from '../componen
 // rules), which is why every inner page rendered at a different colour
 // temperature than the home page.
 
-export function PageHero({ eyebrow, heading, lede }) {
+// The product-hero contract: name, a one-sentence outcome, the target role,
+// and two next steps. `audience` and `actions` are optional, so a prose or
+// legal page renders exactly what it did before.
+export function PageHero({ eyebrow, heading, lede, audience, actions }) {
   return (
     <section className="page-hero">
       <Container>
@@ -18,6 +21,15 @@ export function PageHero({ eyebrow, heading, lede }) {
         </div>
         <h1 data-anim="head" style={{ marginTop: 'var(--s-5)' }}>{heading}</h1>
         <p className="lede prose" style={{ marginTop: 'var(--s-5)' }}>{lede}</p>
+
+        {audience && (
+          <p className="page-hero__for">
+            <span className="label">Who it is for</span>
+            {audience}
+          </p>
+        )}
+
+        {actions}
       </Container>
     </section>
   );
@@ -74,7 +86,7 @@ export function Related({ items }) {
   );
 }
 
-export function PageCta({ heading, body }) {
+export function PageCta({ heading, body, product, industry }) {
   return (
     <Section edge="bottom">
       <Container>
@@ -89,12 +101,17 @@ export function PageCta({ heading, body }) {
                 the nav and the closing all offered a thirty-minute call --
                 a fourth variant of the first step, on twenty pages. */}
             <Button
-              href={WA_BRIEFING}
+              href={product ? waProduct(product, 'review') : WA_BRIEFING}
               {...WA_LINK}
               data-track="discovery_start"
+              data-track-product={product || 'general'}
+              data-track-industry={industry}
               data-track-cta_location="page_cta"
             >
-              Book a 30-minute discovery call
+              {/* "Book a review of X", not "Book a X review": the article is
+                  wrong in front of a product name beginning with a vowel
+                  sound, and this phrasing works for all four. */}
+              {product ? `Book a review of ${product}` : 'Book a 30-minute discovery call'}
             </Button>
           </div>
         </div>
@@ -219,10 +236,10 @@ const ACTOR = {
   done: { label: 'Completed', cls: 'wf__step--done' },
 };
 
-export function Workflow({ steps, head = 'The workflow, end to end' }) {
+export function Workflow({ steps, head = 'The workflow, end to end', id }) {
   if (!steps?.length) return null;
   return (
-    <Section edge="bottom">
+    <Section id={id} edge="bottom">
       <Container>
         <Label as="h2" className="label--head">{head}</Label>
         <ol className="wf" style={{ marginTop: 'var(--s-5)' }}>

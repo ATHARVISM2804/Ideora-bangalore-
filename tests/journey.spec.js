@@ -231,3 +231,63 @@ test('the homepage runs in the specified sequence', async ({ page }) => {
   await expect(page.locator('#how .step')).toHaveCount(6);
   await expect(page.locator('#how .step__facts')).toHaveCount(6);
 });
+
+test('the hero uses the approved copy and tracking', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await page.waitForFunction(() => document.fonts.check('1em Newsreader'));
+
+  await expect(page.locator('.hero__badge')).toHaveText(/custom ai automation for service businesses/i);
+  await expect(page.locator('h1')).toHaveText(
+    'AI systems that handle enquiries, bookings and follow-ups inside your existing software.',
+  );
+  await expect(page.locator('.hero__lede')).toHaveText(
+    'Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars and operating controls.',
+  );
+  await expect(page.locator('.hero__actions a').first()).toHaveText('Book a 30-minute discovery call');
+  await expect(page.locator('.hero__actions a').nth(1)).toHaveText('See product demos');
+  await expect(page.locator('.hero__reassure')).toHaveText(/No migration \| Fixed scope \| Weekly working builds/);
+
+  // "Limit the hero description to two readable lines at 1440 pixels."
+  const lines = await page.locator('.hero__lede').evaluate((el) =>
+    Math.round(el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight)),
+  );
+  expect(lines, `hero description runs to ${lines} lines`).toBeLessThanOrEqual(2);
+
+  // Both CTAs carry product_interest and cta_location.
+  for (const cta of await page.locator('.hero__actions a').all()) {
+    await expect(cta).toHaveAttribute('data-track-product_interest', 'general');
+    await expect(cta).toHaveAttribute('data-track-cta_location', 'hero');
+  }
+});
+
+test('every product page meets the template contract', async ({ page }) => {
+  const products = [
+    ['/products/ideora-health', 'Ideora Health'],
+    ['/products/ideora-auto', 'Ideora Auto'],
+    ['/products/ideora-property', 'Ideora Property'],
+    ['/products/operations-console', 'Operations Console'],
+  ];
+
+  for (const [path, name] of products) {
+    await page.goto(path);
+
+    // Name, outcome, target role, and two next steps -- the product hero.
+    await expect(page.locator('.page-hero .pill')).toHaveText(name);
+    await expect(page.locator('.page-hero h1')).not.toBeEmpty();
+    await expect(page.locator('.page-hero__for')).toBeVisible();
+    await expect(page.locator('.page-hero__actions a')).toHaveCount(2);
+
+    // Workflow, integrations, controls and the management view.
+    expect(await page.locator('.wf__step').count(), `${path} workflow steps`).toBeGreaterThanOrEqual(5);
+    expect(await page.locator('.intg__row').count(), `${path} integrations`).toBeGreaterThan(0);
+    expect(await page.locator('.dash__item').count(), `${path} dashboard`).toBeGreaterThan(0);
+
+    // The next step keeps the product context rather than dropping the reader
+    // into a generic enquiry.
+    const final = page.locator('.page-cta a');
+    await expect(final).toHaveText(`Book a review of ${name}`);
+    const href = await final.getAttribute('href');
+    expect(decodeURIComponent(href), `${path} CTA loses product context`).toContain(name);
+  }
+});

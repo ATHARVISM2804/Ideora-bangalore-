@@ -94,17 +94,19 @@ export function Hero() {
                   {...WA_LINK}
                   data-track="discovery_start"
                   data-track-product="general"
+                  data-track-product_interest="general"
                   data-track-cta_location="hero"
                   onMouseMove={magnetMove}
                   onMouseLeave={magnetLeave}
                 >
-                  Book a discovery call
+                  Book a 30-minute discovery call
                 </Button>
                 <Button
                   to="/products"
                   variant="secondary"
                   data-track="product_view"
                   data-track-product="general"
+                  data-track-product_interest="general"
                   data-track-cta_location="hero"
                 >
                   See product demos
