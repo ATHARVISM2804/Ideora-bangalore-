@@ -38,17 +38,17 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      testMatch: /journey\.spec\.js/,
+      testMatch: /(journey|qa)\.spec\.js/,
       use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'firefox',
-      testMatch: /journey\.spec\.js/,
+      testMatch: /(journey|qa)\.spec\.js/,
       use: { ...devices['Desktop Firefox'] },
     },
     {
       name: 'webkit',
-      testMatch: /journey\.spec\.js/,
+      testMatch: /(journey|qa)\.spec\.js/,
       use: { ...devices['Desktop Safari'] },
     },
     {
@@ -58,12 +58,12 @@ export default defineConfig({
     },
     {
       name: 'mobile-safari',
-      testMatch: /journey\.spec\.js/,
+      testMatch: /(journey|qa)\.spec\.js/,
       use: { ...devices['iPhone 13'] },
     },
     {
       name: 'mobile-chrome',
-      testMatch: /journey\.spec\.js/,
+      testMatch: /(journey|qa)\.spec\.js/,
       use: { ...devices['Pixel 7'] },
     },
   ],

@@ -7,7 +7,11 @@ import { test, expect } from '@playwright/test';
 // template covers every service, industry and legal page. Snapshotting all of
 // them would multiply review cost without covering another arrangement of
 // boxes.
-const WIDTHS = [390, 768, 1280, 1440];
+// The five the test matrix names. 1024 was missing, which is the width where
+// the navigation collapses into the drawer and the hero drops to one column --
+// the single most likely place for a layout to break, and the one nothing was
+// watching.
+const WIDTHS = [390, 768, 1024, 1280, 1440];
 
 const PAGES = [
   ['home', '/'],

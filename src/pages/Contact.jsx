@@ -65,7 +65,11 @@ export function Contact() {
       const json = await res.json().catch(() => ({}));
 
       if (!res.ok || !json.ok) {
-        const errors = json.fields || ['request'];
+        // The test matrix asks for rate-limited and API failure as distinct
+        // states. They were collapsed into one message that told a visitor to
+        // check the form, which is wrong twice: nothing is wrong with the form,
+        // and retrying immediately is the one thing that will not work.
+        const errors = res.status === 429 ? ['rate_limited'] : json.fields || ['request'];
         // Which field group failed, never what the visitor typed.
         track('form_error', { form_id: 'contact', field_group: errors.join(','), error_type: json.error || 'request_failed' });
         setState({ status: 'error', errors, delivered: true });
@@ -140,9 +144,11 @@ export function Contact() {
                       not have to hunt each field to find out what failed. */}
                   {state.errors.length > 0 && (
                     <p className="contact__err" role="alert">
-                      {state.errors.includes('request')
-                        ? 'We could not send that just now. Please try again, or reach us on WhatsApp or email.'
-                        : `Please check ${state.errors.map((f) => FIELD_LABEL[f] || 'the form').join(', ')}.`}
+                      {state.errors.includes('rate_limited')
+                        ? 'That is several attempts in quick succession. Give it a minute, or reach us on WhatsApp and skip the form entirely.'
+                        : state.errors.includes('request')
+                          ? 'We could not send that just now. Nothing is wrong with what you wrote. Please try again, or reach us on WhatsApp or email.'
+                          : `Please check ${state.errors.map((f) => FIELD_LABEL[f] || 'the form').join(', ')}.`}
                     </p>
                   )}
 
