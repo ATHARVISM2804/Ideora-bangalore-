@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MENUS } from '../data/nav';
+import { MENUS, COMPANY_LINKS } from '../data/nav';
 
 const menu = (label) => MENUS.find((m) => m.label === label)?.items ?? [];
 
@@ -56,12 +56,7 @@ export function Footer() {
 
         <FooterColumn
           head="Company"
-          items={[
-            { path: '/about', label: 'About' },
-            { path: '/case-studies', label: 'Case studies' },
-            { path: '/insights', label: 'Insights' },
-            { path: '/contact', label: 'Contact' },
-          ]}
+          items={[{ path: '/case-studies', label: 'Case studies' }, ...COMPANY_LINKS]}
         >
           <li><a href="mailto:info@ideoralabs.com" className="footer__link footer__link--strong">info@ideoralabs.com</a></li>
           <li><span className="footer__place">Bengaluru</span></li>

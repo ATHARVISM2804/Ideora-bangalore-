@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PRODUCTS, STATUS_LABEL } from '../data/products';
+import { PRODUCTS } from '../data/products';
 import { Section, Container, SectionHead } from './ui';
 
 // The product chooser.
@@ -24,7 +24,7 @@ export function ProductChooser({
           hero above it. In the measure container it sat 130px further in and
           read as a different page. */}
       <Container wide>
-        <SectionHead label={label} title={heading} lede={lede} />
+        <SectionHead label={label} title={heading} lede={lede} className="pchoose-head" />
 
         <ul className="pchoose" style={{ marginTop: 'var(--s-5)' }}>
           {PRODUCTS.map((p, i) => (
@@ -46,20 +46,19 @@ export function ProductChooser({
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span className="pchoose__name">{p.name}</span>
-                  {/* Text, not colour alone -- the status has to survive a
-                      greyscale print and a colour-blind reader. */}
-                  <span className={`pchoose__status pchoose__status--${p.status}`}>
-                    {STATUS_LABEL[p.status]}
-                  </span>
                 </span>
 
                 <span className="pchoose__promise">{p.promise}</span>
-                <span className="pchoose__outcome">{p.outcome}</span>
 
                 <span className="pchoose__foot">
                   <span className="pchoose__industry">{p.industry}</span>
-                  <span className="pchoose__cta" aria-hidden="true">{p.cta} →</span>
                 </span>
+
+                {/* The card's accessible name has to say what the link does.
+                    Sighted readers get that from the whole card being one
+                    target; a screen reader would otherwise hear four names and
+                    four descriptions with no verb. */}
+                <span className="visually-hidden">{p.cta}</span>
               </Link>
             </li>
           ))}

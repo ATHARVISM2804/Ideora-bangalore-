@@ -54,15 +54,16 @@ export const MENUS = [
   // is sent to this site to answer one question, and the specification's
   // navigation table lists Security as a primary destination for that reason.
   { label: 'Security', path: '/security', items: [] },
-  {
-    label: 'Company',
-    path: null,
-    items: [
-      { label: 'About', path: '/about', blurb: 'Who builds this, and how we work.' },
-      { label: 'Insights', path: '/insights', blurb: 'Notes on operational automation.' },
-      { label: 'Contact', path: '/contact', blurb: 'Talk to us, or book a discovery call.' },
-    ],
-  },
+];
+
+// About, Insights and Contact are reachable from the footer and from "Talk to
+// us" in the bar rather than from a seventh menu. The reference header carries
+// six items, and a company menu is the one a buyer needs least while deciding
+// whether there is a product here for them.
+export const COMPANY_LINKS = [
+  { label: 'About', path: '/about' },
+  { label: 'Insights', path: '/insights' },
+  { label: 'Contact', path: '/contact' },
 ];
 
 // These have hand-written components because they do something a prose page
@@ -78,6 +79,7 @@ export const ALL_PAGE_PATHS = [
   ...new Set([
     ...MENUS.flatMap((m) => [m.path, ...m.items.map((i) => i.path)])
       .filter((p) => p && !OWN_COMPONENT.has(p)),
+    ...COMPANY_LINKS.map((l) => l.path).filter((p) => !OWN_COMPONENT.has(p)),
     ...FOOTER_ONLY_PATHS,
   ]),
 ];

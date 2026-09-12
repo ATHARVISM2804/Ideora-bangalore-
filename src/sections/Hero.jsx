@@ -11,8 +11,17 @@ import { Container, Button, Pill } from '../components/ui';
 // for, or what arrives. The emphasised clause carries the tone the old line had.
 const WORDS = [
   ['AI', 'systems', 'that', 'handle'],
+  ['enquiries,', 'bookings', 'and'],
+  ['follow-ups', 'inside', 'your'],
+];
+
+// On a phone the headline stops at "follow-ups" and the qualifier moves into
+// the supporting line, which is how the responsive specification renders it.
+// Carried whole, the sentence set to seven lines at 42px and pushed the
+// buttons off the first screen.
+const PHONE_WORDS = [
+  ['AI', 'systems', 'that', 'handle'],
   ['enquiries,', 'bookings'],
-  ['and', 'follow-ups'],
 ];
 
 // Statement on the left, what we sell on the right. The centred arrangement
@@ -20,6 +29,7 @@ const WORDS = [
 // says what we do and where it applies in one screen.
 export function Hero() {
   const phone = useIsPhone();
+  const lines = phone ? PHONE_WORDS : WORDS;
 
   return (
     <section id="top" className="hero">
@@ -35,8 +45,8 @@ export function Hero() {
         <Container wide className="hero__grid">
           <div>
             <div data-anim="hero-1" style={{ display: 'flex' }}>
-              <Pill live className="hero__badge">
-                {phone ? 'Custom AI automation for service businesses' : 'Custom AI automation for healthcare, real estate and automotive teams'}
+              <Pill className="hero__badge">
+                Custom AI automation for service businesses
               </Pill>
             </div>
 
@@ -48,7 +58,7 @@ export function Hero() {
                 Spacing them with margin left the accessible name, the page
                 text and any copy-paste reading "Theworkyourteam...". */}
             <h1 className="hero__title">
-              {WORDS.map((line, li) => (
+              {lines.map((line, li) => (
                 <span key={li} className="hero__line">
                   {line.map((w, wi) => (
                     <span key={w}>
@@ -56,12 +66,12 @@ export function Hero() {
                       <span data-anim="hero-word" className="hero__word">{w}</span>
                     </span>
                   ))}
-                  {li < WORDS.length - 1 && ' '}
-                  {li === WORDS.length - 1 && (
+                  {li < lines.length - 1 && ' '}
+                  {li === lines.length - 1 && (
                     <span>
                       {' '}
                       <span data-anim="hero-word" className="hero__word">
-                        <span className="hero__done">inside your existing software</span>.
+                        {phone ? 'and follow-ups.' : 'existing software.'}
                       </span>
                     </span>
                   )}
@@ -71,8 +81,9 @@ export function Hero() {
 
             <div data-anim="hero-2">
               <p className="lede hero__lede">
-                Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars
-                and the approval rules you run today.
+                {phone
+                  ? 'Inside the software your team already uses. One live workflow in 6 to 10 weeks.'
+                  : 'Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars and operating controls.'}
               </p>
 
               <div className="hero__actions">
@@ -85,7 +96,7 @@ export function Hero() {
                   onMouseMove={magnetMove}
                   onMouseLeave={magnetLeave}
                 >
-                  Book a 30-minute discovery call
+                  Book a discovery call
                 </Button>
                 <Button
                   to="/products"
@@ -98,13 +109,13 @@ export function Hero() {
                 </Button>
               </div>
 
-              <p className="fine hero__reassure">No migration · Fixed scope · Weekly working builds</p>
+              <p className="fine hero__reassure">No migration<span aria-hidden="true"> | </span>Fixed scope<span aria-hidden="true"> | </span>Weekly working builds</p>
             </div>
           </div>
 
           {/* What we sell, around the mark. The sentence beside it already
               names where work stalls; the fold should not say that twice. */}
-          <div data-anim="console">
+          <div data-anim="console" className="hero__visual">
             <AutomationMap />
           </div>
         </Container>

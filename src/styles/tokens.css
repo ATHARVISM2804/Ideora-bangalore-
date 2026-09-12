@@ -35,10 +35,15 @@
      Two oranges with two jobs. --accent is a surface and a marker: status
      dots, the progress bar, hover states, the live indicator. White text on
      it is 3.2:1, so it is never a button fill and never text on paper.
-     --accent-deep is the text-and-action orange: 5.3:1 on paper, and white
-     on it is 5.6:1, so it carries every primary button.                  */
+     --accent-deep is the text-and-action orange. It was #B8400A; the client's
+     reference uses a much brighter orange (#FF5A14), which is 3.1:1 against
+     white and cannot carry a button. #C2410C is the brightest value that
+     still clears 4.5:1 in all four places this token is used: white on it
+     (5.2:1), and it as text on paper (4.9:1), on the sunken band (4.51:1)
+     and on a card (5.2:1). The sunken band is the binding constraint --
+     anything brighter fails there first.                                 */
   --accent:      #F4601E;
-  --accent-deep: #B8400A;
+  --accent-deep: #C2410C;
   --accent-hover:#9C3607;   /* pressed / hovered primary button */
   --accent-tint: #FBEFE7;
   --accent-line: rgba(184, 64, 10, 0.28);

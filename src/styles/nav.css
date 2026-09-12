@@ -70,12 +70,23 @@
 .navmenu { position: relative; }
 .navmenu__trigger.is-open { background: rgba(28, 25, 23, 0.06); }
 
+/* The reference header carries no carets, so these fade back to a hint rather
+   than a mark: still an affordance that something opens, no longer six glyphs
+   competing with six labels. They resolve on hover and focus, and the trigger
+   carries aria-haspopup and aria-expanded regardless, so nothing about this is
+   the only signal a menu exists. */
 .navmenu__caret {
   display: inline-block;
-  font-size: 0.625rem;
+  margin-left: 0.15em;
+  font-size: 0.5rem;
   line-height: 1;
-  transition: transform var(--dur) var(--ease);
+  opacity: 0.35;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
+
+.navmenu:hover .navmenu__caret,
+.navmenu__trigger:focus-visible .navmenu__caret,
+.navmenu__trigger.is-open .navmenu__caret { opacity: 1; }
 .navmenu__trigger.is-open .navmenu__caret { transform: rotate(180deg); }
 
 .navmenu__panel {
