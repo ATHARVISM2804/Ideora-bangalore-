@@ -37,6 +37,7 @@ const router = createBrowserRouter([
       })),
 
       { path: 'products', lazy: lazyPage(() => import('./pages/Products'), 'Products') },
+      { path: 'industries', lazy: lazyPage(() => import('./pages/Industries'), 'Industries') },
       { path: 'case-studies', lazy: lazyPage(() => import('./pages/CaseStudies'), 'CaseStudies') },
       { path: 'case-studies/:slug', lazy: lazyPage(() => import('./pages/CaseStudy'), 'CaseStudy') },
       { path: 'contact', lazy: lazyPage(() => import('./pages/Contact'), 'Contact') },

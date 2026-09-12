@@ -26,6 +26,7 @@ const ORIGIN = readFileSync(resolve(root, 'src/lib/site.js'), 'utf8')
 const priority = (p) =>
   p === '/' ? '1.0'
   : p === '/products' || p.startsWith('/products/') ? '0.9'
+  : p === '/industries' ? '0.8'
   : p.startsWith('/case-studies') || p.startsWith('/industries/') ? '0.8'
   : p === '/privacy' || p === '/terms' || p === '/responsible-ai' ? '0.3'
   : '0.7';
@@ -33,6 +34,7 @@ const priority = (p) =>
 const paths = [
   '/',
   '/products',
+  '/industries',
   ...ALL_PAGE_PATHS,
   '/case-studies',
   ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),

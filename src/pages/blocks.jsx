@@ -162,7 +162,9 @@ export function Deliverables({ items, head = 'What you get' }) {
         <Label as="h2" className="label--head">{head}</Label>
         <div className="cards cards--4" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => (
-            <Card key={it.title} data-anim="card">
+            // `id` is optional: it exists so the five services can be linked
+            // to individually from the navigation without each needing a page.
+            <Card key={it.title} id={it.id} data-anim="card">
               <span className="deliverable__tick" aria-hidden="true">✓</span>
               <h3 style={{ marginTop: 'var(--s-4)', fontSize: 'var(--t-d4)', lineHeight: 1.25 }}>{it.title}</h3>
               <p className="small" style={{ marginTop: 'var(--s-2)' }}>{it.body}</p>
@@ -214,6 +216,7 @@ const ACTOR = {
   auto: { label: 'Automated', cls: 'wf__step--auto' },
   system: { label: 'Integration', cls: 'wf__step--system' },
   human: { label: 'Your team', cls: 'wf__step--human' },
+  done: { label: 'Completed', cls: 'wf__step--done' },
 };
 
 export function Workflow({ steps, head = 'The workflow, end to end' }) {

@@ -142,7 +142,8 @@
   background: var(--raised);
 }
 
-.wf__step--human { border-left-color: var(--accent); }
+.wf__step--human { border-left-color: var(--signal); }
+.wf__step--done { border-left-color: var(--signal-ink); }
 .wf__step--system { border-left-color: var(--ink-ghost); }
 
 .wf__num {
@@ -161,7 +162,8 @@
   color: var(--ink-faint);
 }
 
-.wf__step--human .wf__actor { color: var(--accent-deep); }
+.wf__step--human .wf__actor { color: var(--signal-ink); }
+.wf__step--done .wf__actor { color: var(--signal-ink); }
 
 .wf__title {
   margin: var(--s-2) 0 var(--s-2);
@@ -454,7 +456,9 @@
    statement, so it sets a step down from a full section head and holds one
    line at every desktop width. */
 .pchoose-head .section-head__title {
-  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  /* 32px on a phone, 38px from the desktop breakpoint: the floor and ceiling
+     the typography table sets for an H2. It was 35px at 1440. */
+  font-size: clamp(2rem, 3.8vw, 2.5rem);
   max-width: none;
 }
 
@@ -493,4 +497,34 @@
 
   .footer__legal a,
   .footer__credit a { display: inline-block; padding-block: calc((2.75rem - 1.4em) / 2); }
+}
+
+/* --- Industries index ----------------------------------------------------- */
+.indlist { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+
+.indlist__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: var(--s-5) var(--s-7);
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.indlist__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.indlist__name { margin: 0 0 var(--s-2); font-size: var(--t-d3); line-height: 1.2; }
+.indlist__name a { color: inherit; text-decoration: none; }
+.indlist__name a:hover { color: var(--accent-deep); }
+
+.indlist__links { display: grid; gap: var(--s-4); align-content: start; }
+
+.indlist__link {
+  display: block;
+  margin-top: var(--s-2);
+  font-size: var(--t-sm);
+  color: var(--accent-deep);
+}
+
+@media (max-width: 47.99em) {
+  .indlist__row { grid-template-columns: minmax(0, 1fr); }
 }

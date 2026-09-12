@@ -925,11 +925,11 @@ export const PAGES = [
       { title: 'Accountability does not end at handover', body: 'Most automation fails quietly six weeks after launch, when a form changes or a queue grows and nobody is watching. Managed operation exists because that is the part that actually decides whether this worked.' },
     ],
     deliverables: [
-      { title: 'Automation discovery', body: 'We map the current process, where it waits, the exception rules and what success is measured in. You keep the map whether or not you continue.' },
+      { id: 'discovery', title: 'Automation discovery', body: 'We map the current process, where it waits, the exception rules and what success is measured in. You keep the map whether or not you continue.' },
       { title: 'Solution and agent design', body: 'The workflow, the channels, the points a person still approves, and the reporting management will actually read.' },
-      { title: 'Build and integration', body: 'Agents connected to your CRM, WhatsApp, calendars and operational systems. No migration, no second system for your team to learn.' },
+      { id: 'integration', title: 'Build and integration', body: 'Agents connected to your CRM, WhatsApp, calendars and operational systems. No migration, no second system for your team to learn.' },
       { title: 'Deployment and adoption', body: 'Security review, testing, user acceptance, training and a controlled launch rather than a switch thrown on a Friday.' },
-      { title: 'Managed operation', body: 'We watch the queues, exceptions, accuracy and cost, and keep improving the process after it is live.' },
+      { id: 'managed', title: 'Managed operation', body: 'We watch the queues, exceptions, accuracy and cost, and keep improving the process after it is live.' },
     ],
     faq: [
       { q: 'How do we know whether we need a product or a custom build?', a: 'The discovery call settles it in thirty minutes. If your workflow matches one of the four products, we say so and quote the shorter build. We do not sell a custom project to a business that needs a configuration.' },

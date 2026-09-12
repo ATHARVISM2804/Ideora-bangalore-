@@ -200,8 +200,12 @@ export function Contact() {
                     </label>
                   </p>
 
-                  <Button type="submit" disabled={state.status === 'sending'}>
-                    {state.status === 'sending' ? 'Sending…' : 'Send enquiry'}
+                  <Button
+                    type="submit"
+                    disabled={state.status === 'sending'}
+                    aria-busy={state.status === 'sending' || undefined}
+                  >
+                    {state.status === 'sending' ? 'Sending' : 'Send enquiry'}
                   </Button>
                 </>
               )}

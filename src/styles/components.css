@@ -94,6 +94,42 @@
 }
 .btn--block { width: 100%; }
 
+/* The component table asks for a text variant plus disabled and loading
+   states. --ghost was already the text button in everything but name; this
+   gives it the name the table uses rather than adding a fifth variant that
+   looks identical. */
+.btn--text { padding-inline: 0; background: none; color: var(--accent-deep); }
+.btn--text:hover { color: var(--accent-hover); background: none; text-decoration: underline; }
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading keeps the button's width so the row does not jump when the label is
+   swapped, and the spinner is decorative: the accessible state comes from
+   aria-busy on the control. */
+.btn[aria-busy='true'] { pointer-events: none; }
+
+.btn[aria-busy='true']::after {
+  content: '';
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.5em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn[aria-busy='true']::after { animation: none; opacity: 0.6; }
+}
+
 /* --- Cards ---------------------------------------------------------------
    One radius, one border, one shadow. Was six radii across eleven files. */
 

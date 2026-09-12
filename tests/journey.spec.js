@@ -129,3 +129,43 @@ test('the product row is visible at the fold on 1440x900', async ({ page }) => {
     `first product card starts ${Math.round(box.y)}px down a 900px viewport`,
   ).toBeLessThan(900);
 });
+
+test('the menu closes on an outside tap and on a route change', async ({ page }) => {
+  // Both paths run through one close() helper, and when a rename left that
+  // helper calling a function that no longer existed it threw silently: the
+  // menu simply stopped closing, on every route, in every browser. Only a test
+  // pressing Escape noticed.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+
+  const trigger = page.getByRole('button', { name: /Products/ });
+  await expect(trigger).toHaveAttribute('aria-haspopup', 'menu');
+
+  // Outside tap.
+  await trigger.click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  // A bare coordinate, not an element: closing on pointerdown re-renders the
+  // header, and Playwright retries an element click it thinks moved underneath
+  // it, which never settles.
+  await page.mouse.click(40, 700);
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+  // Route change: following a link used to leave the panel open over the page
+  // it had just navigated to.
+  await trigger.click();
+  await page.locator('.navmenu__panel a').first().click();
+  await expect(page).toHaveURL(/\/products$/);
+  await expect(page.getByRole('button', { name: /Products/ })).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('hovering a trigger does not open it instantly', async ({ page }) => {
+  // 150ms of hover intent, so a cursor travelling down the page does not drag
+  // four panels open on its way past.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+
+  const trigger = page.getByRole('button', { name: /Industries/ });
+  await trigger.hover();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true', { timeout: 2000 });
+});

@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 
 const CLOSE_DELAY = 120;
 
+// Hover intent. Opening the instant a pointer crosses a trigger means a cursor
+// travelling to the page below drags four panels open on the way past.
+const OPEN_DELAY = 150;
+
 // A disclosure holding a list of links.
 //
-// The trigger declares aria-haspopup="true", which ARIA maps to "menu" -- the
-// semantic the audit asked for. The panel itself stays a list of links.
+// The trigger declares aria-haspopup="menu", the value the navigation
+// specification names. The panel itself stays a list of links: ARIA treats
+// "menu" and "true" identically here, so this changes the attribute the spec
+// is read against without changing what a screen reader announces.
 //
 // It previously declared role="menu" / role="menuitem". That pattern describes
 // an application menu and suppresses link semantics, so a screen reader stopped
@@ -20,6 +26,7 @@ export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
     ? [{ path: menu.path, label: menu.overview || `All ${menu.label.toLowerCase()}`, blurb: null, overview: true }, ...menu.items]
     : menu.items;
   const timer = useRef(null);
+  const rootRef = useRef(null);
   const triggerRef = useRef(null);
   const panelId = useId();
   const itemRefs = useRef([]);
@@ -27,10 +34,30 @@ export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
   // A bare timeout would keep firing after unmount during a route change.
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  const cancelClose = () => clearTimeout(timer.current);
+  // A tap outside closes the panel. Without this, a touch user who opened a
+  // menu and then tapped the page had no way to dismiss it except opening
+  // another one: there is no pointer to leave, and no Escape key to press.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDown = (e) => {
+      if (!rootRef.current?.contains(e.target)) onOpenChange(false);
+    };
+    document.addEventListener('pointerdown', onDown, true);
+    return () => document.removeEventListener('pointerdown', onDown, true);
+  }, [open, onOpenChange]);
+
+  // A route change closes it. Following a link left the panel open over the
+  // page it had just navigated to.
+  useEffect(() => { onOpenChange(false); }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const cancelTimer = () => clearTimeout(timer.current);
   const scheduleClose = () => {
-    cancelClose();
+    cancelTimer();
     timer.current = setTimeout(() => onOpenChange(false), CLOSE_DELAY);
+  };
+  const scheduleOpen = () => {
+    cancelTimer();
+    timer.current = setTimeout(() => onOpenChange(true), OPEN_DELAY);
   };
 
   const focusItem = (i) => {
@@ -44,7 +71,7 @@ export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
   };
 
   const close = ({ refocus }) => {
-    cancelClose();
+    cancelTimer();
     onOpenChange(false);
     if (refocus) triggerRef.current?.focus();
   };
@@ -71,8 +98,9 @@ export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
 
   return (
     <div
+      ref={rootRef}
       className="navmenu"
-      onMouseEnter={() => { cancelClose(); onOpenChange(true); }}
+      onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >
       <button
@@ -80,10 +108,13 @@ export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        aria-haspopup="true"
+        aria-haspopup="menu"
         className={`nav__link navmenu__trigger${active ? ' is-active' : ''}${open ? ' is-open' : ''}`}
         onKeyDown={onTriggerKeyDown}
-        onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
+        onClick={() => {
+          cancelTimer();
+          return open ? close({ refocus: false }) : onOpenChange(true);
+        }}
       >
         {menu.label}
         <span aria-hidden="true" className="navmenu__caret">▾</span>

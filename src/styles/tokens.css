@@ -46,6 +46,18 @@
   --accent-deep: #C2410C;
   --accent-hover:#9C3607;   /* pressed / hovered primary button */
   --accent-tint: #FBEFE7;
+
+  /* --- Signal ------------------------------------------------------------
+     The design-system table introduces cyan for one job only: live state,
+     information, and the human-exception indicator. It is never decoration
+     and never a second accent.
+
+     #28C2D8 as specified is 1.9:1 on paper -- fine as a 2px rule or a dot,
+     nowhere near AA as text. --signal-ink is the same hue darkened to 4.6:1
+     so a label can be written in it.                                      */
+  --signal:     #28C2D8;
+  --signal-ink: #0E6E7D;
+  --signal-tint: #EAF8FB;
   --accent-line: rgba(184, 64, 10, 0.28);
 
   /* --- Type ------------------------------------------------------------- */
@@ -67,9 +79,15 @@
                                                         the fold. 56 is the
                                                         desktop floor the spec
                                                         names.                */
-  --t-d2:    clamp(2rem, 3.4vw, 2.875rem);       /* 32 → 46  section head.
-                                                        Floor was 30; the spec
-                                                        asks 32-38 on mobile. */
+  --t-d2:    clamp(2rem, 3.8vw, 2.875rem);       /* 32 → 46  section head.
+                                                        The table asks 32-38 on
+                                                        mobile and 38-48 from
+                                                        the desktop breakpoint.
+                                                        At 3.4vw it was 34.8px
+                                                        at 1024 -- under the
+                                                        desktop floor. 3.8vw
+                                                        clears 38 at 1024 and
+                                                        still starts at 32.   */
   --t-d3:    clamp(1.375rem, 2vw, 1.625rem);     /* 22 → 26  subhead      */
   --t-d4:    1.1875rem;                          /* 19       card title   */
   --t-lede:  clamp(1.0625rem, 1.15vw, 1.1875rem);/* 17 → 19  standfirst   */
@@ -112,7 +130,7 @@
   --band-tight: clamp(3rem, 6vw, 5rem);        /* 48 →  80 */
 
   /* --- Shape ------------------------------------------------------------ */
-  --r-btn:   8px;
+  --r-btn:   10px;  /* radius.control in the design-system table */
   --r-card:  16px;
   --r-panel: 22px;
   --r-pill:  999px;

@@ -14,6 +14,7 @@ const PAGES = [
   ['products-index', '/products'],
   ['product-template', '/products/ideora-health'],
   ['prose-template', '/security'],
+  ['industries-index', '/industries'],
   ['case-studies', '/case-studies'],
   ['contact', '/contact'],
   ['not-found', '/this-route-does-not-exist'],

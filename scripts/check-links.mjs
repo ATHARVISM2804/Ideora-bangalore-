@@ -16,7 +16,8 @@ import { dirname, resolve, join } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 
-const { ALL_PAGE_PATHS, MENUS, FOOTER_ONLY_PATHS } = await import(resolve(root, 'src/data/nav.js'));
+const { ALL_PAGE_PATHS, FOOTER_ONLY_PATHS, OWN_COMPONENT, COMPANY_LINKS } =
+  await import(resolve(root, 'src/data/nav.js'));
 const { REDIRECTS } = await import(resolve(root, 'src/data/redirects.js'));
 const { CASE_STUDIES } = await import(resolve(root, 'src/data/caseStudies.js'));
 const { PRODUCTS } = await import(resolve(root, 'src/data/products.js'));
@@ -24,10 +25,15 @@ const { PRODUCTS } = await import(resolve(root, 'src/data/products.js'));
 const failures = [];
 
 // --- 1. Known destinations -------------------------------------------------
+// Derived, not listed. This set was hand-maintained and immediately drifted:
+// adding /industries as a real page made the checker reject the nav that
+// pointed at it.
 const known = new Set([
-  '/', '/products', '/case-studies', '/about', '/insights', '/contact',
+  '/',
   ...ALL_PAGE_PATHS,
+  ...OWN_COMPONENT,
   ...FOOTER_ONLY_PATHS,
+  ...COMPANY_LINKS.map((l) => l.path),
   ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),
   ...REDIRECTS.map((r) => r.from),
 ]);
@@ -40,6 +46,7 @@ function walk(dir) {
 }
 
 const files = walk(resolve(root, 'src')).filter((f) => /\.(jsx?|css)$/.test(f));
+const anchors = [];
 
 // Any string literal that looks like a site-root path. Catching only `to=`
 // and `href=` missed a lookup table in Work.jsx that pointed four case-study
@@ -48,18 +55,37 @@ const files = walk(resolve(root, 'src')).filter((f) => /\.(jsx?|css)$/.test(f));
 // are filtered below instead.
 // Must begin with a letter, so "1/12" style fragments in copy are not read as
 // routes.
-const LINK = /['"](\/[a-z][^'"#?\s]*)['"]/gi;
+// The fragment is captured separately so "/services#discovery" is checked as
+// a link to /services rather than skipped entirely, which is what happened
+// before: anchored links matched nothing and were silently unvalidated.
+const LINK = /['"](\/[a-z][^'"?\s]*)['"]/gi;
 
 for (const file of files) {
   const src = readFileSync(file, 'utf8');
   for (const m of src.matchAll(LINK)) {
-    const href = m[1].replace(/\/$/, '') || '/';
+    const [pathPart, fragment] = m[1].split('#');
+    const href = pathPart.replace(/\/$/, '') || '/';
+    if (fragment) anchors.push({ file, href, fragment });
     if (href.startsWith('/api/') || href.startsWith('/assets/')) continue;
     if (href.startsWith('/src/') || href.startsWith('/node_modules/')) continue;
     if (/\.[a-z0-9]{2,4}$/i.test(href)) continue; // a file, not a route
     if (!known.has(href)) {
       failures.push(`${file.replace(root + '/', '')}: links to ${href}, which is not a route`);
     }
+  }
+}
+
+// An anchored link must land on an id that exists somewhere in the source.
+// Cheap and static, but it catches the common case: a section renamed and the
+// three links into it left pointing at nothing.
+const allSource = files.map((f) => readFileSync(f, 'utf8')).join('\n');
+for (const { file, href, fragment } of anchors) {
+  const declared =
+    allSource.includes(`id: '${fragment}'`) ||
+    allSource.includes(`id="${fragment}"`) ||
+    allSource.includes(`id={'${fragment}'}`);
+  if (!declared) {
+    failures.push(`${file.replace(root + '/', '')}: links to ${href}#${fragment}, and no element declares that id`);
   }
 }
 
