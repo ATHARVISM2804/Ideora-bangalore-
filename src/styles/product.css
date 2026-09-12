@@ -77,6 +77,27 @@
   gap: var(--s-2) var(--s-3);
 }
 
+/* Featured: one card carrying more weight than its siblings, for a launch or
+   a campaign. Not used on the homepage today; the variant exists because the
+   component table lists it and a card that gains it later should not need new
+   CSS written under time pressure. */
+.pchoose__card--featured {
+  border-color: var(--accent-line);
+  box-shadow: var(--sh-card);
+}
+
+.pchoose__status {
+  font-size: var(--t-xs);
+  color: var(--ink-faint);
+  white-space: nowrap;
+  grid-column: 2;
+}
+
+/* Text plus colour, never colour alone. */
+.pchoose__status--live { color: var(--accent-deep); }
+.pchoose__status--pilot { color: var(--signal-ink); }
+.pchoose__status--soon { color: var(--ink-faint); }
+
 .pchoose__num {
   display: grid;
   place-items: center;
@@ -527,4 +548,22 @@
 
 @media (max-width: 47.99em) {
   .indlist__row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --- Component gallery (internal) ----------------------------------------- */
+.gal__row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+  gap: var(--s-5) var(--s-7);
+  padding: var(--s-6) 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+
+.gal__name { margin: 0 0 var(--s-2); font-size: var(--t-d4); line-height: 1.25; }
+.gal__demo { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+.gal__demo > * { max-width: 100%; }
+
+@media (max-width: 47.99em) {
+  .gal__row { grid-template-columns: minmax(0, 1fr); }
 }

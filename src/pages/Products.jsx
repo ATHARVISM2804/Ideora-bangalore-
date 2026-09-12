@@ -50,7 +50,12 @@ export function Products() {
         lede="Each one covers a workflow we have built and run before, so the build is shorter and the edge cases are already met. Where your workflow is genuinely yours, we build it as a custom service instead."
       />
 
-      <ProductChooser label="Choose a product" heading="Pick the operation you want to fix first" lede={null} />
+      <ProductChooser
+        label="Choose a product"
+        heading="Pick the operation you want to fix first"
+        lede={null}
+        showStatus
+      />
 
       <Faq
         head="Choosing between them"

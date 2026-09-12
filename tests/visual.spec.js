@@ -18,6 +18,9 @@ const PAGES = [
   ['case-studies', '/case-studies'],
   ['contact', '/contact'],
   ['not-found', '/this-route-does-not-exist'],
+  // The gallery is the one page where a broken component state is the whole
+  // point of looking, so it is snapshotted like any other layout.
+  ['component-states', '/components'],
 ];
 
 for (const [name, path] of PAGES) {

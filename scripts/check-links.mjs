@@ -30,6 +30,8 @@ const failures = [];
 // pointed at it.
 const known = new Set([
   '/',
+  // Internal, deliberately unlinked and unindexed.
+  '/components',
   ...ALL_PAGE_PATHS,
   ...OWN_COMPONENT,
   ...FOOTER_ONLY_PATHS,

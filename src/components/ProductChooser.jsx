@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, STATUS_LABEL } from '../data/products';
 import { Section, Container, SectionHead } from './ui';
 
 // The product chooser.
@@ -17,6 +17,10 @@ export function ProductChooser({
   lede = null,
   label = 'Choose a product',
   id = 'products',
+  // The homepage matches a reference render that carries no status, but the
+  // products index is a catalogue: the card requirements ask for live, pilot
+  // and coming-soon there, as text plus colour rather than colour alone.
+  showStatus = false,
 }) {
   return (
     <Section id={id} edge="bottom">
@@ -31,7 +35,7 @@ export function ProductChooser({
             <li key={p.path}>
               <Link
                 to={p.path}
-                className="pchoose__card"
+                className={`pchoose__card${p.featured ? ' pchoose__card--featured' : ''}`}
                 data-track="product_view"
                 data-track-product={p.name}
                 data-track-industry={p.industry}
@@ -46,6 +50,11 @@ export function ProductChooser({
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span className="pchoose__name">{p.name}</span>
+                  {showStatus && (
+                    <span className={`pchoose__status pchoose__status--${p.status}`}>
+                      {STATUS_LABEL[p.status]}
+                    </span>
+                  )}
                 </span>
 
                 <span className="pchoose__promise">{p.promise}</span>

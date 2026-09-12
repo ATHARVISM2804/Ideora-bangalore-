@@ -62,3 +62,14 @@ nothing reads it, and committing both doubled the repo's image weight.
 Review every changed snapshot before committing. A baseline updated without
 being looked at is worse than no baseline: it silently blesses the regression
 it was meant to catch.
+
+## The component gallery
+
+`/components` renders every state the component table requires, using the same
+components the site uses. It is the specification's "Storybook or equivalent":
+one route rather than a second build and a second dependency tree, and because
+it imports the real components a state cannot be documented there and broken in
+production.
+
+It is unlinked, excluded from the sitemap, and noindexed both at the edge
+(`vercel.json`) and in the DOM. Add a state to a component and add it there.

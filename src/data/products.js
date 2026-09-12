@@ -61,5 +61,6 @@ export const STATUS_LABEL = {
   live: 'Live with clients',
   pilot: 'In pilot',
   build: 'In build',
+  soon: 'Coming soon',
   included: 'Included with every system',
 };
