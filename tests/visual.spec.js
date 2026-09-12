@@ -25,8 +25,20 @@ for (const [name, path] of PAGES) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(path);
 
-      // Fonts decide layout. Shooting before they settle produces a diff on
-      // every run that has nothing to do with the change under test.
+      // Fonts decide layout, and document.fonts.ready resolves whether or not
+      // a face actually arrived -- so a run where Google Fonts was slow or
+      // blocked would quietly snapshot the fallback metrics and bake a layout
+      // no reader sees into the baseline. That produced a 29px height
+      // difference between two machines and a CI failure nobody could
+      // reproduce locally.
+      //
+      // Waiting on the faces themselves makes that case a loud timeout instead
+      // of a wrong baseline.
+      await page.waitForFunction(
+        () => document.fonts.check('1em Newsreader') && document.fonts.check('1em Geist'),
+        null,
+        { timeout: 15_000 },
+      );
       await page.evaluate(() => document.fonts.ready);
 
       // The hero's colour fields drift on an infinite loop. Reduced-motion

@@ -36,11 +36,19 @@ Linux — and CI compares the **Linux** ones. Regenerate them in the same
 container CI uses, never on your own machine:
 
 ```
-docker run --rm \
-  -v "$PWD":/w -v /w/node_modules -w /w --network host \
+docker run --rm -e CI=1 \
+  -v "$PWD":/w -v /w/node_modules -w /w \
   mcr.microsoft.com/playwright:v1.63.0-noble \
   bash -lc "npm ci --silent && npx playwright test --project=visual --update-snapshots"
 ```
+
+Both flags on that first line matter. `-e CI=1` turns off `reuseExistingServer`,
+so the container builds and serves the tree it has instead of attaching to
+whatever is already listening. Without it -- and with `--network host`, which is
+why it is gone -- a run here will happily screenshot a stale preview server
+still up on your machine and write those pixels as the baseline. Verify a
+regeneration by running the same command again without `--update-snapshots`
+before you commit it.
 
 The second `-v /w/node_modules` is load-bearing. It shadows your host
 `node_modules` with an empty volume so the container installs its own Linux
