@@ -158,14 +158,29 @@ test('the menu closes on an outside tap and on a route change', async ({ page })
   await expect(page.getByRole('button', { name: /Products/ })).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('hovering a trigger does not open it instantly', async ({ page }) => {
+test('hovering a trigger waits for intent before opening', async ({ page, isMobile }) => {
   // 150ms of hover intent, so a cursor travelling down the page does not drag
   // four panels open on its way past.
+  //
+  // This asserted "still closed" immediately after hovering, which is a race:
+  // on a slower machine the timer had already fired by the time the assertion
+  // ran, and it failed on WebKit in CI while passing locally. Measuring how
+  // long the open actually took tests the same behaviour without depending on
+  // how fast the runner is.
+  test.skip(!!isMobile, 'hover intent is a pointer behaviour; touch opens on tap');
+
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
 
   const trigger = page.getByRole('button', { name: /Industries/ });
-  await trigger.hover();
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-  await expect(trigger).toHaveAttribute('aria-expanded', 'true', { timeout: 2000 });
+
+  const started = Date.now();
+  await trigger.hover();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true', { timeout: 3000 });
+  const elapsed = Date.now() - started;
+
+  // Generous lower bound: the point is that it is deferred at all, not that it
+  // is deferred by exactly 150ms.
+  expect(elapsed, `menu opened after ${elapsed}ms`).toBeGreaterThan(100);
 });
