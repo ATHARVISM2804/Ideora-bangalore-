@@ -27,6 +27,9 @@ export function PageHero({ eyebrow, heading, lede }) {
 // table, not two blocks. Spacing them apart left an empty band bounded by two
 // parallel hairlines, which read as a row that had failed to load.
 export function ProofStrip({ items }) {
+  // Legal and trust pages carry no figures. Without this they rendered an
+  // empty ruled band where the numbers should have been.
+  if (!items?.length) return null;
   return (
     <Container>
       <div className="proof">
@@ -40,6 +43,7 @@ export function ProofStrip({ items }) {
 // right. The body is capped at 68 characters rather than spanning seven of
 // twelve columns, which at the old 1400px container ran past eighty.
 export function ProseSections({ sections }) {
+  if (!sections?.length) return null;
   return (
     <Section edge="bottom" tight>
       <Container>
@@ -177,6 +181,151 @@ export function Faq({ items, head = 'Questions we get asked' }) {
             </div>
           ))}
         </dl>
+      </Container>
+    </Section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Product template blocks.
+//
+// The audit's finding was that a buyer could read the whole site and still not
+// know what they would receive. These are the blocks that answer that: the
+// workflow end to end, what it plugs into, what the buyer still controls, and
+// what management sees. Each is optional, so a services or industry page can
+// skip the ones that do not apply to it.
+// ---------------------------------------------------------------------------
+
+// Who acts at each step. A buyer's first question about an AI workflow is
+// "where does a person still decide?", so the actor is a labelled state on the
+// step rather than a footnote under the diagram.
+const ACTOR = {
+  auto: { label: 'Automated', cls: 'wf__step--auto' },
+  system: { label: 'Integration', cls: 'wf__step--system' },
+  human: { label: 'Your team', cls: 'wf__step--human' },
+};
+
+export function Workflow({ steps, head = 'The workflow, end to end' }) {
+  if (!steps?.length) return null;
+  return (
+    <Section edge="bottom">
+      <Container>
+        <Label>{head}</Label>
+        <ol className="wf" style={{ marginTop: 'var(--s-5)' }}>
+          {steps.map((st, i) => {
+            const actor = ACTOR[st.actor] || ACTOR.auto;
+            return (
+              <li key={st.title} data-anim="card" className={`wf__step ${actor.cls}`}>
+                <span className="wf__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  {/* Text as well as colour: the state has to survive a
+                      greyscale print and a colour-blind reader. */}
+                  <span className="wf__actor">{actor.label}</span>
+                  <h3 className="wf__title">{st.title}</h3>
+                  <p className="small">{st.body}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+// Named systems, how they connect and what the client needs to have ready.
+// "Works with your CRM" is not checkable; this is.
+export function Integrations({ items, note, head = 'What it connects to' }) {
+  if (!items?.length) return null;
+  return (
+    <Section edge="bottom" tight>
+      <Container>
+        <Label>{head}</Label>
+        <div className="rule-top" style={{ marginTop: 'var(--s-5)' }}>
+          {items.map((it) => (
+            <div key={it.name} className="intg__row">
+              <div className="intg__name">{it.name}</div>
+              <div className="small intg__how">{it.how}</div>
+              <div className="small intg__need">{it.needs}</div>
+            </div>
+          ))}
+        </div>
+        {note && <p className="fine" style={{ marginTop: 'var(--s-4)' }}>{note}</p>}
+      </Container>
+    </Section>
+  );
+}
+
+// Permissions, approval points, audit trail and escalation. Procurement asks
+// for exactly these four, and an operations lead will not sponsor a system
+// internally without them.
+export function Controls({ items, head = 'What you keep control of' }) {
+  if (!items?.length) return null;
+  return (
+    <Section edge="bottom" tight>
+      <Container>
+        <Label>{head}</Label>
+        <div className="cards cards--2" style={{ marginTop: 'var(--s-5)' }}>
+          {items.map((it) => (
+            <Card key={it.title} data-anim="card">
+              <h3 style={{ fontSize: 'var(--t-d4)', lineHeight: 1.25 }}>{it.title}</h3>
+              <p className="small" style={{ marginTop: 'var(--s-2)' }}>{it.body}</p>
+            </Card>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+// The management view, named field by field, so a buyer can tell before a
+// call whether the report they already run by hand is in here.
+export function Dashboard({ items, head = 'What management sees' }) {
+  if (!items?.length) return null;
+  return (
+    <Section edge="bottom" tight>
+      <Container>
+        <Label>{head}</Label>
+        <ul className="dash" style={{ marginTop: 'var(--s-5)' }}>
+          {items.map((it) => <li key={it} className="dash__item">{it}</li>)}
+        </ul>
+      </Container>
+    </Section>
+  );
+}
+
+// The demo slot. Recorded walkthroughs are a client deliverable we do not have
+// yet, and a page that claims one and then shows nothing is worse than a page
+// that says so. This renders the honest fallback until `demo.video` exists.
+export function Demo({ demo, head = 'See it working' }) {
+  if (!demo) return null;
+  return (
+    <Section edge="bottom">
+      <Container>
+        <div className="panel">
+          <div className="panel__body">
+            <Label>{head}</Label>
+            <h2 style={{ marginTop: 'var(--s-4)', maxWidth: '31rem' }}>{demo.heading}</h2>
+            <p className="body-muted prose--narrow" style={{ marginTop: 'var(--s-4)' }}>{demo.body}</p>
+
+            <ol className="demo__steps" style={{ marginTop: 'var(--s-5)' }}>
+              {demo.steps.map((st) => <li key={st} className="small demo__step">{st}</li>)}
+            </ol>
+
+            <Button
+              href={WA_DEMO}
+              {...WA_LINK}
+              data-track="demo_start"
+              style={{ marginTop: 'var(--s-6)' }}
+            >
+              {demo.cta || 'Ask for this walkthrough'}
+            </Button>
+          </div>
+          <div className="panel__foot">
+            Walkthroughs are run live against demonstration data, not recorded. Nothing in a
+            demonstration is taken from a client system.
+          </div>
+        </div>
       </Container>
     </Section>
   );

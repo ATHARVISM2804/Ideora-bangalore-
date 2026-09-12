@@ -7,9 +7,19 @@ const menu = (label) => MENUS.find((m) => m.label === label)?.items ?? [];
 // drift from it. Only the menus that hold items are listed: About and Insights
 // are single pages and live in the Company column instead.
 const COLUMNS = [
-  { head: 'How it works', items: menu('How it works') },
-  { head: 'Solutions', items: menu('Solutions') },
+  { head: 'Products', items: menu('Products') },
+  { head: 'Services', items: menu('Services') },
   { head: 'Industries', items: menu('Industries') },
+];
+
+// Legal and trust links live in their own row rather than a nav column. A
+// buyer's IT and legal reviewers look for exactly these, and the audit found
+// none of them were reachable from the homepage at all.
+const LEGAL = [
+  { path: '/security', label: 'Security and data' },
+  { path: '/privacy', label: 'Privacy' },
+  { path: '/terms', label: 'Terms' },
+  { path: '/responsible-ai', label: 'Responsible AI' },
 ];
 
 // The column heads were <h2> elements, which put four headings in the footer at
@@ -46,13 +56,23 @@ export function Footer() {
 
         <FooterColumn
           head="Company"
-          items={[{ path: '/about', label: 'About' }, { path: '/insights', label: 'Insights' }]}
+          items={[
+            { path: '/about', label: 'About' },
+            { path: '/case-studies', label: 'Case studies' },
+            { path: '/insights', label: 'Insights' },
+            { path: '/contact', label: 'Contact' },
+          ]}
         >
-          <li><Link to="/about#contact" className="footer__link">Contact</Link></li>
           <li><a href="mailto:info@ideoralabs.com" className="footer__link footer__link--strong">info@ideoralabs.com</a></li>
           <li><span className="footer__place">Bengaluru</span></li>
         </FooterColumn>
       </div>
+
+      <nav className="footer__trust" aria-label="Legal and security">
+        {LEGAL.map((l) => (
+          <Link key={l.path} to={l.path} className="footer__link">{l.label}</Link>
+        ))}
+      </nav>
 
       <div className="footer__legal">
         <span>© 2026 Ideora Labs. Systems that run live operations.</span>

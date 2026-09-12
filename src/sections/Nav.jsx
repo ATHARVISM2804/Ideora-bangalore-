@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { MENUS } from '../data/nav';
 import { NavMenu } from '../components/NavMenu';
-import { WA_TALK, WA_DEMO, WA_LINK } from '../lib/whatsapp';
+import { WA_TALK, WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
 import { useBelowDesktop } from '../hooks/useMedia';
 import { useNavHeight } from '../hooks/useNavHeight';
@@ -56,6 +56,7 @@ export function Nav() {
                       menu={menu}
                       active={isActive(menu)}
                       open={openLabel === menu.label}
+                      pathname={pathname}
                       onOpenChange={(next) =>
                         setOpenLabel((prev) => (next ? menu.label : prev === menu.label ? null : prev))
                       }
@@ -64,6 +65,7 @@ export function Nav() {
                     <Link
                       key={menu.label}
                       to={menu.path}
+                      aria-current={menu.path === pathname ? 'page' : undefined}
                       className={`nav__link${isActive(menu) ? ' is-active' : ''}`}
                     >
                       {menu.label}
@@ -74,16 +76,23 @@ export function Nav() {
 
               <div className="nav__cta">
                 <a href={WA_TALK} {...WA_LINK} className="nav__link">Talk to us</a>
+                {/* One primary ask across the whole site. The nav used to
+                    offer a demo while the hero offered a briefing and the
+                    closing offered a third thing, so a visitor met three
+                    different first steps. */}
                 <Button
-                  href={WA_DEMO}
+                  href={WA_BRIEFING}
                   {...WA_LINK}
                   variant="dark"
                   size="sm"
                   className="nav__demo"
+                  data-track="discovery_start"
+                  data-track-product="general"
+                  data-track-cta_location="nav"
                   onMouseMove={magnetMove}
                   onMouseLeave={magnetLeave}
                 >
-                  Request a demo
+                  Book a call
                 </Button>
               </div>
             </>

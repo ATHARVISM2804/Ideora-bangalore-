@@ -1,0 +1,28 @@
+# Blocks a deployment when an internal link resolves to nothing.
+#
+# The audit found thirteen linked routes returning 404 in production. This is
+# the gate that stops that happening again: the link check runs before the
+# build, and the build runs on every push and pull request.
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npx oxlint src/
+      - name: Check internal links and redirects
+        run: npm run check:links
+      - name: Build
+        run: npm run build

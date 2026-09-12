@@ -55,10 +55,15 @@
   --t-d3:    clamp(1.375rem, 2vw, 1.625rem);     /* 22 → 26  subhead      */
   --t-d4:    1.1875rem;                          /* 19       card title   */
   --t-lede:  clamp(1.0625rem, 1.15vw, 1.1875rem);/* 17 → 19  standfirst   */
-  --t-body:  1.0625rem;                          /* 17                    */
+  --t-body:  1.125rem;                           /* 18  the audit's floor
+                                                        for a 40+ management
+                                                        reader. Was 17.      */
   --t-sm:    0.9375rem;                          /* 15                    */
   --t-xs:    0.8125rem;                          /* 13                    */
-  --t-label: 0.75rem;                            /* 12       eyebrow      */
+  --t-label: 0.8125rem;                          /* 13       eyebrow. Was
+                                                        12, which the audit
+                                                        flagged as below a
+                                                        comfortable size.    */
 
   --lh-display: 1.06;
   --lh-heading: 1.2;

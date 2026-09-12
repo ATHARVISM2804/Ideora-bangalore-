@@ -41,15 +41,16 @@ export function Services() {
     <Section id="services">
       <Container>
         <SectionHead
-          title="Five practices. One method."
-          lede="We map the handoffs your team does by hand, then build systems that do them in your live software, and report back on what they did."
+          label="Services"
+          title="How a build actually runs"
+          lede="Five steps from the first map to a system we keep running. The products above are these same five steps against a workflow we have built before, which is why they take less time."
         />
 
         <div className="services">
           <div
             className="services__tabs"
             role="tablist"
-            aria-label="What we build"
+            aria-label="Delivery steps"
             aria-orientation="vertical"
             tabIndex={-1}
             onKeyDown={onKeyDown}

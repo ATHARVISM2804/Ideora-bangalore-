@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { WA_TALK, WA_DEMO, WA_LINK } from '../lib/whatsapp';
+import { WA_TALK, WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { Button } from './ui';
 
 // The phone counterpart to NavMenu. The desktop menus open on hover, which a
@@ -122,10 +122,14 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
 
               {expanded && (
                 <div className="navsheet__sub">
-                  {menu.items.map((item) => (
+                  {(menu.path
+                    ? [{ path: menu.path, label: menu.overview || `All ${menu.label.toLowerCase()}` }, ...menu.items]
+                    : menu.items
+                  ).map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
+                      aria-current={pathname === item.path ? 'page' : undefined}
                       className={`navsheet__sublink${pathname === item.path ? ' is-active' : ''}`}
                     >
                       {item.label}
@@ -138,8 +142,16 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
         })}
 
         <div className="navsheet__actions">
-          <Button href={WA_DEMO} {...WA_LINK} block onClick={() => setOpen(false)}>
-            Request a demo
+          <Button
+            href={WA_BRIEFING}
+            {...WA_LINK}
+            block
+            data-track="discovery_start"
+            data-track-product="general"
+            data-track-cta_location="mobile_nav"
+            onClick={() => setOpen(false)}
+          >
+            Book a 30-minute discovery call
           </Button>
           <Button href={WA_TALK} {...WA_LINK} variant="secondary" block onClick={() => setOpen(false)}>
             Talk to us

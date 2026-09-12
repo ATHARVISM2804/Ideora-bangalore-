@@ -2,29 +2,34 @@
 // table. Adding a page means adding it here and adding its copy to pages.js;
 // PageShell asserts the two stay in sync.
 //
-// Real Estate and Healthcare appear under both Solutions and Industries by
-// design: Solutions describes what gets built, Industries describes who it is
-// for. The pages cross-link rather than duplicate.
+// The shape follows the audit's content rule: products say what a buyer
+// receives, services say how a custom build is delivered, industries say where
+// it applies. The old menu mixed all three under "Solutions", so a buyer could
+// not compare like with like. Every former path still resolves -- see the
+// redirect matrix in redirects.js.
+//
+// A menu with a `path` gets an overview link at the top of its panel, so the
+// index page is reachable and not just the leaves.
 
 export const MENUS = [
   {
-    label: 'How it works',
-    path: null,
+    label: 'Products',
+    path: '/products',
+    overview: 'All four products',
     items: [
-      { label: 'Your dashboard', path: '/platforms/ops-console', blurb: 'Every job, every exception, in one place.' },
-      { label: 'Always running', path: '/platforms/agent-runtime', blurb: 'Evenings, weekends and peak days covered.' },
-      { label: 'Works with your software', path: '/platforms/integrations', blurb: 'No migration. Nothing gets replaced.' },
+      { label: 'Ideora Health', path: '/products/ideora-health', blurb: 'Appointments, intake, reminders and follow-up.' },
+      { label: 'Ideora Auto', path: '/products/ideora-auto', blurb: 'Bookings, approvals, status and payment chase.' },
+      { label: 'Ideora Property', path: '/products/ideora-property', blurb: 'Lead qualification, site visits and follow-up.' },
+      { label: 'Operations Console', path: '/products/operations-console', blurb: 'Queues, exceptions, ageing and reporting.' },
     ],
   },
   {
-    label: 'Solutions',
-    path: null,
+    label: 'Services',
+    path: '/services',
+    overview: 'How we deliver',
     items: [
-      { label: 'Operations automation', path: '/solutions/agentic-ai', blurb: 'Systems that finish the work end to end.' },
-      { label: 'Real estate', path: '/solutions/real-estate', blurb: 'Every enquiry qualified before an agent sees it.' },
-      { label: 'Clinics and healthcare', path: '/solutions/healthcare', blurb: 'Intake and cover settled before arrival.' },
-      { label: 'Service centres', path: '/solutions/service-centre', blurb: 'Bookings answered in seconds.' },
-      { label: 'Ready-made systems', path: '/solutions/productised-systems', blurb: 'Fixed scope, fixed window, run for you.' },
+      { label: 'Custom AI automation', path: '/services/custom-ai-automation', blurb: 'For a workflow no product covers yet.' },
+      { label: 'Ready-made systems', path: '/services/productised-systems', blurb: 'Fixed scope, fixed window, run for you.' },
     ],
   },
   {
@@ -36,8 +41,40 @@ export const MENUS = [
       { label: 'Healthcare', path: '/industries/healthcare', blurb: 'Clinics and multi-site providers.' },
     ],
   },
-  { label: 'About', path: '/about', items: [] },
-  { label: 'Insights', path: '/insights', items: [] },
+  { label: 'Case studies', path: '/case-studies', items: [] },
+  {
+    label: 'How it works',
+    path: '/how-it-works',
+    overview: 'Discovery to managed operation',
+    items: [
+      { label: 'Works with your software', path: '/integrations', blurb: 'No migration. Nothing gets replaced.' },
+      { label: 'Security and data', path: '/security', blurb: 'Hosting, access, retention and audit.' },
+    ],
+  },
+  {
+    label: 'Company',
+    path: null,
+    items: [
+      { label: 'About', path: '/about', blurb: 'Who builds this, and how we work.' },
+      { label: 'Insights', path: '/insights', blurb: 'Notes on operational automation.' },
+      { label: 'Contact', path: '/contact', blurb: 'Talk to us, or book a discovery call.' },
+    ],
+  },
 ];
 
-export const ALL_PAGE_PATHS = MENUS.flatMap((m) => m.items.map((i) => i.path));
+// These have hand-written components because they do something a prose page
+// cannot: a product chooser, a case-study collection, a form. Everything else
+// renders through PageShell from pages.js.
+const OWN_COMPONENT = new Set(['/about', '/insights', '/products', '/case-studies', '/contact']);
+
+// Reachable from the footer rather than the menu. A buyer's legal and IT
+// reviewers look for these; they do not belong in a sales nav.
+export const FOOTER_ONLY_PATHS = ['/privacy', '/terms', '/responsible-ai'];
+
+export const ALL_PAGE_PATHS = [
+  ...new Set([
+    ...MENUS.flatMap((m) => [m.path, ...m.items.map((i) => i.path)])
+      .filter((p) => p && !OWN_COMPONENT.has(p)),
+    ...FOOTER_ONLY_PATHS,
+  ]),
+];

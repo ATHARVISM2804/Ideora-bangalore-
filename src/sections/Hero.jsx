@@ -4,9 +4,15 @@ import { AutomationMap } from './AutomationMap';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { Container, Button, Pill } from '../components/ui';
 
+// The approved hero copy from the audit, set as words so the reveal can stagger
+// them. It replaces "The work your team never gets to. Done." -- a better line,
+// but one that left the business category to be inferred: a buyer could read the
+// largest type on the page and still not know this is AI automation, who it is
+// for, or what arrives. The emphasised clause carries the tone the old line had.
 const WORDS = [
-  ['The', 'work', 'your', 'team'],
-  ['never', 'gets', 'to.'],
+  ['AI', 'systems', 'that', 'handle'],
+  ['enquiries,', 'bookings'],
+  ['and', 'follow-ups'],
 ];
 
 // Statement on the left, what we sell on the right. The centred arrangement
@@ -30,7 +36,7 @@ export function Hero() {
           <div>
             <div data-anim="hero-1" style={{ display: 'flex' }}>
               <Pill live className="hero__badge">
-                {phone ? 'Custom AI automation · Automotive, property, healthcare' : 'Custom AI automation for automotive, property and healthcare groups'}
+                {phone ? 'Custom AI automation for service businesses' : 'Custom AI automation for healthcare, real estate and automotive teams'}
               </Pill>
             </div>
 
@@ -50,12 +56,12 @@ export function Hero() {
                       <span data-anim="hero-word" className="hero__word">{w}</span>
                     </span>
                   ))}
-                  {li === 0 && ' '}
-                  {li === 1 && (
+                  {li < WORDS.length - 1 && ' '}
+                  {li === WORDS.length - 1 && (
                     <span>
                       {' '}
                       <span data-anim="hero-word" className="hero__word">
-                        <span className="hero__done">Done</span>.
+                        <span className="hero__done">inside your existing software</span>.
                       </span>
                     </span>
                   )}
@@ -65,18 +71,34 @@ export function Hero() {
 
             <div data-anim="hero-2">
               <p className="lede hero__lede">
-                Bookings, approvals, follow-up: answered the moment they arrive, inside the
-                software you already own.
+                Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars
+                and the approval rules you run today.
               </p>
 
               <div className="hero__actions">
-                <Button href={WA_BRIEFING} {...WA_LINK} onMouseMove={magnetMove} onMouseLeave={magnetLeave}>
+                <Button
+                  href={WA_BRIEFING}
+                  {...WA_LINK}
+                  data-track="discovery_start"
+                  data-track-product="general"
+                  data-track-cta_location="hero"
+                  onMouseMove={magnetMove}
+                  onMouseLeave={magnetLeave}
+                >
                   Book a 30-minute discovery call
                 </Button>
-                <Button href="#services" variant="secondary">See what we build</Button>
+                <Button
+                  to="/products"
+                  variant="secondary"
+                  data-track="product_view"
+                  data-track-product="general"
+                  data-track-cta_location="hero"
+                >
+                  See product demos
+                </Button>
               </div>
 
-              <p className="fine hero__reassure">Thirty minutes · you keep the map · no obligation</p>
+              <p className="fine hero__reassure">No migration · Fixed scope · Weekly working builds</p>
             </div>
           </div>
 

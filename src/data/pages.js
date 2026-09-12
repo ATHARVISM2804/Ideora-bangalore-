@@ -8,10 +8,108 @@ import { ALL_PAGE_PATHS } from './nav';
 
 export const PAGES = [
   {
-    path: '/platforms/ops-console',
-    title: 'Your operations dashboard',
+    path: '/products/operations-console',
+    product: 'Operations Console',
+    industry: 'cross-industry',
+    audience: 'Owners, general managers and operations leaders across multiple sites or queues.',
+    trail: [
+      {
+        label: 'Products',
+        path: '/products',
+      },
+    ],
+    workflow: [
+      {
+        actor: 'system',
+        title: 'Work comes in',
+        body: 'Forms, WhatsApp, voice, email and integrations are normalised into one event stream, whatever they started as.',
+      },
+      {
+        actor: 'auto',
+        title: 'A system acts',
+        body: 'The rule, agent or workflow step that acted is recorded against the job, not just the outcome.',
+      },
+      {
+        actor: 'human',
+        title: 'An exception is raised',
+        body: 'What stopped, why, who owns it and how long it has been waiting. This is the only queue a supervisor has to work.',
+      },
+      {
+        actor: 'system',
+        title: 'The audit record is written',
+        body: 'Timestamp, source, action, result and approval history, retained and searchable.',
+      },
+      {
+        actor: 'auto',
+        title: 'Management sees the operation',
+        body: 'Volume, completed, waiting, exception ageing and outcome, from the same records the work was done in.',
+      },
+      {
+        actor: 'auto',
+        title: 'Forecast and alerts',
+        body: 'Shown only where data quality and confidence clear a documented threshold. Off by default rather than confidently wrong.',
+      },
+    ],
+    demo: {
+      heading: 'The console against your own queue',
+      body: 'We run this live against demonstration data, then talk through what your own queue would look like in it.',
+      steps: [
+        'See work arrive from four different channels into one queue.',
+        'Watch an automated action complete and write its audit record.',
+        'Work an exception: owner, reason, SLA and resolution.',
+        'Open the management view and the weekly report it produces.',
+      ],
+      cta: 'Book a walkthrough',
+    },
+    integrations: [
+      {
+        name: 'Your operational systems',
+        how: 'Whatever the workflow already writes to: CRM, DMS, HIS, calendars',
+        needs: 'Existing connections from the product in use',
+      },
+      {
+        name: 'Identity',
+        how: 'SSO where you run it, strong authentication where you do not',
+        needs: 'An identity provider, or we issue accounts',
+      },
+      {
+        name: 'Reporting export',
+        how: 'Scheduled export to a warehouse or a sheet',
+        needs: 'A destination and an owner',
+      },
+    ],
+    integrationsNote: 'The console reports only what the underlying workflows actually record. We do not add a metric the operation cannot support.',
+    controls: [
+      {
+        title: 'Role-based access, enforced server-side',
+        body: 'Permissions are checked on the server, not hidden in the interface. A filter cannot be edited in a URL to reveal another location.',
+      },
+      {
+        title: 'Scoped to your organisation and sites',
+        body: 'A user sees the locations they are authorised for. There is no view that crosses a customer boundary.',
+      },
+      {
+        title: 'Exports are logged',
+        body: 'Who exported what and when is recorded, and sensitive fields are excluded by default.',
+      },
+      {
+        title: 'Every automated write is traceable',
+        body: 'Source, action and result are retained for every write, so an automated change can always be explained.',
+      },
+    ],
+    dashboard: [
+      'Live queues and current volume',
+      'Backlog and how long work has waited',
+      'Service levels against the target you set',
+      'Exception reasons, ranked',
+      'Action logs and approval history',
+      'Throughput per person, bay or room',
+      'Revenue and payment status',
+      'Demand forecast, where confidence allows',
+    ],
+    title: 'Operations Console',
     description: 'One operational record every team reads from: jobs, queues, agents, and the exceptions that need a person.',
-    eyebrow: 'Platforms',
+    eyebrow: 'Products',
     heading: 'A queue management can read on a Monday',
     lede: 'The console is the single place your operation is visible. Every job an agent completed, every record it touched, and every exception it could not resolve, in one view that does not need a weekly export to be trusted.',
     proof: [
@@ -38,8 +136,8 @@ export const PAGES = [
       { q: 'Is this another subscription to manage?', a: 'The engagement is a fixed-scope build, then a managed operation. The dashboard comes with the system. It is not sold separately.' },
     ],
     related: [
-      { label: 'Always running', path: '/platforms/agent-runtime' },
-      { label: 'Works with your software', path: '/platforms/integrations' },
+      { label: 'Always running', path: '/how-it-works' },
+      { label: 'Works with your software', path: '/integrations' },
     ],
     cta: {
       heading: 'See the console against your own queue',
@@ -47,10 +145,10 @@ export const PAGES = [
     },
   },
   {
-    path: '/platforms/agent-runtime',
-    title: 'Always-on operations',
+    path: '/how-it-works',
+    title: 'How it works',
     description: 'Where agents execute, retry, and hand work to one another, and where a failed step becomes a named exception instead of a silent drop.',
-    eyebrow: 'Platforms',
+    eyebrow: 'How it works',
     heading: 'Agents that finish, or say why they stopped',
     lede: 'The runtime is where every agent executes. It holds the run open, retries the step that failed, passes work between agents, and raises a named exception the moment it cannot proceed on its own.',
     proof: [
@@ -78,8 +176,8 @@ export const PAGES = [
       { q: 'Can we turn parts of it off?', a: 'Yes. Each step is scoped with you, and anything you would rather keep with a person stays with a person.' },
     ],
     related: [
-      { label: 'Your dashboard', path: '/platforms/ops-console' },
-      { label: 'Works with your software', path: '/platforms/integrations' },
+      { label: 'Your dashboard', path: '/products/operations-console' },
+      { label: 'Works with your software', path: '/integrations' },
     ],
     cta: {
       heading: 'Run one of your workflows through it',
@@ -87,10 +185,10 @@ export const PAGES = [
     },
   },
   {
-    path: '/platforms/integrations',
+    path: '/integrations',
     title: 'Works with your software',
     description: 'The connection into the systems you already run: your CRM, DMS, EMR, calendars and messaging, with no rip and replace.',
-    eyebrow: 'Platforms',
+    eyebrow: 'How it works',
     heading: 'Your existing stack. No rip and replace.',
     lede: 'Agents work the same records your team works. The integrations layer connects them to the systems already in place, under your permissions, so the operation changes without the software underneath it changing.',
     proof: [
@@ -118,8 +216,8 @@ export const PAGES = [
       { q: 'Do you need access to everything?', a: 'No, and we would rather not have it. Access is scoped to the processes in the build and agreed in writing first.' },
     ],
     related: [
-      { label: 'Your dashboard', path: '/platforms/ops-console' },
-      { label: 'Always running', path: '/platforms/agent-runtime' },
+      { label: 'Your dashboard', path: '/products/operations-console' },
+      { label: 'Always running', path: '/how-it-works' },
     ],
     cta: {
       heading: 'Bring us your stack as it is',
@@ -127,10 +225,10 @@ export const PAGES = [
     },
   },
   {
-    path: '/solutions/agentic-ai',
-    title: 'Operations automation',
+    path: '/services/custom-ai-automation',
+    title: 'Custom AI automation',
     description: 'Custom agents that complete multi-step operational tasks end to end, built against your APIs, your permissions, and your escalation rules.',
-    eyebrow: 'Solutions',
+    eyebrow: 'Services',
     heading: 'Custom agents that complete the work end to end',
     lede: 'Agents that complete multi-step operational tasks end to end, with a full trace of every action. Built against your APIs, your permissions and your escalation rules. It works inside them, never around them.',
     proof: [
@@ -158,8 +256,8 @@ export const PAGES = [
       { q: 'What happens to the people doing this work now?', a: 'The routine part stops reaching them. What remains is the exceptions, which is the part that needed a person in the first place.' },
     ],
     related: [
-      { label: 'Service centres', path: '/solutions/service-centre' },
-      { label: 'Ready-made systems', path: '/solutions/productised-systems' },
+      { label: 'Service centres', path: '/products/ideora-auto' },
+      { label: 'Ready-made systems', path: '/services/productised-systems' },
     ],
     cta: {
       heading: 'Start with the process that stalls most',
@@ -167,10 +265,126 @@ export const PAGES = [
     },
   },
   {
-    path: '/solutions/real-estate',
-    title: 'Real estate automation',
+    path: '/products/ideora-property',
+    product: 'Ideora Property',
+    industry: 'real estate',
+    audience: 'Sales directors, channel heads and marketing leads at developers and brokerages.',
+    trail: [
+      {
+        label: 'Products',
+        path: '/products',
+      },
+    ],
+    workflow: [
+      {
+        actor: 'system',
+        title: 'Lead arrives from any source',
+        body: 'Portal, lead ad, website form or WhatsApp. All of them land in one place instead of four inboxes.',
+      },
+      {
+        actor: 'auto',
+        title: 'Answered before interest cools',
+        body: 'A reply goes out in seconds, at any hour, including the weekend the campaign actually ran.',
+      },
+      {
+        actor: 'auto',
+        title: 'Requirement qualified',
+        body: 'Budget, location, property type, timeline and funding readiness, asked in a normal conversation rather than a form.',
+      },
+      {
+        actor: 'auto',
+        title: 'Project and inventory matched',
+        body: 'The requirement is matched against live inventory, so the customer is offered something that exists at a price they gave.',
+      },
+      {
+        actor: 'system',
+        title: 'Site visit booked',
+        body: 'Offered from the agent calendar and written to the CRM with the qualification attached.',
+      },
+      {
+        actor: 'human',
+        title: 'Agent picks up a qualified lead',
+        body: 'A legal, pricing or promise question, a poor match, an opt-out or a premium lead goes to a person rather than being answered.',
+      },
+      {
+        actor: 'auto',
+        title: 'Follow-up until it closes or dies',
+        body: 'Chased on a schedule, with the ageing visible instead of living in an agent memory.',
+      },
+    ],
+    demo: {
+      heading: 'A lead, from campaign click to booked visit',
+      body: 'We run this live against demonstration data on a call, using a lead you submit yourself.',
+      steps: [
+        'Submit a lead as a campaign source would.',
+        'Watch the qualification happen and a suitable project get matched.',
+        'Take a viewing slot from a live agent calendar.',
+        'See the qualified record and next action written to the CRM.',
+      ],
+      cta: 'Book a walkthrough',
+    },
+    integrations: [
+      {
+        name: 'Lead ads and portals',
+        how: 'Webhook or feed into one intake',
+        needs: 'Page or portal admin access',
+      },
+      {
+        name: 'Website forms',
+        how: 'Posted server-side with source and consent attached',
+        needs: 'A form we can point at an endpoint',
+      },
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number and a provider account in your name',
+      },
+      {
+        name: 'CRM',
+        how: 'Create and update lead, qualification and next action',
+        needs: 'API access and an agreed field map',
+      },
+      {
+        name: 'Inventory feed',
+        how: 'Read availability and pricing for matching',
+        needs: 'A feed or export we can read on a schedule',
+      },
+      {
+        name: 'Agent calendars',
+        how: 'Read availability and write site visits',
+        needs: 'Calendar access per agent',
+      },
+    ],
+    integrationsNote: 'Transcripts shown in a demonstration are synthetic. Where we show a real lead journey, personally identifiable information is removed first and the client has approved it.',
+    controls: [
+      {
+        title: 'Price and legal questions go to a person',
+        body: 'The system qualifies and books. It does not negotiate, quote off-list or answer a legal question about a project.',
+      },
+      {
+        title: 'Routing rules you own',
+        body: 'Which agent gets which lead, and what counts as premium, is a rule you set and can change without a rebuild.',
+      },
+      {
+        title: 'Consent and opt-out respected',
+        body: 'Consent state is captured at source and an opt-out stops contact immediately, across every channel.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, qualification and CRM write is stored with a timestamp and a result, so a disputed lead can be reconstructed.',
+      },
+    ],
+    dashboard: [
+      'Response time, by source and hour',
+      'Leads qualified and disqualified, with reasons',
+      'Site visits booked, attended and missed',
+      'Conversion by source, campaign and project',
+      'Agent acceptance and follow-up ageing',
+      'Inventory interest and unmatched demand',
+    ],
+    title: 'Ideora Property',
     description: 'Enquiry qualification, viewing scheduling, and document chasing run continuously, so agents spend the day with buyers who are ready.',
-    eyebrow: 'Solutions',
+    eyebrow: 'Products',
     heading: 'Enquiries qualified, viewings booked, documents chased',
     lede: 'Enquiry qualification, viewing scheduling and document chasing handled continuously so agents spend their day with buyers who are ready. What gets delivered is qualified enquiries, confirmed viewings, and a document checklist that closes itself.',
     proof: [
@@ -199,7 +413,7 @@ export const PAGES = [
     ],
     related: [
       { label: 'Real Estate', path: '/industries/real-estate' },
-      { label: 'Operations automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/services/custom-ai-automation' },
     ],
     cta: {
       heading: 'Put it against a week of your enquiries',
@@ -207,10 +421,122 @@ export const PAGES = [
     },
   },
   {
-    path: '/solutions/healthcare',
-    title: 'Healthcare and clinic automation',
+    path: '/products/ideora-health',
+    product: 'Ideora Health',
+    industry: 'healthcare',
+    audience: 'Clinic and hospital owners, practice managers and front-desk leads.',
+    trail: [
+      {
+        label: 'Products',
+        path: '/products',
+      },
+    ],
+    workflow: [
+      {
+        actor: 'auto',
+        title: 'Enquiry arrives',
+        body: 'A call, a WhatsApp message or a web form. It is answered in seconds, at any hour, in the language the patient wrote in.',
+      },
+      {
+        actor: 'auto',
+        title: 'Department and doctor matched',
+        body: 'The request is read for what is actually being asked, then matched to the right department, doctor and location before a slot is offered.',
+      },
+      {
+        actor: 'system',
+        title: 'Slot confirmed and written',
+        body: 'The appointment is written into the calendar or HIS your front desk already works in. There is no second diary to reconcile.',
+      },
+      {
+        actor: 'auto',
+        title: 'Registration and consent captured',
+        body: 'Details, referral source and consent state are collected ahead of arrival, so the desk is not taking them while a queue forms.',
+      },
+      {
+        actor: 'human',
+        title: 'Exception raised to staff',
+        body: 'Urgent clinical wording, an unclear request, no available slot, a payment problem or a missing consent stops the system and names a person.',
+      },
+      {
+        actor: 'auto',
+        title: 'Follow-up kept visible',
+        body: 'Reminders before the appointment and the follow-up due after it, chased without anyone keeping a private list.',
+      },
+      {
+        actor: 'system',
+        title: 'Management record written',
+        body: 'Every action lands in the same record the dashboard reads, so the report and the operation cannot disagree.',
+      },
+    ],
+    demo: {
+      heading: 'A booking, from message to calendar',
+      body: 'We run this live against demonstration data on a call. You send the enquiry yourself and watch each step land.',
+      steps: [
+        'Send a test enquiry from WhatsApp or the page simulator.',
+        'See the approved response and the slots actually available.',
+        'Confirm a slot and watch it written into the operational calendar.',
+        'Open the front-desk exception queue and the management record it produced.',
+      ],
+      cta: 'Book a walkthrough',
+    },
+    integrations: [
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number and a provider account in your name',
+      },
+      {
+        name: 'Calendar or HIS',
+        how: 'Direct connector where an API exists; a supervised worker where one does not',
+        needs: 'Test credentials and a named system owner',
+      },
+      {
+        name: 'CRM',
+        how: 'Create and update contact, appointment and source records',
+        needs: 'API access and an agreed field map',
+      },
+      {
+        name: 'Payments',
+        how: 'Payment link issued and status read back',
+        needs: 'Your existing payment gateway account',
+      },
+      {
+        name: 'Email and SMS',
+        how: 'Confirmations and reminders on your existing sender',
+        needs: 'Verified sender domain or SMS header',
+      },
+    ],
+    integrationsNote: 'We state the controls we actually operate. Ideora does not claim HIPAA, DPDP or medical-device certification, and no part of this system performs diagnosis or clinical advice.',
+    controls: [
+      {
+        title: 'Clinical wording never gets answered',
+        body: 'Anything that reads as urgent or symptomatic is routed to a person immediately. The system books appointments; it does not discuss conditions, triage or treatment.',
+      },
+      {
+        title: 'Approval points you set',
+        body: 'Which actions complete on their own and which wait for a person is agreed during design and can be changed afterwards without a rebuild.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, action and write is stored with a timestamp, a source and a result. You can reconstruct any booking end to end.',
+      },
+      {
+        title: 'Your data stays yours',
+        body: 'Records are written into your systems. We do not resell, train on or move patient data out of the region you operate in.',
+      },
+    ],
+    dashboard: [
+      'Appointments booked, by doctor and location',
+      'Cancellations and no-shows',
+      'Payment and outstanding status',
+      'Doctor and room utilisation',
+      'Follow-up due and overdue',
+      'Referral and enquiry source',
+      'Exception queue and how long items have waited',
+    ],
+    title: 'Ideora Health',
     description: 'Intake, eligibility checks, reminders and recall lists run before the patient reaches the desk, with clinical judgement left to clinicians.',
-    eyebrow: 'Solutions',
+    eyebrow: 'Products',
     heading: 'The desk work done before the patient arrives',
     lede: 'Intake, eligibility checks, reminders, and recall lists run before the patient reaches the desk. What gets delivered is completed intake, verified coverage, and a filled schedule with named exceptions.',
     proof: [
@@ -239,7 +565,7 @@ export const PAGES = [
     ],
     related: [
       { label: 'Healthcare', path: '/industries/healthcare' },
-      { label: 'Operations automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/services/custom-ai-automation' },
     ],
     cta: {
       heading: 'Take one clinic and one week',
@@ -247,10 +573,123 @@ export const PAGES = [
     },
   },
   {
-    path: '/solutions/service-centre',
-    title: 'Service centre automation',
+    path: '/products/ideora-auto',
+    product: 'Ideora Auto',
+    industry: 'automotive',
+    audience: 'Dealer principals, service-centre heads and aftersales managers.',
+    trail: [
+      {
+        label: 'Products',
+        path: '/products',
+      },
+    ],
+    workflow: [
+      {
+        actor: 'auto',
+        title: 'Customer asks for a service',
+        body: 'A call or a WhatsApp message, answered immediately instead of going to a voicemail nobody clears.',
+      },
+      {
+        actor: 'auto',
+        title: 'Vehicle and concern identified',
+        body: 'Registration, model, service history and the actual complaint are captured before a slot is discussed.',
+      },
+      {
+        actor: 'system',
+        title: 'Bay and advisor availability checked',
+        body: 'Real capacity from the workshop calendar, not an optimistic guess that the floor has to absorb on the day.',
+      },
+      {
+        actor: 'auto',
+        title: 'Booking confirmed and written',
+        body: 'The slot is written into the DMS or workshop diary, with the customer told what to bring.',
+      },
+      {
+        actor: 'human',
+        title: 'Estimate sent for approval',
+        body: 'The estimate goes out and the reply is captured against the job. A dispute, a safety finding or an unclear category stops and goes to an advisor.',
+      },
+      {
+        actor: 'auto',
+        title: 'Status kept moving',
+        body: 'The customer is told what is happening without an advisor stopping work to make the call.',
+      },
+      {
+        actor: 'system',
+        title: 'Payment and NPS closed out',
+        body: 'Payment status is chased and the follow-up survey goes out on the same record.',
+      },
+    ],
+    demo: {
+      heading: 'A service booking, from message to bay',
+      body: 'We run this live against demonstration data on a call, including the estimate approval most demos skip.',
+      steps: [
+        'Book a service slot over WhatsApp as a customer would.',
+        'Watch the booking written into the workshop capacity view.',
+        'Send an estimate-approval request and capture the reply.',
+        'See the customer status updates and the management report they produced.',
+      ],
+      cta: 'Book a walkthrough',
+    },
+    integrations: [
+      {
+        name: 'WhatsApp Business',
+        how: 'Official Business API through a provider account',
+        needs: 'A verified business number and a provider account in your name',
+      },
+      {
+        name: 'Voice',
+        how: 'Answers the service line and writes what was agreed into the job',
+        needs: 'A number we can route, or a SIP trunk',
+      },
+      {
+        name: 'Dealer CRM or DMS',
+        how: 'Read capacity, create and update the job card',
+        needs: 'API or database access and a named system owner',
+      },
+      {
+        name: 'Workshop calendar',
+        how: 'Bay and technician availability read and written',
+        needs: 'Existing calendar or planning tool',
+      },
+      {
+        name: 'Payments',
+        how: 'Payment link issued and status read back',
+        needs: 'Your existing payment gateway account',
+      },
+    ],
+    integrationsNote: 'Capacity forecasting is offered as a management feature only where production data supports it. We would rather leave it switched off than show a number you cannot act on.',
+    controls: [
+      {
+        title: 'Safety findings go to a person',
+        body: 'Anything that reads as a safety concern is escalated to an advisor rather than answered. The system books and updates; it does not make a technical judgement.',
+      },
+      {
+        title: 'Money needs a human yes',
+        body: 'Estimate values, discounts and goodwill sit behind an approval point you define. Nothing commits your margin on its own.',
+      },
+      {
+        title: 'A full audit trail',
+        body: 'Every message, approval and write is stored with a timestamp, a source and a result, so a disputed job can be reconstructed.',
+      },
+      {
+        title: 'Capacity you can override',
+        body: 'The floor can block, move or release slots at any time. The system reads the same diary your team edits.',
+      },
+    ],
+    dashboard: [
+      'Bookings, cancellations and no-shows',
+      'Bay and technician utilisation',
+      'Estimates sent, approved and waiting',
+      'Parts status and jobs held',
+      'Revenue and pending payments',
+      'Follow-up due and overdue',
+      'NPS and response rate',
+      'Capacity risk over the coming weeks',
+    ],
+    title: 'Ideora Auto',
     description: 'One agent across booking, estimate approval, parts status and customer updates, working the same records your advisors and DMS already use.',
-    eyebrow: 'Solutions',
+    eyebrow: 'Products',
     heading: 'One agent across booking, estimate and update',
     lede: 'One agent covering booking, estimate approval, parts status, and customer updates, working the same records your advisors and DMS already use. Bookings held, estimates approved, and a bay schedule that reflects reality by 9am.',
     proof: [
@@ -279,7 +718,7 @@ export const PAGES = [
     ],
     related: [
       { label: 'Automotive', path: '/industries/automotive' },
-      { label: 'Operations automation', path: '/solutions/agentic-ai' },
+      { label: 'Operations automation', path: '/services/custom-ai-automation' },
     ],
     cta: {
       heading: 'Bring us one site and its backlog',
@@ -287,10 +726,10 @@ export const PAGES = [
     },
   },
   {
-    path: '/solutions/productised-systems',
+    path: '/services/productised-systems',
     title: 'Ready-made systems',
     description: 'Systems we have already built and deployed, then configured to your data: a shorter build, the same operating model.',
-    eyebrow: 'Solutions',
+    eyebrow: 'Services',
     heading: 'Already built. Configured to your data.',
     lede: 'Systems we have already built and deployed, then configured to your data. A shorter build, the same operating model: a running system, the standard dashboard, and a managed operation.',
     proof: [
@@ -318,8 +757,8 @@ export const PAGES = [
       { q: 'Can we move to a custom build later?', a: 'Yes. It runs on your systems and your records, so extending it is a scoping conversation and never a migration.' },
     ],
     related: [
-      { label: 'Service centres', path: '/solutions/service-centre' },
-      { label: 'Real estate', path: '/solutions/real-estate' },
+      { label: 'Service centres', path: '/products/ideora-auto' },
+      { label: 'Real estate', path: '/products/ideora-property' },
     ],
     cta: {
       heading: 'Find out which route you are on',
@@ -363,8 +802,8 @@ export const PAGES = [
       { q: 'How long before it is live?', a: 'Six to ten weeks to a first system in production. The scope call is ninety minutes and you keep the map either way.' },
     ],
     related: [
-      { label: 'Service centres', path: '/solutions/service-centre' },
-      { label: 'Your dashboard', path: '/platforms/ops-console' },
+      { label: 'Service centres', path: '/products/ideora-auto' },
+      { label: 'Your dashboard', path: '/products/operations-console' },
     ],
     cta: {
       heading: 'Compare it against your own service queue',
@@ -408,8 +847,8 @@ export const PAGES = [
       { q: 'What happens to leads outside office hours?', a: 'They are answered when they arrive. That is usually where the difference shows first.' },
     ],
     related: [
-      { label: 'Real estate', path: '/solutions/real-estate' },
-      { label: 'Your dashboard', path: '/platforms/ops-console' },
+      { label: 'Real estate', path: '/products/ideora-property' },
+      { label: 'Your dashboard', path: '/products/operations-console' },
     ],
     cta: {
       heading: 'Read your own pipeline this way',
@@ -453,14 +892,181 @@ export const PAGES = [
       { q: 'We run several clinics. Does it handle multi-site?', a: 'Yes. Each clinic is read separately and against the others, so load is visible before it becomes a problem.' },
     ],
     related: [
-      { label: 'Clinics and healthcare', path: '/solutions/healthcare' },
-      { label: 'Your dashboard', path: '/platforms/ops-console' },
+      { label: 'Clinics and healthcare', path: '/products/ideora-health' },
+      { label: 'Your dashboard', path: '/products/operations-console' },
     ],
     cta: {
       heading: 'Start with your busiest Monday',
       body: 'We will take one week of intake across your clinics and show what the desk would have been holding on the morning the load peaked.',
     },
   },
+  // -------------------------------------------------------------------------
+  // Services index.
+  // -------------------------------------------------------------------------
+  {
+    path: '/services',
+    title: 'Services',
+    description: 'How Ideora Labs designs, builds, integrates and then runs automation around the software your business already owns.',
+    eyebrow: 'Services',
+    heading: 'We do not hand over a system and leave',
+    lede: 'A product covers a workflow we have already built many times. A service covers the one that is yours alone. Either way the same five steps run, and the same team stays accountable after launch.',
+    proof: [
+      { label: 'First live workflow', value: '6-10 weeks' },
+      { label: 'Engagement', value: 'Fixed scope' },
+      { label: 'Working build', value: 'Weekly' },
+      { label: 'After launch', value: 'Managed' },
+    ],
+    sections: [
+      { title: 'Start with a product where one fits', body: 'If your workflow is appointments, service bookings or property leads, we have built it before. You get a shorter build, a known integration path and a system that has already met the edge cases. Choose a service when the workflow is genuinely yours.' },
+      { title: 'The work becomes reusable', body: 'What we build for one client becomes product capability for the next, which is why the second clinic costs less than the first. We say which parts of your build are bespoke and which are configuration, before you commit.' },
+      { title: 'Accountability does not end at handover', body: 'Most automation fails quietly six weeks after launch, when a form changes or a queue grows and nobody is watching. Managed operation exists because that is the part that actually decides whether this worked.' },
+    ],
+    deliverables: [
+      { title: 'Automation discovery', body: 'We map the current process, where it waits, the exception rules and what success is measured in. You keep the map whether or not you continue.' },
+      { title: 'Solution and agent design', body: 'The workflow, the channels, the points a person still approves, and the reporting management will actually read.' },
+      { title: 'Build and integration', body: 'Agents connected to your CRM, WhatsApp, calendars and operational systems. No migration, no second system for your team to learn.' },
+      { title: 'Deployment and adoption', body: 'Security review, testing, user acceptance, training and a controlled launch rather than a switch thrown on a Friday.' },
+      { title: 'Managed operation', body: 'We watch the queues, exceptions, accuracy and cost, and keep improving the process after it is live.' },
+    ],
+    faq: [
+      { q: 'How do we know whether we need a product or a custom build?', a: 'The discovery call settles it in thirty minutes. If your workflow matches one of the four products, we say so and quote the shorter build. We do not sell a custom project to a business that needs a configuration.' },
+      { q: 'What do we have to provide?', a: 'A named system owner, access to the systems being connected, and a decision-maker who can approve the process rules. The build stalls on access far more often than on engineering.' },
+      { q: 'What does the commercial model look like?', a: 'A fixed-scope build fee for the first live workflow, then a monthly managed operation fee. Both are quoted after discovery, against a written scope, so there is no hourly meter running.' },
+      { q: 'What happens if we want to stop?', a: 'The systems write into software you already own, so your data and your records stay with you. We hand over documentation and the integration map on exit.' },
+    ],
+    related: [
+      { label: 'Custom AI automation', path: '/services/custom-ai-automation' },
+      { label: 'Ready-made systems', path: '/services/productised-systems' },
+      { label: 'How it works', path: '/how-it-works' },
+    ],
+    cta: {
+      heading: 'Bring us the process nobody wants to own',
+      body: 'Thirty minutes with you and your operations lead. We map the handoffs and tell you which one a system can take first.',
+    },
+  },
+
+  // -------------------------------------------------------------------------
+  // Trust pages. A corporate buyer's IT and legal reviewers look for exactly
+  // these, and will not sponsor a supplier internally without them.
+  //
+  // Every statement here describes a control Ideora actually operates. There
+  // are no compliance badges and no certification claims, because none have
+  // been audited -- saying so plainly is worth more to a procurement reviewer
+  // than a logo they will ask to see evidence for.
+  // -------------------------------------------------------------------------
+  {
+    path: '/security',
+    title: 'Security and data handling',
+    description: 'How Ideora Labs hosts, accesses, retains and audits the data our systems touch, and what your team stays in control of.',
+    eyebrow: 'How it works',
+    trail: [{ label: 'How it works', path: '/how-it-works' }],
+    heading: 'Your systems stay yours. Ours read and write to them.',
+    lede: 'Our systems act inside the software you already own, which means the security question is not where we store your data. It is what we can reach, who approved it, and whether you can see what was done. This page answers those three.',
+    proof: [
+      { label: 'Data residency', value: 'India' },
+      { label: 'Access', value: 'Least privilege' },
+      { label: 'Audit trail', value: 'Every write' },
+      { label: 'Transport', value: 'TLS 1.2+' },
+    ],
+    sections: [
+      { title: 'Where data lives', body: 'Operational records stay in your systems. What we hold is the working state a workflow needs to run and its audit trail, hosted in India. We do not move client data outside the region you operate in, and we do not use it to train models.' },
+      { title: 'What we can reach', body: 'Each integration is scoped to the smallest permission that makes the workflow run, granted by your system owner and revocable by them at any time. Credentials are held in managed secret storage and never reach a browser.' },
+      { title: 'What you can see', body: 'Every automated action stores a timestamp, a source, the rule that acted and the result. There is no action our systems can take that you cannot reconstruct afterwards.' },
+      { title: 'When something goes wrong', body: 'A failed step becomes a named exception with an owner rather than a silent drop. For anything affecting your data we contact your named owner directly; we do not wait for a status page to be read.' },
+    ],
+    deliverables: [
+      { title: 'Transport and hosting', body: 'HTTPS with HSTS across the site, TLS in transit to every integration, and encryption at rest for the state we hold. Hosting is in India.' },
+      { title: 'Access control', body: 'Role-based access enforced server-side, scoped to your organisation and locations. Production access is limited to named engineers and reviewed.' },
+      { title: 'Retention and deletion', body: 'Retention periods are agreed per engagement and written into the contract. On exit we delete working state and hand over the integration map and documentation.' },
+      { title: 'Exports and logging', body: 'Exports are logged with who, what and when. Sensitive fields are excluded by default rather than opted out of.' },
+    ],
+    faq: [
+      { q: 'Are you HIPAA, DPDP or ISO certified?', a: 'No. We hold no third-party security certification today, and we will not claim one we have not been audited against. What we will do is answer a security questionnaire in writing, name our sub-processors and let your IT team review the integration scope before anything is connected.' },
+      { q: 'Do you train AI models on our data?', a: 'No. Client data is used to run your workflows and nothing else. It is not used to train, fine-tune or evaluate models, ours or a provider\'s.' },
+      { q: 'Which third parties are involved?', a: 'The model provider, the WhatsApp Business provider and the hosting platform, plus whatever systems you ask us to integrate with. We will give you the current list in writing before contract.' },
+      { q: 'Who is accountable if the system does something wrong?', a: 'We are, for the system behaving as specified. That is why approval points exist: the actions that carry commercial or clinical risk wait for a person, and which ones those are is agreed in writing during design.' },
+      { q: 'Can our IT team review this before we commit?', a: 'Yes, and we would rather they did. We will take a security review, a questionnaire or a call with your IT lead during evaluation, not after.' },
+    ],
+    related: [
+      { label: 'Works with your software', path: '/integrations' },
+      { label: 'Privacy', path: '/privacy' },
+      { label: 'Responsible AI', path: '/responsible-ai' },
+    ],
+    cta: {
+      heading: 'Send us your security questionnaire',
+      body: 'We will complete it in writing during evaluation rather than after contract. If something is not in place yet, the answer will say so.',
+    },
+  },
+
+  {
+    path: '/privacy',
+    title: 'Privacy',
+    description: 'What personal data Ideora Labs collects through this website and through the systems we operate, why, and how to have it removed.',
+    eyebrow: 'Legal',
+    heading: 'Privacy',
+    lede: 'This explains what we collect through this website and through the systems we run for clients, what we do with it, and how to have it removed. It is written to be read rather than to be defensible.',
+    sections: [
+      { title: 'What this website collects', body: 'If you contact us, we hold what you send: your name, your contact details and your message. If analytics is enabled, we record which pages and products were viewed and which buttons were pressed. We do not send names, phone numbers, email addresses or message contents to analytics, and we do not run advertising trackers.' },
+      { title: 'Why we hold it', body: 'To reply to you, to run an evaluation with you, and to understand which parts of the site are useful. We do not sell contact details, and we do not add you to a list you did not ask for.' },
+      { title: 'Data inside the systems we operate', body: 'Where we run automation for a client, that client is the controller of the personal data involved and we act on their instructions as a processor. If you are a patient, customer or lead of one of our clients, your rights are exercised through them, and we will support them in answering you.' },
+      { title: 'How long we keep it', body: 'Enquiries are kept while there is an active conversation and for a reasonable period afterwards. Operational data inside a client system is kept for the period agreed in that client\'s contract.' },
+      { title: 'Your rights', body: 'You can ask what we hold about you, ask for it to be corrected, or ask for it to be deleted. Write to the address below and we will answer. If we hold the data on behalf of a client we will tell you who to approach.' },
+      { title: 'Changes', body: 'If this page changes materially we will update the date at the foot of it. We do not make quiet changes to how data is used.' },
+    ],
+    faq: [
+      { q: 'Do you use cookies?', a: 'The site itself does not set advertising or profiling cookies. If analytics is enabled it may set a first-party cookie to count a visit; nothing on this site tracks you across other websites.' },
+      { q: 'How do I have my data removed?', a: 'Email info@ideoralabs.com with the request. If we hold it directly we will delete it and confirm. If we hold it for a client, we will tell you which client to contact and let them know you asked.' },
+    ],
+    related: [
+      { label: 'Security and data', path: '/security' },
+      { label: 'Terms', path: '/terms' },
+      { label: 'Contact', path: '/contact' },
+    ],
+  },
+
+  {
+    path: '/terms',
+    title: 'Terms of use',
+    description: 'The terms that apply to using the Ideora Labs website. Client engagements are governed by a separate signed agreement.',
+    eyebrow: 'Legal',
+    heading: 'Terms of use',
+    lede: 'These terms cover this website. They are not the terms of an engagement: if you become a client, a separate signed agreement governs scope, responsibilities, service levels, liability and exit, and it takes precedence over anything here.',
+    sections: [
+      { title: 'What this site is', body: 'A description of what Ideora Labs builds and operates. Figures, timelines and outcomes shown here describe work we have done or scopes we offer. They are not a guarantee of a result in your business, which depends on your process, your systems and your data.' },
+      { title: 'Demonstrations', body: 'Anything shown in a walkthrough runs against synthetic demonstration data. No demonstration uses a client\'s records, and no figure in a demonstration should be read as a client\'s actual performance.' },
+      { title: 'Your use of the site', body: 'Use it to evaluate us. Do not attempt to break it, scrape it at a volume that degrades it for others, or misrepresent it as your own work.' },
+      { title: 'Intellectual property', body: 'The content, design and code of this site belong to Ideora Labs. What we build for a client under an engagement is governed by that engagement, not by this page.' },
+      { title: 'Third-party links', body: 'Where we link out, we do not control what is on the other end and are not responsible for it.' },
+      { title: 'Governing law', body: 'These terms are governed by the laws of India, with the courts at Bengaluru having jurisdiction.' },
+    ],
+    related: [
+      { label: 'Privacy', path: '/privacy' },
+      { label: 'Security and data', path: '/security' },
+      { label: 'Contact', path: '/contact' },
+    ],
+  },
+
+  {
+    path: '/responsible-ai',
+    title: 'Responsible AI',
+    description: 'Where Ideora Labs lets an AI system act on its own, where a person must still decide, and what we will not automate.',
+    eyebrow: 'Legal',
+    heading: 'Where a person still decides',
+    lede: 'The useful question about an AI system is not how capable it is. It is what it is allowed to do unsupervised, and what happens when it is unsure. This is our answer, and it is the same answer we give in a design session.',
+    sections: [
+      { title: 'Automation has a boundary, written down', body: 'For every workflow we build, we agree in writing which actions complete on their own and which wait for a person. That list is part of the scope, it is visible in the console, and changing it is a decision you make rather than a side effect of a model update.' },
+      { title: 'Uncertainty stops, it does not guess', body: 'When intent is unclear, when a request falls outside the agreed scope, or when confidence is low, the system raises a named exception to a person instead of producing a plausible answer. A system that stops is recoverable. A system that improvises is not.' },
+      { title: 'What we will not automate', body: 'Clinical advice, diagnosis or triage. Legal advice. Final pricing, discounting or contractual commitment. Anything where being confidently wrong causes harm we cannot undo. We will decline this scope rather than quote it.' },
+      { title: 'People are told what they are talking to', body: 'Where a customer, patient or lead is in conversation with an automated system, we do not design it to pretend otherwise, and we will not build a system whose purpose is to conceal that.' },
+      { title: 'Every action is attributable', body: 'The rule, agent or step that acted is stored with the result. When something goes wrong, we can show you exactly what happened rather than reasoning about what the model probably did.' },
+      { title: 'We do not train on your data', body: 'Client data runs your workflows. It is not used to train, fine-tune or evaluate models, ours or a provider\'s.' },
+    ],
+    related: [
+      { label: 'Security and data', path: '/security' },
+      { label: 'Privacy', path: '/privacy' },
+    ],
+  },
+
 ];
 
 // Fails loudly in dev if nav.js and pages.js drift apart. A menu item with no

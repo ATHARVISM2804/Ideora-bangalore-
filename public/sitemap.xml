@@ -6,68 +6,123 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.ideoralabs.com/platforms/ops-console</loc>
+    <loc>https://www.ideoralabs.com/about</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ideoralabs.com/platforms/agent-runtime</loc>
+    <loc>https://www.ideoralabs.com/case-studies</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/case-studies/clinic-intake-and-coverage</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/case-studies/property-lead-qualification</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/case-studies/service-centre-bookings</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/contact</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ideoralabs.com/platforms/integrations</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/solutions/agentic-ai</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/solutions/real-estate</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/solutions/healthcare</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/solutions/service-centre</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/solutions/productised-systems</loc>
+    <loc>https://www.ideoralabs.com/how-it-works</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.ideoralabs.com/industries/automotive</loc>
     <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ideoralabs.com/industries/real-estate</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.ideoralabs.com/industries/healthcare</loc>
     <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.ideoralabs.com/about</loc>
+    <loc>https://www.ideoralabs.com/industries/real-estate</loc>
     <lastmod>2026-09-12</lastmod>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.ideoralabs.com/insights</loc>
     <lastmod>2026-09-12</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/integrations</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/privacy</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/products</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/products/ideora-auto</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/products/ideora-health</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/products/ideora-property</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/products/operations-console</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/responsible-ai</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/security</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/services</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/services/custom-ai-automation</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/services/productised-systems</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ideoralabs.com/terms</loc>
+    <lastmod>2026-09-12</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

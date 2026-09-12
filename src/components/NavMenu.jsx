@@ -5,12 +5,20 @@ const CLOSE_DELAY = 120;
 
 // A disclosure holding a list of links.
 //
+// The trigger declares aria-haspopup="true", which ARIA maps to "menu" -- the
+// semantic the audit asked for. The panel itself stays a list of links.
+//
 // It previously declared role="menu" / role="menuitem". That pattern describes
 // an application menu and suppresses link semantics, so a screen reader stopped
 // announcing these as links and stopped offering them in a links list. Site
 // navigation is a list of links inside a nav, which is what it is now. The
 // keyboard model is unchanged -- it was already the best code in the repo.
-export function NavMenu({ menu, active, open, onOpenChange }) {
+// A menu with a `path` gets an overview link at the head of its panel, so the
+// index page ("all four products") is reachable and not only its leaves.
+export function NavMenu({ menu, active, open, onOpenChange, pathname }) {
+  const items = menu.path
+    ? [{ path: menu.path, label: menu.overview || `All ${menu.label.toLowerCase()}`, blurb: null, overview: true }, ...menu.items]
+    : menu.items;
   const timer = useRef(null);
   const triggerRef = useRef(null);
   const panelId = useId();
@@ -26,7 +34,7 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
   };
 
   const focusItem = (i) => {
-    const clamped = Math.max(0, Math.min(i, menu.items.length - 1));
+    const clamped = Math.max(0, Math.min(i, items.length - 1));
     itemRefs.current[clamped]?.focus();
   };
 
@@ -55,7 +63,7 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
     else if (e.key === 'ArrowUp') { e.preventDefault(); focusItem(i - 1); }
     else if (e.key === 'Escape') { e.preventDefault(); close({ refocus: true }); }
     else if (e.key === 'Tab') {
-      const lastIndex = menu.items.length - 1;
+      const lastIndex = items.length - 1;
       if (!e.shiftKey && i === lastIndex) close({ refocus: false });
       else if (e.shiftKey && i === 0) close({ refocus: false });
     }
@@ -72,6 +80,7 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
+        aria-haspopup="true"
         className={`nav__link navmenu__trigger${active ? ' is-active' : ''}${open ? ' is-open' : ''}`}
         onKeyDown={onTriggerKeyDown}
         onClick={() => (open ? close({ refocus: false }) : onOpenChange(true))}
@@ -82,17 +91,18 @@ export function NavMenu({ menu, active, open, onOpenChange }) {
 
       {open && (
         <ul id={panelId} className="navmenu__panel" aria-label={menu.label}>
-          {menu.items.map((item, i) => (
+          {items.map((item, i) => (
             <li key={item.path}>
               <Link
                 to={item.path}
                 ref={(el) => { itemRefs.current[i] = el; }}
                 onKeyDown={(e) => onItemKeyDown(e, i)}
                 onClick={() => close({ refocus: false })}
-                className="navmenu__item"
+                aria-current={item.path === pathname ? 'page' : undefined}
+                className={`navmenu__item${item.overview ? ' navmenu__item--overview' : ''}`}
               >
                 <span className="navmenu__item-label">{item.label}</span>
-                <span className="navmenu__item-blurb">{item.blurb}</span>
+                {item.blurb && <span className="navmenu__item-blurb">{item.blurb}</span>}
               </Link>
             </li>
           ))}

@@ -1,5 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/platforms/ops-console", "destination": "/products/operations-console", "permanent": true },
+    { "source": "/platforms/agent-runtime", "destination": "/how-it-works", "permanent": true },
+    { "source": "/platforms/integrations", "destination": "/integrations", "permanent": true },
+    { "source": "/solutions/agentic-ai", "destination": "/services/custom-ai-automation", "permanent": true },
+    { "source": "/solutions/real-estate", "destination": "/products/ideora-property", "permanent": true },
+    { "source": "/solutions/healthcare", "destination": "/products/ideora-health", "permanent": true },
+    { "source": "/solutions/service-centre", "destination": "/products/ideora-auto", "permanent": true },
+    { "source": "/solutions/productised-systems", "destination": "/services/productised-systems", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
@@ -15,7 +25,10 @@
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
       ]
     }
   ]

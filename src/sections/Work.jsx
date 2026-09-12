@@ -13,7 +13,7 @@ const CASE_PATH = {
   'Automotive': '/industries/automotive',
   'Real estate': '/industries/real-estate',
   'Healthcare': '/industries/healthcare',
-  'Cross-vertical': '/platforms/ops-console',
+  'Cross-vertical': '/products/operations-console',
 };
 
 const SINCE_LABEL = { live: 'live since', pilot: 'pilot since' };

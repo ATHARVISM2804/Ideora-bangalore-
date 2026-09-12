@@ -5,6 +5,7 @@ import { useScrollProgress } from '../hooks/useScrollProgress';
 import { Nav } from '../sections/Nav';
 import { Footer } from '../sections/Footer';
 import { WhatsAppButton } from '../components/WhatsAppButton';
+import { installClickTracking } from '../lib/analytics';
 
 // Router keeps scroll position across navigations; reset it, unless the target
 // is a hash anchor. ScrollTrigger.refresh() is required because the entrance
@@ -24,6 +25,11 @@ function useRouteScrollReset() {
 
 export function Layout() {
   useRouteScrollReset();
+
+  // One delegated listener for every `data-track` element on the site, so a
+  // CTA reports its event without each component importing the analytics
+  // module. Installed once at the shell rather than per route.
+  useEffect(() => installClickTracking(), []);
 
   const barRef = useRef(null);
   useScrollProgress(barRef);

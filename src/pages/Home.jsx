@@ -3,6 +3,7 @@ import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
+import { ProductChooser } from '../components/ProductChooser';
 import { Outcome } from '../sections/Outcome';
 import { Services } from '../sections/Services';
 import { Work } from '../sections/Work';
@@ -11,10 +12,14 @@ import { Stack } from '../sections/Stack';
 import { Voices } from '../sections/Voices';
 import { Closing } from '../sections/Closing';
 
-// Eight sections, down from twelve. The page is read mostly on a phone by
-// owners, not operators: Problem, Capabilities, Industries, Engagement and
-// Process were removed rather than shortened, because the argument they made
-// is carried by the case studies.
+// The order is the audit's: category, then product choice, then outcomes and
+// proof, and only then the delivery method. The old page put the six-step
+// method before a buyer knew what was for sale, so a visitor read how we work
+// before learning what they could buy.
+//
+// The chooser sits immediately under the hero because it is the block that
+// answers "is there something here for my business", and it is the one section
+// on the page that never waits for a scroll trigger.
 //
 // The rhythm alternates a paper band with a sunken one: statement, proof,
 // statement, proof.
@@ -23,14 +28,15 @@ export function Home() {
   const parallaxRef = useRef(null);
 
   useDocumentTitle(
-    'Ideora Labs | The work your team never gets to. Done.',
-    'Ideora Labs builds and runs the systems that carry the work your team is waiting on, inside the software your business already owns.',
+    'Custom AI automation for service businesses | Ideora Labs',
+    'AI systems that handle enquiries, bookings and follow-ups inside your existing software. One live workflow in 6 to 10 weeks for clinics, service centres and property teams.',
   );
   useGsapTimeline({ rootRef, parallaxRef });
 
   return (
     <div ref={rootRef}>
       <Hero />
+      <ProductChooser />
       <Outcome cardRef={parallaxRef} />
       <Services />
       <Work />

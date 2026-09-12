@@ -1,0 +1,363 @@
+/* ===========================================================================
+   Product, proof and trust surfaces.
+
+   Everything the audit added to the site: the product chooser, the workflow
+   with its actor states, the integration table, the case-study list, the
+   contact form and the breadcrumbs. All of it reads from the token layer --
+   no hex literal and no font size is typed in this file.
+   =========================================================================== */
+
+/* --- Breadcrumbs ---------------------------------------------------------- */
+.crumbs { padding-top: var(--s-5); }
+
+.crumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-xs);
+  color: var(--ink-faint);
+}
+
+.crumbs__item + .crumbs__item::before {
+  content: '/';
+  margin-right: var(--s-2);
+  color: var(--ink-ghost);
+}
+
+.crumbs__item a { color: inherit; text-decoration: none; }
+.crumbs__item a:hover { color: var(--accent-deep); text-decoration: underline; }
+.crumbs__item[aria-current] { color: var(--ink); }
+
+/* --- Product chooser ------------------------------------------------------
+   Four products, each a single anchor. One tab stop per product rather than
+   three, and the whole card is the target on a phone. */
+.pchoose {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pchoose__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  height: 100%;
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.pchoose__card:hover,
+.pchoose__card:focus-visible {
+  border-color: var(--rule-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-lift);
+}
+
+.pchoose__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.pchoose__name {
+  font-family: var(--display);
+  font-size: var(--t-d3);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* Status carries a word as well as a colour, so it survives greyscale and a
+   colour-blind reader. */
+.pchoose__status {
+  font-size: var(--t-xs);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.pchoose__status--live { color: var(--accent-deep); }
+
+.pchoose__aud {
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.pchoose__promise { font-size: var(--t-body); color: var(--ink); }
+.pchoose__outcome { font-size: var(--t-sm); color: var(--ink-muted); }
+
+.pchoose__cta {
+  margin-top: auto;
+  padding-top: var(--s-3);
+  font-size: var(--t-sm);
+  color: var(--accent-deep);
+}
+
+/* --- Workflow ------------------------------------------------------------- */
+.wf {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.wf__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-4);
+  padding: var(--s-5);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-strong);
+  border-radius: var(--r-card);
+  background: var(--raised);
+}
+
+.wf__step--human { border-left-color: var(--accent); }
+.wf__step--system { border-left-color: var(--ink-ghost); }
+
+.wf__num {
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+  color: var(--ink-ghost);
+}
+
+.wf__actor {
+  display: block;
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.wf__step--human .wf__actor { color: var(--accent-deep); }
+
+.wf__title {
+  margin: var(--s-2) 0 var(--s-2);
+  font-size: var(--t-d4);
+  line-height: 1.25;
+}
+
+/* --- Integrations table --------------------------------------------------- */
+.intg__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) minmax(0, 1.6fr) minmax(0, 1.4fr);
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.intg__name { font-size: var(--t-body); color: var(--ink); }
+.intg__how,
+.intg__need { color: var(--ink-muted); }
+
+/* --- Management view ------------------------------------------------------ */
+.dash {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--s-3) var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dash__item {
+  padding-left: var(--s-4);
+  border-left: 2px solid var(--accent-line);
+  font-size: var(--t-sm);
+  color: var(--ink-muted);
+}
+
+/* --- Demo ----------------------------------------------------------------- */
+.demo__steps {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding-left: var(--s-5);
+  color: var(--ink-muted);
+}
+
+.demo__step { padding-left: var(--s-2); }
+
+/* --- Case studies --------------------------------------------------------- */
+.cslist {
+  display: grid;
+  gap: var(--s-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cslist__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.cslist__card:hover,
+.cslist__card:focus-visible {
+  border-color: var(--rule-strong);
+  transform: translateY(-2px);
+}
+
+.cslist__title {
+  margin: 0;
+  font-size: var(--t-d3);
+  line-height: 1.2;
+}
+
+.cslist__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+
+.cslist__body { display: block; margin-top: var(--s-2); color: var(--ink-muted); }
+.cslist__cta { font-size: var(--t-sm); color: var(--accent-deep); }
+
+/* --- Contact -------------------------------------------------------------- */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: var(--s-8);
+  align-items: start;
+}
+
+.contact__list {
+  display: grid;
+  gap: var(--s-4);
+  margin: var(--s-7) 0 0;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+}
+
+.contact__list dd { margin: var(--s-1) 0 0; font-size: var(--t-body); }
+.contact__list a { color: var(--ink); }
+
+.contact__form {
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+}
+
+.field { display: grid; gap: var(--s-2); margin: var(--s-5) 0 0; }
+
+.field label {
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  /* 44px minimum target, per the spec's touch requirement. */
+  min-height: 2.75rem;
+  padding: var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-btn);
+  background: var(--bg);
+  font: inherit;
+  font-size: var(--t-body);
+  color: var(--ink);
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 1px;
+}
+
+.field input[aria-invalid],
+.field textarea[aria-invalid] { border-color: var(--accent-deep); }
+
+.field--check {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--s-3);
+}
+
+.field--check input { width: 1.15rem; min-height: 1.15rem; margin-top: 0.15rem; }
+
+.field--check label {
+  font-size: var(--t-sm);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink-muted);
+}
+
+/* The honeypot. Off-screen rather than display:none, because some bots skip
+   fields that are not rendered at all. */
+.field__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact__ok,
+.contact__err {
+  margin: var(--s-5) 0 0;
+  padding: var(--s-4);
+  border-radius: var(--r-btn);
+  font-size: var(--t-sm);
+}
+
+.contact__ok { border: 1px solid var(--rule-strong); background: var(--bg); color: var(--ink); }
+.contact__err { border: 1px solid var(--accent-deep); color: var(--accent-deep); }
+
+.link-quiet { font-size: var(--t-sm); color: var(--ink-muted); }
+.link-quiet:hover { color: var(--accent-deep); }
+
+/* --- Footer trust row ----------------------------------------------------- */
+.footer__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: var(--s-5) var(--gut) 0;
+  font-size: var(--t-xs);
+}
+
+/* --- Narrow --------------------------------------------------------------- */
+@media (max-width: 47.99em) {
+  .pchoose,
+  .cslist__cols,
+  .contact { grid-template-columns: minmax(0, 1fr); }
+
+  .contact { gap: var(--s-7); }
+
+  .intg__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+
+  .wf__step { padding: var(--s-4); gap: var(--s-3); }
+}

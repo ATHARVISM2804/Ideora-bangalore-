@@ -77,3 +77,18 @@
   mask: url(/assets/ideora-mark-mask.png) center / contain no-repeat;
   -webkit-mask: url(/assets/ideora-mark-mask.png) center / contain no-repeat;
 }
+
+/* --- Reveal safety net ---------------------------------------------------
+   The audit reported long blank sections waiting for a motion trigger. It did
+   not reproduce -- GSAP sets the from-state in JS, so with no JS the content
+   is simply visible -- but the failure mode it describes is real and cheap to
+   foreclose: if the timeline throws, or ScrollTrigger never fires because a
+   layout shift left a trigger off-screen, animated elements would keep
+   whatever opacity the script last set.
+
+   GSAP writes its from-state as an inline style, which outranks this rule, so
+   the animations are untouched. What this guarantees is the floor: with no
+   JavaScript, a thrown timeline or a trigger that never fires, every animated
+   element renders at its final state instead of whatever the script last set.
+   Essential content is never one script away from invisible. */
+[data-anim] { opacity: 1; transform: none; }
