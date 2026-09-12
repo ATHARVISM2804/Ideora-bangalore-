@@ -184,3 +184,50 @@ test('hovering a trigger waits for intent before opening', async ({ page, isMobi
   // is deferred by exactly 150ms.
   expect(elapsed, `menu opened after ${elapsed}ms`).toBeGreaterThan(100);
 });
+
+test('the homepage runs in the specified sequence', async ({ page }) => {
+  // The homepage implementation table is an ordered list, and the order is the
+  // argument: category, then what you can buy, then proof it runs, then one
+  // workflow shown, then evidence, and only then how delivery works. A section
+  // moved by accident is invisible in review and changes what the page argues.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+
+  const order = await page.evaluate(() =>
+    [...document.querySelectorAll('main section')]
+      .filter((s) => !s.parentElement.closest('section'))
+      .map((s) => s.id)
+      .filter(Boolean),
+  );
+
+  // Rows 02-10. The proof strip is a band rather than a section and is
+  // asserted separately below.
+  expect(order).toEqual([
+    'top',       // 02 hero
+    'products',  // 03 product chooser
+    'demo',      // 05 featured product demo
+    'outcome',   // 06 evidence: before and after
+    'work',      //    evidence: case studies
+    'services',  // 07
+    'how',       // 08
+    'stack',     // 09 integrations
+    'trust',     //    security
+    'book',      // 10 final CTA
+  ]);
+
+  // 04: three factual promises, sitting between the chooser and the demo.
+  const promises = page.locator('.promises__item');
+  await expect(promises).toHaveCount(3);
+
+  const [cardsBottom, stripTop, demoTop] = await page.evaluate(() => [
+    document.querySelector('.pchoose').getBoundingClientRect().bottom,
+    document.querySelector('.promises').getBoundingClientRect().top,
+    document.querySelector('#demo').getBoundingClientRect().top,
+  ]);
+  expect(stripTop).toBeGreaterThan(cardsBottom);
+  expect(stripTop).toBeLessThan(demoTop);
+
+  // 08: six delivery steps, each stating scope, owner and deliverable.
+  await expect(page.locator('#how .step')).toHaveCount(6);
+  await expect(page.locator('#how .step__facts')).toHaveCount(6);
+});

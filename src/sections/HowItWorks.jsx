@@ -1,7 +1,7 @@
 import { PROC } from '../data/content';
-import { Section, Container, SectionHead, Card, Pill } from '../components/ui';
+import { Section, Container, SectionHead, Card } from '../components/ui';
 
-// A numbered spine. These five genuinely are a sequence, which is the only
+// A numbered spine. These six genuinely are a sequence, which is the only
 // thing that justifies numbering them -- the markers state something true
 // about the content rather than decorating it.
 export function HowItWorks() {
@@ -10,7 +10,7 @@ export function HowItWorks() {
       <Container>
         <SectionHead
           title="From first call to a system you own."
-          lede="Five stages, six to ten weeks. You approve the design before anything is built, and you keep the dashboard afterwards."
+          lede="Six stages, six to ten weeks. You approve the design before anything is built, and you keep the dashboard afterwards."
         />
 
         <ol className="steps">
@@ -24,9 +24,17 @@ export function HowItWorks() {
               <Card>
                 <h3>{p.title}</h3>
                 <p className="body-muted" style={{ marginTop: 'var(--s-3)', maxWidth: 'var(--prose)' }}>{p.body}</p>
-                <div className="step__tags">
-                  {p.tags.map((tag) => <Pill key={tag}>{tag}</Pill>)}
-                </div>
+                {/* Scope, owner and deliverable, as the homepage row asks:
+                    a step that does not say who owns it and what lands is a
+                    description of activity rather than of delivery. */}
+                <dl className="step__facts">
+                  {[['Scope', p.scope], ['Owner', p.owner], ['You get', p.deliverable]].map(([k, v]) => (
+                    <div key={k}>
+                      <dt className="label">{k}</dt>
+                      <dd>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
               </Card>
             </li>
           ))}

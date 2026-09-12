@@ -4,6 +4,8 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
 import { ProductChooser } from '../components/ProductChooser';
+import { ProofStrip } from '../sections/ProofStrip';
+import { FeaturedDemo } from '../sections/FeaturedDemo';
 import { Outcome } from '../sections/Outcome';
 import { Services } from '../sections/Services';
 import { Work } from '../sections/Work';
@@ -22,10 +24,14 @@ import { Closing } from '../sections/Closing';
 // answers "is there something here for my business", and it is the one section
 // on the page that never waits for a scroll trigger.
 //
-// Case studies now come before the five services, not after: evidence that the
-// thing works is what earns the reader's attention for how it is delivered.
-// Trust closes the argument, because the last question a corporate buyer has
-// before booking is what their IT and legal reviewers will say.
+// The order is the homepage implementation table's, row for row. Two things it
+// asks for were missing outright: a proof strip under the chooser, and one
+// featured workflow shown rather than described.
+//
+// Evidence is one run -- the before-and-after, the case studies and the client
+// voices together -- because a buyer who has just watched a workflow wants to
+// know it has worked somewhere, and only then how it is delivered. Trust closes
+// the argument: the last question before booking is what IT and legal will say.
 //
 // The rhythm alternates a paper band with a sunken one: statement, proof,
 // statement, proof.
@@ -41,15 +47,20 @@ export function Home() {
 
   return (
     <div ref={rootRef}>
+      {/* 01 header (Layout) · 02 hero · 03 product chooser · 04 proof strip ·
+          05 featured demo · 06 case studies · 07 services · 08 how it works ·
+          09 security and integrations · 10 final CTA. */}
       <Hero />
       <ProductChooser />
+      <ProofStrip />
+      <FeaturedDemo />
       <Outcome cardRef={parallaxRef} />
       <Work />
+      <Voices />
       <Services />
       <HowItWorks />
       <Stack />
       <Trust />
-      <Voices />
       <Closing />
     </div>
   );

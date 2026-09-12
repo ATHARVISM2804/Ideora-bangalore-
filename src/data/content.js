@@ -142,15 +142,17 @@ export const STEPS = [
 ];
 
 export const PROC = [
-  { n: "01", title: "Scope call", tags: ["90 minutes", "You keep the map"],
+  { n: "01", title: "Scope call", scope: "The process you want automated", owner: "You and your operations lead", deliverable: "A written map of the handoffs and the delays",
     body: "We walk the process you want automated, meet the people who run it today, and agree what success looks like before anything is designed." },
-  { n: "02", title: "Blueprint and design", tags: ["Fixed scope", "Fixed price"],
+  { n: "02", title: "Blueprint and design", scope: "Workflow, channels and approval points", owner: "Ideora, approved by you", deliverable: "A fixed scope and a fixed price",
     body: "We map the architecture, the systems it touches, and what runs automatically versus what a person reviews. Then we fix the scope and the price." },
-  { n: "03", title: "Build in the open", tags: ["Weekly builds", "Your staging data"],
+  { n: "03", title: "Build in the open", scope: "The agreed workflow, built weekly", owner: "Ideora", deliverable: "Working software every week, on your staging data",
     body: "You see working software every week. Nobody sends you a status update instead. Each build runs against your staging data the same day it ships." },
-  { n: "04", title: "Integrate and connect", tags: ["Your permissions", "Real volume first"],
+  { n: "04", title: "Integrate and connect", scope: "Your CRM, calendars, DMS or HIS", owner: "Ideora with your system owner", deliverable: "A connected system running against real volume",
     body: "The system is wired into the software you already run, with your permissions and escalation rules, then run against real volume before cutover." },
-  { n: "05", title: "Run and report", tags: ["We operate it", "You keep the dashboard"],
+  { n: "05", title: "Acceptance and launch", scope: "Testing, training and security review", owner: "Your team signs it off", deliverable: "A signed-off system and a trained team",
+    body: "Your team works the system against real cases until it behaves the way the blueprint said it would. Your IT reviewer signs off the integration scope. Then it goes live alongside the current process, not instead of it." },
+  { n: "06", title: "Run and report", scope: "Queues, exceptions, accuracy and cost", owner: "Ideora, reporting to you", deliverable: "A monitored system and a report that matches it",
     body: "We operate the system and you keep the dashboard. Backlog, ageing and exceptions are visible the day they happen." }
 ];
 
@@ -161,3 +163,14 @@ export const RESULT_STATS = [
   { value: 12, suffix: "/12", label: "systems running right now", note: "99.98% uptime" }
 ];
 
+
+
+// The proof strip under the product chooser. Three short factual operating
+// promises and no client claim: the homepage row asks for a live system count,
+// the time to a first workflow and the integration promise, and that is all
+// this is allowed to say.
+export const PROMISES = [
+  { label: 'Running in production', value: 'Four systems live, two in build' },
+  { label: 'Time to first workflow', value: '6 to 10 weeks' },
+  { label: 'What it runs on', value: 'Your existing software. No migration.' },
+];
