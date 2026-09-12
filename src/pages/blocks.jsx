@@ -148,7 +148,7 @@ export function Deliverables({ items, head = 'What you get' }) {
   return (
     <Section edge="bottom">
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <div className="cards cards--4" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => (
             <Card key={it.title} data-anim="card">
@@ -172,7 +172,7 @@ export function Faq({ items, head = 'Questions we get asked' }) {
   return (
     <Section edge="bottom">
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <dl className="rule-top" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => (
             <div key={it.q} className="faq__row">
@@ -210,7 +210,7 @@ export function Workflow({ steps, head = 'The workflow, end to end' }) {
   return (
     <Section edge="bottom">
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <ol className="wf" style={{ marginTop: 'var(--s-5)' }}>
           {steps.map((st, i) => {
             const actor = ACTOR[st.actor] || ACTOR.auto;
@@ -240,7 +240,7 @@ export function Integrations({ items, note, head = 'What it connects to' }) {
   return (
     <Section edge="bottom" tight>
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <div className="rule-top" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => (
             <div key={it.name} className="intg__row">
@@ -264,7 +264,7 @@ export function Controls({ items, head = 'What you keep control of' }) {
   return (
     <Section edge="bottom" tight>
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <div className="cards cards--2" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => (
             <Card key={it.title} data-anim="card">
@@ -285,7 +285,7 @@ export function Dashboard({ items, head = 'What management sees' }) {
   return (
     <Section edge="bottom" tight>
       <Container>
-        <Label>{head}</Label>
+        <Label as="h2" className="label--head">{head}</Label>
         <ul className="dash" style={{ marginTop: 'var(--s-5)' }}>
           {items.map((it) => <li key={it} className="dash__item">{it}</li>)}
         </ul>

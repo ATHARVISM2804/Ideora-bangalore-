@@ -134,7 +134,9 @@
 .wf__num {
   font-family: var(--mono);
   font-size: var(--t-sm);
-  color: var(--ink-ghost);
+  /* Not --ink-ghost: that token is documented as decoration only and measured
+     2.96:1 here, below AA for text. These numbers are read. */
+  color: var(--ink-faint);
 }
 
 .wf__actor {
@@ -421,4 +423,15 @@
 
 @media (max-width: 47.99em) {
   .nf__list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* A section heading that reads as a label. The block heads are h2 for document
+   structure -- the h3s beneath them were otherwise hanging off the page h1 --
+   but they should not inherit the 46px display size that belongs to a prose
+   section head. */
+.label--head {
+  font-size: var(--t-label);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
 }
