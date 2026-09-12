@@ -455,10 +455,12 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.02fr 1fr;
-  gap: clamp(var(--s-6), 5vw, 4.5rem);
+  /* The text column carries an 88-character headline. At the old 1.02fr it
+     was ~570px wide, which wrapped that sentence to seven lines. */
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(var(--s-5), 3.5vw, 3.5rem);
   align-items: center;
-  padding-block: clamp(var(--s-7), 8vh, 6.25rem) clamp(var(--s-6), 3.6vw, var(--s-8));
+  padding-block: clamp(var(--s-6), 4.5vh, 3.5rem) clamp(var(--s-5), 2.4vw, var(--s-7));
 }
 @media (max-width: 1024px) { .hero__grid { grid-template-columns: 1fr; } }
 

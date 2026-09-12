@@ -48,9 +48,12 @@ export const MENUS = [
     overview: 'Discovery to managed operation',
     items: [
       { label: 'Works with your software', path: '/integrations', blurb: 'No migration. Nothing gets replaced.' },
-      { label: 'Security and data', path: '/security', blurb: 'Hosting, access, retention and audit.' },
     ],
   },
+  // Top level, not tucked under "How it works". A procurement or IT reviewer
+  // is sent to this site to answer one question, and the specification's
+  // navigation table lists Security as a primary destination for that reason.
+  { label: 'Security', path: '/security', items: [] },
   {
     label: 'Company',
     path: null,

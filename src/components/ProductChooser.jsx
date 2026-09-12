@@ -14,17 +14,20 @@ import { Section, Container, SectionHead } from './ui';
 // and visible without scrolling into a trigger.
 export function ProductChooser({
   heading = 'Start with the workflow you need to fix',
-  lede = 'Four systems we have already built and run. Pick the one that matches your operation, or ask us for a custom build where none of them do.',
-  label = 'Products',
+  lede = null,
+  label = 'Choose a product',
   id = 'products',
 }) {
   return (
     <Section id={id} edge="bottom">
-      <Container>
+      {/* The wide container, so the chooser's left edge lines up with the
+          hero above it. In the measure container it sat 130px further in and
+          read as a different page. */}
+      <Container wide>
         <SectionHead label={label} title={heading} lede={lede} />
 
-        <ul className="pchoose" style={{ marginTop: 'var(--s-7)' }}>
-          {PRODUCTS.map((p) => (
+        <ul className="pchoose" style={{ marginTop: 'var(--s-5)' }}>
+          {PRODUCTS.map((p, i) => (
             <li key={p.path}>
               <Link
                 to={p.path}
@@ -35,6 +38,13 @@ export function ProductChooser({
                 data-track-cta_location="chooser"
               >
                 <span className="pchoose__top">
+                  {/* The index, as the specification's card renders it. Purely
+                      ordinal, so it is hidden from assistive technology: the
+                      list already conveys position and "01" read aloud before
+                      every product name is noise. */}
+                  <span className="pchoose__num" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                   <span className="pchoose__name">{p.name}</span>
                   {/* Text, not colour alone -- the status has to survive a
                       greyscale print and a colour-blind reader. */}
@@ -43,10 +53,13 @@ export function ProductChooser({
                   </span>
                 </span>
 
-                <span className="pchoose__aud">{p.audience}</span>
                 <span className="pchoose__promise">{p.promise}</span>
                 <span className="pchoose__outcome">{p.outcome}</span>
-                <span className="pchoose__cta" aria-hidden="true">{p.cta} →</span>
+
+                <span className="pchoose__foot">
+                  <span className="pchoose__industry">{p.industry}</span>
+                  <span className="pchoose__cta" aria-hidden="true">{p.cta} →</span>
+                </span>
               </Link>
             </li>
           ))}

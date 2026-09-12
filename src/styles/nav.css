@@ -135,7 +135,13 @@
   left: var(--gut);
   right: var(--gut);
   z-index: 2;
-  max-height: calc(100dvh - var(--safe-t) - var(--safe-b) - 5.5rem);
+  /* A full-height drawer, per the responsive specification, rather than a
+     card sized to its contents: with seven groups the sheet nearly fills the
+     screen anyway, and a fixed surface keeps the two actions in the same place
+     whichever menu is expanded. */
+  height: calc(100dvh - var(--safe-t) - var(--safe-b) - 5.5rem);
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding: var(--s-3);
   border: 1px solid var(--rule);
@@ -236,3 +242,7 @@
 [aria-expanded="true"] > .navsheet__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 [aria-expanded="true"] > .navsheet__bar:nth-child(2) { opacity: 0; }
 [aria-expanded="true"] > .navsheet__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* The actions sit at the foot of the drawer, not immediately under the last
+   menu, so the primary ask is where a thumb rests. */
+.navsheet__actions { margin-top: auto; }

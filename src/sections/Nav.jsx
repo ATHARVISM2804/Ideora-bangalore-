@@ -92,7 +92,7 @@ export function Nav() {
                   onMouseMove={magnetMove}
                   onMouseLeave={magnetLeave}
                 >
-                  Book a call
+                  Book a 30-min call
                 </Button>
               </div>
             </>

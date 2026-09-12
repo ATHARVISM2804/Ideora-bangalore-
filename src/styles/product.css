@@ -34,14 +34,19 @@
 /* --- Product chooser ------------------------------------------------------
    Four products, each a single anchor. One tab stop per product rather than
    three, and the whole card is the target on a phone. */
+/* Four across on a desktop, as the specification's homepage render shows
+   them: the whole portfolio is one glance rather than a 2x2 block whose lower
+   half falls below the fold. */
 .pchoose {
   display: grid;
   gap: var(--s-4);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
+@media (max-width: 74.99em) { .pchoose { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .pchoose__card {
   display: flex;
@@ -66,11 +71,23 @@
 }
 
 .pchoose__top {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s-3);
-  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+}
+
+.pchoose__num {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--r-pill);
+  background: var(--accent-deep);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1;
 }
 
 .pchoose__name {
@@ -90,21 +107,31 @@
 
 .pchoose__status--live { color: var(--accent-deep); }
 
-.pchoose__aud {
+.pchoose__status { grid-column: 2; }
+
+.pchoose__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--s-4);
+}
+
+.pchoose__industry {
   font-size: var(--t-xs);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--accent-deep);
 }
 
 .pchoose__promise { font-size: var(--t-body); color: var(--ink); }
 .pchoose__outcome { font-size: var(--t-sm); color: var(--ink-muted); }
 
 .pchoose__cta {
-  margin-top: auto;
-  padding-top: var(--s-3);
   font-size: var(--t-sm);
-  color: var(--accent-deep);
+  color: var(--ink-faint);
 }
 
 /* --- Workflow ------------------------------------------------------------- */

@@ -103,3 +103,29 @@ test('no page scrolls sideways', async ({ page }) => {
     expect(overflow, `${path} overflows horizontally by ${overflow}px`).toBeLessThanOrEqual(0);
   }
 });
+
+test('the product row is visible at the fold on 1440x900', async ({ page }) => {
+  // An explicit acceptance condition: "ProductCard x 4 -- visible without an
+  // additional reveal interaction on 1440 x 900."
+  //
+  // It failed by 384px once already, and silently: the page looked fine, the
+  // cards were there, and nothing but a measurement showed that a buyer on a
+  // laptop saw no product at all without scrolling. Hence a test rather than
+  // a note.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+
+  // The headline is set in Newsreader and wraps to a different number of lines
+  // in the fallback face, which moves everything below it. Measuring before
+  // the webfont settles reports a layout no reader ever sees.
+  await page.evaluate(() => document.fonts.ready);
+
+  const first = page.locator('.pchoose__card').first();
+  const box = await first.boundingBox();
+
+  expect(box, 'the first product card should be laid out').not.toBeNull();
+  expect(
+    box.y,
+    `first product card starts ${Math.round(box.y)}px down a 900px viewport`,
+  ).toBeLessThan(900);
+});

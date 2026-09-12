@@ -36,13 +36,16 @@ Linux — and CI compares the **Linux** ones. Regenerate them in the same
 container CI uses, never on your own machine:
 
 ```
-docker run --rm -v "$PWD":/w -w /w --network host \
+docker run --rm \
+  -v "$PWD":/w -v /w/node_modules -w /w --network host \
   mcr.microsoft.com/playwright:v1.63.0-noble \
-  bash -lc "npm ci && npx playwright test --project=visual --update-snapshots"
+  bash -lc "npm ci --silent && npx playwright test --project=visual --update-snapshots"
 ```
 
-**That `npm ci` writes Linux binaries into your mounted `node_modules` and will
-break your local toolchain.** Run `npm install` afterwards to restore it.
+The second `-v /w/node_modules` is load-bearing. It shadows your host
+`node_modules` with an empty volume so the container installs its own Linux
+binaries there. Without it, `npm ci` writes them over yours and your local
+build stops working until you `npm install` again.
 
 Only the `-linux` baselines are committed. A macOS run writes its own `-darwin`
 set, which is useful for checking a change before you push but is gitignored:

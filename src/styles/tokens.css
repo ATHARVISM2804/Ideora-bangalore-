@@ -50,9 +50,18 @@
 
   /* A nine-step scale in rem, so browser font-size preferences are honoured.
      The site previously had a hard 18px root and zero rem anywhere. */
-  --t-d1:    clamp(2.625rem, 4.6vw, 4.25rem);    /* 42 → 68  page title.
-                                                        Floor was 38; the spec
-                                                        asks 42-52 on mobile. */
+  --t-d1:    clamp(2.625rem, 4.2vw, 3.5rem);     /* 42 → 56  page title.
+                                                        Floor is the spec's
+                                                        42-52 mobile range. The
+                                                        ceiling came down from
+                                                        68: at that size the
+                                                        hero headline wrapped
+                                                        to seven lines in its
+                                                        column and pushed the
+                                                        product row 384px below
+                                                        the fold. 56 is the
+                                                        desktop floor the spec
+                                                        names.                */
   --t-d2:    clamp(2rem, 3.4vw, 2.875rem);       /* 32 → 46  section head.
                                                         Floor was 30; the spec
                                                         asks 32-38 on mobile. */
