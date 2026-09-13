@@ -585,15 +585,21 @@
 }
 
 /* --- Proof strip ---------------------------------------------------------- */
+/* The strip sits between two sections with no band of its own, so its spacing
+   is stated here rather than inherited.
+ 
+   One rule, not two. It previously closed with a bottom border that landed
+   directly on the sunken band's own top border below it -- two hairlines a
+   pixel apart, with the next section's label sitting on them. The band edge
+   below is the closing rule; this only needs the opening one. */
 .promises {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--s-5) var(--s-7);
-  margin: 0;
-  padding: var(--s-6) 0;
+  margin-block: calc(-1 * var(--s-7)) var(--band-tight);
+  padding: var(--s-6) 0 0;
   list-style: none;
   border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
 }
 
 .promises__item { display: grid; gap: var(--s-2); }
@@ -626,9 +632,7 @@
 .demo__flow { margin-top: var(--s-7); }
 .demo__flow > section { padding-block: 0; }
 
-/* The chooser closes with a bottom band and the strip opens with a rule, which
-   together left 130px of empty paper between the cards and the first fact. */
-.promises { margin-top: calc(-1 * var(--s-7)); }
+
 
 /* --- Product hero --------------------------------------------------------- */
 .page-hero__for {

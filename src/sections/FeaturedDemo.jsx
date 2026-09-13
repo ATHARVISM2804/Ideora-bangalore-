@@ -22,9 +22,12 @@ const FEATURED = {
   ],
 };
 
+// A full band rather than edge="bottom": with no top padding the sunken ground
+// began at the proof strip's rule above it, and this section's label sat a
+// pixel under two stacked hairlines.
 export function FeaturedDemo() {
   return (
-    <Section id="demo" tone="sunken" edge="bottom">
+    <Section id="demo" tone="sunken">
       <Container>
         <SectionHead
           label="See one working"
