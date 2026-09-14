@@ -3,6 +3,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { useTrackPageType } from '../hooks/useTrack';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { ProductDashboard } from '../components/ProductDashboard';
 import { Button } from '../components/ui';
 import { waProduct, WA_LINK } from '../lib/whatsapp';
 import { useJsonLd } from '../hooks/useJsonLd';
@@ -96,6 +97,9 @@ export function PageShell({ page }) {
       <Integrations items={page.integrations} note={page.integrationsNote} />
       <Controls items={page.controls} />
       <Dashboard items={page.dashboard} />
+      {/* The same metrics the list above names, drawn. Products only: a legal
+          page has no management view. */}
+      {page.product && <ProductDashboard product={page.product} />}
       <Transcript transcript={page.transcript} />
       <Evidence proof={page.evidence} />
       <Deployment items={page.deployment} />

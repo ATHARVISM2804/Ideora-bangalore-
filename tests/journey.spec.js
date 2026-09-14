@@ -292,6 +292,23 @@ test('every product page meets the template contract', async ({ page }) => {
     expect(await page.locator('.dash__item').count(), `${path} dashboard`).toBeGreaterThan(0);
     expect(await page.locator('.deploy__step').count(), `${path} deployment`).toBe(6);
 
+    // The management view, drawn. The list of metric names above it is the
+    // contract; this is the same metrics as a screen.
+    await expect(page.locator('.dashv')).toBeVisible();
+    await expect(page.locator('.dashv__kpi')).toHaveCount(4);
+    expect(await page.locator('.dashv__pipestep').count(), `${path} pipeline`).toBeGreaterThan(3);
+    expect(await page.locator('.dashv__table tbody tr').count(), `${path} exception queue`).toBeGreaterThan(0);
+
+    // Nothing is conveyed by shape alone: each chart is one labelled image.
+    for (const chart of await page.locator('.dashv [role="img"]').all()) {
+      const label = await chart.getAttribute('aria-label');
+      expect(label?.length, `${path} chart has no description`).toBeGreaterThan(20);
+    }
+
+    // A screen of numbers that looks like a client's operation has to say it
+    // is not one, on the panel rather than in a footnote.
+    await expect(page.locator('.dashv__note')).toContainText(/demonstration data/i);
+
     // An outcome renders only with the source beside it. The block refuses to
     // render at all otherwise, so this asserts both.
     await expect(page.locator('.evidence > div')).toHaveCount(3);

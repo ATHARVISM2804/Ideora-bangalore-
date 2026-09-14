@@ -1,0 +1,270 @@
+/* ===========================================================================
+   The product management view.
+
+   Dark, because the specification's own product render puts the live workflow
+   on a black card: it reads as the product rather than as more page. The
+   palette is the brand's, inverted -- the accent and the signal cyan do the
+   same jobs here that they do everywhere else.
+
+   Every colour below was checked against this ground rather than assumed. The
+   muted text is #B4ADA5 at 7.4:1 and the faint series colour is only ever a
+   swatch beside its own label, never text.
+   =========================================================================== */
+
+.dashv {
+  --dash-bg:      #1C1917;
+  --dash-panel:   #262220;
+  --dash-line:    #3A3532;
+  --dash-text:    #F7F5F2;   /* 15.8:1 on --dash-bg */
+  --dash-muted-t: #B4ADA5;   /*  7.4:1 on --dash-bg */
+
+  --dash-accent:  #F4601E;
+  --dash-signal:  #35C9DE;
+  /* The two neutral series. They were #6E6862 and #453F3B, which measured
+     2.87:1 and 1.52:1 against the card behind them -- below the 3:1 a
+     graphical object needs, and the darker one was effectively invisible on
+     the donut. These are 8.2:1 and 4.2:1, and 2:1 apart from each other so
+     they still read as two series. */
+  --dash-muted:   #C3BAB0;
+  --dash-faint:   #8A827A;
+
+  margin-top: var(--s-5);
+  padding: var(--s-5);
+  border-radius: var(--r-panel);
+  background: var(--dash-bg);
+  color: var(--dash-text);
+  box-shadow: var(--sh-panel);
+}
+
+/* The donut's empty track, behind every segment, so a partial ring reads as a
+   proportion of a whole rather than as a floating arc. */
+.dashv__track { stroke: #332E2B; }
+
+/* --- Chrome --------------------------------------------------------------- */
+.dashv__bar--top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--dash-line);
+}
+
+.dashv__title { font-size: var(--t-sm); font-weight: var(--w-medium); }
+
+.dashv__live {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-xs);
+  color: var(--dash-muted-t);
+}
+
+.dashv__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--dash-signal);
+}
+
+/* --- KPI tiles ------------------------------------------------------------ */
+.dashv__kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dashv__kpi {
+  display: grid;
+  gap: var(--s-1);
+  padding: var(--s-4);
+  border-radius: var(--r-card);
+  background: var(--dash-panel);
+}
+
+.dashv__kpilabel {
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dash-muted-t);
+}
+
+.dashv__kpivalue {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+  line-height: 1.05;
+}
+
+.dashv__kpidelta { font-size: var(--t-xs); color: var(--dash-muted-t); }
+.dashv__kpidelta--up { color: var(--dash-signal); }
+.dashv__kpidelta--down { color: var(--dash-accent); }
+
+/* --- Cards ---------------------------------------------------------------- */
+.dashv__charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.dashv__card {
+  margin-top: var(--s-3);
+  padding: var(--s-5);
+  border-radius: var(--r-card);
+  background: var(--dash-panel);
+}
+
+.dashv__charts .dashv__card { margin-top: 0; }
+
+.dashv__cardhead {
+  margin: 0 0 var(--s-4);
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dash-muted-t);
+}
+
+.dashv__foot { margin: var(--s-4) 0 0; font-size: var(--t-xs); color: var(--dash-muted-t); }
+
+/* --- Donut ---------------------------------------------------------------- */
+.dashv__donutwrap {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-5);
+  align-items: center;
+}
+
+.dashv__donut { width: 8.75rem; height: 8.75rem; flex: none; }
+
+.dashv__donutnum {
+  fill: var(--dash-text);
+  font-family: var(--display);
+  font-size: 1.5rem;
+  text-anchor: middle;
+}
+
+.dashv__donutcap {
+  fill: var(--dash-muted-t);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.dashv__legend { display: grid; gap: var(--s-3); margin: 0; padding: 0; list-style: none; }
+
+.dashv__legend li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--t-xs);
+}
+
+.dashv__swatch { width: 0.6rem; height: 0.6rem; border-radius: 2px; }
+.dashv__legendlabel { color: var(--dash-muted-t); }
+.dashv__legendvalue { font-variant-numeric: tabular-nums; }
+
+/* --- Bars ----------------------------------------------------------------- */
+.dashv__bars {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: end;
+  height: 8.75rem;
+}
+
+.dashv__bar {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--s-2);
+  height: 100%;
+  text-align: center;
+}
+
+.dashv__barvalue { font-size: var(--t-xs); font-variant-numeric: tabular-nums; }
+
+.dashv__barfill {
+  align-self: end;
+  width: 100%;
+  min-height: 2px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, var(--dash-accent), rgba(244, 96, 30, 0.45));
+}
+
+.dashv__barlabel { font-size: 0.6875rem; color: var(--dash-muted-t); }
+
+/* --- Pipeline ------------------------------------------------------------- */
+.dashv__pipe {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dashv__pipestep {
+  display: grid;
+  gap: var(--s-1);
+  padding: var(--s-4) var(--s-3);
+  border-radius: var(--r-btn);
+  background: var(--dash-bg);
+  border-left: 3px solid var(--tone);
+}
+
+.dashv__pipevalue { font-family: var(--display); font-size: var(--t-d4); line-height: 1.1; }
+.dashv__pipelabel { font-size: var(--t-xs); color: var(--dash-muted-t); }
+
+/* --- Exception table ------------------------------------------------------ */
+.dashv__table { width: 100%; border-collapse: collapse; font-size: var(--t-xs); }
+
+.dashv__table th {
+  padding-bottom: var(--s-3);
+  text-align: left;
+  font-weight: var(--w-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dash-muted-t);
+  border-bottom: 1px solid var(--dash-line);
+}
+
+.dashv__table td { padding: var(--s-3) var(--s-3) var(--s-3) 0; border-bottom: 1px solid var(--dash-line); }
+.dashv__table tr:last-child td { border-bottom: 0; }
+.dashv__ref { font-family: var(--mono); color: var(--dash-signal); white-space: nowrap; }
+.dashv__age { font-variant-numeric: tabular-nums; color: var(--dash-muted-t); white-space: nowrap; }
+
+.dashv__note {
+  margin: var(--s-5) 0 0;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--dash-line);
+  font-size: var(--t-xs);
+  color: var(--dash-muted-t);
+}
+
+/* --- Narrow ---------------------------------------------------------------
+   The charts stack, the KPI grid halves, and the pipeline and the table
+   scroll sideways inside their own cards rather than squeezing five columns
+   into 320px or pushing the page wider than the screen. */
+@media (max-width: 63.99em) {
+  .dashv__charts { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 47.99em) {
+  .dashv { padding: var(--s-4); }
+  .dashv__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashv__donutwrap { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .dashv__legend { width: 100%; }
+
+  .dashv__pipe,
+  .dashv__table { min-width: 30rem; }
+
+  .dashv__card:has(.dashv__pipe),
+  .dashv__card:has(.dashv__table) { overflow-x: auto; }
+}
