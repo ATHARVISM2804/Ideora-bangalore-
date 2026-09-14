@@ -114,3 +114,68 @@ test('the hero image reserves its space before it loads', async ({ page }) => {
   const served = await img.evaluate((el) => el.currentSrc);
   expect(served, `served ${served}`).toMatch(/\.(avif|webp)$/);
 });
+
+test('the drawer is actually usable, not just visible', async ({ page }) => {
+  // The existing drawer test opened it and checked its height and focus, and
+  // passed while every control inside it was untappable: .nav disables pointer
+  // events so the page scrolls through the header gutters, .nav__bar turns them
+  // back on for itself, and the drawer -- a sibling of the bar -- never did.
+  // Presses went straight through to the hero behind it.
+  //
+  // Playwright's click hit-tests, so tapping a real control is what catches it.
+  await page.goto('/');
+  await page.locator('.navsheet__trigger').click();
+
+  const sheet = page.locator('.navsheet');
+  await expect(sheet).toBeVisible();
+
+  // A group expands.
+  const products = page.locator('button.navsheet__row').filter({ hasText: 'Products' });
+  await expect(products).toHaveAttribute('aria-expanded', 'false');
+  await products.click();
+  await expect(products).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('.navsheet__sublink')).not.toHaveCount(0);
+
+  // A destination navigates, closes the drawer and gives scrolling back.
+  await page.locator('.navsheet__sublink').filter({ hasText: 'Ideora Health' }).click();
+  await expect(page).toHaveURL(/\/products\/ideora-health$/);
+  await expect(page.locator('.navsheet')).toHaveCount(0);
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .not.toBe('hidden');
+});
+
+test('tapping outside the drawer closes it', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.navsheet__trigger').click();
+  await expect(page.locator('.navsheet')).toBeVisible();
+
+  // A corner the drawer does not cover. The scrim carries the close handler,
+  // and with pointer events off it could never receive the tap.
+  await page.mouse.click(6, 300);
+
+  await expect(page.locator('.navsheet')).toHaveCount(0);
+  await expect(page).toHaveURL(/\/$/);
+});
+
+test('the drawer keeps its call to action in view when a group is open', async ({ page }) => {
+  // margin-top:auto inside the scrolling column pushed the actions below the
+  // fold the moment any group expanded, cutting the primary CTA in half at the
+  // screen edge.
+  await page.setViewportSize({ width: 360, height: 640 });
+  await page.goto('/');
+  await page.locator('.navsheet__trigger').click();
+  await page.locator('button.navsheet__row').filter({ hasText: 'Products' }).click();
+  await expect(page.locator('.navsheet__sublink')).not.toHaveCount(0);
+
+  const fits = await page.evaluate(() => {
+    const s = document.querySelector('.navsheet');
+    const a = s.querySelector('.navsheet__actions');
+    const sr = s.getBoundingClientRect();
+    const ar = a.getBoundingClientRect();
+    return { overflows: s.scrollHeight > s.clientHeight, inside: ar.bottom <= sr.bottom + 1 && ar.top >= sr.top };
+  });
+
+  expect(fits.overflows, 'the drawer should be overflowing for this to mean anything').toBe(true);
+  expect(fits.inside, 'the call to action is outside the drawer').toBe(true);
+});

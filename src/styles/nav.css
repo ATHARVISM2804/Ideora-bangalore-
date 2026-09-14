@@ -130,10 +130,18 @@
 
 /* --- Mobile sheet -------------------------------------------------------- */
 
+/* .nav disables pointer events so the page scrolls through the header's
+   gutters, and .nav__bar turns them back on for itself. The scrim and the
+   drawer are also children of .nav and never did -- so on a phone the menu
+   opened and then nothing inside it could be tapped: every press went straight
+   through to the hero behind. The trigger worked, which is why it looked fine.
+   
+   Both surfaces take pointer events back explicitly. */
 .navsheet__scrim {
   position: fixed;
   inset: 0;
   z-index: 1;
+  pointer-events: auto;
   background: rgba(31, 27, 24, 0.34);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -141,6 +149,7 @@
 }
 
 .navsheet {
+  pointer-events: auto;
   position: fixed;
   top: calc(var(--safe-t) + 4.25rem);
   left: var(--gut);
@@ -284,6 +293,22 @@
 [aria-expanded="true"] > .navsheet__bar:nth-child(2) { opacity: 0; }
 [aria-expanded="true"] > .navsheet__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* The actions sit at the foot of the drawer, not immediately under the last
-   menu, so the primary ask is where a thumb rests. */
-.navsheet__actions { margin-top: auto; }
+/* The actions are pinned to the foot of the drawer rather than laid out after
+   the last menu.
+ 
+   They were pushed down by `margin-top: auto` inside the scrolling column, so
+   expanding any group moved the primary call to action below the fold and cut
+   it in half at the screen edge -- on a 640px phone, which is the common case.
+   Sticky keeps them in place while the menus scroll behind, and the negative
+   offset cancels the sheet's own padding so they sit flush on its floor. */
+.navsheet__actions {
+  position: sticky;
+  bottom: calc(-1 * var(--s-3));
+  margin-top: auto;
+  padding: var(--s-4) 0 var(--s-3);
+  background: var(--raised);
+  border-top: 1px solid var(--rule);
+}
+
+/* The menus need somewhere to scroll to that is not under the pinned actions. */
+.navsheet__group:last-of-type { margin-bottom: var(--s-2); }

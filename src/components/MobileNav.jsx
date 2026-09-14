@@ -151,7 +151,10 @@ export function MobileNavSheet({ menus, isActive, open, setOpen }) {
             data-track-cta_location="mobile_nav"
             onClick={() => setOpen(false)}
           >
-            Book a 30-minute discovery call
+            {/* The same label the bar carries on a wider screen: this drawer
+                is the navigation on a phone, and the full sentence wrapped to
+                two lines inside it. */}
+            Book a 30-min call
           </Button>
           <Button href={WA_TALK} {...WA_LINK} variant="secondary" block onClick={() => setOpen(false)}>
             Talk to us
