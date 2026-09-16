@@ -17,23 +17,83 @@ import { Photo } from '../components/Photo';
 
 const METHOD = ['Read the request', 'Check the record', 'Act in your system', 'Log the outcome'];
 
+// Every stage reveals a scene and one UI card showing what that stage hands
+// over: the map, the approval rules, the connected systems, the launch
+// checklist. The photo sits over a tonal field, so a stage whose photography
+// has not arrived still shows its card rather than an empty half.
+function MapCard() {
+  return (
+    <div className="svc-map">
+      <span className="svc-map__title">Process map · draft 2</span>
+      <ol className="svc-map__nodes">
+        <li><span className="svc-map__node">Enquiry</span></li>
+        <li><span className="svc-map__node svc-map__wait">Waits 4–6h</span></li>
+        <li><span className="svc-map__node">Booked</span></li>
+      </ol>
+      <span className="svc-map__note">You keep this, whether or not you continue.</span>
+    </div>
+  );
+}
+
+function RulesCard() {
+  return (
+    <div className="svc-map">
+      <span className="svc-map__title">Approval rules · v1</span>
+      <ul className="svc-rules">
+        <li><span>Booking inside open hours</span><span className="svc-rules__auto">Automated</span></li>
+        <li><span>Discount or refund</span><span className="svc-rules__ask">Needs approval</span></li>
+        <li><span>Clinical or legal question</span><span className="svc-rules__ask">To a person</span></li>
+      </ul>
+      <span className="svc-map__note">Agreed in writing before the build starts.</span>
+    </div>
+  );
+}
+
+function SystemsCard() {
+  return (
+    <div className="svc-map">
+      <span className="svc-map__title">Connected systems</span>
+      <ol className="svc-map__nodes">
+        <li><span className="svc-map__node">WhatsApp</span></li>
+        <li><span className="svc-map__node svc-map__wait">Agent</span></li>
+        <li><span className="svc-map__node">CRM</span></li>
+        <li><span className="svc-map__node">Calendar</span></li>
+      </ol>
+      <span className="svc-map__note">No migration. Every action written to the record.</span>
+    </div>
+  );
+}
+
+function LaunchCard() {
+  return (
+    <div className="svc-map">
+      <span className="svc-map__title">Launch plan</span>
+      <ul className="svc-rules">
+        <li><span>Security review</span><span className="svc-rules__auto">Signed off</span></li>
+        <li><span>User acceptance</span><span className="svc-rules__auto">Passed</span></li>
+        <li><span>Running alongside current process</span><span className="svc-rules__ask">Week 2 of 3</span></li>
+      </ul>
+      <span className="svc-map__note">Handover when it has earned it, not on a Friday.</span>
+    </div>
+  );
+}
+
+const STAGE_MEDIA = {
+  '01': { photo: 'discovery', Card: MapCard },
+  '02': { photo: 'stage-design', Card: RulesCard },
+  '03': { photo: 'stage-build', Card: SystemsCard },
+  '04': { photo: 'stage-launch', Card: LaunchCard },
+};
+
 function StageMedia({ code }) {
-  // Only discovery has an image in the handoff: a mapping session with a small
-  // process map over it. The map is the point -- it is what the client keeps.
-  if (code !== '01') return null;
+  const media = STAGE_MEDIA[code];
+  if (!media) return null;
+  const { photo, Card } = media;
   return (
     <div className="svc-media" aria-hidden="true">
       <span className="svc-media__field" />
-      <Photo name="discovery" className="svc-media__photo" sizes="(max-width: 1023px) 100vw, 45vw" />
-      <div className="svc-map">
-        <span className="svc-map__title">Process map · draft 2</span>
-        <ol className="svc-map__nodes">
-          <li><span className="svc-map__node">Enquiry</span></li>
-          <li><span className="svc-map__node svc-map__wait">Waits 4–6h</span></li>
-          <li><span className="svc-map__node">Booked</span></li>
-        </ol>
-        <span className="svc-map__note">You keep this, whether or not you continue.</span>
-      </div>
+      <Photo key={photo} name={photo} className="svc-media__photo" sizes="(max-width: 1023px) 100vw, 45vw" />
+      <Card />
     </div>
   );
 }
