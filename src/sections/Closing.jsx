@@ -1,6 +1,7 @@
 import { FACTS } from '../data/content';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { Section, Container, Button } from '../components/ui';
+import { Photo } from '../components/Photo';
 
 // The page's last screen, as the redesign handoff's "reserved transition / CTA
 // state": the source render left this area mostly empty, and the handoff asks
@@ -50,9 +51,12 @@ export function Closing() {
           </div>
 
           {/* Illustrative: the copy beside it carries every claim. The field
-              holds the discovery-session photograph's place until it exists. */}
+              holds the photograph's place until it loads. */}
           <div className="closing-x__media" aria-hidden="true">
-            <span className="closing-x__field" />
+            <div className="closing-x__frame">
+              <span className="closing-x__field" />
+              <Photo name="closing" className="closing-x__photo" sizes="(max-width: 1023px) 100vw, 45vw" />
+            </div>
             <div className="cc-ov cc-ov--checklist closing-x__card">
               <p className="cc-ov__title">Discovery call · 30 min</p>
               <ul className="cc-ov__list">

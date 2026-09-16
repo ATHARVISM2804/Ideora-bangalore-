@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "prebuild": "npm run check:links && npm run check:content && npm run sitemap",
     "sitemap": "node scripts/build-sitemap.mjs",
+    "photos": "bash scripts/build-photos.sh",
     "check:links": "node scripts/check-links.mjs",
     "test": "playwright test",
     "test:visual": "playwright test --project=visual",

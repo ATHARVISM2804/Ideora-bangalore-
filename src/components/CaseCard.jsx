@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Photo } from './Photo';
 
 // One case card, fed per industry.
 //
@@ -76,7 +77,7 @@ function Overlay({ overlay }) {
   }
 }
 
-// The image, or the field that stands in for it until the photography exists.
+// The image, over the field that stands in for it until the photography exists.
 // The stand-in is deliberately a tonal surface and not an illustration: the
 // handoff rules out generic diagrams, and a placeholder should not look like it
 // is trying to be a photograph.
@@ -85,12 +86,13 @@ function Media({ cs }) {
 
   return (
     <div className={`cc-media cc-media--${industry}`}>
-      {cs.image ? (
-        <img src={cs.image.src} alt={cs.image.alt} width="800" height="500" loading="lazy" decoding="async" className="cc-media__img" />
-      ) : (
-        <span className="cc-media__field" aria-hidden="true" />
+      <span className="cc-media__field" aria-hidden="true" />
+      {/* Empty alt: the card is one link named by its headline, and the photo
+          sets the scene rather than adding to what the link says. */}
+      {cs.image && (
+        <Photo name={cs.image.name} className="cc-media__img" sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1023px) 50vw, 33vw" position={cs.image.position} />
       )}
-      <div className="cc-media__overlay">
+      <div className={`cc-media__overlay${cs.place === 'bottom' ? ' cc-media__overlay--bottom' : ''}`}>
         <Overlay overlay={cs.overlay} />
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS } from '../data/products';
 import { Section, Container } from './ui';
+import { Photo } from './Photo';
 
 // The homepage product chooser as an editorial index, per the redesign
 // handoff: four rows read like a contents page, and the active one reveals a
@@ -13,6 +14,14 @@ import { Section, Container } from './ui';
 // promise and what it replaces are all in the row itself. On a touch screen
 // there is no hover, a tap goes straight to the product, and the page loses
 // nothing. That is the handoff's own rule: hover enriches, never gates.
+
+// Each product previews the scene its case study is set in.
+const PHOTO = {
+  healthcare: 'case-healthcare',
+  automotive: 'case-automotive',
+  'real estate': 'case-real-estate',
+  'cross-industry': 'case-operations',
+};
 
 export function ProductIndex() {
   const [active, setActive] = useState(0);
@@ -61,6 +70,14 @@ export function ProductIndex() {
           <div className="pidx__preview" aria-hidden="true">
             <div className={`pidx__media pidx__media--${p.industry.replace(/[^a-z]+/g, '-')}`}>
               <span className="pidx__field" />
+              {PRODUCTS.map((item, i) => (
+                <Photo
+                  key={item.name}
+                  name={PHOTO[item.industry]}
+                  className={`pidx__photo${i === active ? ' is-active' : ''}`}
+                  sizes="40vw"
+                />
+              ))}
               <span className="pidx__tag">{p.name}</span>
             </div>
             <p className="pidx__replaces">

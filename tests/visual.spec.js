@@ -54,6 +54,20 @@ for (const [name, path] of PAGES) {
       // this suite would start failing at random and nobody would know why.
       await expect(page.locator('body')).toBeVisible();
 
+      // Photographs lazy-load, so a full-page capture would race them. Load
+      // them all first, then decode, so every run snapshots the same pixels.
+      // A lazy image that has not started reports complete, so poll for real
+      // pixels rather than trusting the flag.
+      await page.evaluate(() => {
+        document.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+      });
+      await page.waitForFunction(
+        () => [...document.images].every((img) => img.complete && img.naturalWidth > 0),
+        null,
+        { timeout: 15_000 },
+      );
+      await page.evaluate(() => Promise.all([...document.images].map((img) => img.decode().catch(() => {}))));
+
       await expect(page).toHaveScreenshot(`${name}-${width}.png`, {
         fullPage: true,
         animations: 'disabled',

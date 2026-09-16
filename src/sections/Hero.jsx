@@ -1,6 +1,7 @@
 import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { HeroVisual } from '../components/HeroVisual';
+import { Photo } from '../components/Photo';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { Container, Button } from '../components/ui';
 
@@ -124,7 +125,14 @@ export function Hero() {
               does, only the src. */}
           <div data-anim="console" className="hero__stage">
             <div className="hero__visual">
-              <HeroVisual />
+              <Photo
+                name="hero"
+                priority
+                className="hero__img"
+                sizes="(max-width: 1024px) calc(100vw - 2.75rem), 40vw"
+                alt="A service advisor checks a booking on a tablet beside a car, with a technician working at a lift behind him."
+                fallback={<HeroVisual />}
+              />
             </div>
 
             <div className="hero__float hero__float--booking" aria-hidden="true">

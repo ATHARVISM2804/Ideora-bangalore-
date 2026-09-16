@@ -154,6 +154,9 @@
   max-width: calc(100% - 2rem);
 }
 
+/* Where the top corner would cover a face, the card moves to the desk below. */
+.cc-media__overlay--bottom { top: auto; bottom: 1rem; }
+
 /* --- Overlays: one UI proof element each ----------------------------------- */
 .cc-ov {
   width: 13.5rem;
@@ -381,9 +384,27 @@
   white-space: nowrap;
 }
 
-.hero__float--booking { left: -1.75rem; bottom: 18%; }
-.hero__float--chips   { right: -1.25rem; top: 9%; gap: 0.35rem; }
-.hero__float--person  { right: 8%; bottom: -1.25rem; }
+/* Each card overlaps the frame by a thin band along its top or bottom edge
+   and hangs outside it otherwise. Placed at 18% and 9% down the frame they sat
+   on the subject -- the advisor's hands, head and legs, or the illustration's
+   modules -- and hid roughly a fifth of the image. The top and bottom strips
+   are ceiling and floor in the photograph and open ground in the illustration,
+   so the cards can touch the frame there without covering anything.
+
+   The left edge is not used: the copy column ends 50px from the frame, and a
+   card pushed out that way would sit on the headline. The two bottom cards are
+   staggered so the pair does not read as a single bar under the image. */
+.hero__float--chips   { right: -1.25rem; top: -1.5rem; gap: 0.35rem; }
+.hero__float--booking { left: -1.75rem; bottom: -2rem; }
+.hero__float--person  { right: -1.25rem; bottom: -2.6rem; }
+
+/* Between the phone stack and ~1240px the frame is under 435px wide, and the
+   two bottom cards need about 460px between them -- they ran into each other.
+   The handoff allows two or three cards, so this band shows two: the booking
+   and the status chips carry the story; the exception is the one that can go. */
+@media (min-width: 64em) and (max-width: 77.49em) {
+  .hero__float--person { display: none; }
+}
 
 .hero__floaticon {
   display: grid;
@@ -949,9 +970,19 @@
   border-radius: 1.25rem;
 }
 
-.closing-x__field {
+.closing-x__frame { position: absolute; inset: 0; }
+
+.closing-x__field,
+.closing-x__photo {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.closing-x__photo { object-fit: cover; }
+
+.closing-x__field {
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E"),
     radial-gradient(120% 90% at 25% 10%, #EFE6DA 0%, #D6C8B6 55%, #B3A08A 100%);
@@ -981,8 +1012,29 @@
 /* On a phone the card comes out from over the field, like the hero's. */
 @media (max-width: 47.99em) {
   .closing-x__media { min-height: 0; overflow: visible; display: grid; gap: var(--s-3); }
-  .closing-x__field { position: relative; display: block; height: 12rem; border-radius: 1rem; }
+  .closing-x__frame { position: relative; height: 13rem; overflow: hidden; border-radius: 1rem; }
   .closing-x__card { position: static; width: auto; }
   .closing-x__actions { flex-direction: column; }
   .closing-x__rail { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); }
+}
+
+/* --- Photography ------------------------------------------------------------- */
+/* Every photo sits over its tonal field, cropped to the frame. */
+.svc-media__photo,
+.pidx__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The product preview crossfades between the four scenes. */
+.pidx__photo { opacity: 0; transition: opacity 260ms var(--ease); }
+.pidx__photo.is-active { opacity: 1; }
+.pidx__tag { z-index: 1; }
+.svc-map { z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pidx__photo { transition: none; }
 }

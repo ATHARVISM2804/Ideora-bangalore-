@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { SERVICES } from '../data/content';
 import { Section, Container } from '../components/ui';
+import { Photo } from '../components/Photo';
 
 // The service, made tangible -- section 05 of the redesign handoff.
 //
@@ -23,6 +24,7 @@ function StageMedia({ code }) {
   return (
     <div className="svc-media" aria-hidden="true">
       <span className="svc-media__field" />
+      <Photo name="discovery" className="svc-media__photo" sizes="(max-width: 1023px) 100vw, 45vw" />
       <div className="svc-map">
         <span className="svc-map__title">Process map · draft 2</span>
         <ol className="svc-map__nodes">
