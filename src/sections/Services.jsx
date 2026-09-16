@@ -82,17 +82,17 @@ const STAGE_MEDIA = {
   '01': { photo: 'discovery', Card: MapCard },
   '02': { photo: 'stage-design', Card: RulesCard },
   '03': { photo: 'stage-build', Card: SystemsCard },
-  '04': { photo: 'stage-launch', Card: LaunchCard },
+  '04': { photo: 'stage-launch', Card: LaunchCard, position: 'center 15%' },
 };
 
 function StageMedia({ code }) {
   const media = STAGE_MEDIA[code];
   if (!media) return null;
-  const { photo, Card } = media;
+  const { photo, Card, position } = media;
   return (
     <div className="svc-media" aria-hidden="true">
       <span className="svc-media__field" />
-      <Photo key={photo} name={photo} className="svc-media__photo" sizes="(max-width: 1023px) 100vw, 45vw" />
+      <Photo key={photo} name={photo} className="svc-media__photo" sizes="(max-width: 1023px) 100vw, 45vw" position={position} />
       <Card />
     </div>
   );

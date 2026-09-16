@@ -843,7 +843,7 @@
 .svc-panel__facts dd { margin: 0; font-size: var(--t-sm); }
 
 /* Discovery: image slot with the process map floating over it. */
-.svc-media { position: relative; min-height: 16rem; overflow: hidden; border-radius: 0.875rem; }
+.svc-media { position: relative; min-height: 22rem; overflow: hidden; border-radius: 0.875rem; }
 
 .svc-media__field {
   position: absolute;
