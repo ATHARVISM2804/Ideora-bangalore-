@@ -12,14 +12,14 @@
 
 :root {
   /* --- Ground ----------------------------------------------------------- */
-  --bg:          #FAF9F7;   /* warm paper */
-  --bg-sunken:   #F2EFE9;   /* alternating bands */
+  --bg:          #F7F4EF;   /* warm editorial canvas, per the redesign handoff */
+  --bg-sunken:   #EFEAE2;   /* alternating bands, a visible step off the canvas */
   --raised:      #FFFFFF;   /* cards and panels */
 
   /* --- Ink -------------------------------------------------------------- */
-  --ink:         #1C1917;   /* 16.6:1 on --bg */
-  --ink-muted:   #6E6862;   /*  5.2:1 — body copy, passes AA          */
-  --ink-faint:   #736C64;   /*  4.9:1 on paper, 4.5:1 on the sunken   */
+  --ink:         #151515;   /* 16.7:1 on --bg -- near-black, never pure black */
+  --ink-muted:   #625B55;   /*  6.1:1 on canvas, 5.6:1 sunken — body  */
+  --ink-faint:   #6B645D;   /*  5.3:1 on canvas, 4.9:1 on the sunken  */
                             /*  band. It has to clear AA on both,     */
                             /*  since labels sit on either. Was       */
                             /*  #9C958E at 2.81:1, which failed and   */
@@ -42,8 +42,13 @@
      (5.2:1), and it as text on paper (4.9:1), on the sunken band (4.51:1)
      and on a card (5.2:1). The sunken band is the binding constraint --
      anything brighter fails there first.                                 */
-  --accent:      #F4601E;
-  --accent-deep: #C2410C;
+  --accent:      #F15A24;   /* the client's orange, exactly. Marks,     */
+                            /* indicators, fills, data. 3.07:1 on the */
+                            /* canvas: enough for a mark, not for text. */
+  --accent-deep: #B53C0B;   /* orange as TEXT. The new canvas and band */
+                            /* pushed #C2410C to 4.32:1 on the sunken  */
+                            /* band; this clears 4.85 there, 5.3 on    */
+                            /* canvas, 5.8 on a card.                  */
   --accent-hover:#9C3607;   /* pressed / hovered primary button */
   --accent-tint: #FBEFE7;
 

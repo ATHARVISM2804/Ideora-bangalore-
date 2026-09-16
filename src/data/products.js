@@ -21,6 +21,7 @@
 export const PRODUCTS = [
   {
     name: 'Ideora Health',
+    replaces: 'Paper intake and phone coverage checks',
     buyer: 'Clinic or hospital owner',
     path: '/products/ideora-health',
     industry: 'healthcare',
@@ -32,6 +33,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Ideora Auto',
+    replaces: 'Three inboxes and a capacity spreadsheet',
     buyer: 'Dealer or service-centre head',
     path: '/products/ideora-auto',
     industry: 'automotive',
@@ -43,6 +45,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Ideora Property',
+    replaces: 'Manual call-backs across four lead sources',
     buyer: 'Real-estate sales director',
     path: '/products/ideora-property',
     industry: 'real estate',
@@ -54,6 +57,7 @@ export const PRODUCTS = [
   },
   {
     name: 'Operations Console',
+    replaces: 'Month-end reporting built by hand',
     buyer: 'Corporate operations leader',
     path: '/products/operations-console',
     industry: 'cross-industry',

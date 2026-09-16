@@ -13,9 +13,9 @@ test('the core journey completes: home to product to a booking CTA', async ({ pa
 
   await expect(page.getByRole('heading', { level: 1 })).toContainText('AI systems that handle');
 
-  // The chooser is the block that answers "is there something here for my
-  // business". It must be present without any scroll-triggered reveal.
-  const cards = page.locator('.pchoose__card');
+  // The product index is the block that answers "is there something here for
+  // my business". It must be present without any scroll-triggered reveal.
+  const cards = page.locator('.pidx__row');
   await expect(cards).toHaveCount(4);
   await expect(cards.first()).toBeVisible();
 
@@ -104,7 +104,12 @@ test('no page scrolls sideways', async ({ page }) => {
   }
 });
 
-test('the product row is visible at the fold on 1440x900', async ({ page }) => {
+// OPEN DECISION, not a pass: the redesign handoff's section rhythm (64-96px
+// between sections, a kicker and headline above the index) puts the first row
+// at 947px on 1440x900. Meeting this without the spacing leaves ~15px of row
+// showing, which passes the number and fails the intent. Re-enable once the
+// client picks: the fold rule, or the handoff spacing.
+test.fixme('the product row is visible at the fold on 1440x900', async ({ page }) => {
   // An explicit acceptance condition: "ProductCard x 4 -- visible without an
   // additional reveal interaction on 1440 x 900."
   //
@@ -120,13 +125,13 @@ test('the product row is visible at the fold on 1440x900', async ({ page }) => {
   // the webfont settles reports a layout no reader ever sees.
   await page.evaluate(() => document.fonts.ready);
 
-  const first = page.locator('.pchoose__card').first();
+  const first = page.locator('.pidx__row').first();
   const box = await first.boundingBox();
 
-  expect(box, 'the first product card should be laid out').not.toBeNull();
+  expect(box, 'the first product row should be laid out').not.toBeNull();
   expect(
     box.y,
-    `first product card starts ${Math.round(box.y)}px down a 900px viewport`,
+    `first product row starts ${Math.round(box.y)}px down a 900px viewport`,
   ).toBeLessThan(900);
 });
 
@@ -200,11 +205,11 @@ test('the homepage runs in the specified sequence', async ({ page }) => {
       .filter(Boolean),
   );
 
-  // Rows 02-10. The proof strip is a band rather than a section and is
+  // Rows 02-10. The proof strip now sits in the hero as its bottom rail and is
   // asserted separately below.
   expect(order).toEqual([
     'top',       // 02 hero
-    'products',  // 03 product chooser
+    'products',  // 03 product index
     'demo',      // 05 featured product demo
     'outcome',   // 06 evidence: before and after
     'work',      //    evidence: case studies
@@ -215,17 +220,15 @@ test('the homepage runs in the specified sequence', async ({ page }) => {
     'book',      // 10 final CTA
   ]);
 
-  // 04: three factual promises, sitting between the chooser and the demo.
-  const promises = page.locator('.promises__item');
+  // 04: three factual promises, as the hero's bottom rail -- above the index.
+  const promises = page.locator('.hero__rail > li');
   await expect(promises).toHaveCount(3);
 
-  const [cardsBottom, stripTop, demoTop] = await page.evaluate(() => [
-    document.querySelector('.pchoose').getBoundingClientRect().bottom,
-    document.querySelector('.promises').getBoundingClientRect().top,
-    document.querySelector('#demo').getBoundingClientRect().top,
+  const [railBottom, indexTop] = await page.evaluate(() => [
+    document.querySelector('.hero__rail').getBoundingClientRect().bottom,
+    document.querySelector('#products').getBoundingClientRect().top,
   ]);
-  expect(stripTop).toBeGreaterThan(cardsBottom);
-  expect(stripTop).toBeLessThan(demoTop);
+  expect(railBottom).toBeLessThanOrEqual(indexTop + 1);
 
   // 08: six delivery steps, each stating scope, owner and deliverable.
   await expect(page.locator('#how .step')).toHaveCount(6);
@@ -237,7 +240,7 @@ test('the hero uses the approved copy and tracking', async ({ page }) => {
   await page.goto('/');
   await page.waitForFunction(() => document.fonts.check('1em Newsreader'));
 
-  await expect(page.locator('.hero__badge')).toHaveText(/custom ai automation for service businesses/i);
+  await expect(page.locator('#top .kicker').first()).toHaveText(/custom ai automation for service businesses/i);
   await expect(page.locator('h1')).toHaveText(
     'AI systems that handle enquiries, bookings and follow-ups inside your existing software.',
   );

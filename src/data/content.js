@@ -87,31 +87,64 @@ export const INDUSTRIES = [
     body: "Intake, insurance checks, and recalls run before the patient arrives. The desk handles exceptions, and the clinic knows on Monday which slots go unfilled." }
 ];
 
+// The six use cases, as the redesign handoff's case-card formula consumes them.
+//
+// `overlay` is the single UI proof element each card carries over its image:
+// a booking confirmation, an enquiry being qualified, an intake checklist, a
+// queue state, a KYC check, a matter status. They show a system state, never an
+// outcome figure -- the evidence rule still applies inside an illustration, so
+// there is no "89% faster" floating over a photo.
+//
+// `image` is empty until the photography exists. The card renders a quiet
+// tonal field in its place, so nothing breaks and nothing pretends to be a
+// photograph. Supply { src, alt } and the card uses it.
+//
+// `to` is where the card goes, and it only exists where there is somewhere
+// real to go. Finance is in build and legal is a pilot: neither has a study to
+// read, so neither gets a link that would end in a dead page.
 export const CASES = [
   { vertical: "Automotive", code: "sys_01", status: "live",
     title: "Service bookings answered in seconds",
     body: "Takes the enquiry, finds the vehicle, holds a bay and returns a confirmed slot before an advisor has read the message.",
-    replaced: "3 inboxes · 1 spreadsheet", since: "Feb 2026" },
+    replaced: "3 inboxes · 1 spreadsheet", since: "Feb 2026",
+    to: "/case-studies/service-centre-bookings", cta: "Read the case study",
+    image: null,
+    overlay: { kind: "confirm", title: "Booking confirmed", lines: ["Sat 12 Oct · 10:00", "Service bay 3"] } },
   { vertical: "Real estate", code: "sys_02", status: "live",
     title: "Every enquiry qualified before an agent sees it",
     body: "Enquiries scored against budget, area and readiness, then routed with a viewing already offered against the agent's calendar.",
-    replaced: "manual call-backs", since: "Apr 2026" },
+    replaced: "manual call-backs", since: "Apr 2026",
+    to: "/case-studies/property-lead-qualification", cta: "Read the case study",
+    image: null,
+    overlay: { kind: "message", title: "New enquiry", lines: ["Interested in a 3BHK in Whitefield. What is available?"], status: "Qualifying" } },
   { vertical: "Healthcare", code: "sys_03", status: "live",
     title: "Intake and coverage settled before arrival",
     body: "Intake completed by message and coverage verified with the payer, so the desk works a short list of exceptions and nothing else.",
-    replaced: "paper intake · phone checks", since: "May 2026" },
+    replaced: "paper intake · phone checks", since: "May 2026",
+    to: "/case-studies/clinic-intake-and-coverage", cta: "Read the case study",
+    image: null,
+    overlay: { kind: "checklist", lines: ["Patient intake complete", "Coverage verified", "Appointment confirmed"] } },
   { vertical: "Cross-vertical", code: "sys_04", status: "live",
     title: "A queue management can read on a Monday",
     body: "Every action writes to one record, so backlog, ageing and exceptions are visible the day they happen, weeks before month end.",
-    replaced: "month-end reporting", since: "Jun 2026" },
+    replaced: "month-end reporting", since: "Jun 2026",
+    to: "/products/operations-console", cta: "See the console",
+    image: null,
+    overlay: { kind: "queue", title: "Queue", stats: [["Waiting", "12"], ["Exceptions", "3"], ["Oldest", "18m"]] } },
   { vertical: "Finance", code: "sys_05", status: "in build",
     title: "Onboarding cleared before a reviewer opens it",
     body: "Registry lookups, director checks and sanctions screening run on arrival, so the file reaching a reviewer is complete and risk-banded.",
-    replaced: "manual KYC checks", since: "Q4 2026" },
+    replaced: "manual KYC checks", since: "Q4 2026",
+    to: null, cta: null,
+    image: null,
+    overlay: { kind: "checklist", lines: ["KYC verified", "Sanctions check clear", "File ready for review"] } },
   { vertical: "Legal", code: "sys_06", status: "pilot",
     title: "Matters opened without partner time",
     body: "Conflict checks, engagement letters and ID chasing are done before a partner opens the file. It arrives ready to bill.",
-    replaced: "manual intake · paper conflicts", since: "Aug 2026" }
+    replaced: "manual intake · paper conflicts", since: "Aug 2026",
+    to: null, cta: null,
+    image: null,
+    overlay: { kind: "checklist", title: "Matter opened", lines: ["Conflicts check complete", "Engagement letter sent"] } }
 ];
 
 export const QUOTES = [

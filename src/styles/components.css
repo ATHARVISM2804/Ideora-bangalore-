@@ -56,12 +56,16 @@
    orange is 3.2:1 and fails AA at button sizes, while white on the deep
    orange is 5.6:1. A burnt orange also reads more established, which is the
    direction the page is arguing for. */
+/* The primary button carries the client's orange exactly, with its label in
+   ink rather than white. White on #F15A24 measures 3.37:1 and fails AA for
+   button text; ink on it measures 5.42:1. So the handoff's colour is honoured
+   to the hex, and nothing about it is unreadable. */
 .btn--primary {
-  background: var(--accent-deep);
-  color: #FFFFFF;
-  box-shadow: var(--sh-btn);
+  background: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 10px 24px -14px rgba(241, 90, 36, 0.65);
 }
-.btn--primary:hover { background: var(--accent-hover); color: #FFFFFF; }
+.btn--primary:hover { background: #E24E19; color: var(--ink); }
 
 .btn--secondary {
   background: transparent;

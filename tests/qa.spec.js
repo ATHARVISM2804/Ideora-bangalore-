@@ -183,8 +183,9 @@ test.describe('touch and layout', () => {
           const b = els[j].getBoundingClientRect();
           const gapX = Math.max(a.left - b.right, b.left - a.right);
           const gapY = Math.max(a.top - b.bottom, b.top - a.bottom);
-          // Overlapping on both axes with no gap on either.
-          if (gapX < 0 && gapY < 0) {
+          // Overlapping on both axes with no gap on either. Rows that share a
+          // rule meet at a fractional edge in Firefox; under 1px is rounding.
+          if (gapX < -1 && gapY < -1) {
             bad.push(`${els[i].textContent.trim().slice(0, 18)} / ${els[j].textContent.trim().slice(0, 18)}`);
           }
         }

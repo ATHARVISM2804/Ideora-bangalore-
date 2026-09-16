@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Section, Container, SectionHead, Button } from '../components/ui';
-import { Workflow } from '../pages/blocks';
+import { WorkflowSequence } from '../components/WorkflowSequence';
 import { WA_DEMO, WA_LINK } from '../lib/whatsapp';
 
 // Row 05 of the homepage sequence: one real workflow, shown rather than
@@ -28,7 +28,7 @@ const FEATURED = {
 export function FeaturedDemo() {
   return (
     <Section id="demo" tone="sunken">
-      <Container>
+      <Container wide>
         <SectionHead
           label="See one working"
           title="What a live workflow actually looks like"
@@ -36,11 +36,11 @@ export function FeaturedDemo() {
         />
       </Container>
 
-      <div className="demo__flow">
-        <Workflow steps={FEATURED.steps} head="Enquiry to management report" />
-      </div>
+      <Container wide>
+        <WorkflowSequence steps={FEATURED.steps} />
+      </Container>
 
-      <Container>
+      <Container wide>
         <div className="demo__foot">
           <Button href={WA_DEMO} {...WA_LINK} data-track="demo_start" data-track-product={FEATURED.product} data-track-cta_location="home_demo">
             Ask for this walkthrough

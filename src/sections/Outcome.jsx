@@ -1,81 +1,81 @@
-import { useIsPhone } from '../hooks/useMedia';
-import { Section, Container, SectionHead } from '../components/ui';
+import { Section, Container } from '../components/ui';
 
-// The business case, for an owner rather than an engineer. Every figure here
-// comes from RESULT_STATS, FACTS and CASES in content.js. Nothing is
-// illustrative -- this sits under the headline on a page that asks a senior
-// operator for ninety minutes of their time.
+// Before and after: the handoff calls this the website's most visual proof
+// module, and it is built from the source's own figures -- the median confirmed
+// answer, the people involved, and where the work is kept. Nothing here is
+// illustrative.
+//
+// A real table, because it is tabular data: a screen reader announces each
+// value with its row and its column, which a grid of styled divs never did.
 const ROWS = [
   {
-    label: 'Answering an enquiry',
-    before: 'Four to six hours',
-    after: 'Forty seconds',
-    note: 'Median time to a confirmed answer. Holding replies do not count.',
+    label: 'Time to a confirmed answer',
+    note: 'Median. Holding replies do not count.',
+    before: '4–6 hours',
+    after: '40 seconds',
   },
   {
     label: 'People it takes to book one job',
+    note: 'A person sees the exceptions. Nothing else reaches them.',
     before: 'Someone, every time',
     after: 'Nobody',
-    note: 'A person sees the exceptions. Nothing else reaches them.',
   },
   {
     label: 'Where the work is kept',
-    before: 'Three inboxes and a spreadsheet',
-    after: 'One record',
-    note: 'Backlog and ageing are visible the day they happen.',
+    note: 'Backlog and ageing visible the day they happen.',
+    before: '3 inboxes + 1 spreadsheet',
+    after: '1 record',
   },
 ];
 
-export function Outcome({ cardRef }) {
-  const phone = useIsPhone();
-
+export function Outcome() {
   return (
     <Section id="outcome" tone="sunken">
       <Container>
-        <SectionHead
-          label="Before and after"
-          title="The same work, without the waiting."
-          lede="Nothing about the job changes. What changes is how long it sits before somebody gets to it."
-        />
+        <div className="ba-head">
+          <p className="kicker">Before and after</p>
+          <h2 className="ba-head__title">The same work, without the waiting.</h2>
+          <p className="ba-head__lede">
+            Nothing about the job changes. What changes is how long it sits before somebody gets to it.
+          </p>
+        </div>
 
-        <div ref={cardRef} data-anim="card" className="panel compare">
-          {!phone && (
-            <div className="compare__head" aria-hidden="true">
-              <span />
-              <span className="label">Before</span>
-              <span className="label compare__after-label">With Ideora</span>
-            </div>
-          )}
+        <div data-anim="card" className="ba">
+          <table className="ba__table">
+            <caption className="visually-hidden">
+              The same operational work before Ideora and with it
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" className="ba__corner"><span className="visually-hidden">Measure</span></th>
+                <th scope="col" className="ba__col ba__col--before">Before</th>
+                <th scope="col" className="ba__col ba__col--after">With Ideora</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.map((r) => (
+                <tr key={r.label} className="ba__row">
+                  <th scope="row" className="ba__label">
+                    <span className="ba__labeltext">{r.label}</span>
+                    <span className="ba__note">{r.note}</span>
+                  </th>
+                  <td className="ba__cell ba__cell--before">
+                    <span className="ba__mobile" aria-hidden="true">Before</span>
+                    {r.before}
+                  </td>
+                  <td className="ba__cell ba__cell--after">
+                    <span className="ba__mobile" aria-hidden="true">With Ideora</span>
+                    {r.after}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-          {ROWS.map((row) => (
-            <div key={row.label} className="compare__row">
-              <div>
-                <h3 className="compare__label">{row.label}</h3>
-                <p className="small compare__note">{row.note}</p>
-              </div>
-
-              {/* On a phone the two columns stack into a single before-to-after
-                  line, which reads faster than a two-column table squeezed to
-                  390px and keeps the comparison on one row. */}
-              {phone ? (
-                <p className="compare__inline">
-                  <span className="compare__before">{row.before}</span>
-                  <span aria-hidden="true" className="compare__arrow">→</span>
-                  <span className="compare__after">{row.after}</span>
-                </p>
-              ) : (
-                <>
-                  <p className="compare__before">{row.before}</p>
-                  <p className="compare__after">{row.after}</p>
-                </>
-              )}
-            </div>
-          ))}
-
-          <div className="panel__foot">
+          <p className="ba__foot">
             Running in automotive, real estate and healthcare since February 2026. Six to ten
             weeks from first conversation to a system in production.
-          </div>
+          </p>
         </div>
       </Container>
     </Section>

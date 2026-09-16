@@ -2,7 +2,7 @@ import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { HeroVisual } from '../components/HeroVisual';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
-import { Container, Button, Pill } from '../components/ui';
+import { Container, Button } from '../components/ui';
 
 // The approved hero copy from the audit, set as words so the reveal can stagger
 // them. It replaces "The work your team never gets to. Done." -- a better line,
@@ -46,10 +46,10 @@ export function Hero() {
 
         <Container wide className="hero__grid">
           <div>
-            <div data-anim="hero-1" style={{ display: 'flex' }}>
-              <Pill className="hero__badge">
-                Custom AI automation for service businesses
-              </Pill>
+            {/* The handoff keeps the category label but changes its form: a
+                small uppercase kicker with an orange lead mark, not a pill. */}
+            <div data-anim="hero-1">
+              <p className="kicker">Custom AI automation for service businesses</p>
             </div>
 
             {/* Was "Most operations don't fail. They wait." -- a good line, but
@@ -117,11 +117,51 @@ export function Hero() {
             </div>
           </div>
 
-          {/* What we sell, around the mark. The sentence beside it already
-              names where work stalls; the fold should not say that twice. */}
-          <div data-anim="console" className="hero__visual">
-            <HeroVisual />
+          {/* The image establishes the scene; the floating modules prove the
+              system is in it. Two or three, overlapping the frame's edges, per
+              the handoff. The illustration holds the frame until the
+              photography arrives -- the composition does not change when it
+              does, only the src. */}
+          <div data-anim="console" className="hero__stage">
+            <div className="hero__visual">
+              <HeroVisual />
+            </div>
+
+            <div className="hero__float hero__float--booking" aria-hidden="true">
+              <span className="hero__floaticon">✓</span>
+              <span>
+                <span className="hero__floattitle">Booking confirmed</span>
+                <span className="hero__floatline">Sat 12 Oct · 10:00 · Service bay 3</span>
+              </span>
+            </div>
+
+            <div className="hero__float hero__float--chips" aria-hidden="true">
+              <span className="hero__chip">Enquiry</span>
+              <span className="hero__chiparrow">→</span>
+              <span className="hero__chip">Matched</span>
+              <span className="hero__chiparrow">→</span>
+              <span className="hero__chip hero__chip--on">Booked</span>
+            </div>
+
+            <div className="hero__float hero__float--person" aria-hidden="true">
+              <span className="hero__floatdot" />
+              <span>
+                <span className="hero__floattitle">1 exception</span>
+                <span className="hero__floatline">Named to the service advisor</span>
+              </span>
+            </div>
           </div>
+        </Container>
+
+        {/* The running-in-production rail, at the foot of the hero where the
+            handoff puts it. It was a separate strip under the chooser; here it
+            closes the first screen with the proof before anything else. */}
+        <Container wide>
+          <ul className="hero__rail">
+            <li><span className="hero__raillabel">Running in production</span><span className="hero__railvalue">Four systems live, two in build</span></li>
+            <li><span className="hero__raillabel">Time to first workflow</span><span className="hero__railvalue">Six to ten weeks</span></li>
+            <li><span className="hero__raillabel">What it runs on</span><span className="hero__railvalue">No migration</span></li>
+          </ul>
         </Container>
       </div>
     </section>

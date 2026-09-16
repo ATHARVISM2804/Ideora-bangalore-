@@ -86,8 +86,11 @@ export function useGsapTimeline(refs) {
           // is the generic default and it moved content under the reader; the
           // page's deliberate motion lives in the hero sequence and the map.
           q('[data-anim="head"]').forEach((el) => {
+            // 280ms: inside the redesign handoff's 150-300ms window for
+            // scroll reveals. At 500ms content arrived noticeably after the
+            // reader did.
             gsap.from(el, {
-              opacity: 0, duration: 0.5, ease: 'power3.out',
+              opacity: 0, duration: 0.28, ease: 'power2.out',
               scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
             });
           });
@@ -100,7 +103,7 @@ export function useGsapTimeline(refs) {
           });
           groups.forEach((els, parent) => {
             gsap.from(els, {
-              opacity: 0, duration: 0.5, stagger: 0.04, ease: 'power3.out',
+              opacity: 0, duration: 0.28, stagger: 0.04, ease: 'power2.out',
               scrollTrigger: { trigger: parent, start: 'top 86%', toggleActions: 'play none none none' },
             });
           });

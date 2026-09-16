@@ -3,8 +3,7 @@ import { useGsapTimeline } from '../hooks/useGsapTimeline';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import { Hero } from '../sections/Hero';
-import { ProductChooser } from '../components/ProductChooser';
-import { ProofStrip } from '../sections/ProofStrip';
+import { ProductIndex } from '../components/ProductIndex';
 import { FeaturedDemo } from '../sections/FeaturedDemo';
 import { Outcome } from '../sections/Outcome';
 import { Services } from '../sections/Services';
@@ -37,13 +36,12 @@ import { Closing } from '../sections/Closing';
 // statement, proof.
 export function Home() {
   const rootRef = useRef(null);
-  const parallaxRef = useRef(null);
 
   useDocumentTitle(
     'Custom AI automation for service businesses | Ideora Labs',
     'AI systems that handle enquiries, bookings and follow-ups inside your existing software. One live workflow in 6 to 10 weeks for clinics, service centres and property teams.',
   );
-  useGsapTimeline({ rootRef, parallaxRef });
+  useGsapTimeline({ rootRef });
 
   return (
     <div ref={rootRef}>
@@ -51,10 +49,11 @@ export function Home() {
           05 featured demo · 06 case studies · 07 services · 08 how it works ·
           09 security and integrations · 10 final CTA. */}
       <Hero />
-      <ProductChooser />
-      <ProofStrip />
+      <ProductIndex />
       <FeaturedDemo />
-      <Outcome cardRef={parallaxRef} />
+      {/* No parallax: the handoff asks for it nowhere, and it was sliding the
+          before-and-after table -- the page's main proof -- under the reader. */}
+      <Outcome />
       <Work />
       <Voices />
       <Services />
