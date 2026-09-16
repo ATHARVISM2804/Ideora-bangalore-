@@ -669,48 +669,6 @@
 .voices__mark { color: var(--accent-deep); }
 .voices__by { margin-top: var(--s-6); display: flex; align-items: center; gap: var(--s-4); }
 
-/* --- Closing ------------------------------------------------------------- */
-
-.facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
-  gap: var(--s-5) var(--s-6);
-  padding-top: var(--s-6);
-  border-top: 1px solid var(--rule);
-}
-.fact__value { margin-top: var(--s-3); line-height: var(--lh-body); color: var(--ink); }
-
-.closing {
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  gap: var(--s-5) var(--s-7);
-  align-items: center;
-  padding: clamp(var(--s-7), 6vw, 4.75rem) clamp(var(--s-5), 5vw, 4.5rem);
-}
-@media (max-width: 900px) { .closing { grid-template-columns: 1fr; } }
-
-/* The one pointer-driven flourish left on the page: a soft light that follows
-   the cursor across the final panel. It is inert on touch, where the browser
-   synthesises a hover that then sticks. */
-.closing__spot {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(760px circle at var(--mx, 30%) var(--my, 50%), rgba(244, 96, 30, 0.07), transparent 62%);
-}
-.closing__dots {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(28, 25, 23, 0.07) 1px, transparent 1px);
-  background-size: 26px 26px;
-  mask-image: radial-gradient(circle at 78% 40%, #000, transparent 68%);
-  -webkit-mask-image: radial-gradient(circle at 78% 40%, #000, transparent 68%);
-}
-.closing > * { position: relative; }
-
 /* --- Stack: what you keep ------------------------------------------------ */
 
 .keeps {

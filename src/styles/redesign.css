@@ -918,3 +918,71 @@
   .svc-panel { padding: var(--s-5); }
   .svc-panel__facts div { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
 }
+
+/* --- Closing: the reserved transition / CTA state ---------------------------- */
+/* The handoff's 120px+ is for "hero transitions and signature moments"; this is
+   the second of the two. */
+.closing-x { padding-block: clamp(var(--s-8), 9vw, 8rem); }
+
+.closing-x__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(var(--s-6), 5vw, var(--s-9));
+  align-items: center;
+}
+
+.closing-x__title {
+  margin: var(--s-4) 0 0;
+  max-width: 16ch;
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  line-height: 1.04;
+}
+
+.closing-x__body { max-width: 34rem; margin: var(--s-5) 0 0; color: var(--ink-muted); }
+
+.closing-x__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+
+.closing-x__media {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.closing-x__field {
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 25% 10%, #EFE6DA 0%, #D6C8B6 55%, #B3A08A 100%);
+  background-blend-mode: multiply, normal;
+}
+
+.closing-x__card { position: absolute; right: var(--s-5); bottom: var(--s-5); width: 15rem; }
+
+.closing-x__rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-5);
+  margin: clamp(var(--s-7), 6vw, var(--s-9)) 0 0;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.closing-x__rail div { display: grid; gap: 0.2rem; align-content: start; }
+.closing-x__rail dt { font-size: var(--t-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+.closing-x__rail dd { margin: 0; font-size: var(--t-sm); color: var(--ink); }
+
+@media (max-width: 63.99em) {
+  .closing-x__grid { grid-template-columns: minmax(0, 1fr); }
+  .closing-x__rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* On a phone the card comes out from over the field, like the hero's. */
+@media (max-width: 47.99em) {
+  .closing-x__media { min-height: 0; overflow: visible; display: grid; gap: var(--s-3); }
+  .closing-x__field { position: relative; display: block; height: 12rem; border-radius: 1rem; }
+  .closing-x__card { position: static; width: auto; }
+  .closing-x__actions { flex-direction: column; }
+  .closing-x__rail { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); }
+}
