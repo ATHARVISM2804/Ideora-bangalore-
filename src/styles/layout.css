@@ -29,6 +29,10 @@
   background: var(--bg-sunken);
   border-block: 1px solid var(--rule);
 }
+/* Two sunken bands in a row are one band: no seam between them. The first
+   one's bottom padding is the gap, so the second's label never sits on a rule. */
+.section--sunken:has(+ .section--sunken) { border-bottom: 0; }
+.section--sunken + .section--sunken { border-top: 0; }
 
 /* --- Containers ----------------------------------------------------------
    Two widths, one gutter. Was four widths (1180 / 1440 / 1400 / 1320) and two

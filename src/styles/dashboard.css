@@ -150,7 +150,7 @@
 .dashv__donutcap {
   fill: var(--dash-muted-t);
   font-size: 0.5rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-anchor: middle;
   text-transform: uppercase;
 }
@@ -197,7 +197,7 @@
   background: linear-gradient(180deg, var(--dash-accent), rgba(244, 96, 30, 0.45));
 }
 
-.dashv__barlabel { font-size: 0.6875rem; color: var(--dash-muted-t); }
+.dashv__barlabel { font-size: 0.75rem; color: var(--dash-muted-t); }
 
 /* --- Pipeline ------------------------------------------------------------- */
 .dashv__pipe {
@@ -262,9 +262,23 @@
   .dashv__donutwrap { grid-template-columns: minmax(0, 1fr); justify-items: center; }
   .dashv__legend { width: 100%; }
 
-  .dashv__pipe,
-  .dashv__table { min-width: 30rem; }
+  /* Two tiles a row rather than a strip that scrolls sideways out of view. */
+  .dashv__pipe { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashv__pipestep:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
-  .dashv__card:has(.dashv__pipe),
-  .dashv__card:has(.dashv__table) { overflow-x: auto; }
+  /* Each exception becomes a small block: reference and wait on one line, the
+     reason and owner under it. The column headings are implied by position. */
+  .dashv__table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .dashv__table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem var(--s-3);
+    padding-block: var(--s-3);
+    border-bottom: 1px solid var(--dash-line);
+  }
+  .dashv__table tr:last-child { border-bottom: 0; }
+  .dashv__table td { padding: 0; border-bottom: 0; }
+  .dashv__table td:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .dashv__table td:nth-child(3) { grid-column: 1 / -1; grid-row: 3; color: var(--dash-muted-t); }
+  .dashv__table td.dashv__age { grid-column: 2; grid-row: 1; text-align: right; }
 }

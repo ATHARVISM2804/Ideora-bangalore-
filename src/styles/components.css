@@ -282,6 +282,9 @@
   border-top: 1px solid var(--rule);
 }
 @media (max-width: 900px) { .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-4); } }
+/* A phone keeps two columns for short figures ("8 wks") but the serif value
+   drops a size, so a sentence-length value wraps to two lines, not four. */
+@media (max-width: 47.99em) { .proof .stat__value { font-size: 1.1875rem; line-height: 1.25; } }
 
 /* An editorial two-column row: the claim holds the left rail, the reasoning
    sits in the right. The body was previously spanning seven of twelve columns
@@ -339,6 +342,19 @@
 .page-cta > :first-child { flex: 1 1 26rem; }
 .page-cta > :first-child h2 { max-width: 24rem; }
 .page-cta > .btn { flex: none; }
+
+@media (max-width: 47.99em) {
+  .page-cta > .btn { flex: 1 1 100%; white-space: normal; }
+  /* One rule for every call to action in page content: full width on a phone,
+     the thumb's easiest target and the same shape the hero uses. */
+  main .btn:not(.btn--text) { width: 100%; }
+}
+
+/* Under 380px the longest label ("Book a 30-minute discovery call") broke onto
+   two lines inside a 48px button. A little less padding keeps it on one. */
+@media (max-width: 23.75em) {
+  .btn { padding-inline: var(--s-4); font-size: 0.9375rem; }
+}
 
 .case__cols {
   display: grid;
@@ -475,8 +491,14 @@
   background: linear-gradient(180deg, var(--accent-line), var(--rule));
 }
 @media (max-width: 640px) {
-  .step { gap: var(--s-4); }
-  .step__n { width: 2.75rem; height: 2.75rem; }
+  /* The number column cost a fifth of a 390px screen and squeezed every card
+     to a narrow strip. On a phone the number sits on the card's top edge. */
+  .steps { gap: var(--s-6); }
+  .step { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .step__marker { position: relative; z-index: 1; align-self: start; margin: 0 0 calc(-1 * 1.25rem) var(--s-5); }
+  .step__line { display: none; }
+  .step__n { width: 2.5rem; height: 2.5rem; background: var(--bg); }
+  .step .card { padding-top: var(--s-6); }
 }
 
 .step__tags { margin-top: var(--s-4); display: flex; gap: var(--s-2); flex-wrap: wrap; }

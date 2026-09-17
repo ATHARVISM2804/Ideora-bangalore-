@@ -708,7 +708,7 @@
 .wseq-v { margin: 0; font-size: 0.75rem; line-height: 1.35; transition: transform 300ms var(--ease), opacity 300ms var(--ease); }
 .wseq__step.is-waiting .wseq-v { transform: translateY(6px); opacity: 0; }
 
-.wseq-v__from { display: block; font-size: 0.6875rem; color: var(--ink-faint); }
+.wseq-v__from { display: block; font-size: 0.75rem; color: var(--ink-faint); }
 
 .wseq-v__bubble {
   margin: 0.4rem 0 0;
@@ -725,7 +725,7 @@
 .wseq-v__pick { padding: 0.3rem 0.45rem; border-radius: 0.4rem; background: var(--raised); box-shadow: inset 2px 0 0 var(--accent); }
 
 .wseq-v__cal { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.3rem 0.5rem; margin-top: 0.4rem; align-items: center; }
-.wseq-v__cal > span:nth-child(odd) { font-family: var(--mono); font-size: 0.6875rem; color: var(--ink-faint); }
+.wseq-v__cal > span:nth-child(odd) { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
 .wseq-v__slot { padding: 0.2rem 0.45rem; border-radius: 0.35rem; background: var(--raised); color: var(--ink-faint); }
 .wseq-v__slot--taken { background: var(--rule); color: var(--ink-muted); }
 
@@ -750,7 +750,7 @@
 .wseq-v--report { display: grid; gap: 0.35rem; }
 .wseq-v__row { display: flex; justify-content: space-between; padding: 0.3rem 0.45rem; border-radius: 0.35rem; background: var(--raised); }
 .wseq-v__row span:last-child { font-family: var(--display); font-size: 0.9375rem; }
-.wseq-v__ok { justify-self: start; padding: 0.15rem 0.5rem; border-radius: var(--r-pill); background: #E3F5EA; color: #13703A; font-size: 0.6875rem; }
+.wseq-v__ok { justify-self: start; padding: 0.15rem 0.5rem; border-radius: var(--r-pill); background: #E3F5EA; color: #13703A; font-size: 0.75rem; }
 
 .wseq__controls { display: flex; justify-content: flex-end; margin-top: var(--s-4); min-height: 2.75rem; }
 

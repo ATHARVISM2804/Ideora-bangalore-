@@ -41,7 +41,7 @@ export function About() {
                 <Label>Direct</Label>
                 <a
                   href="mailto:info@ideoralabs.com"
-                  style={{ display: 'block', marginTop: 'var(--s-3)', color: 'var(--ink)', overflowWrap: 'anywhere' }}
+                  style={{ display: 'block', marginTop: 'var(--s-2)', paddingBlock: 'var(--s-2)', color: 'var(--ink)', overflowWrap: 'anywhere' }}
                 >
                   info@ideoralabs.com
                 </a>

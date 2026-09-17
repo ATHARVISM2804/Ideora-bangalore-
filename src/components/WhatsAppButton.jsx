@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 
 // The mobile nav sheet is a full-screen overlay, and a floating button must not
@@ -20,8 +21,32 @@ function useOverlayOpen() {
   return locked;
 }
 
+// On a phone the button used to sit on top of the hero photo, next to two
+// buttons that already make the same offer. It waits until the page's own
+// call to action has scrolled away, then stays.
+function useHeroActionsVisible() {
+  const { pathname } = useLocation();
+  // Keyed by route, so a reading from the previous page never carries over.
+  const [seen, setSeen] = useState({ pathname: null, visible: false });
+
+  useEffect(() => {
+    // Phones only: on a desktop the button sits in an empty corner and covers
+    // nothing, and it is the persistent booking action the page relies on.
+    const phone = window.matchMedia('(max-width: 47.99em)').matches;
+    const target = document.querySelector('.hero__actions, .page-hero__actions');
+    if (!phone || !target || typeof IntersectionObserver === 'undefined') return undefined;
+    const io = new IntersectionObserver(([e]) => setSeen({ pathname, visible: e.isIntersecting }));
+    io.observe(target);
+    return () => io.disconnect();
+  }, [pathname]);
+
+  return seen.pathname === pathname && seen.visible;
+}
+
 export function WhatsAppButton() {
-  const hidden = useOverlayOpen();
+  const overlay = useOverlayOpen();
+  const heroActions = useHeroActionsVisible();
+  const hidden = overlay || heroActions;
 
   return (
     <a

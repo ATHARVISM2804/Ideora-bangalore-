@@ -13,6 +13,9 @@
 .crumbs__list {
   display: flex;
   flex-wrap: wrap;
+  /* The links carry 44px of padding on a phone and the current page does not;
+     centring keeps all three on one baseline. */
+  align-items: center;
   gap: var(--s-2);
   margin: 0;
   padding: 0;
@@ -498,6 +501,8 @@
   .crumbs { padding-top: var(--s-2); }
 
   .crumbs__item a,
+  .indlist__name a,
+  .indlist__link,
   .trustband__link,
   .contact__list a,
   .nf__quiet,
@@ -621,6 +626,14 @@
   margin-top: var(--s-6);
 }
 
+/* Full-width like every other primary action on a phone, with the text link
+   centred under it rather than ragged with its arrow on a line of its own. */
+@media (max-width: 47.99em) {
+  .demo__foot { flex-direction: column; align-items: stretch; gap: var(--s-2); text-align: center; }
+  .demo__foot .btn { justify-content: center; }
+  .demo__foot .link-quiet { text-wrap: balance; }
+}
+
 @media (max-width: 47.99em) {
   .promises { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
 }
@@ -651,6 +664,12 @@
   flex-wrap: wrap;
   gap: var(--s-3);
   margin-top: var(--s-6);
+}
+
+/* Stacked and full width on a phone, the same as the homepage hero. */
+@media (max-width: 47.99em) {
+  .page-hero__actions { flex-direction: column; }
+  .page-hero__actions .btn { width: 100%; }
 }
 
 /* --- Inputs --------------------------------------------------------------- */
