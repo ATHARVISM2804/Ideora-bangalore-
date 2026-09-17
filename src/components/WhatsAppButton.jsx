@@ -33,7 +33,10 @@ function useHeroActionsVisible() {
     // Phones only: on a desktop the button sits in an empty corner and covers
     // nothing, and it is the persistent booking action the page relies on.
     const phone = window.matchMedia('(max-width: 47.99em)').matches;
-    const target = document.querySelector('.hero__actions, .page-hero__actions');
+    // The homepage hero only: its first button is this same discovery call.
+    // A product hero offers a walkthrough and a review instead, so there the
+    // button is the page's one discovery action and has to stay.
+    const target = document.querySelector('.hero__actions');
     if (!phone || !target || typeof IntersectionObserver === 'undefined') return undefined;
     const io = new IntersectionObserver(([e]) => setSeen({ pathname, visible: e.isIntersecting }));
     io.observe(target);

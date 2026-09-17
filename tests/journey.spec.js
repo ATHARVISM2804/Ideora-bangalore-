@@ -62,6 +62,32 @@ test('content renders without JavaScript', async ({ browser }) => {
   await context.close();
 });
 
+test('a new page opens at the top, not where the last one was scrolled', async ({ page }) => {
+  // Clicking a footer link used to land a visitor at the bottom of the next
+  // page: the route reset was a smooth scroll, and the new render cut it off.
+  await page.goto('/');
+  const footer = page.locator('footer.footer');
+
+  await footer.scrollIntoViewIfNeeded();
+  await footer.locator('a[href="/services/custom-ai-automation"]').click();
+  await expect(page).toHaveURL(/\/services\/custom-ai-automation$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+
+  // And through the navbar, from the bottom of that page.
+  await footer.scrollIntoViewIfNeeded();
+  const sheetTrigger = page.locator('.navsheet__trigger');
+  if (await sheetTrigger.isVisible()) {
+    await sheetTrigger.click();
+    await page.locator('button.navsheet__row').filter({ hasText: 'Services' }).click();
+    await page.locator('.navsheet__sublink[href="/services/productised-systems"]').click();
+  } else {
+    await page.locator('header').getByRole('button', { name: /Services/ }).click();
+    await page.locator('.navmenu__panel a[href="/services/productised-systems"]').click();
+  }
+  await expect(page).toHaveURL(/\/services\/productised-systems$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
 test('the product menu works by keyboard', async ({ page }) => {
   await page.goto('/');
 
