@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Layout } from './layout/Layout';
 import { Home } from './pages/Home';
 import { ALL_PAGE_PATHS } from './data/nav';
@@ -24,7 +24,9 @@ const subPage = (path) => async () => {
 
 const lazyPage = (load, name) => async () => ({ Component: (await load())[name] });
 
-const router = createBrowserRouter([
+// Exported on its own so the build-time prerender can walk the same table with
+// a memory router, one URL at a time.
+export const routes = [
   {
     path: '/',
     element: <Layout />,
@@ -63,6 +65,4 @@ const router = createBrowserRouter([
       { path: '*', lazy: lazyPage(() => import('./pages/NotFound'), 'NotFound') },
     ],
   },
-]);
-
-export default router;
+];

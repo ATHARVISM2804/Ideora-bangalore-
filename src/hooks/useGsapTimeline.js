@@ -48,7 +48,14 @@ export function useGsapTimeline(refs) {
           // Only the home page has a word-split headline. Building the timeline
           // unconditionally made GSAP warn about four missing targets on each of
           // the other thirteen routes.
-          if (q('[data-anim="hero-word"]').length) {
+          // A prerendered first load already shows the headline; rising it out
+          // of a mask would hide it and bring it back. Skip the intro once.
+          const staticFirstPaint = 'prerendered' in document.documentElement.dataset;
+          delete document.documentElement.dataset.prerendered;
+
+          if (staticFirstPaint) {
+            // Nothing: the hero is already on screen as the reader left it.
+          } else if (q('[data-anim="hero-word"]').length) {
             const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
             intro.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.9, ease: 'power2.out' });
             intro.from('[data-anim="hero-word"]', {

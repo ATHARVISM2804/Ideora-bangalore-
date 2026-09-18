@@ -50,14 +50,21 @@ test('every legacy URL still resolves', async ({ page }) => {
 });
 
 test('content renders without JavaScript', async ({ browser }) => {
-  // The audit reported long blank sections waiting for motion triggers. It did
-  // not reproduce, but this is the assertion that keeps it that way: with no
-  // JS at all the shell still has to paint its markup.
+  // What a crawler that does not run JavaScript receives. Before the prerender
+  // it was an empty <div id="root"> and the homepage's title on every URL, so
+  // nothing on the site could be read or indexed without a browser.
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
 
   await page.goto('/');
-  await expect(page.locator('#root')).toBeAttached();
+  await expect(page.locator('h1')).toContainText('AI systems that handle');
+  await expect(page.locator('#products')).toContainText('Ideora Health');
+
+  await page.goto('/products/ideora-health');
+  await expect(page).toHaveTitle(/^Ideora Health \| Ideora Labs$/);
+  await expect(page.locator('h1')).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://www.ideoralabs.com/products/ideora-health');
+  await expect(page.locator('script[type="application/ld+json"][data-jsonld="product"]')).toHaveCount(1);
 
   await context.close();
 });

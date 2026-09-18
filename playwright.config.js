@@ -68,12 +68,13 @@ export default defineConfig({
     },
   ],
 
-  // `vite preview` serves the real production build, not the dev server, so
-  // what is tested is what ships.
+  // The real production build, served the way the host serves it: each URL's
+  // prerendered file first, the SPA shell otherwise (scripts/serve-dist.mjs).
+  // `vite preview` answered every path with the homepage's HTML.
   webServer: process.env.BASE_URL
     ? undefined
     : {
-        command: 'npm run build && npm run preview -- --port 4173',
+        command: 'npm run build && node scripts/serve-dist.mjs 4173',
         url: 'http://localhost:4173',
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,

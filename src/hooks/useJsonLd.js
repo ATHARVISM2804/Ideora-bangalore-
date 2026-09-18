@@ -14,6 +14,10 @@ export function useJsonLd(data, key) {
   useEffect(() => {
     if (!json) return undefined;
 
+    // A prerendered page already carries this block in its static head. Replace
+    // it rather than add a second copy next to it.
+    document.head.querySelector(`script[data-jsonld="${key}"]`)?.remove();
+
     const el = document.createElement('script');
     el.type = 'application/ld+json';
     el.dataset.jsonld = key;
