@@ -277,7 +277,7 @@ test('the hero uses the approved copy and tracking', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText(
     'AI systems that handle enquiries, bookings and follow-ups inside your existing software.',
   );
-  await expect(page.locator('.hero__lede')).toHaveText(
+  await expect(page.locator('.hero__lede:visible')).toHaveText(
     'Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars and operating controls.',
   );
   await expect(page.locator('.hero__actions a').first()).toHaveText('Book a 30-minute discovery call');
@@ -285,7 +285,7 @@ test('the hero uses the approved copy and tracking', async ({ page }) => {
   await expect(page.locator('.hero__reassure')).toHaveText(/No migration \| Fixed scope \| Weekly working builds/);
 
   // "Limit the hero description to two readable lines at 1440 pixels."
-  const lines = await page.locator('.hero__lede').evaluate((el) =>
+  const lines = await page.locator('.hero__lede:visible').evaluate((el) =>
     Math.round(el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight)),
   );
   expect(lines, `hero description runs to ${lines} lines`).toBeLessThanOrEqual(2);

@@ -1,4 +1,3 @@
-import { useIsPhone } from '../hooks/useMedia';
 import { magnetMove, magnetLeave } from '../lib/handlers';
 import { HeroVisual } from '../components/HeroVisual';
 import { Photo } from '../components/Photo';
@@ -13,7 +12,6 @@ import { Container, Button } from '../components/ui';
 const WORDS = [
   ['AI', 'systems', 'that', 'handle'],
   ['enquiries,', 'bookings', 'and'],
-  ['follow-ups', 'inside', 'your'],
 ];
 
 // On a phone the headline stops at "follow-ups" and the qualifier moves into
@@ -21,18 +19,18 @@ const WORDS = [
 // Carried whole, the sentence set to seven lines at 42px and pushed the
 // buttons off the first screen.
 //
-// One group rather than several: the desktop breaks are chosen for a 735px
-// column, and forcing them into 346px made "AI systems that handle" wrap on
-// its own and cost a fifth line. Left to flow, it fills each line before
-// starting the next, which is also what stops a one-word line at the end.
-const PHONE_WORDS = [['AI', 'systems', 'that', 'handle', 'enquiries,', 'bookings']];
+// One markup for both, switched by CSS (components.css): the page ships as
+// prerendered HTML, which has no screen width to branch on. On a phone the
+// three lines flow as one group -- the desktop breaks are chosen for a 735px
+// column, and forcing them into 346px cost a fifth line -- and the desktop
+// tail is hidden and a CSS full stop closes the sentence, so the text itself
+// -- what a crawler or screen reader gets -- is the one approved headline.
+const TAIL = ['inside', 'your', 'existing', 'software.'];
 
 // Statement on the left, what we sell on the right. The centred arrangement
 // this replaces gave the fold a single sentence and no anchor; a split hero
 // says what we do and where it applies in one screen.
 export function Hero() {
-  const phone = useIsPhone();
-  const lines = phone ? PHONE_WORDS : WORDS;
 
   return (
     <section id="top" className="hero">
@@ -61,7 +59,7 @@ export function Hero() {
                 Spacing them with margin left the accessible name, the page
                 text and any copy-paste reading "Theworkyourteam...". */}
             <h1 className="hero__title">
-              {lines.map((line, li) => (
+              {WORDS.map((line, li) => (
                 <span key={li} className="hero__line">
                   {line.map((w, wi) => (
                     <span key={w}>
@@ -69,24 +67,28 @@ export function Hero() {
                       <span data-anim="hero-word" className="hero__word">{w}</span>
                     </span>
                   ))}
-                  {li < lines.length - 1 && ' '}
-                  {li === lines.length - 1 && (
-                    <span>
-                      {' '}
-                      <span data-anim="hero-word" className="hero__word">
-                        {phone ? 'and follow-ups.' : 'existing software.'}
-                      </span>
-                    </span>
-                  )}
+                  {' '}
                 </span>
               ))}
+              <span className="hero__line">
+                <span data-anim="hero-word" className="hero__word hero__word--end">follow-ups</span>
+                <span className="hero__desk-only">
+                  {TAIL.map((w) => (
+                    <span key={w}>
+                      {' '}
+                      <span data-anim="hero-word" className="hero__word">{w}</span>
+                    </span>
+                  ))}
+                </span>
+              </span>
             </h1>
 
             <div data-anim="hero-2">
-              <p className="lede hero__lede">
-                {phone
-                  ? 'Inside the software your team already uses. One live workflow in 6 to 10 weeks.'
-                  : 'Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars and operating controls.'}
+              <p className="lede hero__lede hero__desk-only">
+                Launch one live workflow in 6 to 10 weeks. Keep your CRM, WhatsApp, calendars and operating controls.
+              </p>
+              <p className="lede hero__lede hero__phone-only">
+                Inside the software your team already uses. One live workflow in 6 to 10 weeks.
               </p>
 
               <div className="hero__actions">

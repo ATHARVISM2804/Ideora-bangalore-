@@ -55,7 +55,7 @@ test.describe('screen reader', () => {
 
   test('the current page is announced as current', async ({ page }) => {
     await page.goto('/security');
-    await expect(page.locator('[aria-current="page"]').first()).toBeVisible();
+    await expect(page.locator('[aria-current="page"]:visible').first()).toBeVisible();
   });
 });
 

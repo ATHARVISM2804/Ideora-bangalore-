@@ -5,7 +5,6 @@ import { MENUS } from '../data/nav';
 import { NavMenu } from '../components/NavMenu';
 import { WA_TALK, WA_BRIEFING, WA_LINK } from '../lib/whatsapp';
 import { MobileNavTrigger, MobileNavSheet } from '../components/MobileNav';
-import { useBelowDesktop } from '../hooks/useMedia';
 import { useNavHeight } from '../hooks/useNavHeight';
 import { Button } from '../components/ui';
 
@@ -32,7 +31,9 @@ export function Nav() {
 
   // Five menus, two buttons and the lockup need roughly 1000px of bar. Below
   // that the whole set moves into the tap-driven sheet rather than squeezing.
-  const compact = useBelowDesktop();
+  // Both are rendered and CSS picks one (nav.css): the page ships as
+  // prerendered HTML, which has no screen width to branch on, and a phone must
+  // not paint the desktop bar before the script arrives.
 
   return (
     <header ref={headerRef} className="nav">
@@ -42,12 +43,11 @@ export function Nav() {
             <img src="/assets/ideora-lockup.png" alt="Ideora Labs, home" width="92" height="24" />
           </Link>
 
-          {compact ? (
-            <div style={{ marginLeft: 'auto', display: 'flex' }}>
-              <MobileNavTrigger open={menuOpen} setOpen={setMenuOpen} />
-            </div>
-          ) : (
-            <>
+          <div className="nav__compact">
+            <MobileNavTrigger open={menuOpen} setOpen={setMenuOpen} />
+          </div>
+
+          <div className="nav__full">
               <nav className="nav__links" aria-label="Main">
                 {MENUS.map((menu) => (
                   menu.items.length > 0 ? (
@@ -95,14 +95,11 @@ export function Nav() {
                   Book a 30-min call
                 </Button>
               </div>
-            </>
-          )}
+          </div>
         </div>
       </div>
 
-      {compact && (
-        <MobileNavSheet menus={MENUS} isActive={isActive} open={menuOpen} setOpen={setMenuOpen} />
-      )}
+      <MobileNavSheet menus={MENUS} isActive={isActive} open={menuOpen} setOpen={setMenuOpen} />
     </header>
   );
 }

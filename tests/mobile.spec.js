@@ -179,3 +179,18 @@ test('the drawer keeps its call to action in view when a group is open', async (
   expect(fits.overflows, 'the drawer should be overflowing for this to mean anything').toBe(true);
   expect(fits.inside, 'the call to action is outside the drawer').toBe(true);
 });
+
+test('the prerendered page is already the phone layout before any script runs', async ({ browser }) => {
+  // Every URL ships as prerendered HTML, which is built without a screen. The
+  // nav and the headline used to pick their phone form in JavaScript, so a
+  // phone painted the desktop bar until the script arrived.
+  const context = await browser.newContext({ ...devices['iPhone 13'], javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('/');
+
+  await expect(page.locator('.navsheet__trigger')).toBeVisible();
+  await expect(page.locator('.nav__links')).toBeHidden();
+  await expect(page.locator('.hero__lede:visible')).toHaveText(/^Inside the software your team already uses/);
+
+  await context.close();
+});

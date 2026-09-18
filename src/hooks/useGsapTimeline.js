@@ -58,8 +58,11 @@ export function useGsapTimeline(refs) {
           } else if (q('[data-anim="hero-word"]').length) {
             const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
             intro.from('[data-anim="hero-1"]', { opacity: 0, duration: 0.9, ease: 'power2.out' });
+            // On a phone the lines flow as one group with no per-line mask
+            // (components.css), so the words fade rather than rise.
+            const flowing = window.matchMedia('(max-width: 640px)').matches;
             intro.from('[data-anim="hero-word"]', {
-              yPercent: 118,
+              ...(flowing ? { opacity: 0 } : { yPercent: 118 }),
               filter: 'blur(10px)',
               duration: 1.45,
               stagger: 0.085,

@@ -549,6 +549,18 @@
   margin-bottom: -0.16em;
 }
 .hero__word { display: inline-block; }
+
+/* Desktop and phone versions of the headline's tail and the lede live in one
+   markup; the phone breakpoint (PHONE in useMedia.js) picks. On a phone the
+   lines stop being blocks and flow as one group. */
+.hero__phone-only { display: none; }
+@media (max-width: 640px) {
+  .hero__desk-only { display: none; }
+  .hero__phone-only { display: revert; }
+  .hero__word--end::after { content: '.'; }
+  .hero__title { overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; }
+  .hero__line { display: inline; overflow: visible; padding: 0; margin: 0; }
+}
 .hero__lede { margin-top: clamp(var(--s-5), 2.4vw, var(--s-6)); max-width: 29rem; }
 
 .hero__actions {
