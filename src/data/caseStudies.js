@@ -15,6 +15,8 @@
 export const CASE_STUDIES = [
   {
     slug: 'service-centre-bookings',
+    metaTitle: 'Service centre booking automation',
+    metaDescription: 'How a multi-site automotive service group replaced three inboxes and a capacity spreadsheet with bookings confirmed against live bay availability.',
     industry: 'automotive',
     product: 'Ideora Auto',
     productPath: '/products/ideora-auto',
@@ -34,6 +36,8 @@ export const CASE_STUDIES = [
   },
   {
     slug: 'property-lead-qualification',
+    metaTitle: 'Property lead qualification',
+    metaDescription: 'How a brokerage stopped losing weekend enquiries: leads scored against budget, area and readiness, with a viewing offered against a real calendar.',
     industry: 'real estate',
     product: 'Ideora Property',
     productPath: '/products/ideora-property',
@@ -53,6 +57,8 @@ export const CASE_STUDIES = [
   },
   {
     slug: 'clinic-intake-and-coverage',
+    metaTitle: 'Clinic intake and coverage checks',
+    metaDescription: 'How a multi-location clinic group settled patient intake and insurance coverage before arrival, leaving the front desk a short list of exceptions.',
     industry: 'healthcare',
     product: 'Ideora Health',
     productPath: '/products/ideora-health',

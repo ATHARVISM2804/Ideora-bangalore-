@@ -42,12 +42,6 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/((?!api/).*)",
-      "destination": "/spa.html"
-    }
-  ],
   "headers": [
     {
       "source": "/fonts/(.*)",

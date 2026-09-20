@@ -10,11 +10,11 @@
 // rendered inside jsdom, a simulated browser, one URL at a time. The routes
 // come from the sitemap, which is itself derived from the route table.
 //
-// dist/index.html is kept as dist/spa.html first: that empty shell is what
-// the host serves for any URL without a file of its own (vercel.json), so an
-// unknown path renders the 404 page instead of flashing the homepage.
+// Every public URL therefore has a file, which is also what lets the host
+// answer an unknown URL with a real 404 (dist/404.html) instead of a 200 and
+// the homepage shell -- a soft 404, which search engines treat as a fault.
 
-import { readFileSync, writeFileSync, copyFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
@@ -26,10 +26,17 @@ const ORIGIN = readFileSync(resolve(root, 'src/lib/site.js'), 'utf8')
   .match(/export const ORIGIN = '([^']+)'/)[1];
 
 const template = readFileSync(resolve(dist, 'index.html'), 'utf8');
-copyFileSync(resolve(dist, 'index.html'), resolve(dist, 'spa.html'));
 
 const paths = [...readFileSync(resolve(dist, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map(([, loc]) => loc.replace(ORIGIN, '') || '/');
+
+// Not in the sitemap, and needed as files all the same: the internal gallery,
+// and the 404 the host serves for every unknown URL (as dist/404.html, which
+// is the name Vercel looks for).
+const EXTRA = [
+  { path: '/components', out: 'components/index.html' },
+  { path: '/this-page-does-not-exist', out: '404.html' },
+];
 
 // The browser APIs the app touches that jsdom does not provide. Reduced motion
 // is reported as on: the static page should be the finished, unanimated one,
@@ -70,7 +77,7 @@ install(new JSDOM(template, { url: ORIGIN + '/', pretendToBeVisual: true }));
 const { render } = await import(pathToFileURL(resolve(root, 'dist-ssr/prerender.js')).href);
 
 let failed = 0;
-for (const path of paths) {
+for (const { path, out: outName } of [...paths.map((p) => ({ path: p })), ...EXTRA]) {
   const dom = new JSDOM(template, { url: ORIGIN + path, pretendToBeVisual: true });
   install(dom);
 
@@ -85,7 +92,9 @@ for (const path of paths) {
     unmount();
     if (!h1) throw new Error('rendered without an h1');
 
-    const out = path === '/' ? resolve(dist, 'index.html') : resolve(dist, `.${path}`, 'index.html');
+    const out = outName
+      ? resolve(dist, outName)
+      : path === '/' ? resolve(dist, 'index.html') : resolve(dist, `.${path}`, 'index.html');
     mkdirSync(dirname(out), { recursive: true });
     writeFileSync(out, html);
   } catch (err) {
@@ -99,4 +108,4 @@ if (failed) {
   console.error(`Prerender failed on ${failed} of ${paths.length} URLs.`);
   process.exit(1);
 }
-console.log(`Prerendered ${paths.length} URLs.`);
+console.log(`Prerendered ${paths.length} URLs, plus the gallery and the 404.`);

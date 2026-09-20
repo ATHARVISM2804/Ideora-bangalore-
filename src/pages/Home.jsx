@@ -40,7 +40,7 @@ export function Home() {
 
   useDocumentTitle(
     'Custom AI automation for service businesses | Ideora Labs',
-    'AI systems that handle enquiries, bookings and follow-ups inside your existing software. One live workflow in 6 to 10 weeks for clinics, service centres and property teams.',
+    'AI systems that handle enquiries, bookings and follow-ups inside your existing software. One live workflow in 6 to 10 weeks. No migration.',
   );
   useGsapTimeline({ rootRef });
 

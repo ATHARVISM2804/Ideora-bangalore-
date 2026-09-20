@@ -44,6 +44,44 @@ export function PageShell({ page }) {
       : null,
     'product',
   );
+
+  // The questions already on the page, marked up as the questions they are.
+  // Only the ones a reader can see: FAQ structured data that does not match
+  // visible content is exactly what the rich-result guidelines forbid.
+  useJsonLd(
+    page.faq?.length
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: page.faq.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        }
+      : null,
+    'faq',
+  );
+
+  // A service page describes something we do rather than something we sell as
+  // a unit, so it is a Service and not a Product. No price: the scope call
+  // sets it, and a made-up figure in markup is a penalty waiting to happen.
+  useJsonLd(
+    !page.product && page.path.startsWith('/services/')
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: page.title,
+          description: page.description,
+          url: ORIGIN + page.path,
+          serviceType: page.title,
+          provider: { '@id': `${ORIGIN}/#organization` },
+          areaServed: { '@type': 'Country', name: 'India' },
+        }
+      : null,
+    'service',
+  );
+
   useTrackPageType(page);
   useGsapTimeline({ rootRef });
 

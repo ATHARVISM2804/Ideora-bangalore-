@@ -85,7 +85,7 @@ test.describe('SEO', () => {
       expect(meta.ogUrl, `${path} og:url`).toBe(meta.canonical);
       expect(meta.ogImage, `${path} og:image`).toContain('/og.png');
       expect(meta.twitter).toBe('summary_large_image');
-      expect(meta.robots, `${path} must be indexable`).toBeUndefined();
+      expect(meta.robots || '', `${path} must be indexable`).not.toMatch(/noindex/);
 
       // Unique, and long enough to be useful in a result.
       expect(seen.has(meta.title), `${path} reuses the title "${meta.title}"`).toBe(false);
@@ -111,6 +111,18 @@ test.describe('SEO', () => {
 
   test('the internal gallery is not indexable', async ({ page }) => {
     await page.goto('/components');
+    // One robots tag, not one per mechanism: the page updates the site-wide
+    // tag rather than appending a second directive beside it.
+    await expect(page.locator('meta[name=robots]')).toHaveCount(1);
+    await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);
+  });
+
+  test('an unknown URL is a real 404, not a 200 with the homepage', async ({ page }) => {
+    // A soft 404 -- the old catch-all rewrite -- tells a crawler the page
+    // exists and is the homepage, for every typo and stale link on the web.
+    const res = await page.goto('/this-page-does-not-exist');
+    expect(res.status()).toBe(404);
+    await expect(page.locator('h1')).toContainText(/moved, or never existed/i);
     await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);
   });
 });

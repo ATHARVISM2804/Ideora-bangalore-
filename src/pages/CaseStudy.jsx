@@ -19,9 +19,12 @@ export function CaseStudy() {
   const rootRef = useRef(null);
   const c = CASE_STUDIES.find((x) => x.slug === slug);
 
+  // A result truncates past roughly sixty characters of title and a hundred
+  // and sixty of description, so both are written for that slot rather than
+  // reusing the page's headline and its opening paragraph.
   useDocumentTitle(
-    c ? `${c.title} | Ideora Labs` : 'Case study | Ideora Labs',
-    c?.context || '',
+    c ? `${c.metaTitle || c.title} | Ideora Labs` : 'Case study | Ideora Labs',
+    c?.metaDescription || c?.context || '',
   );
   useGsapTimeline({ rootRef });
 

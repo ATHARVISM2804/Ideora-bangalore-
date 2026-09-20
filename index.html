@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <!-- The two faces the first screen sets in. Self-hosted, so they are on
          the same connection as everything else and need no preconnect. -->
+    <!-- Indexable by default; this only tells a crawler it may show a large
+         image and the full text in a result rather than a clipped preview. -->
+    <meta name="robots" content="max-image-preview:large, max-snippet:-1" />
+    <meta property="og:locale" content="en_IN" />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-300600.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-400.woff2" crossorigin />
 

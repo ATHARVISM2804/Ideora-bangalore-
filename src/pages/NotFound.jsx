@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useRobots } from '../hooks/useRobots';
 import { Section, Container, Label, Button } from '../components/ui';
 import { PRODUCTS } from '../data/products';
 
@@ -14,6 +15,11 @@ export function NotFound() {
   const { pathname } = useLocation();
 
   useDocumentTitle('Page not found | Ideora Labs', 'That page does not exist. Here is where the rest of the site is.');
+
+  // This page is served for every unknown URL, so it must never be indexed
+  // under one. The host returns a real 404 with it; this is the same
+  // instruction for a crawler that renders the page.
+  useRobots('noindex, follow');
 
   return (
     <Section>

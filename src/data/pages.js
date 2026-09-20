@@ -266,6 +266,7 @@ export const PAGES = [
   },
   {
     path: '/services/custom-ai-automation',
+    trail: [{ label: 'Services', path: '/services' }],
     title: 'Custom AI automation',
     description: 'Custom agents that complete multi-step operational tasks end to end, built against your APIs, your permissions, and your escalation rules.',
     eyebrow: 'Services',
@@ -928,6 +929,7 @@ export const PAGES = [
   },
   {
     path: '/services/productised-systems',
+    trail: [{ label: 'Services', path: '/services' }],
     title: 'Ready-made systems',
     description: 'Systems we have already built and deployed, then configured to your data: a shorter build, the same operating model.',
     eyebrow: 'Services',
@@ -975,8 +977,9 @@ export const PAGES = [
     // what is running today from what it would be built for. Nothing here
     // claims a client in a vertical we have not delivered in.
     path: '/services/appointment-booking',
+    trail: [{ label: 'Services', path: '/services' }],
     title: 'Appointment booking system',
-    description: 'An AI appointment booking system that answers enquiries on WhatsApp, phone and web, checks real availability in your calendar, and books the slot without anyone at a desk retyping it.',
+    description: 'An AI appointment booking system that answers on WhatsApp, phone and web, checks real availability, and books the slot in the calendar you already run.',
     eyebrow: 'Services',
     heading: 'Appointments booked while the enquiry is still warm',
     lede: 'Someone asks for a time on WhatsApp, the phone or a web form. The system reads the request, checks what is genuinely free in the calendar you already run, books it, confirms it, and reminds them. What it cannot answer, it hands to a named person with the reason attached.',
@@ -1074,6 +1077,7 @@ export const PAGES = [
   },
   {
     path: '/industries/automotive',
+    trail: [{ label: 'Industries', path: '/industries' }],
     integrations: [
       {
         name: 'WhatsApp Business',
@@ -1166,6 +1170,7 @@ export const PAGES = [
   },
   {
     path: '/industries/real-estate',
+    trail: [{ label: 'Industries', path: '/industries' }],
     integrations: [
       {
         name: 'Lead ads and portals',
@@ -1263,6 +1268,7 @@ export const PAGES = [
   },
   {
     path: '/industries/healthcare',
+    trail: [{ label: 'Industries', path: '/industries' }],
     integrations: [
       {
         name: 'WhatsApp Business',

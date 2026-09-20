@@ -1,9 +1,10 @@
 // Serves dist/ the way the host does, for the test suite.
 //
-// `vite preview` answers every path with dist/index.html, which since the
-// prerender is the homepage -- so tests against it never saw a product page's
-// own HTML. Vercel serves the file, then the folder's index.html, then the
-// SPA shell (vercel.json). This does the same, with no dependencies.
+// Vercel applies the redirects in vercel.json, then serves the file, then the
+// folder's index.html, then 404.html with a 404 status. `vite preview` does
+// none of that -- it answers every path with dist/index.html, which since the
+// prerender is the homepage, so tests against it never saw a product page's
+// own HTML or a real 404.
 //
 //   node scripts/serve-dist.mjs [port]
 
@@ -12,8 +13,11 @@ import { readFileSync, statSync } from 'node:fs';
 import { dirname, extname, join, normalize, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const dist = resolve(dirname(fileURLToPath(import.meta.url)), '../dist');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const dist = resolve(root, 'dist');
 const port = Number(process.argv[2] || 4173);
+
+const { redirects = [] } = JSON.parse(readFileSync(resolve(root, 'vercel.json'), 'utf8'));
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -43,11 +47,24 @@ const isFile = (p) => {
 http
   .createServer((req, res) => {
     const path = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname));
-    let file = join(dist, path);
-    if (!file.startsWith(dist)) file = join(dist, 'spa.html');
-    if (!isFile(file)) file = isFile(join(file, 'index.html')) ? join(file, 'index.html') : join(dist, 'spa.html');
 
-    res.writeHead(200, { 'content-type': TYPES[extname(file)] || 'application/octet-stream' });
+    const moved = redirects.find((r) => r.source === path);
+    if (moved) {
+      res.writeHead(moved.permanent ? 308 : 307, { location: moved.destination });
+      res.end();
+      return;
+    }
+
+    let file = join(dist, path);
+    if (!file.startsWith(dist)) file = join(dist, '404.html');
+
+    let status = 200;
+    if (!isFile(file)) {
+      if (isFile(join(file, 'index.html'))) file = join(file, 'index.html');
+      else { file = join(dist, '404.html'); status = 404; }
+    }
+
+    res.writeHead(status, { 'content-type': TYPES[extname(file)] || 'application/octet-stream' });
     res.end(readFileSync(file));
   })
   .listen(port, () => console.log(`dist on http://localhost:${port}`));

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useRobots } from '../hooks/useRobots';
 import { Section, Container, Label, Button, Card, Pill, Stat } from '../components/ui';
 import { Workflow, Integrations, Controls, Dashboard, Demo } from './blocks';
 import { PRODUCTS, STATUS_LABEL } from '../data/products';
@@ -41,13 +42,7 @@ export function Components() {
   // Belt and braces with the X-Robots-Tag in vercel.json. The header is the
   // one that counts, but a crawler that reaches this through a client-side
   // navigation only ever sees the DOM.
-  useEffect(() => {
-    const el = document.createElement('meta');
-    el.name = 'robots';
-    el.content = 'noindex, nofollow';
-    document.head.appendChild(el);
-    return () => el.remove();
-  }, []);
+  useRobots('noindex, nofollow');
 
   return (
     <div ref={rootRef}>
