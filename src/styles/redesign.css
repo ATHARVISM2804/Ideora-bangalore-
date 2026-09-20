@@ -1046,75 +1046,99 @@
 .svc-rules__auto { background: #E7F4EC; color: #17663A; }
 .svc-rules__ask { background: #FDF0E9; color: var(--accent-deep); }
 
-/* --- Appointment booking, on the homepage ----------------------------------- */
-.appt {
+/* --- Appointment booking, on the homepage ----------------------------------
+   The booking played out: steps on the left, the industry and the panel on the
+   right. Motion is per element and short; the reduced-motion block at the end
+   removes all of it and leaves the finished booking. */
+.abx {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
   gap: clamp(var(--s-6), 5vw, var(--s-9));
   align-items: start;
 }
 
-.appt__title {
+.abx__title {
   margin: var(--s-3) 0 0;
   max-width: 14ch;
   font-size: clamp(2rem, 3.2vw, 2.75rem);
   line-height: 1.06;
 }
 
-.appt__body { max-width: 34rem; margin: var(--s-5) 0 0; color: var(--ink-muted); }
+.abx__body { max-width: 34rem; margin: var(--s-5) 0 0; color: var(--ink-muted); }
 
-/* The three states, as one ruled list rather than three cards. */
-.appt__flow {
-  display: grid;
-  gap: 0;
-  margin: var(--s-6) 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--rule-strong);
-}
+/* --- The three steps -------------------------------------------------------- */
+.abx__steps { margin: var(--s-6) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
+.abx__step { border-bottom: 1px solid var(--rule-strong); }
 
-.appt__step {
+.abx__stepbtn {
+  position: relative;
   display: grid;
-  grid-template-columns: 6.5rem minmax(0, 1fr);
+  grid-template-columns: 2.5rem minmax(0, 1fr);
   gap: var(--s-4);
-  align-items: baseline;
-  padding: var(--s-4) 0;
-  border-bottom: 1px solid var(--rule-strong);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--s-4) 0 var(--s-4) var(--s-4);
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
 }
 
-.appt__steplabel {
-  font-size: var(--t-label);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
+/* The indicator is a bar on the left edge, the same language as the product
+   index above it. */
+.abx__stepbtn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16%;
+  bottom: 16%;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: 50% 50%;
+  transition: transform 260ms var(--ease);
 }
 
-.appt__steptext { font-size: var(--t-sm); color: var(--ink); }
-.appt__step--done .appt__steplabel { color: var(--accent-deep); }
+.abx__step.is-active .abx__stepbtn::before { transform: scaleY(1); }
+.abx__step.is-done .abx__stepbtn::before { transform: scaleY(1); background: var(--rule-strong); }
 
-.appt__cta {
+.abx__stepnum { font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-faint); }
+.abx__steplabel { display: block; font-family: var(--display); font-size: 1.25rem; line-height: 1.2; }
+.abx__stepcaption { display: block; margin-top: 0.15rem; font-size: var(--t-sm); color: var(--ink-muted); }
+.abx__step.is-active .abx__stepnum { color: var(--accent-deep); }
+
+.abx__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4); margin-top: var(--s-6); }
+
+.abx__cta {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  /* 44px of target on a phone, where this is the row's only action. */
   min-height: 2.75rem;
-  margin-top: var(--s-5);
   font-weight: var(--w-medium);
   color: var(--ink);
   text-decoration: none;
   transition: color var(--dur) var(--ease);
 }
-.appt__cta:hover, .appt__cta:focus-visible { color: var(--accent-deep); }
+.abx__cta:hover, .abx__cta:focus-visible { color: var(--accent-deep); }
 
-.appt__where {
-  padding: clamp(var(--s-5), 2.4vw, var(--s-6));
-  border: 1px solid var(--rule);
-  border-radius: var(--r-card);
-  background: var(--raised);
-  box-shadow: var(--sh-card);
+.abx__control {
+  min-height: 2.75rem;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  font: inherit;
+  font-size: var(--t-sm);
+  color: var(--ink-muted);
+  cursor: pointer;
 }
+.abx__control:hover { color: var(--ink); }
 
-.appt__wherehead {
+/* --- Industry chooser ------------------------------------------------------- */
+.abx__pickhead {
   margin: 0;
   font-size: var(--t-label);
   letter-spacing: 0.08em;
@@ -1122,27 +1146,140 @@
   color: var(--ink-faint);
 }
 
-.appt__live { display: grid; gap: var(--s-3); margin: var(--s-4) 0 var(--s-6); padding: 0; list-style: none; }
-.appt__live li { display: grid; gap: 0.15rem; }
-.appt__livename { font-family: var(--display); font-size: 1.125rem; line-height: 1.2; }
-.appt__livenote { font-size: var(--t-sm); color: var(--ink-muted); }
+.abx__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-3); }
 
-.appt__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-4) 0 0; padding: 0; list-style: none; }
-
-.appt__tag {
-  padding: 0.35rem 0.7rem;
+.abx__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
   border: 1px solid var(--rule-strong);
   border-radius: var(--r-pill);
+  background: var(--raised);
+  font: inherit;
   font-size: var(--t-xs);
   color: var(--ink-muted);
+  cursor: pointer;
+  transition: border-color 200ms var(--ease), color 200ms var(--ease), background 200ms var(--ease);
 }
 
-.appt__note { margin: var(--s-5) 0 0; font-size: var(--t-xs); color: var(--ink-faint); }
+.abx__chip:hover { color: var(--ink); border-color: var(--ink-ghost); }
+.abx__chip.is-on { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+.abx__live { width: 6px; height: 6px; border-radius: 50%; background: #1FA855; flex: none; }
+.abx__chip.is-on .abx__live { background: #6BE39B; }
+
+.abx__picknote { display: flex; align-items: baseline; gap: 0.45rem; margin: var(--s-4) 0 0; font-size: var(--t-xs); color: var(--ink-faint); }
+.abx__picknote .abx__live { transform: translateY(-1px); }
+
+/* --- The panel -------------------------------------------------------------- */
+.abx__panel {
+  margin-top: var(--s-5);
+  padding: clamp(var(--s-5), 2.2vw, var(--s-6));
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+  box-shadow: var(--sh-card);
+}
+
+.abx__panelhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.abx__panelname { font-family: var(--display); font-size: 1.125rem; }
+.abx__panelnote { font-size: var(--t-xs); color: var(--ink-faint); }
+
+.abx__stage { display: grid; gap: var(--s-4); margin-top: var(--s-5); }
+
+/* Each piece waits, then arrives. Nothing moves until its step is reached. */
+.abx__msg, .abx__checks, .abx__cal, .abx__confirm {
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+}
+.abx__msg.is-waiting, .abx__checks.is-waiting, .abx__cal.is-waiting, .abx__confirm.is-waiting {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.abx__from { display: block; font-size: 0.75rem; color: var(--ink-faint); }
+
+.abx__bubble {
+  margin: 0.35rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.75rem 0.75rem 0.75rem 0.2rem;
+  background: var(--bg-sunken);
+  font-size: var(--t-sm);
+}
+
+.abx__checks { display: grid; gap: 0.3rem; margin: 0; font-size: var(--t-sm); }
+.abx__checks div { display: flex; justify-content: space-between; gap: var(--s-3); }
+.abx__checks dt { color: var(--ink-faint); }
+.abx__checks dd { margin: 0; color: var(--ink); }
+
+.abx__cal { display: grid; gap: var(--s-2); }
+
+.abx__slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  font-size: var(--t-sm);
+  transition: background 260ms var(--ease), border-color 260ms var(--ease), color 260ms var(--ease);
+}
+
+.abx__slottime { font-family: var(--mono); font-size: 0.8125rem; }
+.abx__slotstate { font-size: 0.75rem; color: var(--ink-faint); }
+
+.abx__slot--taken { background: var(--bg-sunken); color: var(--ink-muted); }
+.abx__slot--taken .abx__slotstate { color: var(--ink-muted); }
+
+.abx__slot--new {
+  border-color: var(--accent);
+  background: #FDF0E9;
+  animation: abx-write 520ms var(--ease) both;
+}
+.abx__slot--new .abx__slotstate { color: var(--accent-deep); font-weight: var(--w-medium); }
+
+@keyframes abx-write {
+  from { transform: translateX(-6px); opacity: 0.4; }
+  to   { transform: none; opacity: 1; }
+}
+
+.abx__confirm {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+
+.abx__confirmicon { display: inline-flex; color: #1FA855; }
+.abx__confirmtitle { display: block; font-weight: var(--w-medium); font-size: var(--t-sm); }
+.abx__confirmline { display: block; margin-top: 0.1rem; font-size: 0.75rem; color: var(--ink-faint); }
 
 @media (max-width: 63.99em) {
-  .appt { grid-template-columns: minmax(0, 1fr); }
+  .abx { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 47.99em) {
-  .appt__step { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .abx__stepbtn { grid-template-columns: 2rem minmax(0, 1fr); gap: var(--s-3); }
+  .abx__panelhead { flex-direction: column; gap: 0.15rem; }
+}
+
+/* No motion: every state is simply present, and the sequence never autoplays.
+   The component also renders the finished booking rather than the first step. */
+@media (prefers-reduced-motion: reduce) {
+  .abx__msg, .abx__checks, .abx__cal, .abx__confirm, .abx__slot, .abx__chip, .abx__stepbtn::before {
+    transition: none;
+  }
+  .abx__slot--new { animation: none; }
 }

@@ -89,7 +89,10 @@ export function WorkflowSequence({ steps }) {
           io.disconnect();
         }
       },
-      { threshold: 0.45 },
+      // Low on purpose: the five steps stack on a phone, where the sequence is
+      // several screens tall and a high ratio would never be reached, leaving
+      // every step at its waiting opacity.
+      { threshold: 0.15 },
     );
     io.observe(node);
     return () => io.disconnect();
