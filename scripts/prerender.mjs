@@ -55,6 +55,12 @@ function install(dom) {
   w.IntersectionObserver = NoopObserver;
   w.ResizeObserver = NoopObserver;
   w.scrollTo = () => {};
+
+  // The build is not a visitor. Without this the analytics tag installs during
+  // prerender and its <script> is serialised into every static page, which
+  // would load it for everyone -- including the readers who asked not to be
+  // tracked, whose opt-out is only checked at runtime.
+  Object.defineProperty(w.navigator, 'doNotTrack', { value: '1', configurable: true });
   w.requestAnimationFrame = (cb) => setTimeout(() => cb(Date.now()), 0);
   w.cancelAnimationFrame = (id) => clearTimeout(id);
 
@@ -88,6 +94,9 @@ for (const { path, out: outName } of [...paths.map((p) => ({ path: p })), ...EXT
     // <html> as 0px. Leave the root unstyled so the browser uses the CSS default
     // until the app measures for real.
     dom.window.document.documentElement.removeAttribute('style');
+    // Belt and braces with the opt-out above: no third-party tag is ever part
+    // of the static HTML. It is installed at runtime or not at all.
+    dom.window.document.querySelectorAll('script[src*="googletagmanager.com"]').forEach((el) => el.remove());
     const html ='<!doctype html>\n' + dom.window.document.documentElement.outerHTML;
     unmount();
     if (!h1) throw new Error('rendered without an h1');

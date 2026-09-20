@@ -6,6 +6,7 @@ import { Nav } from '../sections/Nav';
 import { Footer } from '../sections/Footer';
 import { WhatsAppButton } from '../components/WhatsAppButton';
 import { installClickTracking } from '../lib/analytics';
+import { installGa4, trackPageView } from '../lib/ga';
 
 // Router keeps scroll position across navigations; reset it, unless the target
 // is a hash anchor. ScrollTrigger.refresh() is required because the entrance
@@ -38,6 +39,19 @@ export function Layout() {
   // CTA reports its event without each component importing the analytics
   // module. Installed once at the shell rather than per route.
   useEffect(() => installClickTracking(), []);
+
+  // GA4, if an ID is configured and the visitor has not opted out. A page view
+  // per route: this is a single-page app, so the tag's own load-time page view
+  // would count the first screen and nothing after it.
+  useEffect(() => { installGa4(); }, []);
+
+  const { pathname } = useLocation();
+  useEffect(() => {
+    // After the route's own title is set, or every view reports the previous
+    // page's name.
+    const t = setTimeout(() => trackPageView(pathname), 0);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   const barRef = useRef(null);
   useScrollProgress(barRef);

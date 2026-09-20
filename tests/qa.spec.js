@@ -179,6 +179,23 @@ test.describe('touch and layout', () => {
   // "At least 44 by 44 CSS pixels with separation from adjacent controls." The
   // separation half was never checked: two 44px targets flush against each
   // other still produce a mis-tap.
+  test('no third-party tag is baked into the HTML', async ({ page }) => {
+    // The prerender runs the real app, so anything an effect appends to <head>
+    // lands in every static page. An analytics tag must never: the opt-out is
+    // a runtime check, and a hardcoded <script> would load for everyone.
+    const hosts = [];
+    page.on('request', (r) => hosts.push(new URL(r.url()).host));
+
+    for (const path of ['/', '/products/ideora-health']) {
+      const res = await page.goto(path);
+      expect(await res.text()).not.toContain('googletagmanager.com');
+    }
+
+    // Everything the page asked for came from the site itself.
+    const own = new URL(page.url()).host;
+    expect([...new Set(hosts.filter((h) => h && h !== own))], 'the page loaded a third-party host').toEqual([]);
+  });
+
   test('adjacent controls are separated', async ({ page }) => {
     await page.goto('/');
 

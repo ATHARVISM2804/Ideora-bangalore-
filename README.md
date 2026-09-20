@@ -76,3 +76,19 @@ There is no test suite. Before shipping a visual change:
 3. Tab through it. Every hover affordance must have a visible focus state.
 4. Check text contrast against both `--bg` and `--bg-sunken`; labels sit on
    either, so they have to clear 4.5:1 on both.
+
+## Analytics
+
+GA4 is off until a measurement ID is set. Add `VITE_GA_ID=G-XXXXXXXXXX` to the
+host's environment (Vercel: Project → Settings → Environment Variables) and
+redeploy; with no ID, no tag loads and no request is made.
+
+What it does, matching what /cookies tells readers: ad personalisation and
+Google signals are off, and nothing loads at all for a visitor whose browser
+sends Do Not Track or Global Privacy Control. A page view is sent per route,
+because the tag's own page view fires on load only and this is a single-page
+app. Events come from `src/lib/analytics.js`, which scrubs anything that could
+identify a person before it leaves the page.
+
+The tag is never part of the prerendered HTML: it is installed at runtime, or
+not at all (`tests/qa.spec.js` asserts it).
