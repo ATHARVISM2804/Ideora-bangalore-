@@ -28,6 +28,7 @@ export const MENUS = [
     path: '/services',
     overview: 'How we deliver',
     items: [
+      { label: 'Appointment booking system', path: '/services/appointment-booking', blurb: 'Enquiry to a confirmed slot, in your calendar.' },
       { label: 'Custom AI automation', path: '/services/custom-ai-automation', blurb: 'For a workflow no product covers yet.' },
       { label: 'Ready-made systems', path: '/services/productised-systems', blurb: 'Fixed scope, fixed window, run for you.' },
       // The specification names workflow discovery, integration and managed

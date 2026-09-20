@@ -1045,3 +1045,104 @@
 .svc-rules__auto, .svc-rules__ask { flex: none; padding: 0.15rem 0.5rem; border-radius: var(--r-pill); font-size: 0.6875rem; font-weight: var(--w-medium); }
 .svc-rules__auto { background: #E7F4EC; color: #17663A; }
 .svc-rules__ask { background: #FDF0E9; color: var(--accent-deep); }
+
+/* --- Appointment booking, on the homepage ----------------------------------- */
+.appt {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(var(--s-6), 5vw, var(--s-9));
+  align-items: start;
+}
+
+.appt__title {
+  margin: var(--s-3) 0 0;
+  max-width: 14ch;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.06;
+}
+
+.appt__body { max-width: 34rem; margin: var(--s-5) 0 0; color: var(--ink-muted); }
+
+/* The three states, as one ruled list rather than three cards. */
+.appt__flow {
+  display: grid;
+  gap: 0;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.appt__step {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: var(--s-4);
+  align-items: baseline;
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.appt__steplabel {
+  font-size: var(--t-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.appt__steptext { font-size: var(--t-sm); color: var(--ink); }
+.appt__step--done .appt__steplabel { color: var(--accent-deep); }
+
+.appt__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  /* 44px of target on a phone, where this is the row's only action. */
+  min-height: 2.75rem;
+  margin-top: var(--s-5);
+  font-weight: var(--w-medium);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+.appt__cta:hover, .appt__cta:focus-visible { color: var(--accent-deep); }
+
+.appt__where {
+  padding: clamp(var(--s-5), 2.4vw, var(--s-6));
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+  box-shadow: var(--sh-card);
+}
+
+.appt__wherehead {
+  margin: 0;
+  font-size: var(--t-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.appt__live { display: grid; gap: var(--s-3); margin: var(--s-4) 0 var(--s-6); padding: 0; list-style: none; }
+.appt__live li { display: grid; gap: 0.15rem; }
+.appt__livename { font-family: var(--display); font-size: 1.125rem; line-height: 1.2; }
+.appt__livenote { font-size: var(--t-sm); color: var(--ink-muted); }
+
+.appt__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-4) 0 0; padding: 0; list-style: none; }
+
+.appt__tag {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  font-size: var(--t-xs);
+  color: var(--ink-muted);
+}
+
+.appt__note { margin: var(--s-5) 0 0; font-size: var(--t-xs); color: var(--ink-faint); }
+
+@media (max-width: 63.99em) {
+  .appt { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 47.99em) {
+  .appt__step { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+}

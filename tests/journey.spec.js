@@ -244,6 +244,7 @@ test('the homepage runs in the specified sequence', async ({ page }) => {
     'top',       // 02 hero
     'products',  // 03 product index
     'demo',      // 05 featured product demo
+    'appointments',  // appointment booking, the workflow the products share
     'outcome',   // 06 evidence: before and after
     'work',      //    evidence: case studies
     'services',  // 07

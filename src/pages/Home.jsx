@@ -5,6 +5,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Hero } from '../sections/Hero';
 import { ProductIndex } from '../components/ProductIndex';
 import { FeaturedDemo } from '../sections/FeaturedDemo';
+import { Appointments } from '../sections/Appointments';
 import { Outcome } from '../sections/Outcome';
 import { Services } from '../sections/Services';
 import { Work } from '../sections/Work';
@@ -51,6 +52,10 @@ export function Home() {
       <Hero />
       <ProductIndex />
       <FeaturedDemo />
+      {/* The booking workflow the three live products share, and the one most
+          visitors ask for by name. It sits under the worked example because
+          that example is a booking, and above the evidence that follows. */}
+      <Appointments />
       {/* No parallax: the handoff asks for it nowhere, and it was sliding the
           before-and-after table -- the page's main proof -- under the reader. */}
       <Outcome />

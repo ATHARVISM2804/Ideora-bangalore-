@@ -967,6 +967,112 @@ export const PAGES = [
     },
   },
   {
+    // Appointment booking, as its own service page.
+    //
+    // It is the workflow the three live products share: Health books clinic
+    // appointments, Auto books service bays, Property books viewings. This page
+    // says so plainly and states where else the same system fits, separating
+    // what is running today from what it would be built for. Nothing here
+    // claims a client in a vertical we have not delivered in.
+    path: '/services/appointment-booking',
+    title: 'Appointment booking system',
+    description: 'An AI appointment booking system that answers enquiries on WhatsApp, phone and web, checks real availability in your calendar, and books the slot without anyone at a desk retyping it.',
+    eyebrow: 'Services',
+    heading: 'Appointments booked while the enquiry is still warm',
+    lede: 'Someone asks for a time on WhatsApp, the phone or a web form. The system reads the request, checks what is genuinely free in the calendar you already run, books it, confirms it, and reminds them. What it cannot answer, it hands to a named person with the reason attached.',
+    proof: [
+      { label: 'Build window', value: '6 to 10 wks' },
+      { label: 'Answers on', value: 'WhatsApp · phone · web' },
+      { label: 'Books into', value: 'Your existing calendar' },
+      { label: 'Engagement', value: 'Build, then run' },
+    ],
+    workflow: [
+      {
+        actor: 'system',
+        title: 'The request arrives',
+        body: 'A WhatsApp message, a call, a web form or a portal enquiry. All of them land as one request rather than in four different inboxes.',
+      },
+      {
+        actor: 'auto',
+        title: 'It is read for what was actually asked',
+        body: 'Who it is, what they want, where, and when they can come. A returning customer is matched to their record instead of being asked again.',
+      },
+      {
+        actor: 'auto',
+        title: 'Real availability is checked',
+        body: 'Against the working calendar: staff on duty, room or bay capacity, service duration, travel or buffer time, and the rules you set for how far ahead a slot can be offered.',
+      },
+      {
+        actor: 'integration',
+        title: 'The slot is written and confirmed',
+        body: 'Written into the calendar or system your team already works in, then confirmed to the customer on the channel they wrote from. There is no second diary to reconcile.',
+      },
+      {
+        actor: 'human',
+        title: 'Anything unclear stops and names a person',
+        body: 'An urgent or clinical question, a request with no suitable slot, a payment or consent problem, or a customer who wants to negotiate goes to a named member of staff with the message and the reason attached.',
+      },
+      {
+        actor: 'auto',
+        title: 'Reminders, changes and no-shows are worked',
+        body: 'Reminders go out before the appointment, cancellations and reschedules are handled in the same thread, and the freed slot goes back into availability without anyone watching for it.',
+      },
+    ],
+    sections: [
+      { title: 'It books into the calendar you already run', body: 'Your practice management system, dealer management system, CRM or shared calendar stays the system of record. The booking is written there, under permissions you grant and can withdraw. Nothing is migrated and your team does not get a second place to look.' },
+      { title: 'Availability is the hard part, not the chat', body: 'Anyone can send a reply. What makes a booking system useful is refusing to offer a slot that does not exist: duty rosters, capacity, service length, buffers, and the rules about how far ahead and how late a booking may be taken. Those rules are agreed in writing during the design stage and enforced in the build.' },
+      { title: 'The customer never waits for office hours', body: 'Requests arriving at night, over a weekend or during a rush are answered in seconds rather than on the next working morning, in the language they were written in. That is when most enquiries are lost.' },
+      { title: 'A person still decides the things a person should', body: 'The system books, reschedules and reminds. It does not judge urgency, give advice, or approve exceptions. Where the request needs a human, it stops and says why rather than producing a confident answer.' },
+    ],
+    domains: [
+      { title: 'Healthcare', body: 'Clinics and multi-site providers: appointments, intake and coverage checks before arrival. Live today as Ideora Health.' },
+      { title: 'Automotive service', body: 'Service centres and dealer groups: bookings against real bay and advisor capacity. Live today as Ideora Auto.' },
+      { title: 'Real estate', body: 'Brokerages and developers: site visits and viewings booked against an agent’s real calendar. Live today as Ideora Property.' },
+      { title: 'Dental, diagnostics and veterinary', body: 'The same shape as a clinic: recurring visits, recalls, preparation instructions and a front desk that should be working exceptions, not a phone queue.' },
+      { title: 'Salons, spas and fitness', body: 'Service duration, the specific person requested, and chair, room or class capacity, with waitlists when a slot frees.' },
+      { title: 'Professional services', body: 'Legal, accounting and advisory consultations: intake questions answered first, then a slot with the right fee earner, and conflicts or eligibility routed to a person.' },
+      { title: 'Home services and field visits', body: 'Installation, repair and survey visits booked against an engineer’s route and working hours rather than a promise to call back.' },
+      { title: 'Education and coaching', body: 'Demo classes, admissions interviews and tutoring sessions booked against a teacher’s timetable, with reminders that cut the no-show rate.' },
+    ],
+    integrations: [
+      { name: 'WhatsApp Business', how: 'Official Business API through a provider account', needs: 'A verified business number in your name' },
+      { name: 'Calendars and scheduling', how: 'Google Calendar, Microsoft 365, or the scheduling module in your practice, dealer or property system', needs: 'API access and a named system owner' },
+      { name: 'Your CRM or operational system', how: 'Create and update the customer, appointment and source records', needs: 'API access and an agreed field map' },
+      { name: 'Telephony', how: 'Missed calls and voice enquiries handed into the same flow as messages', needs: 'Your existing number and provider' },
+      { name: 'Payments', how: 'A payment or deposit link issued and its status read back', needs: 'Your existing payment gateway account' },
+      { name: 'Email and SMS', how: 'Confirmations and reminders on your existing sender', needs: 'A verified sender domain or SMS header' },
+    ],
+    integrationsNote: 'These are the systems this workflow usually runs on. Anything outside the set is scoped as work, priced, and agreed before the build rather than absorbed into the timeline.',
+    controls: [
+      { title: 'What it may book without asking', body: 'Which appointment types complete on their own, and which wait for a person, is agreed in writing at the design stage and changed by you afterwards rather than by a model update.' },
+      { title: 'The rules that decide a slot', body: 'Working hours, duration, buffers, capacity, how far ahead a booking may be made and how late it may be changed. Your rules, stated explicitly, enforced in the build.' },
+      { title: 'Escalation and who owns it', body: 'Every case the system will not answer has a named owner and a reason attached, so an exception queue is a short list of real decisions.' },
+      { title: 'A full record of every booking', body: 'What came in, what was matched, what was written and when. You can reconstruct any appointment end to end without asking us.' },
+    ],
+    deliverables: [
+      { title: 'A working booking system on your data', body: 'Answering on your channels, booking into your calendar, running against your rules.' },
+      { title: 'The rules, written down', body: 'Availability, approvals, escalation and reminder policy agreed before the build and documented afterwards.' },
+      { title: 'An exception queue with owners', body: 'The short list of requests that genuinely need a person, named and timed.' },
+      { title: 'A management view', body: 'Bookings made, cancellations, no-shows, exceptions waiting and how long they have waited.' },
+    ],
+    faq: [
+      { q: 'Do we have to change our calendar or booking software?', a: 'No. It books into the system you already run. If a direct connector does not exist, we agree a supervised route at the scope call rather than asking you to migrate.' },
+      { q: 'What happens when someone asks for a time that is not free?', a: 'It offers the nearest alternatives that genuinely exist. If none of them work, the request goes to a person with the conversation attached rather than sitting unanswered.' },
+      { q: 'Can it handle cancellations and rescheduling?', a: 'Yes, in the same thread as the original booking, and the freed slot goes back into availability immediately.' },
+      { q: 'Will it answer questions that are not about booking?', a: 'Only the ones you have approved. Anything clinical, legal or commercially sensitive stops and names a person. That boundary is agreed in writing before anything is built.' },
+      { q: 'We are not in healthcare, automotive or real estate. Can you still build it?', a: 'Yes. Those three run in production today, so the pattern and the connectors are proven. For another operation it is a fixed-scope build against your rules, and we will say at the scope call if we think it is a poor fit.' },
+    ],
+    related: [
+      { label: 'Ideora Health', path: '/products/ideora-health' },
+      { label: 'Ideora Auto', path: '/products/ideora-auto' },
+      { label: 'Custom AI automation', path: '/services/custom-ai-automation' },
+    ],
+    cta: {
+      heading: 'Book a call about your booking process',
+      body: 'Thirty minutes on how appointments reach you today, where they wait, and which part a system can take first. You keep the map either way.',
+    },
+  },
+  {
     path: '/industries/automotive',
     integrations: [
       {

@@ -93,6 +93,9 @@ export function PageShell({ page }) {
       <Demo demo={page.demo} />
       <ProseSections sections={page.sections} />
       <Deliverables items={page.deliverables} />
+      {/* Where a workflow fits, for pages that apply across industries rather
+          than inside one. Same card grid, its own heading. */}
+      <Deliverables items={page.domains} head="Where it fits" />
       <Inputs items={page.inputs} />
       <Integrations items={page.integrations} note={page.integrationsNote} />
       <Controls items={page.controls} />
