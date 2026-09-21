@@ -179,6 +179,16 @@
   --safe-l: env(safe-area-inset-left, 0px);
   --safe-r: env(safe-area-inset-right, 0px);
 
-  /* Published by useNavHeight so the hero can reach behind the sticky bar. */
-  --nav-h: 0px;
+  /* Published by useNavHeight so the hero can reach behind the sticky bar.
+     The default is the height the CSS above actually produces -- 74px on a
+     phone, 72px once the bar has room for the wider layout -- because every
+     page now ships as prerendered HTML and paints before any measurement.
+     At 0px the hero painted under the bar and then jumped the moment the
+     script measured: one 0.30 layout shift on a throttled phone, which is
+     three times the Core Web Vitals budget on its own. */
+  --nav-h: calc(var(--safe-t) + 4.625rem);
+}
+
+@media (min-width: 64.0625em) {
+  :root { --nav-h: calc(var(--safe-t) + 4.5rem); }
 }
