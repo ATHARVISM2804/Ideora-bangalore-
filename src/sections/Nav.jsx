@@ -40,7 +40,10 @@ export function Nav() {
       <div className="nav__wrap">
         <div className="nav__bar">
           <Link to="/" className="nav__logo">
-            <img src="/assets/ideora-lockup.png" alt="Ideora Labs, home" width="92" height="24" />
+            <picture>
+              <source srcSet="/assets/ideora-lockup.webp" type="image/webp" />
+              <img src="/assets/ideora-lockup.png" alt="Ideora Labs, home" width="92" height="24" />
+            </picture>
           </Link>
 
           <div className="nav__compact">

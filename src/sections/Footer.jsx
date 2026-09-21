@@ -46,7 +46,10 @@ export function Footer() {
     <footer className="footer">
       <div className="footer__wrap">
         <div className="footer__brand">
-          <img src="/assets/ideora-lockup.png" alt="Ideora Labs" width="130" height="34" className="footer__logo" />
+          <picture>
+              <source srcSet="/assets/ideora-lockup.webp" type="image/webp" />
+              <img src="/assets/ideora-lockup.png" alt="Ideora Labs" width="130" height="34" className="footer__logo" />
+            </picture>
           <p className="small footer__blurb">
             We build and run the systems that carry the work your operation waits on.
           </p>
