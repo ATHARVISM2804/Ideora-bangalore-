@@ -68,7 +68,7 @@
   /* --- Type ------------------------------------------------------------- */
   --sans:    Geist, ui-sans-serif, system-ui, sans-serif;
   --mono:    'JetBrains Mono', ui-monospace, monospace;
-  --display: Newsreader, ui-serif, Georgia, 'Times New Roman', serif;
+  --display: Newsreader, 'Newsreader fallback', 'Newsreader fallback georgia', ui-serif, Georgia, 'Times New Roman', serif;
 
   /* A nine-step scale in rem, so browser font-size preferences are honoured.
      The site previously had a hard 18px root and zero rem anywhere. */

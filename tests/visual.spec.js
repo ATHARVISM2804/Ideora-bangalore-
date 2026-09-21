@@ -54,6 +54,10 @@ for (const [name, path] of PAGES) {
       // this suite would start failing at random and nobody would know why.
       await expect(page.locator('body')).toBeVisible();
 
+      // The app replaces the prerendered markup on its first commit, and a
+      // capture taken in that frame catches a half-empty page.
+      await page.waitForFunction(() => document.documentElement.dataset.app === 'ready', null, { timeout: 15_000 });
+
       // Photographs lazy-load, so a full-page capture would race them. Load
       // them all first, then decode, so every run snapshots the same pixels.
       // A lazy image that has not started reports complete, so poll for real

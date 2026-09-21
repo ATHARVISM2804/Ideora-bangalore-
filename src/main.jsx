@@ -39,6 +39,11 @@ whenReady(router).then(() => {
       <App router={router} />
     </StrictMode>,
   );
+  // Says the app has taken over the prerendered markup. React clears the
+  // container on its first commit, so anything that reads the page -- a test,
+  // a screenshot, a crawler running JS -- can wait for this rather than catch
+  // the blank frame in between.
+  requestAnimationFrame(() => { document.documentElement.dataset.app = 'ready'; });
 });
 
 // Started here rather than inside a component: these are page-lifetime
