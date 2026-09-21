@@ -79,9 +79,10 @@ There is no test suite. Before shipping a visual change:
 
 ## Analytics
 
-GA4 is off until a measurement ID is set. Add `VITE_GA_ID=G-XXXXXXXXXX` to the
-host's environment (Vercel: Project → Settings → Environment Variables) and
-redeploy; with no ID, no tag loads and no request is made.
+GA4 runs against the property in `src/lib/ga.js` (`G-6WR0P8L43K`). A
+measurement ID is public -- it ships in the page -- and lives in the code so a
+deploy cannot lose analytics by missing a variable. Set `VITE_GA_ID` in the
+host's environment to point a build at a different property instead.
 
 What it does, matching what /cookies tells readers: ad personalisation and
 Google signals are off, and nothing loads at all for a visitor whose browser

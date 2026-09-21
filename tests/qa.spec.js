@@ -181,19 +181,34 @@ test.describe('touch and layout', () => {
   // other still produce a mis-tap.
   test('no third-party tag is baked into the HTML', async ({ page }) => {
     // The prerender runs the real app, so anything an effect appends to <head>
-    // lands in every static page. An analytics tag must never: the opt-out is
+    // lands in every static page. The analytics tag must never: the opt-out is
     // a runtime check, and a hardcoded <script> would load for everyone.
+    for (const path of ['/', '/products/ideora-health']) {
+      const res = await page.goto(path);
+      expect(await res.text(), `${path} ships a tag in its HTML`).not.toContain('googletagmanager.com');
+    }
+  });
+
+  test('a visitor who opted out loads nothing third-party', async ({ browser }) => {
+    // What /cookies promises: "your browser's block cookies or do not track
+    // setting is respected". Respected means the tag is not fetched at all.
+    const context = await browser.newContext();
+    await context.addInitScript(() => {
+      Object.defineProperty(navigator, 'doNotTrack', { get: () => '1' });
+    });
+    const page = await context.newPage();
+
     const hosts = [];
     page.on('request', (r) => hosts.push(new URL(r.url()).host));
 
-    for (const path of ['/', '/products/ideora-health']) {
-      const res = await page.goto(path);
-      expect(await res.text()).not.toContain('googletagmanager.com');
-    }
+    await page.goto('/');
+    await page.locator('.pidx__row').first().click();
+    await expect(page).toHaveURL(/\/products\//);
 
-    // Everything the page asked for came from the site itself.
     const own = new URL(page.url()).host;
-    expect([...new Set(hosts.filter((h) => h && h !== own))], 'the page loaded a third-party host').toEqual([]);
+    expect([...new Set(hosts.filter((h) => h && h !== own))], 'opted out, still called a third party').toEqual([]);
+
+    await context.close();
   });
 
   test('adjacent controls are separated', async ({ page }) => {

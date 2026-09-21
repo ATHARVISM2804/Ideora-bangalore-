@@ -6,9 +6,11 @@
 // visitor who has asked not to be tracked. If those rules ever stop being
 // true, that page has to change first.
 //
-// The measurement ID comes from VITE_GA_ID at build time. With no ID set,
-// nothing loads and no request is made: the site ships with analytics off
-// until someone sets it in the host's environment.
+// The measurement ID is the site's own, and public -- it ships in the page for
+// anyone to read, and it identifies the property, not a person. It lives here
+// so a deploy cannot silently lose analytics by missing an environment
+// variable; VITE_GA_ID still overrides it, which is how a second property (a
+// staging one, say) would be pointed at.
 
 const SRC = 'https://www.googletagmanager.com/gtag/js?id=';
 
@@ -26,8 +28,10 @@ export function optedOut(nav = typeof navigator === 'undefined' ? null : navigat
   );
 }
 
+const DEFAULT_ID = 'G-6WR0P8L43K';
+
 export function gaId() {
-  const id = import.meta.env.VITE_GA_ID;
+  const id = import.meta.env.VITE_GA_ID || DEFAULT_ID;
   return typeof id === 'string' && /^G-[A-Z0-9]+$/i.test(id.trim()) ? id.trim() : null;
 }
 
