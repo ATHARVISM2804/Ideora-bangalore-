@@ -32,6 +32,7 @@ const known = new Set([
   '/',
   // Internal, deliberately unlinked and unindexed.
   '/components',
+  '/survey',
   ...ALL_PAGE_PATHS,
   ...OWN_COMPONENT,
   ...FOOTER_ONLY_PATHS,

@@ -35,6 +35,7 @@ const paths = [...readFileSync(resolve(dist, 'sitemap.xml'), 'utf8').matchAll(/<
 // is the name Vercel looks for).
 const EXTRA = [
   { path: '/components', out: 'components/index.html' },
+  { path: '/survey', out: 'survey/index.html' },
   { path: '/this-page-does-not-exist', out: '404.html' },
 ];
 

@@ -374,6 +374,89 @@
 .contact__ok { border: 1px solid var(--rule-strong); background: var(--bg); color: var(--ink); }
 .contact__err { border: 1px solid var(--accent-deep); color: var(--accent-deep); }
 
+/* --- Survey (/survey) ------------------------------------------------------ */
+
+.survey { max-width: var(--form-width); }
+
+.survey__q {
+  margin: 0 0 var(--s-5);
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  background: var(--raised);
+}
+
+.survey__q[aria-invalid] { border-color: var(--accent-deep); }
+
+.survey__q legend {
+  float: left;
+  width: 100%;
+  font-size: var(--t-d4);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-heading);
+  color: var(--ink);
+}
+
+.survey__n {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-label);
+  color: var(--accent-deep);
+}
+
+.survey__hint {
+  clear: both;
+  margin: 0;
+  padding-top: var(--s-2);
+  font-size: var(--t-sm);
+  font-weight: var(--w-normal);
+  color: var(--ink-faint);
+}
+
+.survey__q legend .survey__hint { display: inline; padding: 0; }
+
+.survey__options { display: grid; gap: var(--s-2); margin-top: var(--s-4); }
+
+.survey__opt {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s-3);
+  /* 44px minimum target, as on the contact form. */
+  min-height: 2.75rem;
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-btn);
+  background: var(--bg);
+  font-size: var(--t-body);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+
+.survey__opt:hover { border-color: var(--accent); }
+.survey__opt:has(input:checked) { border-color: var(--accent-deep); background: var(--accent-tint); }
+.survey__opt:has(input:disabled) { opacity: 0.55; cursor: not-allowed; }
+.survey__opt input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--accent-deep); }
+.survey__opt:has(input:focus-visible) { outline: 2px solid var(--accent-deep); outline-offset: 1px; }
+
+.survey__q .field:first-of-type { clear: both; margin-top: var(--s-4); }
+
+.survey__submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+
+@media (max-width: 640px) {
+  .survey__q { padding: var(--s-5) var(--s-4); }
+  .survey__submit .btn { width: 100%; }
+}
+
 .link-quiet { font-size: var(--t-sm); color: var(--ink-muted); }
 .link-quiet:hover { color: var(--accent-deep); }
 

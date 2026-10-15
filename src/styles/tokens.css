@@ -166,6 +166,7 @@
      fallback against 9.16px on Geist. These are measured character counts. */
   --prose:        35rem;    /* ~68 characters */
   --prose-narrow: 27rem;    /* ~53 characters, for a standfirst */
+  --form-width:   48rem;    /* the survey: one readable column of questions */
 
   /* --- Motion ----------------------------------------------------------- */
   --dur-fast: 0.15s;

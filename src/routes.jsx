@@ -54,6 +54,9 @@ export const routes = [
       { path: 'about', lazy: lazyPage(() => import('./pages/About'), 'About') },
       { path: 'insights', lazy: lazyPage(() => import('./pages/Insights'), 'Insights') },
 
+      // Shared by link only. Not in the navigation, not in the sitemap, noindexed.
+      { path: 'survey', lazy: lazyPage(() => import('./pages/Survey'), 'Survey') },
+
       // The host serves these as real 301s (vercel.json). These exist so the
       // same URLs behave identically in `vite dev`, where nothing sits in
       // front of the app to redirect them.
