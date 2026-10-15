@@ -38,10 +38,10 @@ export function Survey() {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const answers = Object.fromEntries(
-      SURVEY_QUESTIONS.map((q) => [q.id, q.max ? picked[q.id] || [] : form.get(q.id) || '']),
+      SURVEY_QUESTIONS.map((q) => [q.id, q.multi ? picked[q.id] || [] : form.get(q.id) || '']),
     );
 
-    const local = SURVEY_QUESTIONS.filter((q) => (q.max ? !answers[q.id].length : !answers[q.id])).map((q) => q.id);
+    const local = SURVEY_QUESTIONS.filter((q) => (q.multi ? !answers[q.id].length : !answers[q.id])).map((q) => q.id);
     if (form.get('consent') !== 'on') local.push('consent');
     if (local.length) {
       setState({ status: 'error', errors: local });
@@ -101,18 +101,17 @@ export function Survey() {
                       <span className="survey__n">{String(i + 1).padStart(2, '0')}</span>
                       {q.text}
                     </legend>
-                    <p className="survey__hint">{q.max ? `Select up to ${q.max}` : 'Choose one'}</p>
+                    <p className="survey__hint">{q.multi ? 'Select all that apply' : 'Choose one'}</p>
                     <div className="survey__options">
                       {q.options.map((o, j) => {
                         const id = `${formId}-${q.id}-${j}`;
                         return (
                           <label key={o} htmlFor={id} className="survey__opt">
-                            {q.max ? (
+                            {q.multi ? (
                               <input
                                 id={id}
                                 type="checkbox"
                                 checked={chosen.includes(o)}
-                                disabled={!chosen.includes(o) && chosen.length >= q.max}
                                 onChange={() => toggle(q, o)}
                               />
                             ) : (

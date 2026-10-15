@@ -2,8 +2,8 @@
 //
 // Plain ESM with no JSX so api/survey.js validates against the same list the
 // page renders: an answer the page cannot offer is rejected by the server.
-// `max` marks a select-up-to question (checkboxes); everything else is one
-// choice (radios).
+// `multi` marks a select-all-that-apply question (checkboxes); everything
+// else is one choice (radios).
 
 export const SURVEY_QUESTIONS = [
   {
@@ -25,7 +25,7 @@ export const SURVEY_QUESTIONS = [
   {
     id: 'q3',
     text: 'What are your biggest PT management challenges?',
-    max: 3,
+    multi: true,
     options: [
       'Tracking used and remaining sessions',
       'Trainer attendance and accountability',
@@ -54,7 +54,7 @@ export const SURVEY_QUESTIONS = [
   {
     id: 'q7',
     text: 'Which features would be most valuable?',
-    max: 3,
+    multi: true,
     options: [
       'Trainer marks sessions through mobile',
       'Automatic session balance updates',

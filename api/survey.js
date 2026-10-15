@@ -34,9 +34,9 @@ function validate(body) {
 
   for (const q of SURVEY_QUESTIONS) {
     const v = body?.answers?.[q.id];
-    if (q.max) {
+    if (q.multi) {
       const picked = Array.isArray(v) ? v : [];
-      const ok = picked.length >= 1 && picked.length <= q.max
+      const ok = picked.length >= 1
         && new Set(picked).size === picked.length
         && picked.every((p) => q.options.includes(p));
       if (!ok) errors.push(q.id);
@@ -90,7 +90,7 @@ export default async function handler(req, res) {
     answers: SURVEY_QUESTIONS.map((q, i) => ({
       n: i + 1,
       question: q.text,
-      answer: q.max ? answers[q.id].join('; ') : answers[q.id],
+      answer: q.multi ? answers[q.id].join('; ') : answers[q.id],
     })),
     consent: true,
   };
