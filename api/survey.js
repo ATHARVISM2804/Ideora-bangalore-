@@ -34,18 +34,12 @@ function validate(body) {
 
   for (const q of SURVEY_QUESTIONS) {
     const v = body?.answers?.[q.id];
-    if (q.multi) {
-      const picked = Array.isArray(v) ? v : [];
-      const ok = picked.length >= 1
-        && new Set(picked).size === picked.length
-        && picked.every((p) => q.options.includes(p));
-      if (!ok) errors.push(q.id);
-      else answers[q.id] = picked;
-    } else if (typeof v !== 'string' || !q.options.includes(v)) {
-      errors.push(q.id);
-    } else {
-      answers[q.id] = v;
-    }
+    const picked = Array.isArray(v) ? v : [];
+    const ok = picked.length >= 1
+      && new Set(picked).size === picked.length
+      && picked.every((p) => q.options.includes(p));
+    if (!ok) errors.push(q.id);
+    else answers[q.id] = picked;
   }
 
   const details = {};
@@ -90,7 +84,7 @@ export default async function handler(req, res) {
     answers: SURVEY_QUESTIONS.map((q, i) => ({
       n: i + 1,
       question: q.text,
-      answer: q.multi ? answers[q.id].join('; ') : answers[q.id],
+      answer: answers[q.id].join('; '),
     })),
     consent: true,
   };
