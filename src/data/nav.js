@@ -79,7 +79,7 @@ export const COMPANY_LINKS = [
 // These have hand-written components because they do something a prose page
 // cannot: a product chooser, a case-study collection, a form. Everything else
 // renders through PageShell from pages.js.
-export const OWN_COMPONENT = new Set(['/about', '/insights', '/products', '/case-studies', '/contact', '/industries']);
+export const OWN_COMPONENT = new Set(['/about', '/insights', '/products', '/case-studies', '/contact', '/industries', '/industries/healthcare']);
 
 // Reachable from the footer rather than the menu. A buyer's legal and IT
 // reviewers look for these; they do not belong in a sales nav.

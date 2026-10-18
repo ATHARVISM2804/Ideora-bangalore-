@@ -35,6 +35,7 @@ const paths = [
   '/',
   '/products',
   '/industries',
+  '/industries/healthcare',
   ...ALL_PAGE_PATHS,
   '/case-studies',
   ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),

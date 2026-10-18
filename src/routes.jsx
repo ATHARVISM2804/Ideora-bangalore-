@@ -45,6 +45,7 @@ export const routes = [
 
       { path: 'products', lazy: lazyPage(() => import('./pages/Products'), 'Products') },
       { path: 'industries', lazy: lazyPage(() => import('./pages/Industries'), 'Industries') },
+      { path: 'industries/healthcare', lazy: lazyPage(() => import('./pages/Healthcare'), 'Healthcare') },
 
       // Internal. Not in the navigation, not in the sitemap, noindexed.
       { path: 'components', lazy: lazyPage(() => import('./pages/Components'), 'Components') },
