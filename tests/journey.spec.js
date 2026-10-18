@@ -398,7 +398,9 @@ test('every industry page carries its required sections and cross-links', async 
   // integrations, controls, case studies and a CTA. Integrations and controls
   // were missing on all three: the pages established relevance and then could
   // not answer the two questions an IT reviewer asks next.
-  for (const path of ['/industries/healthcare', '/industries/automotive', '/industries/real-estate']) {
+  // Healthcare is the Careora landing page, built to the client's own design,
+  // and has its own test below.
+  for (const path of ['/industries/automotive', '/industries/real-estate']) {
     await page.goto(path);
 
     await expect(page.locator('.prose-row').first()).toBeVisible();
@@ -410,6 +412,28 @@ test('every industry page carries its required sections and cross-links', async 
     expect(links.some((h) => h.startsWith('/case-studies/')), `${path} links no case study`).toBe(true);
     await expect(page.locator('.page-cta')).toBeVisible();
   }
+});
+
+test('the healthcare page carries the Careora landing sections and demo CTAs', async ({ page }) => {
+  // The client's design: hero, challenge, solution, features, clinics and
+  // hospitals, testimonials, closing. Every demo button must stay tracked.
+  await page.goto('/industries/healthcare');
+
+  await expect(page.locator('h1')).toContainText('Smarter Clinics');
+  await expect(page.locator('.cr-console')).toBeVisible();
+  await expect(page.locator('.cr-pain')).toHaveCount(6);
+  await expect(page.locator('.cr-modules li')).toHaveCount(6);
+  await expect(page.locator('.cr-feature')).toHaveCount(6);
+  await expect(page.locator('.cr-sol')).toHaveCount(2);
+  await expect(page.locator('.cr-quote')).toHaveCount(3);
+  await expect(page.locator('.cr-close')).toBeVisible();
+
+  const demos = page.locator('a[data-track="demo_start"]');
+  expect(await demos.count()).toBeGreaterThanOrEqual(4);
+  for (const href of await demos.evaluateAll((els) => els.map((e) => e.getAttribute('href')))) {
+    expect(href).toContain('wa.me');
+  }
+  await expect(page.locator('a[href^="/products/"]').first()).toBeVisible();
 });
 
 test('a failure renders the error state inside the shell', async ({ page }) => {
