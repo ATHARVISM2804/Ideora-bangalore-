@@ -39,7 +39,6 @@
 
 .cr-logo { display: block; width: 10rem; height: auto; }
 .cr-logo--hero { width: clamp(9.5rem, 14vw, 12rem); margin-bottom: 1.6rem; }
-.cr-logo--nav { width: 6.4rem; margin: 0.1rem 0 1rem 0.35rem; }
 .cr-logo--core { width: 72%; }
 
 .cr-eyebrow {
@@ -185,74 +184,18 @@
 .cr-trust { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem; margin: 2.75rem 0 0; padding: 0; list-style: none; }
 .cr-trust li { display: flex; align-items: center; gap: 0.65rem; font-size: 0.875rem; line-height: 1.35; color: var(--cr-muted); }
 
-/* Console mock-up */
+/* Dashboard screenshot: the real Careora dashboard, tilted like the deck's mock-up. */
 .cr-hero__visual { perspective: 1800px; }
-.cr-console {
-  display: grid;
-  grid-template-columns: 7.75rem minmax(0, 1fr);
+.cr-shot {
   overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--cr-line);
   border-radius: 1.25rem;
   background: #FFFFFF;
   box-shadow: var(--cr-shadow-lg);
-  font-size: 0.68rem;
-  color: var(--cr-muted);
   transform: rotateY(-9deg) rotateX(3deg);
   transform-origin: left center;
 }
-.cr-console__nav { display: grid; align-content: start; gap: 0.2rem; padding: 1.1rem 0.6rem; background: linear-gradient(180deg, #16205A, #0E1A47); color: #B9C0E4; }
-.cr-console__nav span { display: flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.55rem; border-radius: 0.5rem; }
-.cr-console__nav .is-on { background: var(--cr-indigo); color: #FFFFFF; }
-
-.cr-console__main { display: grid; gap: 0.7rem; padding: 0.9rem 1rem 1rem; background: #FAFBFF; }
-.cr-console__bar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
-.cr-search { display: flex; align-items: center; gap: 0.4rem; flex: 1; max-width: 15rem; padding: 0.4rem 0.7rem; border: 1px solid var(--cr-line); border-radius: 0.5rem; background: #FFFFFF; }
-.cr-user { display: flex; align-items: center; gap: 0.45rem; }
-.cr-user > span:last-child { display: grid; }
-.cr-user b { font-size: 0.68rem; color: var(--cr-navy); }
-.cr-user small { font-size: 0.58rem; }
-.cr-user .cr-av { width: 1.7rem; height: 1.7rem; font-size: 0.55rem; }
-
-.cr-console__hello strong { display: block; font-size: 1rem; color: var(--cr-navy); }
-.cr-console__hello small { font-size: 0.65rem; }
-
-.cr-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
-.cr-kpis > div { display: grid; gap: 0.15rem; padding: 0.65rem; border: 1px solid var(--cr-line); border-radius: 0.65rem; background: #FFFFFF; }
-.cr-kpis span { font-size: 0.6rem; }
-.cr-kpis strong { font-size: 1.15rem; color: var(--cr-navy); }
-.cr-kpis em { font-style: normal; font-size: 0.55rem; color: #16A34A; }
-.cr-kpis em.is-down { color: #DC2626; }
-
-.cr-console__row { display: grid; grid-template-columns: 1.45fr 1fr; gap: 0.5rem; }
-.cr-pane { position: relative; padding: 0.7rem; border: 1px solid var(--cr-line); border-radius: 0.65rem; background: #FFFFFF; }
-.cr-pane__t { display: flex; justify-content: space-between; margin-bottom: 0.45rem; font-size: 0.68rem; font-weight: 700; color: var(--cr-navy); }
-.cr-pane__t small { font-weight: 500; color: var(--cr-muted); }
-.cr-line { display: block; width: 100%; height: 4.5rem; }
-.cr-tip { position: absolute; top: 2.1rem; left: 46%; display: grid; padding: 0.3rem 0.5rem; border-radius: 0.4rem; background: var(--cr-navy); color: #FFFFFF; font-size: 0.7rem; font-weight: 700; line-height: 1.2; }
-.cr-tip small { font-size: 0.5rem; font-weight: 500; color: #B9C0E4; }
-.cr-axis { display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.55rem; color: var(--cr-muted); }
-
-.cr-pane__donut { display: flex; align-items: center; gap: 0.75rem; }
-.cr-donut { position: relative; display: grid; place-items: center; flex: none; width: 4.2rem; height: 4.2rem; border-radius: 50%; }
-.cr-donut::before { content: ''; position: absolute; inset: 0.6rem; border-radius: 50%; background: #FFFFFF; }
-.cr-donut span { position: relative; font-size: 0.72rem; font-weight: 800; color: var(--cr-navy); }
-.cr-mini-stat { display: grid; }
-.cr-mini-stat b { font-size: 1rem; color: var(--cr-navy); }
-.cr-mini-stat small { font-size: 0.55rem; }
-
-.cr-appt { display: grid; grid-template-columns: 3.1rem auto 1fr auto; align-items: center; gap: 0.4rem; padding: 0.35rem 0; font-size: 0.6rem; }
-.cr-appt .cr-av { width: 1.5rem; height: 1.5rem; font-size: 0.5rem; }
-.cr-appt__n { display: grid; }
-.cr-appt__n b { color: var(--cr-navy); }
-.cr-pill-ok { padding: 0.2rem 0.45rem; border-radius: 999px; background: #DCFCE7; color: #15803D; font-size: 0.55rem; font-weight: 700; }
-
-.cr-legend { display: grid; gap: 0.2rem; margin: 0; padding: 0; list-style: none; font-size: 0.55rem; }
-.cr-legend li { display: flex; align-items: center; gap: 0.3rem; }
-.cr-legend b { margin-left: auto; padding-left: 0.4rem; color: var(--cr-navy); }
-.cr-dot { width: 0.45rem; height: 0.45rem; border-radius: 50%; }
-.cr-dot--indigo { background: #6366F1; }
-.cr-dot--teal { background: #14B8A6; }
-.cr-dot--amber { background: #F59E0B; }
-.cr-dot--lilac { background: #A78BFA; }
 
 /* --- Challenge ------------------------------------------------------------ */
 
@@ -483,7 +426,7 @@
 @media (max-width: 64em) {
   .cr-hero__title { white-space: normal; }
   .cr-hero__grid, .cr-challenge__top, .cr-solution, .cr-close__grid { grid-template-columns: minmax(0, 1fr); }
-  .cr-console { transform: none; }
+  .cr-shot { transform: none; }
   .cr-challenge__photo { margin-bottom: 0; }
   .cr-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cr-solutions, .cr-results { grid-template-columns: minmax(0, 1fr); }
@@ -510,8 +453,7 @@
   .cr-trust li { display: grid; justify-items: center; gap: 0.45rem; font-size: 0.75rem; text-align: center; }
   .cr-trust br { display: none; }
 
-  .cr-hero__visual { display: flex; justify-content: center; }
-  .cr-console { flex: none; width: 620px; zoom: 0.68; }
+  .cr-shot { border-radius: 0.9rem; }
 
   .cr-challenge { border-radius: 1.75rem 1.75rem 0 0; }
   .cr-challenge__photo { aspect-ratio: 4 / 3.4; margin-top: 0.5rem; }
@@ -561,11 +503,6 @@
   .cr-close__chips small { font-size: 0.68rem; line-height: 1.25; }
 }
 
-/* 620px dashboard scaled to the content width of each phone class. */
-@media (max-width: 30em) { .cr-console { zoom: 0.6; } }    /* 430px Pro Max */
-@media (max-width: 26.25em) { .cr-console { zoom: 0.55; } } /* 390–414px */
-@media (max-width: 24em) { .cr-console { zoom: 0.53; } }    /* 375px mini, SE */
-@media (max-width: 21.25em) { .cr-console { zoom: 0.44; } } /* 320px */
 @media (max-width: 22em) {
   .cr-hero__title { font-size: 2.1rem; }
   .cr-pains { grid-template-columns: minmax(0, 1fr); }

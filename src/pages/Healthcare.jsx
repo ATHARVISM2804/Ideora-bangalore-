@@ -40,9 +40,6 @@ const ICONS = {
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
   arrowLeft: <path d="M19 12H5M11 6l-6 6 6 6" />,
   play: <path d="M8 5l11 7-11 7z" />,
-  search: <><circle cx="11" cy="11" r="6.5" /><path d="M20 20l-4-4" /></>,
-  grid: <><rect x="4" y="4" width="7" height="7" rx="1.5" /><rect x="13" y="4" width="7" height="7" rx="1.5" /><rect x="4" y="13" width="7" height="7" rx="1.5" /><rect x="13" y="13" width="7" height="7" rx="1.5" /></>,
-  message: <path d="M4 5h16v11H9l-5 4z" />,
   trend: <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />,
   whatsapp: <path d="M4 20l1.3-4A8 8 0 1 1 8 18.7zM9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 1a5 5 0 0 1-2.4-2.4l1-1-1-2z" />,
 };
@@ -141,97 +138,6 @@ const OUTCOMES = [
 function Avatar({ name, tone = 'violet' }) {
   const initials = name.replace(/^Dr\.\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2);
   return <span className={`cr-av cr-av--${tone}`}>{initials}</span>;
-}
-
-function Donut({ parts, children }) {
-  const stops = parts.map(([v, c], i) => {
-    const from = parts.slice(0, i).reduce((sum, [p]) => sum + p, 0);
-    return `${c} ${from}% ${from + v}%`;
-  });
-  return (
-    <div className="cr-donut" style={{ background: `conic-gradient(${stops.join(',')})` }}>
-      <span>{children}</span>
-    </div>
-  );
-}
-
-function Console() {
-  const nav = [['grid', 'Dashboard'], ['calendar', 'Appointments'], ['users', 'Patients'], ['file', 'Billing'], ['message', 'Messages'], ['chart', 'Reports'], ['users', 'Staff'], ['gear', 'Settings']];
-  return (
-    <div className="cr-console" aria-hidden="true">
-      <aside className="cr-console__nav">
-        <Logo light className="cr-logo cr-logo--nav" />
-        {nav.map(([icon, label], i) => (
-          <span key={label} className={i === 0 ? 'is-on' : undefined}><Icon name={icon} className="cr-ico cr-ico--xs" />{label}</span>
-        ))}
-      </aside>
-      <div className="cr-console__main">
-        <div className="cr-console__bar">
-          <span className="cr-search"><Icon name="search" className="cr-ico cr-ico--xs" />Search patients…</span>
-          <span className="cr-user"><Avatar name="Sarah Khan" tone="orange" /><span><b>Dr. Sarah Khan</b><small>Administrator</small></span></span>
-        </div>
-        <div className="cr-console__hello">
-          <strong>Good Morning, Dr. Sarah! 👋</strong>
-          <small>Here&rsquo;s what&rsquo;s happening at your clinic today.</small>
-        </div>
-        <div className="cr-kpis">
-          <div><span>Today&rsquo;s Appointments</span><strong>24</strong><em>▲ 12% from yesterday</em></div>
-          <div><span>Total Patients</span><strong>1,284</strong><em>▲ 8% this month</em></div>
-          <div><span>Revenue</span><strong>₹18.6L</strong><em>▲ 15% this month</em></div>
-          <div><span>No-Show Rate</span><strong>7.2%</strong><em className="is-down">▼ 2% from last month</em></div>
-        </div>
-        <div className="cr-console__row">
-          <div className="cr-pane cr-pane--chart">
-            <span className="cr-pane__t">Appointments Overview <small>This Month ▾</small></span>
-            <svg className="cr-line" viewBox="0 0 300 90" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="crLineFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#6366F1" stopOpacity="0.22" />
-                  <stop offset="1" stopColor="#6366F1" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path d="M0 70 C30 40 50 35 75 50 S120 70 150 45 S200 20 225 48 S270 30 300 22 V90 H0Z" fill="url(#crLineFill)" />
-              <path d="M0 70 C30 40 50 35 75 50 S120 70 150 45 S200 20 225 48 S270 30 300 22" fill="none" stroke="#6366F1" strokeWidth="2.2" vectorEffect="non-scaling-stroke" />
-            </svg>
-            <span className="cr-tip">486<small>Appointments</small></span>
-            <div className="cr-axis"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
-          </div>
-          <div className="cr-pane">
-            <span className="cr-pane__t">Patient Satisfaction</span>
-            <div className="cr-pane__donut">
-              <Donut parts={[[62, '#14B8A6'], [26, '#6366F1'], [12, '#E5E7F5']]}>4.8/5</Donut>
-              <span className="cr-mini-stat"><b>4.8</b><small>Based on 320 reviews</small></span>
-            </div>
-          </div>
-        </div>
-        <div className="cr-console__row">
-          <div className="cr-pane">
-            <span className="cr-pane__t">Upcoming Appointments</span>
-            {[['10:00 AM', 'Rahul Mehta', 'Physiotherapy'], ['11:30 AM', 'Priya Sharma', 'Consultation']].map(([t, n, d]) => (
-              <div key={t} className="cr-appt">
-                <span className="cr-appt__t">{t}</span>
-                <Avatar name={n} tone="blue" />
-                <span className="cr-appt__n"><b>{n}</b><small>{d}</small></span>
-                <span className="cr-pill-ok">Confirmed</span>
-              </div>
-            ))}
-          </div>
-          <div className="cr-pane">
-            <span className="cr-pane__t">Revenue Breakdown</span>
-            <div className="cr-pane__donut">
-              <Donut parts={[[45, '#6366F1'], [30, '#14B8A6'], [15, '#F59E0B'], [10, '#A78BFA']]} />
-              <ul className="cr-legend">
-                <li><i className="cr-dot cr-dot--indigo" />Consultations <b>45%</b></li>
-                <li><i className="cr-dot cr-dot--teal" />Therapy Sessions <b>30%</b></li>
-                <li><i className="cr-dot cr-dot--amber" />Packages <b>15%</b></li>
-                <li><i className="cr-dot cr-dot--lilac" />Other <b>10%</b></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function FeatureMock({ kind }) {
@@ -373,7 +279,14 @@ export function Healthcare() {
             </ul>
           </div>
           <div className="cr-hero__visual" data-anim="console">
-            <Console />
+            <div className="cr-shot">
+              <Photo
+                name="careora-dashboard"
+                alt="The Careora clinic dashboard: today's appointments, revenue, new patients, no-show rate and chats resolved by AI, with a revenue chart and appointments by service"
+                sizes="(max-width: 64em) 92vw, 50vw"
+                priority
+              />
+            </div>
           </div>
         </Container>
       </section>

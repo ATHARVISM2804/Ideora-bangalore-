@@ -420,7 +420,7 @@ test('the healthcare page carries the Careora landing sections and demo CTAs', a
   await page.goto('/industries/healthcare');
 
   await expect(page.locator('h1')).toContainText('Smarter Clinics');
-  await expect(page.locator('.cr-console')).toBeVisible();
+  await expect(page.locator('.cr-shot img')).toBeVisible();
   await expect(page.locator('.cr-pain')).toHaveCount(6);
   await expect(page.locator('.cr-modules li')).toHaveCount(6);
   await expect(page.locator('.cr-feature')).toHaveCount(6);
