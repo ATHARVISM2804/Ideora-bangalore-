@@ -16,6 +16,8 @@ import { waHref, WA_LINK } from '../lib/whatsapp';
 // is deployed.
 
 const PRODUCT = 'Careora';
+// The live Careora demo: the WhatsApp assistant plus the clinic dashboard (separate Vercel project).
+const DEMO_URL = 'https://whatsapp-automation-atharv-golaits-projects.vercel.app';
 const DEMO_HREF = waHref('Hi Ideora, I would like a demo of Careora for our clinic.');
 
 // --- Icons ------------------------------------------------------------------
@@ -362,7 +364,7 @@ export function Healthcare() {
             </p>
             <div className="cr-actions">
               <a className="cr-btn cr-btn--orange" {...demo('careora_hero')}>Book a Demo <Icon name="arrow" className="cr-ico cr-ico--sm" /></a>
-              <a className="cr-btn cr-btn--white" href="#cr-features">Explore Product <span className="cr-play"><Icon name="play" className="cr-ico cr-ico--xs" /></span></a>
+              <a className="cr-btn cr-btn--white" href={DEMO_URL} target="_blank" rel="noopener noreferrer" data-track="careora_demo_open">Explore Product <span className="cr-play"><Icon name="play" className="cr-ico cr-ico--xs" /></span></a>
             </div>
             <ul className="cr-trust">
               <li><span className="cr-tile cr-tile--violet cr-tile--sm"><Icon name="hospital" className="cr-ico cr-ico--sm" /></span>Trusted by growing <br />clinics &amp; hospitals</li>
