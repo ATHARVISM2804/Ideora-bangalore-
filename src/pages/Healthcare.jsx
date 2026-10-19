@@ -17,7 +17,7 @@ import { waHref, WA_LINK } from '../lib/whatsapp';
 
 const PRODUCT = 'Careora';
 // The live Careora demo: the WhatsApp assistant plus the clinic dashboard (separate Vercel project).
-const DEMO_URL = 'https://whatsapp-automation-atharv-golaits-projects.vercel.app';
+const DEMO_URL = 'https://whatsapp-automation-nnvc.vercel.app/demo/whatsapp';
 const DEMO_HREF = waHref('Hi Ideora, I would like a demo of Careora for our clinic.');
 
 // --- Icons ------------------------------------------------------------------
