@@ -604,6 +604,12 @@
 @media (max-width: 64em) {
   .re-hero__grid, .re-head, .re-challenge, .re-panel, .re-journey, .re-rollout, .re-connect, .re-faq, .re-close__grid { grid-template-columns: minmax(0, 1fr); }
   .re-scene { aspect-ratio: 1.25; }
+  /* Stacked, the phone is taller than the photo beside it would be, and
+     absolutely placed it rose over the copy above. Here it joins the flow and
+     overlaps only the foot of the photo. */
+  .re-challenge__visual { display: grid; justify-items: center; padding-bottom: 0; }
+  .re-challenge__photo { width: 100%; margin-left: 0; aspect-ratio: 4 / 3; }
+  .re-phone { position: relative; bottom: auto; left: auto; width: min(80%, 18rem); margin-top: -7rem; }
   .re-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .re-proof > div:nth-child(3) { padding-left: 0; border-left: 0; }
   .re-proof > div:nth-child(n + 3) { border-top: 1px solid var(--re-line); }
@@ -645,8 +651,6 @@
   .re-proof > div { padding: 1.25rem 1rem 1.4rem 0; }
   .re-proof > div:nth-child(even) { padding-left: 1rem; }
 
-  .re-challenge__photo { margin-left: 25%; }
-  .re-phone { width: 62%; }
   .re-pains, .re-services { grid-template-columns: minmax(0, 1fr); }
   .re-pain:nth-child(n) { padding: 1.5rem 0; border-left: 0; }
 
