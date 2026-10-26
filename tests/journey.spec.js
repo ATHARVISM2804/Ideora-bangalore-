@@ -398,9 +398,8 @@ test('every industry page carries its required sections and cross-links', async 
   // integrations, controls, case studies and a CTA. Integrations and controls
   // were missing on all three: the pages established relevance and then could
   // not answer the two questions an IT reviewer asks next.
-  // Healthcare is the Careora landing page, built to the client's own design,
-  // and has its own test below.
-  for (const path of ['/industries/automotive', '/industries/real-estate']) {
+  // Healthcare and real estate are landing pages with their own tests below.
+  for (const path of ['/industries/automotive']) {
     await page.goto(path);
 
     await expect(page.locator('.prose-row').first()).toBeVisible();
@@ -434,6 +433,36 @@ test('the healthcare page carries the Careora landing sections and demo CTAs', a
     expect(href).toContain('wa.me');
   }
   await expect(page.locator('a[href^="/products/"]').first()).toBeVisible();
+});
+
+test('the real-estate page carries the Ideora Property sections and demo CTAs', async ({ page }) => {
+  // Hero with the live 3D township, the challenge, six services, the animated
+  // workflow, the stage walkthrough, one enquiry's timeline, before and after,
+  // developers and brokerages, rollout, integrations, questions, closing.
+  await page.goto('/industries/real-estate');
+
+  await expect(page.locator('h1')).toContainText('Every enquiry answered');
+  await expect(page.locator('.re-scene')).toBeVisible();
+  await expect(page.locator('.re-pain')).toHaveCount(6);
+  await expect(page.locator('.re-service')).toHaveCount(6);
+  await expect(page.locator('.re-track__step')).toHaveCount(6);
+  await expect(page.locator('.re-steps__item')).toHaveCount(7);
+  await expect(page.locator('.re-wf__svg')).toBeVisible();
+  await expect(page.locator('.re-compare__row:not(.re-compare__row--head)')).toHaveCount(6);
+  await expect(page.locator('.re-audience')).toHaveCount(2);
+  await expect(page.locator('.re-close')).toBeVisible();
+
+  // Picking a stage swaps the panel.
+  await page.locator('.re-track__step').nth(2).click();
+  await expect(page.locator('.re-panel h3')).toHaveText('AI Voice Agent');
+
+  const demos = page.locator('a[data-track="demo_start"]');
+  expect(await demos.count()).toBeGreaterThanOrEqual(4);
+  for (const href of await demos.evaluateAll((els) => els.map((e) => e.getAttribute('href')))) {
+    expect(href).toContain('wa.me');
+  }
+  await expect(page.locator('a[href="/products/ideora-property"]').first()).toBeVisible();
+  await expect(page.locator('a[href^="/case-studies/"]').first()).toBeVisible();
 });
 
 test('a failure renders the error state inside the shell', async ({ page }) => {
